@@ -37,4 +37,5 @@ class IconsAssets {
   static const String youtubeIcon = "$iconPath/youtube.svg";
   static const String linkedinIcon = "$iconPath/linkedin.svg";
   static const String instagramIcon = "$iconPath/instagram.svg";
+  static const String attachmentIcon = "$iconPath/attachment.svg";
 }

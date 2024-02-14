@@ -63,3 +63,8 @@ class CreateTimeOffError extends CreateTimeOffState {
   @override
   List<Object> get props => [];
 }
+
+class ChangeFileNameState extends CreateTimeOffState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}

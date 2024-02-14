@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, deprecated_member_use
 
 import 'dart:io';
 import 'package:Attendace/core/utils/font_manager.dart';
@@ -336,6 +336,50 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                               ),
                             ),
                           ),
+                    const SizedBox(
+                      height: AppSize.s16,
+                    ),
+                    const TextCustom(
+                      text: 'Attachment',
+                      color: ColorManager.textFormLabelColor,
+                    ),
+                    SizedBox(
+                      height: AppSize.s4.h,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(12.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: ColorManager.textFormColor,
+                        border: Border.all(
+                            color: ColorManager.textFormColor, width: 2),
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          cubit.pickFileFromDevice();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextCustom(
+                              text: cubit.fileName ?? "File Name",
+                              color: ColorManager.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp,
+                            ),
+                            SvgPicture.asset(
+                              'assets/icons/attachment.svg',
+                              width: 24.w,
+                              height: 24.h,
+                              color: const Color(0xff3D8BD3),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppSize.s16,
+                    ),
                     const Spacer(),
                     state is CreateTimeOffLoading
                         ? Center(

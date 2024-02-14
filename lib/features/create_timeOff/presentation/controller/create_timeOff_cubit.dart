@@ -4,6 +4,7 @@ import 'package:Attendace/core/usecases/usecase.dart';
 import 'package:Attendace/core/utils/constants_manager.dart';
 
 import 'package:dartz/dartz.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -71,5 +72,16 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
     }, (createTimeOffEntity) {
       return CreateTimeOffSuccess(createTimeOffEntity: createTimeOffEntity);
     }));
+  }
+
+  String? fileName;
+  pickFileFromDevice() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) {
+      return null;
+    }
+    final file = result.files.first;
+    fileName = file.name;
+    emit(ChangeFileNameState());
   }
 }

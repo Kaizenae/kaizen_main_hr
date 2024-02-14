@@ -38,7 +38,7 @@ class ScaffoldCustom extends StatelessWidget {
       extendBodyBehindAppBar: isExtend!,
       resizeToAvoidBottomInset: true,
       appBar: appBarCustom,
-      body: body,
+      body: SafeArea(child: body),
       bottomNavigationBar: bottomNavigationBar,
       floatingActionButton: floatingActionButton,
     );

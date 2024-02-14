@@ -8,6 +8,7 @@ import 'package:Attendace/features/create_timeOff/presentation/screens/create_ti
 import 'package:Attendace/features/edit_company/presentation/screens/edit_company_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_location_screen.dart';
 import 'package:Attendace/features/help_and_feedback/presentation/screens/help_and_feedback_screen.dart';
+import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import 'package:Attendace/features/login/presentation/screens/baseUrl_screen.dart';
 import 'package:Attendace/features/main_page_admin_screen.dart';
 import 'package:Attendace/features/main_page_screen.dart';
@@ -68,6 +69,8 @@ class Routes {
   static const String webViewExampleRoute = "WebViewExample";
   static const String helpRoute = "HelpScreen";
   static const String createLoanRoute = "CreateLoanScreen";
+  static const String lateInRequestRoute = "lateInRequestRoute";
+  static const String earlyOutRequestRoute = "earlyOutRequestRoute";
 
   static Route createRoute(String screen) {
     if (Platform.isAndroid) {
@@ -135,6 +138,11 @@ class RoutesMap {
           const CreateLoanScreen(),
       Routes.localAuthRoute: (BuildContext context) => const LocalAuthScreen(),
       Routes.splashRoute: (BuildContext context) => const SplashScreen(),
+      Routes.lateInRequestRoute: (BuildContext context) =>
+          const LateInEarlyOutScreen(title: AppStrings.lateInRequest),
+      Routes.earlyOutRequestRoute: (BuildContext context) =>
+          const LateInEarlyOutScreen(title: AppStrings.earlyOutRequest),
+
       // 'userData': (BuildContext context) => const UserScreen(),
       // 'adminScreen': (BuildContext context) => const AdminHomeScreen(),
       // 'requests': (BuildContext context) => const RequestsScreen(),

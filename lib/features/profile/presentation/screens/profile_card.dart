@@ -1,6 +1,8 @@
 import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
+import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
@@ -14,6 +16,7 @@ import '../../../../core/widgets/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/values_manager.dart';
+import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../cubit/profile_cubit.dart';
 import '../cubit/profile_state.dart';
@@ -162,30 +165,99 @@ class ProfileCard extends StatelessWidget {
             decoration: BoxDecoration(
                 color: ColorManager.white,
                 borderRadius: BorderRadius.circular(AppSize.s10.r)),
-            child: const Column(
+            child: Column(
               children: [
-                ProfileComponent(
+                const ProfileComponent(
                   iconName: IconsAssets.personIcon,
                   name: AppStrings.editProfile,
                   screen: Routes.editProfileRoute,
                 ),
-                Divider(),
-                ProfileComponent(
+                const Divider(),
+                const ProfileComponent(
                   iconName: IconsAssets.attendIcon,
                   name: AppStrings.myRequests,
                   screen: Routes.myRequestsRoute,
                 ),
-                Divider(),
-                ProfileComponent(
+                const Divider(),
+                const ProfileComponent(
                   iconName: IconsAssets.attendIcon,
                   name: AppStrings.myLoans,
                   screen: Routes.myLoansRoute,
                 ),
-                Divider(),
-                ProfileComponent(
+                const Divider(),
+                const ProfileComponent(
                   iconName: IconsAssets.attendIcon,
                   name: AppStrings.myTimeOff,
                   screen: Routes.myTimeOffRoute,
+                ),
+                const Divider(),
+
+                //////////////////////// late in item //////////////////
+                SlideInLeft(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LateInEarlyOutScreen(
+                                    title: AppStrings.lateInRequest,
+                                  )));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: AppPadding.p6.h),
+                      child: Row(
+                        children: [
+                          const SvgPictureCustom(
+                            assetsName: IconsAssets.attendIcon,
+                            color: ColorManager.primary,
+                          ),
+                          SizedBox(
+                            width: AppSize.s16.w,
+                          ),
+                          TextCustom(
+                            text: AppStrings.lateInRequest,
+                            fontWeight: FontWeight.w500,
+                            fontSize: FontSize.s16.sp,
+                            color: ColorManager.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const Divider(),
+                /////////////////////////// early out item ///////////////////
+                SlideInLeft(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LateInEarlyOutScreen(
+                                    title: AppStrings.earlyOutRequest,
+                                  )));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: AppPadding.p6.h),
+                      child: Row(
+                        children: [
+                          const SvgPictureCustom(
+                            assetsName: IconsAssets.attendIcon,
+                            color: ColorManager.primary,
+                          ),
+                          SizedBox(
+                            width: AppSize.s16.w,
+                          ),
+                          TextCustom(
+                            text: AppStrings.earlyOutRequest,
+                            fontWeight: FontWeight.w500,
+                            fontSize: FontSize.s16.sp,
+                            color: ColorManager.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
