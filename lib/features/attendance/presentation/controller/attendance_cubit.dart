@@ -1,0 +1,45 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/error/failure.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../../../../core/utils/constants_manager.dart';
+import '../../domain/entities/attendace_entity.dart';
+import '../../domain/usecases/attendance_usecase.dart';
+import 'attendance_state.dart';
+
+class AttendanceCubit extends Cubit<AttendanceState> {
+  final AttendanceUsecase attendanceUsecase;
+
+  AttendanceCubit({required this.attendanceUsecase})
+      : super(AttendanceInitial());
+
+  static AttendanceCubit get(context) => BlocProvider.of(context);
+
+  int? userId;
+  Future<void> getAttendanceFun() async {
+    emit(GetAttendanceLoading());
+    Either<Failure, AttendanceEntity> response =
+        await attendanceUsecase(EmployeeParams(userId: AppConstants.token));
+
+    emit(response.fold((failure) {
+      return GetAttendanceError(message: failure.message);
+    }, (attendanceEntity) {
+      // print(attendanceEntity.resultEntity.response.first.checkOut);
+      return GetAttendanceSuccess(attendanceEntity: attendanceEntity);
+    }));
+  }
+
+  Future<void> getEmployeeAttendanceFun() async {
+    emit(GetEmployeeAttendanceLoading());
+    Either<Failure, AttendanceEntity> response =
+        await attendanceUsecase(EmployeeParams(userId: userId));
+
+    emit(response.fold((failure) {
+      return GetEmployeeAttendanceError(message: failure.message);
+    }, (attendanceEntity) {
+      // print(attendanceEntity.resultEntity.response.first.checkOut);
+      return GetEmployeeAttendanceSuccess(attendanceEntity: attendanceEntity);
+    }));
+  }
+}
