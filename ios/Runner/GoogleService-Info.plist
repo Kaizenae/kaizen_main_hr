@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>888625483054-4hboft63gm56vdcd1okm1hf324l6h40t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.888625483054-4hboft63gm56vdcd1okm1hf324l6h40t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDffR8gWejYxVf_MBJ2eTNsLOSKtig_rsQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>888625483054</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.attendace</string>
+	<key>PROJECT_ID</key>
+	<string>kaizen-hr</string>
+	<key>STORAGE_BUCKET</key>
+	<string>kaizen-hr.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:888625483054:ios:6a477fc6f88a6a5795febf</string>
+</dict>
+</plist>
