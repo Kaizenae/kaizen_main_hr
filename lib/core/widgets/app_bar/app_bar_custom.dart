@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../text_custom/text_custom.dart';
@@ -63,7 +62,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       title: TextCustom(
         textAlign: textAlign!,
         text: text!,
-        fontSize: fontSize!.sp,
+        fontSize: fontSize!,
         fontWeight: fontWeight!,
         color: Colors.black,
       ),

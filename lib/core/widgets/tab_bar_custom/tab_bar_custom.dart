@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/color_manager.dart';
 import '../../utils/font_manager.dart';
@@ -29,7 +28,7 @@ class TabBarCustom extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.zero,
-              height: AppSize.s55.h,
+              height: AppSize.s55,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(double.parse('$radius')),
                 color: ColorManager.white,
@@ -44,7 +43,7 @@ class TabBarCustom extends StatelessWidget {
                 },
                 tabs: myTabs,
                 labelStyle: TextStyle(
-                  fontSize: FontSize.s14.sp,
+                  fontSize: FontSize.s14,
                   fontWeight: FontWeight.w600,
                 ),
                 enableFeedback: true,

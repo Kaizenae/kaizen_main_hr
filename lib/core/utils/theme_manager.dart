@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'color_manager.dart';
 import 'font_manager.dart';
@@ -63,13 +62,13 @@ ThemeData getApplicationTheme() {
 
     textTheme: TextTheme(
         displayLarge: getSemiBoldStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s20.sp),
-        headlineLarge: getSemiBoldStyle(
-            color: ColorManager.white, fontSize: FontSize.s16.sp),
-        headlineMedium: getRegularStyle(
-            color: ColorManager.grey, fontSize: FontSize.s14.sp),
-        titleMedium: getMediumStyle(
-            color: ColorManager.primary, fontSize: FontSize.s16.sp),
+            color: ColorManager.darkGrey, fontSize: FontSize.s20),
+        headlineLarge:
+            getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s16),
+        headlineMedium:
+            getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+        titleMedium:
+            getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s16),
         bodyLarge: getRegularStyle(color: ColorManager.grey1),
         bodySmall: getRegularStyle(color: ColorManager.grey)),
 
@@ -78,10 +77,10 @@ ThemeData getApplicationTheme() {
         // content padding
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         // hint style
-        hintStyle: getRegularStyle(
-            color: ColorManager.grey, fontSize: FontSize.s14.sp),
+        hintStyle:
+            getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
         labelStyle:
-            getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14.sp),
+            getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
         errorStyle: getRegularStyle(color: ColorManager.error),
 
         // enabled border style

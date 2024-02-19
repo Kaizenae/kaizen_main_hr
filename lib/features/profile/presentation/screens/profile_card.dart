@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -46,22 +45,22 @@ class ProfileCard extends StatelessWidget {
                       state is GetEmployeeSuccess
                           ? Column(
                               children: [
-                                CircleAvatar(
-                                  radius: AppSize.s30.r,
+                                const CircleAvatar(
+                                  radius: AppSize.s30,
                                   backgroundColor: ColorManager.scaffoldColor,
-                                  child: const CachedNetworkImageCustom(
+                                  child: CachedNetworkImageCustom(
                                     url:
                                         'https://res.cloudinary.com/halqetelzekr/image/upload/v1678732276/placeholder_t7jyyi.png',
                                   ),
                                 ),
-                                SizedBox(
-                                  height: AppSize.s16.h,
+                                const SizedBox(
+                                  height: AppSize.s16,
                                 ),
                                 TextCustom(
                                   text: state.employeeEntity.resultEntity
                                       .response[0].name,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: FontSize.s16.sp,
+                                  fontSize: FontSize.s16,
                                   color: ColorManager.black,
                                 ),
                                 const SizedBox(
@@ -77,11 +76,11 @@ class ProfileCard extends StatelessWidget {
                                             color: ColorManager
                                                 .textBackgroundColor,
                                             borderRadius: BorderRadius.circular(
-                                                AppSize.s10.r)),
+                                                AppSize.s10)),
                                         child: TextCustom(
                                           text: state.employeeEntity
                                               .resultEntity.response[0].email,
-                                          fontSize: FontSize.s16.sp,
+                                          fontSize: FontSize.s16,
                                           color: ColorManager.grey2,
                                         ),
                                       ),
@@ -97,7 +96,7 @@ class ProfileCard extends StatelessWidget {
                                     : TextCustom(
                                         text: state.employeeEntity.resultEntity
                                             .response[0].mobilePhone,
-                                        fontSize: FontSize.s12.sp,
+                                        fontSize: FontSize.s12,
                                         color: ColorManager.primary,
                                       ),
                               ],
@@ -113,7 +112,7 @@ class ProfileCard extends StatelessWidget {
                                     TextCustom(
                                       text: 'Kaizen',
                                       fontWeight: FontWeight.w600,
-                                      fontSize: FontSize.s16.sp,
+                                      fontSize: FontSize.s16,
                                       color: ColorManager.black,
                                     ),
                                     const SizedBox(
@@ -126,10 +125,10 @@ class ProfileCard extends StatelessWidget {
                                           color:
                                               ColorManager.textBackgroundColor,
                                           borderRadius: BorderRadius.circular(
-                                              AppSize.s10.r)),
+                                              AppSize.s10)),
                                       child: TextCustom(
                                         text: 'xxx@xx.com',
-                                        fontSize: FontSize.s16.sp,
+                                        fontSize: FontSize.s16,
                                         color: ColorManager.grey2,
                                       ),
                                     ),
@@ -149,17 +148,17 @@ class ProfileCard extends StatelessWidget {
                                         .getEmployeeFun();
                                   },
                                 ),
-                      SizedBox(
-                        height: AppSize.s16.h,
+                      const SizedBox(
+                        height: AppSize.s16,
                       ),
-                      SizedBox(
-                        height: AppSize.s20.h,
+                      const SizedBox(
+                        height: AppSize.s20,
                       ),
                       Container(
-                        padding: EdgeInsets.all(AppPadding.p12.r),
+                        padding: const EdgeInsets.all(AppPadding.p12),
                         decoration: BoxDecoration(
                             color: ColorManager.white,
-                            borderRadius: BorderRadius.circular(AppSize.s10.r)),
+                            borderRadius: BorderRadius.circular(AppSize.s10)),
                         child: Column(
                           children: [
                             const ProfileComponent(
@@ -172,7 +171,7 @@ class ProfileCard extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: ColorManager.white,
                                   borderRadius:
-                                      BorderRadius.circular(AppSize.s10.r)),
+                                      BorderRadius.circular(AppSize.s10)),
                               child: Column(
                                 children: [
                                   const ProfileComponent(
@@ -209,7 +208,7 @@ class ProfileCard extends StatelessWidget {
                               decoration: BoxDecoration(
                                   color: ColorManager.white,
                                   borderRadius:
-                                      BorderRadius.circular(AppSize.s10.r)),
+                                      BorderRadius.circular(AppSize.s10)),
                               child: const Column(
                                 children: [
                                   ProfileComponent(
@@ -226,8 +225,8 @@ class ProfileCard extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: AppSize.s20.h,
+                            const SizedBox(
+                              height: AppSize.s20,
                             ),
                             TextButton(
                                 onPressed: () async {
@@ -236,7 +235,7 @@ class ProfileCard extends StatelessWidget {
                                 },
                                 child: TextCustom(
                                   text: 'Logout',
-                                  fontSize: FontSize.s16.sp,
+                                  fontSize: FontSize.s16,
                                   fontWeight: FontWeight.w600,
                                   color: ColorManager.error,
                                 ))

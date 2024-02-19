@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../utils/color_manager.dart';
@@ -31,8 +30,8 @@ class SvgPictureCustom extends StatelessWidget {
     return SvgPicture.asset(
       fit: boxFit!,
       assetsName,
-      height: height!.h,
-      width: width!.w,
+      height: height!,
+      width: width!,
       color: color,
     );
   }

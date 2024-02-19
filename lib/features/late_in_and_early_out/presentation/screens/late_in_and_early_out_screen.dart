@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:Attendace/core/utils/font_manager.dart';
@@ -11,7 +10,6 @@ import 'package:Attendace/features/late_in_and_early_out/presentation/controller
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -45,10 +43,13 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                   SnackBar(content: Text(state.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is EarlyOutSuccessState) {
+              Navigator.pop(context);
+
               SnackBar snackBar =
                   SnackBar(content: Text(state.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is LateInSuccessState) {
+              Navigator.pop(context);
               SnackBar snackBar =
                   SnackBar(content: Text(state.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -60,10 +61,9 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
           },
           builder: (context, state) {
             var cubit = BlocProvider.of<EarlyOutLateInCubit>(context);
-            log(state.toString());
 
             return Padding(
-              padding: EdgeInsets.all(AppPadding.p16.r),
+              padding: const EdgeInsets.all(AppPadding.p16),
               child: SafeArea(
                 child: Form(
                   key: formKey,
@@ -78,23 +78,23 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                               child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: AppSize.s10.h,
+                              const SizedBox(
+                                height: AppSize.s10,
                               ),
 
                               TextCustom(
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
                                 text: 'Date',
                                 color: ColorManager.textFormLabelColor,
                               ),
-                              SizedBox(
-                                height: AppSize.s8.h,
+                              const SizedBox(
+                                height: AppSize.s8,
                               ),
                               //Date
                               Container(
-                                padding: EdgeInsets.all(12.sp),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderRadius: BorderRadius.circular(8),
                                   color: ColorManager.textFormColor,
                                   border: Border.all(
                                       color: ColorManager.textFormColor,
@@ -111,8 +111,7 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                                   DateFormat("MM/dd/yyyy")
                                                       .format(DateTime.parse(
                                                           v.toString()));
-                                              log(cubit.selectedDate
-                                                  .toString());
+
                                               Navigator.pop(context);
                                             },
                                             controller: cubit.dateController,
@@ -145,27 +144,27 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                         text: cubit.selectedDate!,
                                         color: ColorManager.black,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 12.sp,
+                                        fontSize: 12,
                                       ),
                                       SvgPicture.asset(
                                         'assets/icons/calender.svg',
-                                        width: 24.w,
-                                        height: 24.h,
+                                        width: 24,
+                                        height: 24,
                                       )
                                     ],
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: AppSize.s20.h,
+                              const SizedBox(
+                                height: AppSize.s20,
                               ),
                               TextCustom(
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
                                 text: 'Reason',
                                 color: ColorManager.textFormLabelColor,
                               ),
-                              SizedBox(
-                                height: AppSize.s8.h,
+                              const SizedBox(
+                                height: AppSize.s8,
                               ),
                               Platform.isAndroid
                                   ? TextFormFieldCustom(
@@ -178,7 +177,7 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                         return null;
                                       })
                                   : SizedBox(
-                                      height: AppSize.s100.h,
+                                      height: AppSize.s100,
                                       child: CupertinoTextFormFieldRow(
                                         controller: cubit.reasonController,
                                         decoration: BoxDecoration(
@@ -186,10 +185,10 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                           //floatingLabelBehavior: FloatingLabelBehavior.auto,
                                           border: Border.all(
                                             color: ColorManager.textFormColor,
-                                            width: AppSize.s1_5.w,
+                                            width: AppSize.s1_5,
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                              AppSize.s8.r),
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
                                         ),
                                         style: Theme.of(context)
                                             .textTheme
@@ -197,11 +196,11 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                             .copyWith(
                                                 color: ColorManager.primary,
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: FontSize.s14.sp),
+                                                fontSize: FontSize.s14),
                                         showCursor: true,
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: AppPadding.p16.h,
-                                          horizontal: AppPadding.p16.w,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: AppPadding.p16,
+                                          horizontal: AppPadding.p16,
                                         ),
                                         validator: (validate) {
                                           if (validate!.isEmpty) {
@@ -214,21 +213,21 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                         maxLines: null,
                                       ),
                                     ),
-                              SizedBox(
-                                height: AppSize.s20.h,
+                              const SizedBox(
+                                height: AppSize.s20,
                               ),
                               TextCustom(
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
                                 text: 'Attachment',
                                 color: ColorManager.textFormLabelColor,
                               ),
-                              SizedBox(
-                                height: AppSize.s8.h,
+                              const SizedBox(
+                                height: AppSize.s8,
                               ),
                               Container(
-                                padding: EdgeInsets.all(12.sp),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
+                                  borderRadius: BorderRadius.circular(8),
                                   color: ColorManager.textFormColor,
                                   border: Border.all(
                                       color: ColorManager.textFormColor,
@@ -246,12 +245,12 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                         text: cubit.fileName ?? "File Name",
                                         color: ColorManager.black,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 12.sp,
+                                        fontSize: 12,
                                       ),
                                       SvgPicture.asset(
                                         'assets/icons/attachment.svg',
-                                        width: 24.w,
-                                        height: 24.h,
+                                        width: 24,
+                                        height: 24,
                                         // ignore: deprecated_member_use
                                         color: const Color(0xff3D8BD3),
                                       )
@@ -261,22 +260,22 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                               ),
                             ],
                           )),
-                          SizedBox(
-                            height: AppSize.s20.h,
+                          const SizedBox(
+                            height: AppSize.s20,
                           ),
                           SizedBox(
                             child: state is EarlyOutLoadingState ||
                                     state is LateInLoadingState
-                                ? Center(
+                                ? const Center(
                                     child: CupertinoActivityIndicator(
                                       color: ColorManager.primary,
-                                      radius: AppSize.s16.r,
+                                      radius: AppSize.s16,
                                     ),
                                   )
                                 : ElevatedButtonCustom(
                                     text: 'Submit',
                                     fontWeight: FontWeight.w500,
-                                    fontSize: FontSize.s18.sp,
+                                    fontSize: FontSize.s18,
                                     onPressed: () async {
                                       if (formKey.currentState!.validate()) {
                                         if (widget.title ==
@@ -287,7 +286,8 @@ class _LateInEarlyOutScreenState extends State<LateInEarlyOutScreen> {
                                           cubit.earlyOutRequest();
                                         }
                                       }
-                                    }),
+                                    },
+                                  ),
                           )
                         ],
                       ),

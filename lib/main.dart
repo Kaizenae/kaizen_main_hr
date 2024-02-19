@@ -12,7 +12,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'core/local/cache_helper.dart';
 import 'features/all_employee/presentation/cubit/all_employees_cubit.dart';
@@ -96,40 +95,29 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => sl<CompaniesCubit>()..getCompaniesFun()),
       ],
-      child: ScreenUtilInit(
-        designSize: const Size(400, 860),
-        minTextAdapt: true,
-        builder: (BuildContext context, Widget? child) {
-          return GestureDetector(
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            child: MaterialApp(
-              useInheritedMediaQuery: true,
-              locale: DevicePreview.locale(context),
-              builder: DevicePreview.appBuilder,
-              // builder: (context, child) => MediaQuery(
-              //     data: MediaQuery.of(context)
-              //         .copyWith(textScaler: const TextScaler.linear(1.0)),
-              //     child: Material(child: child!)),
-              title: 'KAIZEN HR',
-              theme: getApplicationTheme(),
-              routes: RoutesMap.routesMap(),
+      child: MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        // builder: (context, child) => MediaQuery(
+        //     data: MediaQuery.of(context)
+        //         .copyWith(textScaler: const TextScaler.linear(1.0)),
+        //     child: Material(child: child!)),
+        title: 'KAIZEN HR',
+        theme: getApplicationTheme(),
+        routes: RoutesMap.routesMap(),
 
-              initialRoute: Routes.loginRoute,
-              // home: const LocalAuthScreen(),
-              // EndPoints.baseUrl().isEmpty
-              //     ? const BaseUrlScreen()
-              //     : AppConstants.token == AppStrings.empty ||
-              //             AppConstants.token == 0
-              //         ? const LoginScreen()
-              //         : AppConstants.admin
-              //             ? const MainPageAdmin()
-              //             : const MainPage(),
-              debugShowCheckedModeBanner: false,
-            ),
-          );
-        },
+        initialRoute: Routes.splashRoute,
+        // home: const LocalAuthScreen(),
+        // EndPoints.baseUrl().isEmpty
+        //     ? const BaseUrlScreen()
+        //     : AppConstants.token == AppStrings.empty ||
+        //             AppConstants.token == 0
+        //         ? const LoginScreen()
+        //         : AppConstants.admin
+        //             ? const MainPageAdmin()
+        //             : const MainPage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

@@ -5,7 +5,6 @@ import 'package:Attendace/features/myRequests/presentation/controller/myRequests
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_request/accept_reject_request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
@@ -28,7 +27,7 @@ class ApprovedWidget extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.all(AppPadding.p12.r),
+                    padding: const EdgeInsets.all(AppPadding.p12),
                     child: Column(
                       children: [
                         UserRequestWidget(

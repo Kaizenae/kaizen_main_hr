@@ -7,7 +7,6 @@ import 'package:Attendace/core/widgets/text_form_field/text_form_field_custom.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -34,7 +33,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-      appBarCustom: const AppBarCustom(text: 'Apply TimeOff'),
+      appBarCustom: const AppBarCustom(text: 'Apply Leave Request'),
       body: BlocConsumer<CreateTimeOffCubit, CreateTimeOffState>(
         listener: (context, state) {
           if (state is CreateTimeOffSuccess) {
@@ -52,7 +51,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
         builder: (context, state) {
           var cubit = CreateTimeOffCubit.get(context);
           return Padding(
-            padding: EdgeInsets.all(AppPadding.p16.r),
+            padding: const EdgeInsets.all(AppPadding.p16),
             child: SafeArea(
               child: Form(
                 key: cubit.formKey,
@@ -69,7 +68,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                 children: [
                                   TextCustom(
                                     text: 'Type',
-                                    fontSize: FontSize.s14.sp,
+                                    fontSize: FontSize.s14,
                                     color: ColorManager.textFormLabelColor,
                                   ),
                                   const SizedBox(
@@ -90,9 +89,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                     ColorManager.textFormColor,
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        AppSize.s8.r)),
+                                                        AppSize.s8)),
                                             width: context.width / 1.1,
-                                            height: AppSize.s50.h,
+                                            height: AppSize.s50,
                                             child: state is GetTimeOffSuccess
                                                 ? InkWell(
                                                     onTap: () {
@@ -104,9 +103,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                           builder: (BuildContext
                                                               context) {
                                                             return Container(
-                                                              height: AppSize
-                                                                      .s100.h *
-                                                                  3,
+                                                              height:
+                                                                  AppSize.s100 *
+                                                                      3,
                                                               padding:
                                                                   const EdgeInsets
                                                                       .only(
@@ -146,7 +145,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                                               children: List.generate(
                                                                                   state.getTimeOffEntity.resultEntity.response.length,
                                                                                   (index) => Center(
-                                                                                        child: TextCustom(color: ColorManager.primary, fontSize: FontSize.s14.sp, textAlign: TextAlign.center, text: state.getTimeOffEntity.resultEntity.response[index].name),
+                                                                                        child: TextCustom(color: ColorManager.primary, fontSize: FontSize.s14, textAlign: TextAlign.center, text: state.getTimeOffEntity.resultEntity.response[index].name),
                                                                                       )),
 
                                                                               onSelectedItemChanged: (index) {
@@ -164,8 +163,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                                   ElevatedButtonCustom(
                                                                     fontSize:
                                                                         FontSize
-                                                                            .s14
-                                                                            .sp,
+                                                                            .s14,
                                                                     text:
                                                                         'Done',
                                                                     onPressed:
@@ -184,8 +182,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                     },
                                                     child: Center(
                                                       child: TextCustom(
-                                                        fontSize:
-                                                            FontSize.s14.sp,
+                                                        fontSize: FontSize.s14,
                                                         text: cubit.checkType
                                                                 .isNotEmpty
                                                             ? cubit.checkType
@@ -211,7 +208,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                     height: AppSize.s16,
                                   ),
                                   TextCustom(
-                                    fontSize: FontSize.s14.sp,
+                                    fontSize: FontSize.s14,
                                     text: 'Date',
                                     color: ColorManager.textFormLabelColor,
                                   ),
@@ -220,9 +217,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                   ),
                                   //Date
                                   Container(
-                                    padding: EdgeInsets.all(12.sp),
+                                    padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                       color: ColorManager.textFormColor,
                                       border: Border.all(
                                           color: ColorManager.textFormColor,
@@ -275,12 +272,12 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                             text: cubit.selectedDate!,
                                             color: ColorManager.black,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 12.sp,
+                                            fontSize: 12,
                                           ),
                                           SvgPicture.asset(
                                             'assets/icons/calender.svg',
-                                            width: 24.w,
-                                            height: 24.h,
+                                            width: 24,
+                                            height: 24,
                                           )
                                         ],
                                       ),
@@ -290,12 +287,12 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                     height: AppSize.s16,
                                   ),
                                   TextCustom(
-                                    fontSize: FontSize.s14.sp,
+                                    fontSize: FontSize.s14,
                                     text: 'Days',
                                     color: ColorManager.textFormLabelColor,
                                   ),
-                                  SizedBox(
-                                    height: AppSize.s4.h,
+                                  const SizedBox(
+                                    height: AppSize.s4,
                                   ),
                                   Platform.isAndroid
                                       ? TextFormFieldCustom(
@@ -309,7 +306,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                           })
                                       : Expanded(
                                           child: SizedBox(
-                                            height: AppSize.s100.h,
+                                            height: AppSize.s100,
                                             child: CupertinoTextFormFieldRow(
                                               controller: cubit.daysController,
                                               decoration: BoxDecoration(
@@ -319,11 +316,11 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                 border: Border.all(
                                                   color: ColorManager
                                                       .textFormColor,
-                                                  width: AppSize.s1_5.w,
+                                                  width: AppSize.s1_5,
                                                 ),
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        AppSize.s8.r),
+                                                        AppSize.s8),
                                               ),
                                               style: Theme.of(context)
                                                   .textTheme
@@ -333,12 +330,12 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                           ColorManager.primary,
                                                       fontWeight:
                                                           FontWeight.w600,
-                                                      fontSize:
-                                                          FontSize.s14.sp),
+                                                      fontSize: FontSize.s14),
                                               showCursor: true,
-                                              padding: EdgeInsets.symmetric(
-                                                vertical: AppPadding.p16.h,
-                                                horizontal: AppPadding.p16.w,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: AppPadding.p16,
+                                                horizontal: AppPadding.p16,
                                               ),
                                               validator: (validate) {
                                                 if (validate!.isEmpty) {
@@ -358,17 +355,17 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                     height: AppSize.s16,
                                   ),
                                   TextCustom(
-                                    fontSize: FontSize.s14.sp,
+                                    fontSize: FontSize.s14,
                                     text: 'Attachment',
                                     color: ColorManager.textFormLabelColor,
                                   ),
-                                  SizedBox(
-                                    height: AppSize.s4.h,
+                                  const SizedBox(
+                                    height: AppSize.s4,
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(12.sp),
+                                    padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.r),
+                                      borderRadius: BorderRadius.circular(8),
                                       color: ColorManager.textFormColor,
                                       border: Border.all(
                                           color: ColorManager.textFormColor,
@@ -386,12 +383,12 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                             text: cubit.fileName ?? "File Name",
                                             color: ColorManager.black,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 12.sp,
+                                            fontSize: 12,
                                           ),
                                           SvgPicture.asset(
                                             'assets/icons/attachment.svg',
-                                            width: 24.w,
-                                            height: 24.h,
+                                            width: 24,
+                                            height: 24,
                                             color: const Color(0xff3D8BD3),
                                           )
                                         ],
@@ -404,21 +401,21 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: AppSize.s20.h,
+                            const SizedBox(
+                              height: AppSize.s20,
                             ),
                             SizedBox(
                               child: state is CreateTimeOffLoading
-                                  ? Center(
+                                  ? const Center(
                                       child: CupertinoActivityIndicator(
                                         color: ColorManager.primary,
-                                        radius: AppSize.s16.r,
+                                        radius: AppSize.s16,
                                       ),
                                     )
                                   : ElevatedButtonCustom(
                                       text: 'Save',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: FontSize.s18.sp,
+                                      fontSize: FontSize.s18,
                                       onPressed: () async {
                                         if (cubit.formKey.currentState!
                                             .validate()) {

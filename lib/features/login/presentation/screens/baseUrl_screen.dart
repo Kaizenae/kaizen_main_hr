@@ -4,7 +4,6 @@ import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/core/widgets/component.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -62,7 +61,7 @@ class BaseUrlScreen extends StatelessWidget {
                         height: AppSize.s30,
                       ),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.baseUrl,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
@@ -90,12 +89,12 @@ class BaseUrlScreen extends StatelessWidget {
                       ),
                       Center(
                         child: state is CacheUrlStateLoading
-                            ? CupertinoActivityIndicator(
+                            ? const CupertinoActivityIndicator(
                                 color: ColorManager.primary,
-                                radius: AppSize.s16.r,
+                                radius: AppSize.s16,
                               )
                             : ElevatedButtonCustom(
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
                                 textColor: ColorManager.white,
                                 onPressed: () async {
                                   if (loginCubit.baseKey.currentState!

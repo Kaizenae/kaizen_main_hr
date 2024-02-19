@@ -2,7 +2,6 @@
 
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -56,7 +55,7 @@ class EditUserNameScreen extends StatelessWidget {
           var editProfileCubit = EditProfileCubit.get(context);
           return SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               child: Form(
                 key: editProfileCubit.formKey,
                 child: SingleChildScrollView(
@@ -65,13 +64,13 @@ class EditUserNameScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: 'UserName',
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s8.h,
+                      const SizedBox(
+                        height: AppSize.s8,
                       ),
                       TextFormFieldCustom(
                         controller: editProfileCubit.userNameController,
@@ -86,17 +85,17 @@ class EditUserNameScreen extends StatelessWidget {
                         suffixIcon: IconsAssets.personIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s40.h,
+                      const SizedBox(
+                        height: AppSize.s40,
                       ),
                       Center(
                         child: state is EditProfileLoadingState
-                            ? CupertinoActivityIndicator(
+                            ? const CupertinoActivityIndicator(
                                 color: ColorManager.primary,
-                                radius: AppSize.s16.r,
+                                radius: AppSize.s16,
                               )
                             : ElevatedButtonCustom(
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
 
                                 textColor: ColorManager.white,
 

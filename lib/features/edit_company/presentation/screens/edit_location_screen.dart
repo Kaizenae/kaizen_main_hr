@@ -2,7 +2,6 @@ import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -62,13 +61,13 @@ class EditLocationScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: 'Latitude',
                           textAlign: TextAlign.start,
                           color: ColorManager.textFormLabelColor,
                         ),
-                        SizedBox(
-                          height: AppSize.s8.h,
+                        const SizedBox(
+                          height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
                           controller: editCompanyCubit.latController,
@@ -83,17 +82,17 @@ class EditLocationScreen extends StatelessWidget {
                           suffixIcon: IconsAssets.locationIcon,
                           suffix: true,
                         ),
-                        SizedBox(
-                          height: AppSize.s16.h,
+                        const SizedBox(
+                          height: AppSize.s16,
                         ),
                         TextCustom(
                           text: 'Longitude',
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           textAlign: TextAlign.start,
                           color: ColorManager.textFormLabelColor,
                         ),
-                        SizedBox(
-                          height: AppSize.s8.h,
+                        const SizedBox(
+                          height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
                           controller: editCompanyCubit.longController,
@@ -108,17 +107,17 @@ class EditLocationScreen extends StatelessWidget {
                           suffixIcon: IconsAssets.locationIcon,
                           suffix: true,
                         ),
-                        SizedBox(
-                          height: AppSize.s40.h,
+                        const SizedBox(
+                          height: AppSize.s40,
                         ),
                         Center(
                           child: state is EditCompanyLoadingState
-                              ? CupertinoActivityIndicator(
+                              ? const CupertinoActivityIndicator(
                                   color: ColorManager.primary,
-                                  radius: AppSize.s16.r,
+                                  radius: AppSize.s16,
                                 )
                               : ElevatedButtonCustom(
-                                  fontSize: FontSize.s14.sp,
+                                  fontSize: FontSize.s14,
 
                                   textColor: ColorManager.white,
 

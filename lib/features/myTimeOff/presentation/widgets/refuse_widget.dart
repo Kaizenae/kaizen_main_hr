@@ -4,7 +4,6 @@ import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_c
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
@@ -29,7 +28,7 @@ class RefusedWidget extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.all(AppPadding.p12.r),
+                    padding: const EdgeInsets.all(AppPadding.p12),
                     child: Column(
                       children: [
                         UserRequestWidget(

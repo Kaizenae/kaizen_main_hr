@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:Attendace/core/utils/values_manager.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProgressIndicatorCustom extends StatelessWidget {
   const ProgressIndicatorCustom({super.key});
@@ -9,14 +8,14 @@ class ProgressIndicatorCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSize.s80.h,
-      width: AppSize.s80.h,
+      height: AppSize.s80,
+      width: AppSize.s80,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.s10.r),
+          borderRadius: BorderRadius.circular(AppSize.s10),
           color: CupertinoColors.secondaryLabel),
-      child: CupertinoActivityIndicator(
+      child: const CupertinoActivityIndicator(
         color: ColorManager.white,
-        radius: AppSize.s16.r,
+        radius: AppSize.s16,
       ),
     );
   }

@@ -1,7 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:developer';
-
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:dio/dio.dart';
@@ -40,7 +38,6 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     } else {
       rangeCount = args.value.length.toString();
     }
-    log(selectDate.toString());
     emit(ChangeSelectedDateState());
   }
 
@@ -55,14 +52,8 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "date": selectedDate.toString(),
       }
     }).then((value) {
-      log(selectedDate!.toString());
-      log(value.data.toString());
       emit(EarlyOutSuccessState(message: "Success"));
     }).catchError((error) {
-      log(error.toString());
-      if (error is DioError) {
-        log(error.response!.data);
-      }
       emit(EarlyOutErrorState(message: "Faild! You Return to the admin"));
     });
   }
@@ -78,15 +69,8 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "date": selectedDate.toString(),
       }
     }).then((value) {
-      log(selectDate.toString());
-      log(value.data.toString());
-
       emit(LateInSuccessState(message: "Success"));
     }).catchError((error) {
-      log(error.toString());
-      if (error is DioError) {
-        log(error.response!.data);
-      }
       emit(LateInErrorState(message: "Faild! You Return to the admin"));
     });
   }

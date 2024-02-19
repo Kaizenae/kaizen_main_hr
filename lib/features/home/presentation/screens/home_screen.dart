@@ -8,7 +8,6 @@ import 'package:Attendace/features/late_in_and_early_out/presentation/screens/la
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
 import '../controller/home_cubit.dart';
 import '../../../../core/utils/assets_manager.dart';
@@ -56,13 +55,13 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Image.asset(
                             ImageAssets.logoImg,
-                            height: AppSize.s80.h,
-                            width: AppSize.s80.w,
+                            height: AppSize.s80,
+                            width: AppSize.s80,
                           ),
-                          CircleAvatar(
-                            radius: AppSize.s30.r,
+                          const CircleAvatar(
+                            radius: AppSize.s30,
                             backgroundColor: ColorManager.scaffoldColor,
-                            child: const CachedNetworkImageCustom(
+                            child: CachedNetworkImageCustom(
                               url:
                                   'https://res.cloudinary.com/halqetelzekr/image/upload/v1678732276/placeholder_t7jyyi.png',
                             ),

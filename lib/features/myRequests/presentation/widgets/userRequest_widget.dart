@@ -2,7 +2,6 @@
 
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/color_manager.dart';
@@ -28,27 +27,27 @@ class UserRequestWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(
             iconPath,
-            height: AppSize.s24.h,
+            height: AppSize.s24,
             color: ColorManager.secondary,
           ),
-          SizedBox(
-            width: AppSize.s8.w,
+          const SizedBox(
+            width: AppSize.s8,
           ),
           // TextCustom(
           //   text: '$text :',
           //   color: ColorManager.black,
           //   fontSize: FontSize.s16,
           // ),
-          SizedBox(
-            width: AppSize.s4.w,
+          const SizedBox(
+            width: AppSize.s4,
           ),
           TextCustom(
             text: subText,
             color: ColorManager.black,
             fontSize: FontSize.s16,
           ),
-          SizedBox(
-            height: AppSize.s14.h,
+          const SizedBox(
+            height: AppSize.s14,
           ),
         ],
       ),

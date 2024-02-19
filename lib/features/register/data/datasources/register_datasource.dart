@@ -34,7 +34,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
         "name": name,
         "email": email,
         "password": password,
-        "phone_number": phoneNumber,
+        "phone_number": "0$phoneNumber",
         "company_id": companyId,
         "device_id": uniqueDeviceId,
         "emp_code": empCode,

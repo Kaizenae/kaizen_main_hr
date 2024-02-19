@@ -7,7 +7,6 @@ import 'package:Attendace/features/create_loan/presentation/controller/currency_
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/media_query_values.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -47,7 +46,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
         builder: (context, state) {
           var cubit = CreateLoanCubit.get(context);
           return Padding(
-            padding: EdgeInsets.all(AppPadding.p16.r),
+            padding: const EdgeInsets.all(AppPadding.p16),
             child: SafeArea(
               child: Form(
                 key: cubit.formKey,
@@ -57,7 +56,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                   children: [
                     TextCustom(
                       text: 'Type',
-                      fontSize: FontSize.s14.sp,
+                      fontSize: FontSize.s14,
                       color: ColorManager.textFormLabelColor,
                     ),
                     const SizedBox(
@@ -74,9 +73,9 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                               decoration: BoxDecoration(
                                   color: ColorManager.textFormColor,
                                   borderRadius:
-                                      BorderRadius.circular(AppSize.s8.r)),
+                                      BorderRadius.circular(AppSize.s8)),
                               width: context.width / 1.1,
-                              height: AppSize.s50.h,
+                              height: AppSize.s50,
                               child: state is GetCurrencySuccess
                                   ? InkWell(
                                       onTap: () {
@@ -85,7 +84,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return Container(
-                                                height: AppSize.s100.h * 3,
+                                                height: AppSize.s100 * 3,
                                                 padding: const EdgeInsets.only(
                                                     top: 6.0),
                                                 color: CupertinoColors.white,
@@ -129,7 +128,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                                                                           Center(
                                                                             child: TextCustom(
                                                                                 color: ColorManager.primary,
-                                                                                fontSize: FontSize.s14.sp,
+                                                                                fontSize: FontSize.s14,
                                                                                 textAlign: TextAlign.center,
                                                                                 text: state.getCurrencyEntity.resultEntity.response[index].name),
                                                                           )),
@@ -164,7 +163,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                                                       ),
                                                     ),
                                                     ElevatedButtonCustom(
-                                                      fontSize: FontSize.s14.sp,
+                                                      fontSize: FontSize.s14,
                                                       text: 'Done',
                                                       onPressed: () {
                                                         Navigator.pop(context);
@@ -177,7 +176,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                                       },
                                       child: Center(
                                         child: TextCustom(
-                                          fontSize: FontSize.s14.sp,
+                                          fontSize: FontSize.s14,
                                           text: cubit.checkType.isNotEmpty
                                               ? cubit.checkType
                                               : 'Select Type',
@@ -198,12 +197,12 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                       height: AppSize.s16,
                     ),
                     TextCustom(
-                      fontSize: FontSize.s14.sp,
+                      fontSize: FontSize.s14,
                       text: 'Loan Amount',
                       color: ColorManager.textFormLabelColor,
                     ),
-                    SizedBox(
-                      height: AppSize.s4.h,
+                    const SizedBox(
+                      height: AppSize.s4,
                     ),
                     Platform.isAndroid
                         ? TextFormFieldCustom(
@@ -217,7 +216,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                             })
                         : Expanded(
                             child: SizedBox(
-                              height: AppSize.s100.h,
+                              height: AppSize.s100,
                               child: CupertinoTextFormFieldRow(
                                 controller: cubit.loanAmountController,
                                 decoration: BoxDecoration(
@@ -225,10 +224,10 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                                   //floatingLabelBehavior: FloatingLabelBehavior.auto,
                                   border: Border.all(
                                     color: ColorManager.textFormColor,
-                                    width: AppSize.s1_5.w,
+                                    width: AppSize.s1_5,
                                   ),
                                   borderRadius:
-                                      BorderRadius.circular(AppSize.s8.r),
+                                      BorderRadius.circular(AppSize.s8),
                                 ),
                                 style: Theme.of(context)
                                     .textTheme
@@ -236,11 +235,11 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                                     .copyWith(
                                         color: ColorManager.primary,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: FontSize.s14.sp),
+                                        fontSize: FontSize.s14),
                                 showCursor: true,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: AppPadding.p16.h,
-                                  horizontal: AppPadding.p16.w,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: AppPadding.p16,
+                                  horizontal: AppPadding.p16,
                                 ),
                                 validator: (validate) {
                                   if (validate!.isEmpty) {
@@ -256,16 +255,16 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                           ),
                     const Spacer(),
                     state is CreateLoanLoading
-                        ? Center(
+                        ? const Center(
                             child: CupertinoActivityIndicator(
                               color: ColorManager.primary,
-                              radius: AppSize.s16.r,
+                              radius: AppSize.s16,
                             ),
                           )
                         : ElevatedButtonCustom(
                             text: 'Save',
                             fontWeight: FontWeight.w500,
-                            fontSize: FontSize.s18.sp,
+                            fontSize: FontSize.s18,
                             onPressed: () async {
                               if (cubit.formKey.currentState!.validate() &&
                                   cubit.checkType.isNotEmpty) {

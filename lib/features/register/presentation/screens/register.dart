@@ -7,7 +7,6 @@ import 'package:Attendace/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
@@ -52,7 +51,7 @@ class RegisterScreen extends StatelessWidget {
             log(state.toString());
             var registerCubit = RegisterCubit.get(context);
             return Padding(
-              padding: EdgeInsets.all(AppPadding.p16.r),
+              padding: const EdgeInsets.all(AppPadding.p16),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Form(
@@ -64,21 +63,19 @@ class RegisterScreen extends StatelessWidget {
                       Center(
                         child: Image.asset(
                           ImageAssets.logoImg,
-                          height: AppSize.s100.w,
-                          width: AppSize.s100.w,
+                          height: AppSize.s100,
+                          width: AppSize.s100,
                         ),
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
-                      ),
+                      const SizedBox(height: AppSize.s30),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.company,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       Material(
                         child: DropdownButtonHideUnderline(
@@ -88,16 +85,16 @@ class RegisterScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       color: ColorManager.textFormColor,
                                       borderRadius:
-                                          BorderRadius.circular(AppSize.s8.r)),
+                                          BorderRadius.circular(AppSize.s8)),
                                   width: context.width / 1.1,
-                                  height: AppSize.s50.h,
+                                  height: AppSize.s50,
                                   child: InkWell(
                                     onTap: () {
                                       showCupertinoModalPopup<void>(
                                           context: context,
                                           builder: (BuildContext context) {
                                             return Container(
-                                              height: AppSize.s100.h * 3,
+                                              height: AppSize.s100 * 3,
                                               padding: const EdgeInsets.only(
                                                   top: 6.0),
                                               color: CupertinoColors.white,
@@ -120,7 +117,7 @@ class RegisterScreen extends StatelessWidget {
                                                             magnification: 1.5,
                                                             backgroundColor:
                                                                 Colors.white,
-                                                            itemExtent: 30.w,
+                                                            itemExtent: 30,
                                                             //height of each item
                                                             looping: false,
 
@@ -134,9 +131,9 @@ class RegisterScreen extends StatelessWidget {
                                                               (index) =>
                                                                   Padding(
                                                                 padding:
-                                                                    EdgeInsets
+                                                                    const EdgeInsets
                                                                         .all(
-                                                                  8.0.w,
+                                                                  8.0,
                                                                 ),
                                                                 child:
                                                                     FittedBox(
@@ -147,8 +144,7 @@ class RegisterScreen extends StatelessWidget {
                                                                           .primary,
                                                                       fontSize:
                                                                           FontSize
-                                                                              .s14
-                                                                              .sp,
+                                                                              .s14,
                                                                       textAlign:
                                                                           TextAlign
                                                                               .center,
@@ -176,7 +172,7 @@ class RegisterScreen extends StatelessWidget {
                                                   ),
                                                   ElevatedButtonCustom(
                                                     text: 'Done',
-                                                    fontSize: FontSize.s14.sp,
+                                                    fontSize: FontSize.s14,
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
@@ -188,7 +184,7 @@ class RegisterScreen extends StatelessWidget {
                                     },
                                     child: TextCustom(
                                       color: ColorManager.primary,
-                                      fontSize: FontSize.s14.sp,
+                                      fontSize: FontSize.s14,
                                       text: registerCubit.companyName.isEmpty
                                           ? 'Select The Company'
                                           : registerCubit.companyName,
@@ -197,7 +193,7 @@ class RegisterScreen extends StatelessWidget {
                                 )
                               : ShimmerCustom(
                                   child: SizedBox(
-                                  height: AppSize.s50.h,
+                                  height: AppSize.s50,
                                   child: DropdownMenu(
                                       width: context.width / 1.1,
                                       hintText: 'Select the company',
@@ -209,44 +205,45 @@ class RegisterScreen extends StatelessWidget {
                                         isDense: true,
                                         //floatingLabelBehavior: FloatingLabelBehavior.auto,
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              AppSize.s8.r),
-                                          borderSide: BorderSide(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
                                             color: ColorManager.textFormColor,
-                                            width: AppSize.s1_5.w,
+                                            width: AppSize.s1_5,
                                           ),
                                         ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              AppSize.s8.r),
-                                          borderSide: BorderSide(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
                                             color: ColorManager.textFormColor,
-                                            width: AppSize.s1_5.w,
+                                            width: AppSize.s1_5,
                                           ),
                                         ),
-                                        contentPadding: EdgeInsets.symmetric(
-                                          vertical: AppPadding.p8.h,
-                                          horizontal: AppPadding.p16.w,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          vertical: AppPadding.p8,
+                                          horizontal: AppPadding.p16,
                                         ),
                                         focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              AppSize.s8.r),
-                                          borderSide: BorderSide(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
                                             color: ColorManager.textFormColor,
-                                            width: AppSize.s1_5.w,
+                                            width: AppSize.s1_5,
                                           ),
                                         ),
                                         errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              AppSize.s8.r),
-                                          borderSide: BorderSide(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
                                             color: Colors.red,
-                                            width: AppSize.s1_5.w,
+                                            width: AppSize.s1_5,
                                           ),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              AppSize.s8.r),
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
                                           borderSide: const BorderSide(
                                             color: Colors.red,
                                           ),
@@ -264,17 +261,17 @@ class RegisterScreen extends StatelessWidget {
                                 )),
                         ),
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.name,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.nameController,
@@ -289,17 +286,17 @@ class RegisterScreen extends StatelessWidget {
                         suffixIcon: IconsAssets.personIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.email,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.emailController,
@@ -310,17 +307,17 @@ class RegisterScreen extends StatelessWidget {
                         suffixIcon: IconsAssets.emailIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.phone,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.phoneNumberController,
@@ -330,23 +327,25 @@ class RegisterScreen extends StatelessWidget {
                           }
                           return null;
                         },
+                        prefix: true, isRegister: true,
+                        hint: "5x xxx xxxx",
                         keyboardType: TextInputType.phone,
                         suffixIcon: IconsAssets.phoneIcon,
                         suffix: true,
 
                         // textInputAction: TextInputAction.done,
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.password,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.passwordController,
@@ -367,17 +366,17 @@ class RegisterScreen extends StatelessWidget {
                           registerCubit.changePasswordVisibility();
                         },
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
                       TextCustom(
-                        fontSize: FontSize.s14.sp,
+                        fontSize: FontSize.s14,
                         text: AppStrings.employeeCode,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.employeeCode,
@@ -392,17 +391,17 @@ class RegisterScreen extends StatelessWidget {
                         suffixIcon: IconsAssets.personIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s40.h,
+                      const SizedBox(
+                        height: AppSize.s40,
                       ),
                       Center(
                         child: state is RegisterLoadingState
-                            ? CupertinoActivityIndicator(
+                            ? const CupertinoActivityIndicator(
                                 color: ColorManager.primary,
-                                radius: AppSize.s16.r,
+                                radius: AppSize.s16,
                               )
                             : ElevatedButtonCustom(
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
                                 textColor: ColorManager.white,
                                 onPressed: () async {
                                   await registerCubit.getUniqueDeviceId();
@@ -420,7 +419,7 @@ class RegisterScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextCustom(
-                            fontSize: FontSize.s14.sp,
+                            fontSize: FontSize.s14,
                             text: AppStrings.haveAccount,
                             color: ColorManager.grey,
                             fontWeight: FontWeight.w600,
@@ -431,12 +430,12 @@ class RegisterScreen extends StatelessWidget {
                             },
                             child: TextCustom(
                                 color: ColorManager.primary,
-                                fontSize: FontSize.s14.sp,
+                                fontSize: FontSize.s14,
                                 text: AppStrings.login,
                                 decoration: TextDecoration.underline),
                           ),
-                          SizedBox(
-                            height: AppSize.s40.h,
+                          const SizedBox(
+                            height: AppSize.s40,
                           ),
                         ],
                       ),

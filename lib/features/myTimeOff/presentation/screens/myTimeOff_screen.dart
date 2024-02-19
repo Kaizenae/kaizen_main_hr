@@ -11,7 +11,6 @@ import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -31,19 +30,19 @@ class MyTimeOffScreen extends StatelessWidget {
         text: AppStrings.myTimeOff,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.r),
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
         child: SafeArea(
           child: Column(
             children: [
               BlocProvider.value(
                 value: BlocProvider.of<MyTimeOffCubit>(context)
-                  ..getMyTimeOffFun()
-                  ..getAllTimeOffValues(),
+                  ..getAllTimeOffValues()
+                  ..getMyTimeOffFun(),
                 child: BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
                   listener: (context, state) {},
                   builder: (context, state) {
                     return SizedBox(
-                      height: AppSize.s120.h,
+                      height: AppSize.s120,
                       child: BlocProvider.of<MyTimeOffCubit>(context)
                               .allTimeOffValueModel
                               .result
@@ -53,11 +52,11 @@ class MyTimeOffScreen extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  padding: EdgeInsets.all(AppPadding.p12.r),
+                                  padding: const EdgeInsets.all(AppPadding.p12),
                                   decoration: BoxDecoration(
                                     color: ColorManager.white,
                                     borderRadius:
-                                        BorderRadius.circular(AppSize.s10.r),
+                                        BorderRadius.circular(AppSize.s10),
                                   ),
                                   child: Column(
                                     mainAxisAlignment:
@@ -71,7 +70,7 @@ class MyTimeOffScreen extends StatelessWidget {
                                                   .allTimeOffNameAndValues[
                                               index]["timeOffValue"],
                                           color: ColorManager.secondary,
-                                          fontSize: FontSize.s20.sp,
+                                          fontSize: FontSize.s20,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -83,7 +82,7 @@ class MyTimeOffScreen extends StatelessWidget {
                                                   .allTimeOffNameAndValues[
                                               index]["timeOffName"],
                                           color: ColorManager.black,
-                                          fontSize: FontSize.s18.sp,
+                                          fontSize: FontSize.s18,
                                         ),
                                       ),
                                     ],
@@ -91,8 +90,8 @@ class MyTimeOffScreen extends StatelessWidget {
                                 );
                               },
                               separatorBuilder: (context, index) {
-                                return SizedBox(
-                                  width: AppSize.s12.w,
+                                return const SizedBox(
+                                  width: AppSize.s12,
                                 );
                               },
                               itemCount:
@@ -110,26 +109,20 @@ class MyTimeOffScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(
-                height: AppSize.s16.h,
+              const SizedBox(
+                height: AppSize.s16,
               ),
-              BlocProvider.of<MyTimeOffCubit>(context)
-                      .allTimeOffValueModel
-                      .result
-                      .responseModel
-                      .isNotEmpty
-                  ? ElevatedButtonCustom(
-                      fontSize: FontSize.s14.sp,
-                      colors: ColorManager.secondary,
-                      width: context.width / 1.6,
-                      text: 'Apply Request',
-                      onPressed: () {
-                        navigator(context, Routes.createTimeOffRoute);
-                      },
-                    )
-                  : const SizedBox(),
-              SizedBox(
-                height: AppSize.s20.h,
+              ElevatedButtonCustom(
+                fontSize: FontSize.s14,
+                colors: ColorManager.secondary,
+                width: context.width / 1.6,
+                text: 'Apply Request',
+                onPressed: () {
+                  navigator(context, Routes.createTimeOffRoute);
+                },
+              ),
+              const SizedBox(
+                height: AppSize.s20,
               ),
 
               TabBarCustom(

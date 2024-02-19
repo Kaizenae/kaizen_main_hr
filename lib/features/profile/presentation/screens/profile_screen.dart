@@ -1,5 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/utils/values_manager.dart';
 
 import 'package:flutter/material.dart';
@@ -12,10 +10,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldCustom(
+    return const ScaffoldCustom(
       body: Padding(
-        padding: EdgeInsets.all(AppPadding.p16.sp),
-        child: const ProfileCard(),
+        padding: EdgeInsets.all(AppPadding.p16),
+        child: ProfileCard(),
       ),
     );
   }

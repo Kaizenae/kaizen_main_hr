@@ -5,7 +5,6 @@ import 'package:Attendace/core/widgets/component.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
@@ -45,8 +44,8 @@ class AllEmployeesScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.all(
-                          AppPadding.p16.r,
+                        padding: const EdgeInsets.all(
+                          AppPadding.p16,
                         ),
                         child: InkWell(
                           onTap: () {
@@ -60,12 +59,12 @@ class AllEmployeesScreen extends StatelessWidget {
                           },
                           child: BounceInLeft(
                             child: Container(
-                              padding: EdgeInsets.all(AppPadding.p12.r),
+                              padding: const EdgeInsets.all(AppPadding.p12),
                               decoration: BoxDecoration(
                                   color: ColorManager.white,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(AppSize.s10.r),
-                                    bottomRight: Radius.circular(AppSize.s10.r),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(AppSize.s10),
+                                    bottomRight: Radius.circular(AppSize.s10),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
@@ -81,8 +80,8 @@ class AllEmployeesScreen extends StatelessWidget {
                                     subText: state.employeeEntity.resultEntity
                                         .response[index].name,
                                   ),
-                                  SizedBox(
-                                    height: AppSize.s10.h,
+                                  const SizedBox(
+                                    height: AppSize.s10,
                                   ),
                                   UserRequestWidget(
                                     iconPath: IconsAssets.emailIcon,
@@ -90,8 +89,8 @@ class AllEmployeesScreen extends StatelessWidget {
                                     subText: state.employeeEntity.resultEntity
                                         .response[index].email,
                                   ),
-                                  SizedBox(
-                                    height: AppSize.s10.h,
+                                  const SizedBox(
+                                    height: AppSize.s10,
                                   ),
                                   UserRequestWidget(
                                     iconPath: IconsAssets.phoneIcon,

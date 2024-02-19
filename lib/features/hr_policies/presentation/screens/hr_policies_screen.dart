@@ -6,7 +6,6 @@ import 'package:Attendace/features/hr_policies/presentation/controller/states.da
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/strings_manager.dart';
 
@@ -24,18 +23,18 @@ class HrPoliciesScreen extends StatelessWidget {
               text: AppStrings.hrPolices,
             ),
             body: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSize.s12.w,
-                vertical: AppSize.s20.h,
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSize.s12,
+                vertical: AppSize.s20,
               ),
               child: ListView.separated(
                   itemBuilder: (context, index) {
                     return BounceInLeft(
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppSize.s8.w,
-                          vertical: AppSize.s10.h,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSize.s8,
+                          vertical: AppSize.s10,
                         ),
                         decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.2),
@@ -51,12 +50,12 @@ class HrPoliciesScreen extends StatelessWidget {
                                   .displayLarge!
                                   .copyWith(color: ColorManager.primary),
                             ),
-                            SizedBox(
-                              height: AppSize.s8.h,
+                            const SizedBox(
+                              height: AppSize.s8,
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: AppSize.s16.w),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSize.s16),
                               child: Text(
                                 BlocProvider.of<HrPoliciesCubit>(context)
                                     .hrPoliciesModel
@@ -75,8 +74,8 @@ class HrPoliciesScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  separatorBuilder: (context, index) => SizedBox(
-                        height: AppSize.s20.h,
+                  separatorBuilder: (context, index) => const SizedBox(
+                        height: AppSize.s20,
                       ),
                   itemCount: BlocProvider.of<HrPoliciesCubit>(context)
                       .hrPoliciesModel

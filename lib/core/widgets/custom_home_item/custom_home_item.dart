@@ -3,7 +3,6 @@
 import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomHomeItem extends StatelessWidget {
   const CustomHomeItem({
@@ -19,7 +18,7 @@ class CustomHomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.all(8.0.w),
+        padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: onTap,
           child: Container(
@@ -43,7 +42,7 @@ class CustomHomeItem extends StatelessWidget {
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontSize: FontSize.s17.sp, color: ColorManager.black),
+                        fontSize: FontSize.s17, color: ColorManager.black),
                   ),
                 )
               ],

@@ -7,7 +7,6 @@ import 'package:Attendace/features/myRequests/presentation/controller/myRequests
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/utils/assets_manager.dart';
@@ -34,7 +33,7 @@ class EmployeeScreen extends StatelessWidget {
     return ScaffoldCustom(
         appBarCustom: const AppBarCustom(),
         body: Padding(
-          padding: EdgeInsets.all(AppPadding.p16.r),
+          padding: const EdgeInsets.all(AppPadding.p16),
           child: SafeArea(
             child: Column(
               children: [
@@ -58,34 +57,33 @@ class EmployeeScreen extends StatelessWidget {
                                     text: state.employeeEntity.resultEntity
                                         .response[0].name,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: FontSize.s22.sp,
+                                    fontSize: FontSize.s22,
                                     color: ColorManager.black,
                                   ),
-                                  SizedBox(
-                                    height: AppSize.s16.h,
+                                  const SizedBox(
+                                    height: AppSize.s16,
                                   ),
                                   Container(
                                     padding:
-                                        const EdgeInsets.all(AppPadding.p8 / 2)
-                                            .r,
+                                        const EdgeInsets.all(AppPadding.p8 / 2),
                                     decoration: BoxDecoration(
                                         color: ColorManager.textBackgroundColor,
-                                        borderRadius: BorderRadius.circular(
-                                            AppSize.s10.r)),
+                                        borderRadius:
+                                            BorderRadius.circular(AppSize.s10)),
                                     child: TextCustom(
                                       text: state.employeeEntity.resultEntity
                                           .response[0].email,
-                                      fontSize: FontSize.s12.sp,
+                                      fontSize: FontSize.s12,
                                       color: ColorManager.grey2,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: AppSize.s20.sp,
+                                  const SizedBox(
+                                    height: AppSize.s20,
                                   ),
                                   TextCustom(
                                     text: state.employeeEntity.resultEntity
                                         .response[0].mobilePhone,
-                                    fontSize: FontSize.s12.sp,
+                                    fontSize: FontSize.s12,
                                     color: ColorManager.primary,
                                   ),
                                 ],
@@ -97,33 +95,32 @@ class EmployeeScreen extends StatelessWidget {
                                       TextCustom(
                                         text: 'Kaizen',
                                         fontWeight: FontWeight.w600,
-                                        fontSize: FontSize.s22.sp,
+                                        fontSize: FontSize.s22,
                                         color: ColorManager.black,
                                       ),
-                                      SizedBox(
-                                        height: AppSize.s16.h,
+                                      const SizedBox(
+                                        height: AppSize.s16,
                                       ),
                                       Container(
                                         padding: const EdgeInsets.all(
-                                                AppPadding.p8 / 2)
-                                            .r,
+                                            AppPadding.p8 / 2),
                                         decoration: BoxDecoration(
                                             color: ColorManager
                                                 .textBackgroundColor,
                                             borderRadius: BorderRadius.circular(
-                                                AppSize.s10.r)),
+                                                AppSize.s10)),
                                         child: TextCustom(
                                           text: 'xxx@xx.com',
-                                          fontSize: FontSize.s12.sp,
+                                          fontSize: FontSize.s12,
                                           color: ColorManager.grey2,
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: AppSize.s20.h,
+                                      const SizedBox(
+                                        height: AppSize.s20,
                                       ),
                                       TextCustom(
                                         text: '+201000000000',
-                                        fontSize: FontSize.s12.sp,
+                                        fontSize: FontSize.s12,
                                         color: ColorManager.primary,
                                       ),
                                     ],
@@ -222,26 +219,27 @@ class EmployeeAttendance extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.symmetric(vertical: AppPadding.p12.h),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: AppPadding.p12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: DateFormat('dd , MMM').format(DateTime.parse(
                               state.attendanceEntity.resultEntity
                                   .response[index].checkIn)),
                           color: ColorManager.black,
                         ),
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: DateFormat('hh: mm a').format(DateTime.parse(
                               state.attendanceEntity.resultEntity
                                   .response[index].checkIn)),
                           color: ColorManager.primary,
                         ),
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: state.attendanceEntity.resultEntity
                                       .response[index].checkOut !=
                                   'false'
@@ -252,7 +250,7 @@ class EmployeeAttendance extends StatelessWidget {
                           color: ColorManager.error,
                         ),
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: state.attendanceEntity.resultEntity
                               .response[index].workedHours
                               .toStringAsFixed(1),
@@ -277,16 +275,16 @@ class EmployeeAttendance extends StatelessWidget {
                           children: [
                             TextCustom(
                               text: '20 sep',
-                              fontSize: FontSize.s14.sp,
+                              fontSize: FontSize.s14,
                               color: ColorManager.black,
                             ),
                             TextCustom(
-                              fontSize: FontSize.s14.sp,
+                              fontSize: FontSize.s14,
                               text: '09 am       ',
                               color: ColorManager.primary,
                             ),
                             TextCustom(
-                              fontSize: FontSize.s14.sp,
+                              fontSize: FontSize.s14,
                               text: '06 pm     ',
                               color: ColorManager.error,
                             ),
@@ -319,7 +317,7 @@ class EmployeeRequests extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.all(AppPadding.p12.r),
+                    padding: const EdgeInsets.all(AppPadding.p12),
                     child: Column(
                       children: [
                         UserRequestWidget(

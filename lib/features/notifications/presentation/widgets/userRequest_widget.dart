@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utils/color_manager.dart';
@@ -22,28 +21,28 @@ class UserRequestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: AppPadding.p4.h),
+      padding: const EdgeInsets.only(top: AppPadding.p4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SvgPicture.asset(
             iconPath,
-            height: AppSize.s20.h,
+            height: AppSize.s20,
             color: ColorManager.secondary,
           ),
-          SizedBox(
-            width: AppSize.s8.w,
+          const SizedBox(
+            width: AppSize.s8,
           ),
-          SizedBox(
-            width: AppSize.s4.w,
+          const SizedBox(
+            width: AppSize.s4,
           ),
           TextCustom(
-            fontSize: FontSize.s14.sp,
+            fontSize: FontSize.s14,
             text: subText,
             color: ColorManager.black,
           ),
-          SizedBox(
-            height: AppSize.s12.h,
+          const SizedBox(
+            height: AppSize.s12,
           ),
         ],
       ),

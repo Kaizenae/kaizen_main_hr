@@ -7,7 +7,6 @@ import 'package:Attendace/features/create_request/presentation/controller/apply_
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/media_query_values.dart';
@@ -52,7 +51,7 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
         builder: (context, state) {
           var cubit = ApplyRequestCubit.get(context);
           return Padding(
-            padding: EdgeInsets.all(AppPadding.p16.r),
+            padding: const EdgeInsets.all(AppPadding.p16),
             child: SafeArea(
               child: Form(
                 key: cubit.formKey,
@@ -61,7 +60,7 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextCustom(
-                      fontSize: FontSize.s14.sp,
+                      fontSize: FontSize.s14,
                       text: 'Type',
                       color: ColorManager.textFormLabelColor,
                     ),
@@ -72,16 +71,16 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                       child: Container(
                         decoration: BoxDecoration(
                             color: ColorManager.textFormColor,
-                            borderRadius: BorderRadius.circular(AppSize.s8.r)),
+                            borderRadius: BorderRadius.circular(AppSize.s8)),
                         width: context.width / 1.1,
-                        height: AppSize.s50.h,
+                        height: AppSize.s50,
                         child: InkWell(
                           onTap: () {
                             showCupertinoModalPopup<void>(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: AppSize.s100.h * 3,
+                                    height: AppSize.s100 * 3,
                                     padding: const EdgeInsets.only(top: 6.0),
                                     color: CupertinoColors.white,
                                     child: Column(
@@ -113,7 +112,7 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                                                           color: ColorManager
                                                               .primary,
                                                           fontSize:
-                                                              FontSize.s14.sp,
+                                                              FontSize.s14,
                                                           textAlign:
                                                               TextAlign.center,
                                                           text: items[index])),
@@ -139,7 +138,7 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                                           ),
                                         ),
                                         ElevatedButtonCustom(
-                                          fontSize: FontSize.s14.sp,
+                                          fontSize: FontSize.s14,
                                           text: 'Done',
                                           onPressed: () {
                                             Navigator.pop(context);
@@ -151,7 +150,7 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                                 });
                           },
                           child: TextCustom(
-                            fontSize: FontSize.s14.sp,
+                            fontSize: FontSize.s14,
                             text: cubit.selectedValue.isNotEmpty
                                 ? cubit.selectedValue
                                 : 'Select Type',
@@ -247,12 +246,12 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                       height: AppSize.s16,
                     ),
                     TextCustom(
-                      fontSize: FontSize.s14.sp,
+                      fontSize: FontSize.s14,
                       text: 'Reason',
                       color: ColorManager.textFormLabelColor,
                     ),
-                    SizedBox(
-                      height: AppSize.s4.h,
+                    const SizedBox(
+                      height: AppSize.s4,
                     ),
                     Expanded(
                       child: TextFormField(
@@ -263,17 +262,17 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                           isDense: true,
                           //floatingLabelBehavior: FloatingLabelBehavior.auto,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(AppSize.s8.r),
-                            borderSide: BorderSide(
+                            borderRadius: BorderRadius.circular(AppSize.s8),
+                            borderSide: const BorderSide(
                               color: ColorManager.textFormColor,
-                              width: AppSize.s1_5.w,
+                              width: AppSize.s1_5,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(AppSize.s8.r),
-                            borderSide: BorderSide(
+                            borderRadius: BorderRadius.circular(AppSize.s8),
+                            borderSide: const BorderSide(
                               color: ColorManager.textFormColor,
-                              width: AppSize.s1_5.w,
+                              width: AppSize.s1_5,
                             ),
                           ),
                           contentPadding: const EdgeInsets.symmetric(
@@ -281,21 +280,21 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                             horizontal: AppPadding.p16,
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(AppSize.s8.r),
-                            borderSide: BorderSide(
+                            borderRadius: BorderRadius.circular(AppSize.s8),
+                            borderSide: const BorderSide(
                               color: ColorManager.textFormColor,
-                              width: AppSize.s1_5.w,
+                              width: AppSize.s1_5,
                             ),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(AppSize.s8.r),
-                            borderSide: BorderSide(
+                            borderRadius: BorderRadius.circular(AppSize.s8),
+                            borderSide: const BorderSide(
                               color: Colors.red,
-                              width: AppSize.s1_5.w,
+                              width: AppSize.s1_5,
                             ),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(AppSize.s8.r),
+                            borderRadius: BorderRadius.circular(AppSize.s8),
                             borderSide: const BorderSide(
                               color: Colors.red,
                             ),
@@ -305,11 +304,11 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
 
                           labelStyle: TextStyle(
                             color: ColorManager.grey,
-                            fontSize: AppSize.s16.sp,
+                            fontSize: AppSize.s16,
                           ),
-                          floatingLabelStyle: TextStyle(
+                          floatingLabelStyle: const TextStyle(
                             color: ColorManager.primary,
-                            fontSize: AppSize.s16.sp,
+                            fontSize: AppSize.s16,
                           ),
                         ),
                         validator: (validate) {
@@ -324,14 +323,14 @@ class _ApplyRequestScreenState extends State<ApplyRequestScreen> {
                       ),
                     ),
                     state is ApplyRequestLoading
-                        ? CupertinoActivityIndicator(
+                        ? const CupertinoActivityIndicator(
                             color: ColorManager.primary,
-                            radius: AppSize.s16.r,
+                            radius: AppSize.s16,
                           )
                         : ElevatedButtonCustom(
                             text: 'Submit The Request',
                             fontWeight: FontWeight.w500,
-                            fontSize: FontSize.s18.sp,
+                            fontSize: FontSize.s18,
                             onPressed: () async {
                               if (cubit.formKey.currentState!.validate() &&
                                   cubit.checkType.isNotEmpty) {

@@ -8,7 +8,6 @@ import 'package:Attendace/core/widgets/svg_pic/svg_pic.dart';
 import 'package:Attendace/core/widgets/text_custom/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:local_auth/local_auth.dart';
 import 'core/api/end_points.dart';
 import 'core/utils/color_manager.dart';
@@ -42,7 +41,7 @@ class _LocalAuthScreenState extends State<LocalAuthScreen> {
 //   isNull: false,
 // ),
         body: Padding(
-      padding: EdgeInsets.all(AppPadding.p16.sp),
+      padding: const EdgeInsets.all(AppPadding.p16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,17 +54,17 @@ class _LocalAuthScreenState extends State<LocalAuthScreen> {
             textAlign: TextAlign.center,
             fontWeight: FontWeight.w600,
           )),
-          SizedBox(
-            height: AppSize.s40.h,
+          const SizedBox(
+            height: AppSize.s40,
           ),
           InkWell(
               onTap: () async {
                 await fingerOrFaceAuth();
               },
-              child: SvgPictureCustom(
+              child: const SvgPictureCustom(
                   assetsName: IconsAssets.fingerprintIcon,
                   color: null,
-                  height: AppSize.s100.h * 1.8)),
+                  height: AppSize.s100 * 1.8)),
         ],
       ),
     ));

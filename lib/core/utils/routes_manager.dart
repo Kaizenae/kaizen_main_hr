@@ -23,7 +23,6 @@ import 'package:Attendace/features/notifications/presentation/screens/notificati
 import 'package:Attendace/features/splash_screen/splash_screen.dart';
 import 'package:Attendace/local_auth_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../features/all_employee/presentation/screens/employee_screen.dart';
 import '../../features/change_password/presentation/screens/change_password_screen.dart';
@@ -238,7 +237,7 @@ class RoutesMap {
               child: TextCustom(
             color: ColorManager.primary,
             text: AppStrings.noRouteFound,
-            fontSize: FontSize.s14.sp,
+            fontSize: FontSize.s14,
           )),
         );
     }

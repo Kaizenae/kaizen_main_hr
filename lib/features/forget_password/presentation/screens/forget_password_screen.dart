@@ -2,7 +2,6 @@ import 'package:Attendace/core/utils/assets_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
@@ -25,7 +24,7 @@ class ForgetPasswordScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
           child: Form(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -33,13 +32,13 @@ class ForgetPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextCustom(
-                    fontSize: FontSize.s14.sp,
+                    fontSize: FontSize.s14,
                     text: AppStrings.userName,
                     textAlign: TextAlign.start,
                     color: ColorManager.textFormLabelColor,
                   ),
-                  SizedBox(
-                    height: AppSize.s8.h,
+                  const SizedBox(
+                    height: AppSize.s8,
                   ),
                   TextFormFieldCustom(
                     validate: (v) {
@@ -52,8 +51,8 @@ class ForgetPasswordScreen extends StatelessWidget {
                     suffixIcon: IconsAssets.emailIcon,
                     suffix: true,
                   ),
-                  SizedBox(
-                    height: AppSize.s40.h,
+                  const SizedBox(
+                    height: AppSize.s40,
                   ),
                   Center(
                     child:
@@ -64,7 +63,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         //       )
                         //     :
                         ElevatedButtonCustom(
-                      fontSize: FontSize.s14.sp,
+                      fontSize: FontSize.s14,
                       textColor: ColorManager.white,
                       onPressed: () {
                         navigator(

@@ -1,5 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -25,7 +23,7 @@ class EditProfileScreen extends StatelessWidget {
           builder: (context, state) {
             var profileCubit = EditProfileCubit.get(context);
             return Padding(
-              padding: EdgeInsets.all(AppPadding.p20.r),
+              padding: const EdgeInsets.all(AppPadding.p20),
               child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

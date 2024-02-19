@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -50,7 +49,7 @@ class ChangePasswordScreen extends StatelessWidget {
             var changePasswordCubit = ChangePasswordCubit.get(context);
             return SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
                 child: Form(
                   key: changePasswordCubit.formKey,
                   child: SingleChildScrollView(
@@ -59,13 +58,13 @@ class ChangePasswordScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: 'Old Password',
                           textAlign: TextAlign.start,
                           color: ColorManager.textFormLabelColor,
                         ),
-                        SizedBox(
-                          height: AppSize.s8.h,
+                        const SizedBox(
+                          height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
                           controller: changePasswordCubit.oldPasswordController,
@@ -84,17 +83,17 @@ class ChangePasswordScreen extends StatelessWidget {
                             changePasswordCubit.changePasswordVisibility();
                           },
                         ),
-                        SizedBox(
-                          height: AppSize.s24.h,
+                        const SizedBox(
+                          height: AppSize.s24,
                         ),
                         TextCustom(
-                          fontSize: FontSize.s14.sp,
+                          fontSize: FontSize.s14,
                           text: 'New Password',
                           textAlign: TextAlign.start,
                           color: ColorManager.textFormLabelColor,
                         ),
-                        SizedBox(
-                          height: AppSize.s8.h,
+                        const SizedBox(
+                          height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
                           controller: changePasswordCubit.newPasswordController,
@@ -115,17 +114,17 @@ class ChangePasswordScreen extends StatelessWidget {
                                 .changePasswordConfirmVisibility();
                           },
                         ),
-                        SizedBox(
-                          height: AppSize.s40.h,
+                        const SizedBox(
+                          height: AppSize.s40,
                         ),
                         Center(
                           child: state is ChangePasswordLoadingState
-                              ? CupertinoActivityIndicator(
+                              ? const CupertinoActivityIndicator(
                                   color: ColorManager.primary,
-                                  radius: AppSize.s16.r,
+                                  radius: AppSize.s16,
                                 )
                               : ElevatedButtonCustom(
-                                  fontSize: FontSize.s14.sp,
+                                  fontSize: FontSize.s14,
 
                                   textColor: ColorManager.white,
 

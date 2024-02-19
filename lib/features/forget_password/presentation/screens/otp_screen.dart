@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/values_manager.dart';
 import 'package:Attendace/core/widgets/component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -36,30 +35,30 @@ class _OTPScreenState extends State<OTPScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextCustom(
-              fontSize: FontSize.s14.sp,
+              fontSize: FontSize.s14,
               text: AppStrings.otpNumber,
               textAlign: TextAlign.start,
               color: ColorManager.textFormLabelColor,
             ),
-            SizedBox(
-              height: AppSize.s12.h,
+            const SizedBox(
+              height: AppSize.s12,
             ),
             OTPTextField(
                 controller: otpController,
                 length: 6,
                 width: MediaQuery.of(context).size.width,
                 textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldWidth: AppSize.s50.w,
+                fieldWidth: AppSize.s50,
                 fieldStyle: FieldStyle.box,
                 outlineBorderRadius: 12,
                 style: Theme.of(context).textTheme.titleMedium!,
                 onChanged: (pin) {},
                 onCompleted: (pin) {}),
-            SizedBox(
-              height: AppSize.s40.h,
+            const SizedBox(
+              height: AppSize.s40,
             ),
             ElevatedButtonCustom(
-              fontSize: FontSize.s14.sp,
+              fontSize: FontSize.s14,
               textColor: ColorManager.white,
               onPressed: () {
                 navigator(

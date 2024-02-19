@@ -6,7 +6,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/widgets/shimmer_custom/shimmer_custom.dart';
@@ -25,7 +24,7 @@ class AllCompaniesScreen extends StatelessWidget {
           height: AppSize.s24,
         ),
         TextCustom(
-          fontSize: FontSize.s14.sp,
+          fontSize: FontSize.s14,
           text: 'Companies',
           textAlign: TextAlign.start,
           color: ColorManager.textFormLabelColor,

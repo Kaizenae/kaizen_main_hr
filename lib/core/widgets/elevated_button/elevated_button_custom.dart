@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/color_manager.dart';
 import '../../utils/values_manager.dart';
 import '../text_custom/text_custom.dart';
@@ -45,7 +44,7 @@ class ElevatedButtonCustom extends StatelessWidget {
           ),
           backgroundColor: colors ?? ColorManager.primary,
           elevation: elevation,
-          minimumSize: Size(width!.w, 55.h),
+          minimumSize: Size(width!, 55),
 
           // padding:
           //     EdgeInsets.symmetric(horizontal: width!.w, vertical: height!.h),
