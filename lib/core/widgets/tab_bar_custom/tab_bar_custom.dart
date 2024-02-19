@@ -28,35 +28,24 @@ class TabBarCustom extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.zero,
-<<<<<<< HEAD
-              height: AppSize.s40,
-=======
               height: AppSize.s55,
->>>>>>> main
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(double.parse('$radius')),
                 color: ColorManager.white,
               ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: TabBar(
-<<<<<<< HEAD
-=======
                 padding: const EdgeInsets.all(0),
                 indicatorPadding: const EdgeInsets.all(0),
                 indicatorWeight: 0,
->>>>>>> main
                 onTap: (int index) {
                   onTap == null ? null : onTap!(index);
                 },
                 tabs: myTabs,
                 labelStyle: TextStyle(
-<<<<<<< HEAD
-                    fontSize: FontSize.s14, fontWeight: FontWeight.w600),
-=======
                   fontSize: FontSize.s14,
                   fontWeight: FontWeight.w600,
                 ),
->>>>>>> main
                 enableFeedback: true,
                 labelColor: ColorManager.white,
                 indicatorSize: TabBarIndicatorSize.tab,

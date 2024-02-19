@@ -2,10 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-<<<<<<< HEAD
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-=======
->>>>>>> main
 import '../../../../core/api/end_points.dart';
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -34,13 +30,6 @@ class LoginScreen extends StatelessWidget {
         child: BlocConsumer<LoginCubit, LoginStates>(
           listener: (context, state) {
             if (state is LoginSuccessState) {
-<<<<<<< HEAD
-              showToast(
-                message: "${state.loginEntity.resultEntity.message}",
-                color: ColorManager.primary,
-              );
-              AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
-=======
               SnackBar snackBar = SnackBar(
                   content:
                       Text(state.loginEntity.resultEntity.message.toString()));
@@ -51,7 +40,6 @@ class LoginScreen extends StatelessWidget {
 
               AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
 
->>>>>>> main
               AppConstants.admin =
                   CacheHelper.get(key: AppStrings.admin) ?? false;
               navigatorAndRemove(
@@ -63,23 +51,15 @@ class LoginScreen extends StatelessWidget {
               if (kDebugMode) {
                 print(state.message);
               }
-<<<<<<< HEAD
-              showToast(message: state.message, color: Colors.red);
-=======
               SnackBar snackBar =
                   SnackBar(content: Text(state.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
->>>>>>> main
             }
           },
           builder: (context, state) {
             var loginCubit = LoginCubit.get(context);
             return Padding(
-<<<<<<< HEAD
-              padding: EdgeInsets.all(AppPadding.p20.r),
-=======
               padding: const EdgeInsets.all(AppPadding.p20),
->>>>>>> main
               child: SingleChildScrollView(
                 child: Form(
                   key: loginCubit.formKey,
@@ -90,52 +70,6 @@ class LoginScreen extends StatelessWidget {
                       Center(
                         child: Image.asset(
                           ImageAssets.logoImg,
-<<<<<<< HEAD
-                          height: AppSize.s100.h,
-                          width: AppSize.s100.h,
-                        ),
-                      ),
-                      SizedBox(
-                        height: AppSize.s20.h,
-                      ),
-                      Center(
-                        child: TextCustom(
-                          text: AppStrings.welcomeBack,
-                          fontSize: FontSize.s32,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      //  SizedBox(
-                      //   height: AppSize.s30.h,
-                      // ),
-                      // const TextCustom(
-                      //   text: AppStrings.baseUrl,
-                      //   textAlign: TextAlign.start,
-                      //   color: ColorManager.textFormLabelColor,
-                      // ),
-                      //  SizedBox(
-                      //   height: AppSize.s4.h,
-                      // ),
-                      // Center(
-                      //   child: Container(
-                      //     height: AppSize.s50.h,
-                      //     width: context.width/1.1,
-                      //     padding: EdgeInsets.all(AppPadding.p8.r),
-                      //     decoration: BoxDecoration(
-                      //       color: ColorManager.textFormColor,
-                      //       borderRadius: BorderRadius.circular(AppSize.s8.r),
-                      //     ),
-                      //     child: TextCustom(
-                      //       text: EndPoints.baseUrl,
-                      //       color: ColorManager.textFormLabelColor,
-                      //     ),
-                      //   ),
-                      // ),
-                      SizedBox(
-                        height: AppSize.s30.h,
-                      ),
-                      const TextCustom(
-=======
                           height: AppSize.s100,
                           width: AppSize.s100,
                         ),
@@ -156,18 +90,12 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextCustom(
                         fontSize: FontSize.s14,
->>>>>>> main
                         text: AppStrings.email,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-<<<<<<< HEAD
-                      SizedBox(
-                        height: AppSize.s4.h,
-=======
                       const SizedBox(
                         height: AppSize.s4,
->>>>>>> main
                       ),
                       TextFormFieldCustom(
                         controller: loginCubit.emailController,
@@ -175,32 +103,17 @@ class LoginScreen extends StatelessWidget {
                           if (value!.trim().isEmpty || value == ' ') {
                             return AppStrings.emailTextField;
                           }
-<<<<<<< HEAD
-                          if (!RegExp(
-                                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                              .hasMatch(value)) {
-                            return AppStrings.emailValidTextField;
-                          }
-=======
->>>>>>> main
                           return null;
                         },
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: IconsAssets.emailIcon,
                         suffix: true,
                       ),
-<<<<<<< HEAD
-                      SizedBox(
-                        height: AppSize.s30.h,
-                      ),
-                      const TextCustom(
-=======
                       const SizedBox(
                         height: AppSize.s30,
                       ),
                       TextCustom(
                         fontSize: FontSize.s14,
->>>>>>> main
                         text: AppStrings.password,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
@@ -220,28 +133,10 @@ class LoginScreen extends StatelessWidget {
                         suffixIcon: loginCubit.suffix,
                         suffix: true,
                         obSecure: loginCubit.isPassword ? true : false,
-<<<<<<< HEAD
-                        prefixOnPressed: () {
-                          loginCubit.changePasswordVisibility();
-                        },
-=======
->>>>>>> main
                         suffixOnPressed: () {
                           loginCubit.changePasswordVisibility();
                         },
                       ),
-<<<<<<< HEAD
-                      SizedBox(
-                        height: AppSize.s40.h,
-                      ),
-                      Center(
-                        child: state is LoginLoadingState
-                            ? CupertinoActivityIndicator(
-                                color: ColorManager.primary,
-                                radius: AppSize.s16.r,
-                              )
-                            : ElevatedButtonCustom(
-=======
                       const SizedBox(
                         height: AppSize.s40,
                       ),
@@ -253,7 +148,6 @@ class LoginScreen extends StatelessWidget {
                               )
                             : ElevatedButtonCustom(
                                 fontSize: FontSize.s14,
->>>>>>> main
                                 textColor: ColorManager.white,
                                 onPressed: () async {
                                   if (loginCubit.formKey.currentState!
@@ -265,8 +159,6 @@ class LoginScreen extends StatelessWidget {
                                 text: AppStrings.login,
                               ),
                       ),
-<<<<<<< HEAD
-=======
                       Center(
                         child: TextButton(
                           onPressed: () {
@@ -280,15 +172,11 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
->>>>>>> main
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextCustom(
-<<<<<<< HEAD
-=======
                             fontSize: FontSize.s14,
->>>>>>> main
                             text: AppStrings.doNotHaveAccount,
                             color: ColorManager.grey,
                             fontWeight: FontWeight.w600,
@@ -296,37 +184,16 @@ class LoginScreen extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               EndPoints.baseUrl;
-<<<<<<< HEAD
-                              navigatorAndRemove(context, Routes.registerRoute);
-                            },
-                            child: const TextCustom(
-                                text: AppStrings.signup,
-=======
                               navigator(context, Routes.registerRoute);
                             },
                             child: TextCustom(
                                 fontSize: FontSize.s14,
                                 text: AppStrings.signup,
                                 color: ColorManager.primary,
->>>>>>> main
                                 decoration: TextDecoration.underline),
                           ),
                         ],
                       ),
-<<<<<<< HEAD
-                      Center(
-                        child: TextButton(
-                          onPressed: () {
-                            navigator(context, Routes.baseUrlRoute);
-                          },
-                          child: TextCustom(
-                              fontSize: FontSize.s16,
-                              fontWeight: FontWeight.w600,
-                              text: AppStrings.baseUrl,
-                              decoration: TextDecoration.underline),
-                        ),
-                      ),
-=======
                       // Center(
                       //   child: TextButton(
                       //     onPressed: () {
@@ -340,7 +207,6 @@ class LoginScreen extends StatelessWidget {
                       //         decoration: TextDecoration.underline),
                       //   ),
                       // ),
->>>>>>> main
                     ],
                   ),
                 ),

@@ -1,8 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:Attendace/features/myTimeOff/domain/entities/myTimeOff_entity.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../domain/entities/myTimeOff_entity.dart';
 
 abstract class MyTimeOffState extends Equatable {
   const MyTimeOffState();
@@ -19,12 +18,10 @@ class GetMyTimeOffLoading extends MyTimeOffState {
 }
 
 class GetMyTimeOffSuccess extends MyTimeOffState {
-  final MyTimeOffEntity myTimeOffEntity;
-
-  const GetMyTimeOffSuccess({required this.myTimeOffEntity});
+  const GetMyTimeOffSuccess({required MyTimeOffEntity myTimeOffEntity});
 
   @override
-  List<Object> get props => [myTimeOffEntity];
+  List<Object> get props => [];
 }
 
 class GetMyTimeOffError extends MyTimeOffState {
@@ -42,12 +39,10 @@ class GetMyTimeOffPendingLoading extends MyTimeOffState {
 }
 
 class GetMyTimeOffPendingSuccess extends MyTimeOffState {
-  final MyTimeOffEntity myTimeOffEntity;
-
-  const GetMyTimeOffPendingSuccess({required this.myTimeOffEntity});
+  const GetMyTimeOffPendingSuccess();
 
   @override
-  List<Object> get props => [myTimeOffEntity];
+  List<Object> get props => [];
 }
 
 class GetMyTimeOffPendingError extends MyTimeOffState {
@@ -58,8 +53,6 @@ class GetMyTimeOffPendingError extends MyTimeOffState {
   @override
   List<Object> get props => [message];
 }
-<<<<<<< HEAD
-=======
 
 class GetTimeOffValueLoading extends MyTimeOffState {
   @override
@@ -100,4 +93,3 @@ class GetTimeOffNameAndValueError extends MyTimeOffState {
   @override
   List<Object?> get props => [];
 }
->>>>>>> main

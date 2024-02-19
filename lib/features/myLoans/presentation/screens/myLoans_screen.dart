@@ -13,10 +13,6 @@ import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-<<<<<<< HEAD
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-=======
->>>>>>> main
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
@@ -36,11 +32,7 @@ class MyLoansScreen extends StatelessWidget {
         text: AppStrings.myLoans,
       ),
       body: Padding(
-<<<<<<< HEAD
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.r),
-=======
         padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
->>>>>>> main
         child: SafeArea(
           child: Column(
             children: [
@@ -51,17 +43,10 @@ class MyLoansScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-<<<<<<< HEAD
-                        padding: EdgeInsets.all(AppPadding.p12.r),
-                        decoration: BoxDecoration(
-                          color: ColorManager.white,
-                          borderRadius: BorderRadius.circular(AppSize.s10.r),
-=======
                         padding: const EdgeInsets.all(AppPadding.p12),
                         decoration: BoxDecoration(
                           color: ColorManager.white,
                           borderRadius: BorderRadius.circular(AppSize.s10),
->>>>>>> main
                         ),
                         child: Column(
                           children: [
@@ -70,37 +55,22 @@ class MyLoansScreen extends StatelessWidget {
                                   ? '${loansCubit.myLoansPending.length + loansCubit.myLoans.length}'
                                   : '0',
                               color: ColorManager.secondary,
-<<<<<<< HEAD
-                              fontSize: FontSize.s32.sp,
-=======
                               fontSize: FontSize.s32,
->>>>>>> main
                               fontWeight: FontWeight.w600,
                             ),
                             TextCustom(
                               text: 'Total Loans',
                               color: ColorManager.black,
-<<<<<<< HEAD
-                              fontSize: FontSize.s18.sp,
-=======
                               fontSize: FontSize.s18,
->>>>>>> main
                             ),
                           ],
                         ),
                       ),
                       Container(
-<<<<<<< HEAD
-                        padding: EdgeInsets.all(AppPadding.p12.r),
-                        decoration: BoxDecoration(
-                          color: ColorManager.white,
-                          borderRadius: BorderRadius.circular(AppSize.s10.r),
-=======
                         padding: const EdgeInsets.all(AppPadding.p12),
                         decoration: BoxDecoration(
                           color: ColorManager.white,
                           borderRadius: BorderRadius.circular(AppSize.s10),
->>>>>>> main
                         ),
                         child: Column(
                           children: [
@@ -109,21 +79,13 @@ class MyLoansScreen extends StatelessWidget {
                                   ? '${loansCubit.myLoans.length}'
                                   : '0',
                               color: ColorManager.secondary,
-<<<<<<< HEAD
-                              fontSize: FontSize.s32.sp,
-=======
                               fontSize: FontSize.s32,
->>>>>>> main
                               fontWeight: FontWeight.w600,
                             ),
                             TextCustom(
                               text: 'Used Loans',
                               color: ColorManager.black,
-<<<<<<< HEAD
-                              fontSize: FontSize.s18.sp,
-=======
                               fontSize: FontSize.s18,
->>>>>>> main
                             ),
                           ],
                         ),
@@ -132,18 +94,11 @@ class MyLoansScreen extends StatelessWidget {
                   );
                 },
               ),
-<<<<<<< HEAD
-              SizedBox(
-                height: AppSize.s16.h,
-              ),
-              ElevatedButtonCustom(
-=======
               const SizedBox(
                 height: AppSize.s16,
               ),
               ElevatedButtonCustom(
                 fontSize: FontSize.s14,
->>>>>>> main
                 colors: ColorManager.secondary,
                 width: context.width / 1.6,
                 text: 'Apply Request',
@@ -151,13 +106,8 @@ class MyLoansScreen extends StatelessWidget {
                   navigator(context, Routes.createLoanRoute);
                 },
               ),
-<<<<<<< HEAD
-              SizedBox(
-                height: AppSize.s18.h,
-=======
               const SizedBox(
                 height: AppSize.s18,
->>>>>>> main
               ),
               Platform.isAndroid
                   ? TabBarCustom(

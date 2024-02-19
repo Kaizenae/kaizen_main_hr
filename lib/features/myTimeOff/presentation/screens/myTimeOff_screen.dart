@@ -11,18 +11,10 @@ import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-<<<<<<< HEAD
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/values_manager.dart';
-import '../../../../core/widgets/text_custom/text_custom.dart';
-import 'package:flutter/material.dart';
-=======
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
->>>>>>> main
 import '../controller/myTimeOff_state.dart';
 import '../widgets/approved_widget.dart';
 import '../widgets/pending_time_widget.dart';
@@ -38,76 +30,17 @@ class MyTimeOffScreen extends StatelessWidget {
         text: AppStrings.myTimeOff,
       ),
       body: Padding(
-<<<<<<< HEAD
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.r),
-=======
         padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
->>>>>>> main
         child: SafeArea(
           child: Column(
             children: [
               BlocProvider.value(
                 value: BlocProvider.of<MyTimeOffCubit>(context)
-<<<<<<< HEAD
-=======
                   ..getAllTimeOffValues()
->>>>>>> main
                   ..getMyTimeOffFun(),
                 child: BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
                   listener: (context, state) {},
                   builder: (context, state) {
-<<<<<<< HEAD
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(AppPadding.p12.r),
-                          decoration: BoxDecoration(
-                            color: ColorManager.white,
-                            borderRadius: BorderRadius.circular(AppSize.s10.r),
-                          ),
-                          child: Column(
-                            children: [
-                              TextCustom(
-                                text: '21',
-                                color: ColorManager.secondary,
-                                fontSize: FontSize.s32.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              TextCustom(
-                                text: 'Total TimeOff',
-                                color: ColorManager.black,
-                                fontSize: FontSize.s18.sp,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(AppPadding.p12.r),
-                          decoration: BoxDecoration(
-                            color: ColorManager.white,
-                            borderRadius: BorderRadius.circular(AppSize.s10.r),
-                          ),
-                          child: Column(
-                            children: [
-                              TextCustom(
-                                text: state is GetMyTimeOffSuccess
-                                    ? '${state.myTimeOffEntity.resultEntity.response.length}'
-                                    : '0',
-                                color: ColorManager.secondary,
-                                fontSize: FontSize.s32.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              TextCustom(
-                                text: 'Used TimeOff',
-                                color: ColorManager.black,
-                                fontSize: FontSize.s18.sp,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-=======
                     return SizedBox(
                       height: AppSize.s120,
                       child: BlocProvider.of<MyTimeOffCubit>(context)
@@ -172,23 +105,15 @@ class MyTimeOffScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
                             ),
->>>>>>> main
                     );
                   },
                 ),
               ),
-<<<<<<< HEAD
-              SizedBox(
-                height: AppSize.s16.h,
-              ),
-              ElevatedButtonCustom(
-=======
               const SizedBox(
                 height: AppSize.s16,
               ),
               ElevatedButtonCustom(
                 fontSize: FontSize.s14,
->>>>>>> main
                 colors: ColorManager.secondary,
                 width: context.width / 1.6,
                 text: 'Apply Request',
@@ -196,16 +121,10 @@ class MyTimeOffScreen extends StatelessWidget {
                   navigator(context, Routes.createTimeOffRoute);
                 },
               ),
-<<<<<<< HEAD
-              SizedBox(
-                height: AppSize.s18.h,
-              ),
-=======
               const SizedBox(
                 height: AppSize.s20,
               ),
 
->>>>>>> main
               TabBarCustom(
                 onTap: (v) {
                   MyTimeOffCubit.get(context).getMyTimeOffFun();
