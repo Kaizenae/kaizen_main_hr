@@ -1,9 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:Attendace/core/utils/constants_manager.dart';
-import 'package:Attendace/features/attendance/presentation/controller/attendance_cubit.dart';
-import 'package:Attendace/features/attendance/presentation/screens/attendance_screen.dart';
-import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +23,7 @@ class MainPageState extends State<MainPage> {
   final _screens = [
     const HomeScreen(),
 
-    const AttendanceScreen(),
+    // const AttendanceScreen(),
     const ProfileScreen(),
 
     // const CategoryScreen(),
@@ -36,13 +32,13 @@ class MainPageState extends State<MainPage> {
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
-    IconsAssets.attendIcon,
+    // IconsAssets.attendIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
-    AppStrings.attendance,
+    // AppStrings.attendance,
     AppStrings.profile,
   ];
 
@@ -139,11 +135,11 @@ class MainPageState extends State<MainPage> {
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
-            if (AppConstants.admin ? index == 2 : index == 1) {
-              BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
-            } else if (AppConstants.admin ? index == 3 : index == 2) {
-              ProfileCubit.get(context).getEmployeeFun();
-            }
+            // if (AppConstants.admin ? index == 2 : index == 1) {
+            //   BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
+            // } else if (AppConstants.admin ? index == 3 : index == 2) {
+            //   ProfileCubit.get(context).getEmployeeFun();
+            // }
             setState(() {
               _selectedIndex = index;
             });
@@ -161,7 +157,10 @@ class MainPageState extends State<MainPage> {
   BottomNavigationBarItem bottom(
       {required String icon, required String label}) {
     return BottomNavigationBarItem(
-      icon: SvgPictureCustom(assetsName: icon, color: ColorManager.grey1),
+      icon: SvgPictureCustom(
+        assetsName: icon,
+        color: ColorManager.grey1,
+      ),
       label: label,
       activeIcon: SvgPictureCustom(assetsName: icon),
     );

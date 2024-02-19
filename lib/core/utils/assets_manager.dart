@@ -3,6 +3,10 @@ const String iconPath = "assets/icons";
 
 class ImageAssets {
   static const String logoImg = "$imagePath/logo.png";
+  static const String lateInImg = "$imagePath/late_in.png";
+  static const String checkOut = "$imagePath/check_out.png";
+  static const String policyImg = "$imagePath/policy.png";
+  static const String timeOffImg = "$imagePath/time_off.png";
 }
 
 class IconsAssets {

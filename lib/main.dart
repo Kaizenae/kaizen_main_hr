@@ -1,13 +1,17 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:Attendace/features/create_request/presentation/controller/apply_request_cubit.dart';
 import 'package:Attendace/features/create_timeOff/presentation/controller/create_timeOff_cubit.dart';
 import 'package:Attendace/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_timeOff/accept_reject_request_cubit.dart';
 
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'core/local/cache_helper.dart';
 import 'features/all_employee/presentation/cubit/all_employees_cubit.dart';
@@ -36,6 +40,8 @@ import 'injection_container.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await DioHelper.init();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await CacheHelper.init();
   await di.init();
   await Firebase.initializeApp(
@@ -55,8 +61,10 @@ void main() async {
 
   AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
   AppConstants.admin = CacheHelper.get(key: AppStrings.admin) ?? false;
+
   // EndPoints.baseUrl();
-  runApp(const MyApp());
+  runApp(DevicePreview(
+      enabled: !kReleaseMode, builder: (context) => const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -87,36 +95,29 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) => sl<CompaniesCubit>()..getCompaniesFun()),
       ],
-      child: ScreenUtilInit(
-        designSize: const Size(400, 860),
-        minTextAdapt: true,
-        builder: (BuildContext context, Widget? child) {
-          return GestureDetector(
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            child: MaterialApp(
-              builder: (context, child) => MediaQuery(
-                  data: MediaQuery.of(context)
-                      .copyWith(textScaler: const TextScaler.linear(1.0)),
-                  child: Material(child: child!)),
-              title: 'KAIZEN HR',
-              theme: getApplicationTheme(),
-              routes: RoutesMap.routesMap(),
-              initialRoute: Routes.splashRoute,
-              // home: const LocalAuthScreen(),
-              // EndPoints.baseUrl().isEmpty
-              //     ? const BaseUrlScreen()
-              //     : AppConstants.token == AppStrings.empty ||
-              //             AppConstants.token == 0
-              //         ? const LoginScreen()
-              //         : AppConstants.admin
-              //             ? const MainPageAdmin()
-              //             : const MainPage(),
-              debugShowCheckedModeBanner: false,
-            ),
-          );
-        },
+      child: MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        // builder: (context, child) => MediaQuery(
+        //     data: MediaQuery.of(context)
+        //         .copyWith(textScaler: const TextScaler.linear(1.0)),
+        //     child: Material(child: child!)),
+        title: 'KAIZEN HR',
+        theme: getApplicationTheme(),
+        routes: RoutesMap.routesMap(),
+
+        initialRoute: Routes.splashRoute,
+        // home: const LocalAuthScreen(),
+        // EndPoints.baseUrl().isEmpty
+        //     ? const BaseUrlScreen()
+        //     : AppConstants.token == AppStrings.empty ||
+        //             AppConstants.token == 0
+        //         ? const LoginScreen()
+        //         : AppConstants.admin
+        //             ? const MainPageAdmin()
+        //             : const MainPage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

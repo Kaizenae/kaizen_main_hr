@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/features/myRequests/presentation/controller/myRequests_cubit.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
@@ -35,20 +34,20 @@ class ProfileComponent extends StatelessWidget {
           }
         },
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: AppPadding.p6.h),
+          padding: const EdgeInsets.symmetric(vertical: AppPadding.p6),
           child: Row(
             children: [
               SvgPictureCustom(
                 assetsName: iconName,
                 color: ColorManager.primary,
               ),
-              SizedBox(
-                width: AppSize.s16.w,
+              const SizedBox(
+                width: AppSize.s16,
               ),
               TextCustom(
                 text: name,
-                fontWeight: FontWeight.w500,
-                fontSize: FontSize.s16.sp,
+                fontWeight: FontWeight.w200,
+                fontSize: FontSize.s16,
                 color: ColorManager.black,
               ),
             ],

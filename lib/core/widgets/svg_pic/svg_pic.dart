@@ -30,8 +30,13 @@ class SvgPictureCustom extends StatelessWidget {
     return SvgPicture.asset(
       fit: boxFit!,
       assetsName,
+<<<<<<< HEAD
       height: height,
       width: width,
+=======
+      height: height!,
+      width: width!,
+>>>>>>> main
       color: color,
     );
   }

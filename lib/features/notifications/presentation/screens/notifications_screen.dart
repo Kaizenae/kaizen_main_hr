@@ -3,7 +3,10 @@ import 'package:Attendace/core/utils/values_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+=======
+>>>>>>> main
 
 import '../../../../core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import '../../../myRequests/presentation/controller/myRequests_cubit.dart';
@@ -21,7 +24,11 @@ class NotificationsScreen extends StatelessWidget {
         text: AppStrings.requests,
       ),
       body: Padding(
+<<<<<<< HEAD
         padding: EdgeInsets.all(AppPadding.p16.r),
+=======
+        padding: const EdgeInsets.all(AppPadding.p16),
+>>>>>>> main
         child: SafeArea(
           child: Column(
             children: [

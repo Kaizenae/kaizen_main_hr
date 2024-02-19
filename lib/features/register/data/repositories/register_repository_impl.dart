@@ -23,12 +23,14 @@ class RegisterRepositoryImpl implements RegisterRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteRegister = await registerRemoteDataSource.register(
-            email: registerParams.email,
-            name: registerParams.name,
-            phoneNumber: registerParams.phoneNumber,
-            password: registerParams.password,
-            companyId: registerParams.companyId,
-            uniqueDeviceId: registerParams.uniqueDeviceId);
+          email: registerParams.email,
+          name: registerParams.name,
+          phoneNumber: registerParams.phoneNumber,
+          password: registerParams.password,
+          companyId: registerParams.companyId,
+          uniqueDeviceId: registerParams.uniqueDeviceId,
+          empCode: registerParams.employeeCode,
+        );
         if (remoteRegister.resultEntity.status == true) {
           // await  registerLocalDataSource.cacheRegister(remoteRegister);
           return Right(remoteRegister);

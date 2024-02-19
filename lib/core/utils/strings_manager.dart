@@ -9,7 +9,7 @@ class AppStrings {
   static const String profile = 'Profile';
   static const String editProfile = 'Update Profile';
   static const String myRequests = 'My Requests';
-  static const String myTimeOff = 'My TimeOff';
+  static const String myTimeOff = 'My Leave Request';
   static const String myLoans = 'My Loans';
   static const String changePassword = 'Change Password';
   static const String changeUserName = 'Change Name';
@@ -59,7 +59,7 @@ class AppStrings {
   static const String approved = 'Approved';
 
   static const String pending = 'pending';
-  static const String timeOffRequests = 'Time Off Requests';
+  static const String timeOffRequests = 'Leave Requests';
   static const String refuse = 'Refused';
   static const String checkIn = 'CheckIn';
   static const String checkOut = 'CheckOut';
@@ -88,4 +88,20 @@ class AppStrings {
   static const String unexpectedError = 'Unexpected Error';
   static const String lateInRequest = 'Late in Request';
   static const String earlyOutRequest = 'Early out Request';
+  static const String totalLeaveRequests = "Total Leave Requests";
+  static const String myLeave = "My Leave";
+  static const String myLateIn = "My Late In";
+  static const String myEarlyOut = "My Early Out";
+  static const String hrPolicy = "HR Policy";
+  static const String forgetPassword = "Forget Password ?";
+  static const String userName = "User Name";
+  static const String userNameValidation = "$userName must be not empty";
+  static const String submit = "Submit";
+  static const String createNewPassword = "Create New Password";
+  static const String newPassword = "New Password";
+  static const String otpNumber = "OTP Number";
+  static const String update = "Update";
+  static const String employeeCode = "Employee Code";
+  static const String youDontHaveLeaveBalance = "You don't have leave balance";
+  static const String hrPolices = "HR Polices";
 }

@@ -1,13 +1,11 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:Attendace/core/widgets/component.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:Attendace/features/myLoans/presentation/controller/myLoans_state.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_request/accept_reject_request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -25,7 +23,9 @@ class PendingWidget extends StatelessWidget {
     return BlocConsumer<MyLoansCubit, MyLoansState>(
       listener: (context, state) {
         if (state is CancelMyLoansSuccess) {
-          showToast(message: "Loan Canceled Successfuly");
+          SnackBar snackBar =
+              const SnackBar(content: Text("Loan Canceled Successfuly"));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
       builder: (context, state) {
@@ -36,7 +36,7 @@ class PendingWidget extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.all(AppPadding.p12.r),
+                  padding: const EdgeInsets.all(AppPadding.p12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -93,7 +93,7 @@ class PendingWidget extends StatelessWidget {
                                   child: SvgPictureCustom(
                                     assetsName: IconsAssets.rejectIcon,
                                     color: ColorManager.error,
-                                    height: AppSize.s40.h,
+                                    height: AppSize.s40,
                                   )),
                               InkWell(
                                   onTap: () async {
@@ -105,10 +105,10 @@ class PendingWidget extends StatelessWidget {
                                         .updatetMyLoansFun(
                                             state: 'waiting_approval_1');
                                   },
-                                  child: SvgPictureCustom(
+                                  child: const SvgPictureCustom(
                                     assetsName: IconsAssets.acceptIcon,
                                     color: null,
-                                    height: AppSize.s40.h,
+                                    height: AppSize.s40,
                                   )),
                             ],
                           )),

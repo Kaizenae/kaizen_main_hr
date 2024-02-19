@@ -9,10 +9,10 @@ import 'package:Attendace/features/myRequests/presentation/controller/myRequests
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_request/accept_reject_request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import 'userRequest_widget.dart';
@@ -35,7 +35,7 @@ class PendingWidget extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.all(AppPadding.p12.r),
+                    padding: const EdgeInsets.all(AppPadding.p12),
                     child: Column(
                       children: [
                         UserRequestWidget(
@@ -80,6 +80,7 @@ class PendingWidget extends StatelessWidget {
                           height: AppSize.s10,
                         ),
                         ElevatedButtonCustom(
+                          fontSize: FontSize.s14,
                           onPressed: () async {
                             await cubit.launchInBrowser(Uri.parse(state
                                 .myRequestsEntity
@@ -89,21 +90,21 @@ class PendingWidget extends StatelessWidget {
                                 .trim()));
                           },
                           width: context.width / 1.6,
-                          widget: Row(
+                          widget: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SvgPictureCustom(
+                              SvgPictureCustom(
                                 assetsName: IconsAssets.locationIcon,
                                 color: ColorManager.white,
                               ),
                               SizedBox(
-                                width: AppSize.s10.w,
+                                width: AppSize.s10,
                               ),
                               TextCustom(
                                 text: AppStrings.location,
                                 color: ColorManager.white,
-                                fontSize: AppSize.s18.sp,
+                                fontSize: AppSize.s18,
                               ),
                             ],
                           ),
@@ -134,10 +135,10 @@ class PendingWidget extends StatelessWidget {
                                 cubit.userId = '';
                                 cubit.getMyRequestsPendingFun();
                               },
-                              child: SvgPictureCustom(
+                              child: const SvgPictureCustom(
                                 assetsName: IconsAssets.acceptIcon,
                                 color: null,
-                                height: AppSize.s40.h,
+                                height: AppSize.s40,
                               ),
                             ),
                             InkWell(
@@ -157,7 +158,7 @@ class PendingWidget extends StatelessWidget {
                                 child: SvgPictureCustom(
                                   assetsName: IconsAssets.rejectIcon,
                                   color: ColorManager.error,
-                                  height: AppSize.s40.h,
+                                  height: AppSize.s40,
                                 )),
                           ],
                         ),

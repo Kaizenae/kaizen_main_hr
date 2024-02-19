@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,6 +28,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       return GetAttendanceError(message: failure.message);
     }, (attendanceEntity) {
       // print(attendanceEntity.resultEntity.response.first.checkOut);
+      log(attendanceEntity.resultEntity.response.toString());
       return GetAttendanceSuccess(attendanceEntity: attendanceEntity);
     }));
   }

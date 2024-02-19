@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,6 +19,12 @@ Future<bool?> showToast(
   );
 }
 
+=======
+import 'package:flutter/material.dart';
+
+import '../utils/routes_manager.dart';
+
+>>>>>>> main
 void navigatorAndRemove(context, String screenName) {
   Navigator.pushAndRemoveUntil(
       context, Routes.createRoute(screenName), (Route<dynamic> route) => false);

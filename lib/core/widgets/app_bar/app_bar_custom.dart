@@ -32,7 +32,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
     this.isNull = true,
     this.centerTitle = true,
     this.textAlign = TextAlign.center,
-    this.fontSize = 18.0,
+    this.fontSize = 16.0,
     this.fontWeight = FontWeight.w600,
     this.actions,
     this.trailing,
@@ -53,15 +53,17 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
                 onPressed == null ? null : onPressed!();
                 Navigator.pop(context);
               },
-              child: SvgPicture.asset('assets/icons/arrowLeft.svg',
-                  fit: BoxFit.scaleDown),
+              child: SvgPicture.asset(
+                'assets/icons/arrowLeft.svg',
+                fit: BoxFit.scaleDown,
+              ),
             )
           : widget,
       title: TextCustom(
         textAlign: textAlign!,
         text: text!,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
+        fontSize: fontSize!,
+        fontWeight: fontWeight!,
         color: Colors.black,
       ),
       actions: actions,

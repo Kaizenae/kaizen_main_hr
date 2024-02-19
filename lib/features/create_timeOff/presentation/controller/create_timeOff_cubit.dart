@@ -42,13 +42,22 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
   }
 
   onSelectionChanged({required DateRangePickerSelectionChangedArgs args}) {
+<<<<<<< HEAD
     selectDate = DateFormat("EEE").format(args.value).toString();
+=======
+    selectDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+>>>>>>> main
     if (args.value is PickerDateRange) {
       range = '${DateFormat('MM/dd/yyyy').format(args.value.startDate)} -'
           // ignore: lineslonger_than_80_chars
           ' ${DateFormat('MM/dd/yyyy').format(args.value.endDate ?? args.value.startDate)}';
     } else if (args.value is DateTime) {
+<<<<<<< HEAD
       selectedDate = args.value.toString();
+=======
+      selectedDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+
+>>>>>>> main
       emit(ChangeSelectedDateState());
     } else if (args.value is List<DateTime>) {
       dateCount = args.value.length.toString();

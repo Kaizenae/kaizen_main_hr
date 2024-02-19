@@ -1,6 +1,6 @@
 class EndPoints {
   // static   String baseUrl.get(key: AppStrings.baseUrl 'http://52.91.122.186:8016';
-  static String baseUrl = 'http://100.24.237.204:8016';
+  static String baseUrl = 'http://178.128.101.145:8069';
 // static   String baseUrl 'http';
 
   static String loginUrl = '$baseUrl/login_api';
@@ -46,4 +46,8 @@ class EndPoints {
 
   static String checkInDeleteRequestsUrl = '$baseUrl/time/delete-checkIn';
   static String checkOutDeleteRequestsUrl = '$baseUrl/time/delete-checkOut';
+  static String getAllTimeOffValuesPath = '$baseUrl/get_employee_timeoff_type';
+  static String earlyOutPath = "$baseUrl/early_out";
+  static String lateInPath = "$baseUrl/late_in";
+  static String hrPoliciesPath = "$baseUrl/get_hr_policy";
 }

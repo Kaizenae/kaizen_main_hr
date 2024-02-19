@@ -11,11 +11,18 @@ import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import 'package:flutter/material.dart';
+=======
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/values_manager.dart';
+import 'package:flutter/material.dart';
+import '../../../../core/widgets/text_custom/text_custom.dart';
+>>>>>>> main
 import '../controller/myTimeOff_state.dart';
 import '../widgets/approved_widget.dart';
 import '../widgets/pending_time_widget.dart';
@@ -31,16 +38,25 @@ class MyTimeOffScreen extends StatelessWidget {
         text: AppStrings.myTimeOff,
       ),
       body: Padding(
+<<<<<<< HEAD
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.r),
+=======
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+>>>>>>> main
         child: SafeArea(
           child: Column(
             children: [
               BlocProvider.value(
                 value: BlocProvider.of<MyTimeOffCubit>(context)
+<<<<<<< HEAD
+=======
+                  ..getAllTimeOffValues()
+>>>>>>> main
                   ..getMyTimeOffFun(),
                 child: BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
                   listener: (context, state) {},
                   builder: (context, state) {
+<<<<<<< HEAD
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -91,14 +107,88 @@ class MyTimeOffScreen extends StatelessWidget {
                           ),
                         ),
                       ],
+=======
+                    return SizedBox(
+                      height: AppSize.s120,
+                      child: BlocProvider.of<MyTimeOffCubit>(context)
+                              .allTimeOffValueModel
+                              .result
+                              .responseModel
+                              .isNotEmpty
+                          ? ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  padding: const EdgeInsets.all(AppPadding.p12),
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.white,
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s10),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: TextCustom(
+                                          text: BlocProvider.of<MyTimeOffCubit>(
+                                                      context)
+                                                  .allTimeOffNameAndValues[
+                                              index]["timeOffValue"],
+                                          color: ColorManager.secondary,
+                                          fontSize: FontSize.s20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: TextCustom(
+                                          text: BlocProvider.of<MyTimeOffCubit>(
+                                                      context)
+                                                  .allTimeOffNameAndValues[
+                                              index]["timeOffName"],
+                                          color: ColorManager.black,
+                                          fontSize: FontSize.s18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  width: AppSize.s12,
+                                );
+                              },
+                              itemCount:
+                                  BlocProvider.of<MyTimeOffCubit>(context)
+                                      .allTimeOffNameAndValues
+                                      .length)
+                          : Center(
+                              child: Text(
+                                AppStrings.youDontHaveLeaveBalance,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.displayLarge,
+                              ),
+                            ),
+>>>>>>> main
                     );
                   },
                 ),
               ),
+<<<<<<< HEAD
               SizedBox(
                 height: AppSize.s16.h,
               ),
               ElevatedButtonCustom(
+=======
+              const SizedBox(
+                height: AppSize.s16,
+              ),
+              ElevatedButtonCustom(
+                fontSize: FontSize.s14,
+>>>>>>> main
                 colors: ColorManager.secondary,
                 width: context.width / 1.6,
                 text: 'Apply Request',
@@ -106,9 +196,16 @@ class MyTimeOffScreen extends StatelessWidget {
                   navigator(context, Routes.createTimeOffRoute);
                 },
               ),
+<<<<<<< HEAD
               SizedBox(
                 height: AppSize.s18.h,
               ),
+=======
+              const SizedBox(
+                height: AppSize.s20,
+              ),
+
+>>>>>>> main
               TabBarCustom(
                 onTap: (v) {
                   MyTimeOffCubit.get(context).getMyTimeOffFun();

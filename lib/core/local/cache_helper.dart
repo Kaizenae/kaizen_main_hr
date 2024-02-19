@@ -11,7 +11,7 @@ class CacheHelper {
 
 // this fun to put data in local data base using key
   static Future<bool> put({
-    required String key,
+    required dynamic key,
     required dynamic value,
   }) async {
     if (value is String) {

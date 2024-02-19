@@ -1,10 +1,12 @@
+import 'dart:developer';
+
+import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/media_query_values.dart';
-import 'package:Attendace/features/companies/presentation/cubit/companies_cubit.dart';
-import 'package:Attendace/features/companies/presentation/cubit/companies_state.dart';
+import 'package:Attendace/features/register/domain/usecases/register_usecase.dart';
+import 'package:Attendace/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
@@ -25,25 +27,31 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-      body: BlocProvider.value(
-        value: BlocProvider.of<RegisterCubit>(context)..getUniqueDeviceId(),
+      body: BlocProvider(
+        create: (context) =>
+            RegisterCubit(registerUsecase: sl<RegisterUsecase>())
+              ..getUniqueDeviceId()
+              ..getCompaniesData(),
         child: BlocConsumer<RegisterCubit, RegisterStates>(
           listener: (context, state) {
             if (state is RegisterSuccessState) {
-              showToast(
-                message: "${state.registerEntity.resultEntity.message}",
-                color: ColorManager.primary,
-              );
+              SnackBar snackBar = SnackBar(
+                  content: Text(
+                      state.registerEntity.resultEntity.message.toString()));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
               navigatorAndRemove(context, Routes.loginRoute);
               // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => const HomeScreen()) ,(route) => false,);
             } else if (state is RegisterErrorState) {
-              showToast(message: state.message, color: Colors.red);
+              SnackBar snackBar =
+                  SnackBar(content: Text(state.message.toString()));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },
           builder: (context, state) {
+            log(state.toString());
             var registerCubit = RegisterCubit.get(context);
             return Padding(
-              padding: EdgeInsets.all(AppPadding.p16.r),
+              padding: const EdgeInsets.all(AppPadding.p16),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Form(
@@ -55,275 +63,215 @@ class RegisterScreen extends StatelessWidget {
                       Center(
                         child: Image.asset(
                           ImageAssets.logoImg,
-                          height: AppSize.s100.w,
-                          width: AppSize.s100.w,
+                          height: AppSize.s100,
+                          width: AppSize.s100,
                         ),
                       ),
-                      // SizedBox(
-                      //   height: AppSize.s20.h,
-                      // ),
-                      // Center(
-                      //   child: TextCustom(
-                      //     text: AppStrings.welcome,
-                      //     fontSize: FontSize.s32.sp,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: AppSize.s30.h,
-                      // ),
-                      // const TextCustom(
-                      //   text: AppStrings.baseUrl,
-                      //   textAlign: TextAlign.start,
-                      //   color: ColorManager.textFormLabelColor,
-                      // ),
-                      // SizedBox(
-                      //   height: AppSize.s4.h,
-                      // ),
-                      // Center(
-                      //   child: Container(
-                      //     height: AppSize.s50.h,
-                      //     width: context.width / 1.1,
-                      //     padding: EdgeInsets.all(AppPadding.p8.r),
-                      //     decoration: BoxDecoration(
-                      //       color: ColorManager.textFormColor,
-                      //       borderRadius: BorderRadius.circular(AppSize.s8.r),
-                      //     ),
-                      //     child: TextCustom(
-                      //       text: EndPoints.baseUrl,
-                      //       color: ColorManager.textFormLabelColor,
-                      //     ),
-                      //   ),
-                      // ),
-                      SizedBox(
-                        height: AppSize.s30.h,
-                      ),
-                      const TextCustom(
+                      const SizedBox(height: AppSize.s30),
+                      TextCustom(
+                        fontSize: FontSize.s14,
                         text: AppStrings.company,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       Material(
                         child: DropdownButtonHideUnderline(
-                          child: BlocProvider.value(
-                            value: BlocProvider.of<CompaniesCubit>(context)
-                              ..getCompaniesFun(),
-                            child: BlocConsumer<CompaniesCubit, CompaniesState>(
-                              listener: (context, state) {},
-                              builder: (context, state) {
-                                return state is GetCompaniesSuccess
-                                    ? Container(
-                                        decoration: BoxDecoration(
-                                            color: ColorManager.textFormColor,
-                                            borderRadius: BorderRadius.circular(
-                                                AppSize.s8.r)),
-                                        width: context.width / 1.1,
-                                        height: AppSize.s50.h,
-                                        child: InkWell(
-                                          onTap: () {
-                                            showCupertinoModalPopup<void>(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return Container(
-                                                    height: AppSize.s100.h * 3,
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 6.0),
-                                                    color:
-                                                        CupertinoColors.white,
-                                                    child: Column(
-                                                      children: [
-                                                        Expanded(
+                          child: registerCubit.companiesDataModel.result
+                                  .responseModel.isNotEmpty
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      color: ColorManager.textFormColor,
+                                      borderRadius:
+                                          BorderRadius.circular(AppSize.s8)),
+                                  width: context.width / 1.1,
+                                  height: AppSize.s50,
+                                  child: InkWell(
+                                    onTap: () {
+                                      showCupertinoModalPopup<void>(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Container(
+                                              height: AppSize.s100 * 3,
+                                              padding: const EdgeInsets.only(
+                                                  top: 6.0),
+                                              color: CupertinoColors.white,
+                                              child: Column(
+                                                children: [
+                                                  Expanded(
+                                                    child: DefaultTextStyle(
+                                                      style: const TextStyle(
+                                                        color: CupertinoColors
+                                                            .black,
+                                                        fontSize: 18.0,
+                                                      ),
+                                                      child: GestureDetector(
+                                                        // Blocks taps from propagating to the modal sheet and popping.
+                                                        onTap: () {},
+                                                        child: SafeArea(
+                                                          top: false,
                                                           child:
-                                                              DefaultTextStyle(
-                                                            style:
-                                                                const TextStyle(
-                                                              color:
-                                                                  CupertinoColors
-                                                                      .black,
-                                                              fontSize: 22.0,
-                                                            ),
-                                                            child:
-                                                                GestureDetector(
-                                                              // Blocks taps from propagating to the modal sheet and popping.
-                                                              onTap: () {},
-                                                              child: SafeArea(
-                                                                top: false,
-                                                                child:
-                                                                    CupertinoPicker(
-                                                                  magnification:
-                                                                      1.5,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .white,
-                                                                  itemExtent:
-                                                                      30,
-                                                                  //height of each item
-                                                                  looping:
-                                                                      false,
+                                                              CupertinoPicker(
+                                                            magnification: 1.5,
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            itemExtent: 30,
+                                                            //height of each item
+                                                            looping: false,
 
-                                                                  children: List.generate(
-                                                                      state
-                                                                          .companiesEntity
-                                                                          .resultEntity
-                                                                          .response
-                                                                          .length,
-                                                                      (index) => TextCustom(
-                                                                          textAlign: TextAlign
+                                                            children:
+                                                                List.generate(
+                                                              registerCubit
+                                                                  .companiesDataModel
+                                                                  .result
+                                                                  .responseModel
+                                                                  .length,
+                                                              (index) =>
+                                                                  Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                  8.0,
+                                                                ),
+                                                                child:
+                                                                    FittedBox(
+                                                                  fit: BoxFit
+                                                                      .scaleDown,
+                                                                  child: TextCustom(
+                                                                      color: ColorManager
+                                                                          .primary,
+                                                                      fontSize:
+                                                                          FontSize
+                                                                              .s14,
+                                                                      textAlign:
+                                                                          TextAlign
                                                                               .center,
-                                                                          text: state
-                                                                              .companiesEntity
-                                                                              .resultEntity
-                                                                              .response[index]
-                                                                              .name)),
-                                                                  onSelectedItemChanged:
-                                                                      (index) {
-                                                                    registerCubit.companyId = state
-                                                                        .companiesEntity
-                                                                        .resultEntity
-                                                                        .response[
-                                                                            index]
-                                                                        .id;
-                                                                    registerCubit.companyName = state
-                                                                        .companiesEntity
-                                                                        .resultEntity
-                                                                        .response[
-                                                                            index]
-                                                                        .name;
-                                                                    // setState(() {
-                                                                    //   selectItem=value.toString();
-                                                                    // });
-                                                                  },
+                                                                      text: registerCubit
+                                                                              .companiesDataModel
+                                                                              .result
+                                                                              .responseModel[index]
+                                                                              .companyName ??
+                                                                          'Select The Company'),
                                                                 ),
                                                               ),
                                                             ),
+                                                            onSelectedItemChanged:
+                                                                (index) {
+                                                              registerCubit.changeCompany(
+                                                                  registerCubit
+                                                                      .companiesDataModel
+                                                                      .result
+                                                                      .responseModel[index]);
+                                                            },
                                                           ),
                                                         ),
-                                                        ElevatedButtonCustom(
-                                                          text: 'Done',
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                        )
-                                                      ],
+                                                      ),
                                                     ),
-                                                  );
-                                                });
-                                          },
-                                          child: TextCustom(
-                                            text: registerCubit
-                                                    .companyName.isEmpty
-                                                ? 'Select The Company'
-                                                : registerCubit.companyName,
+                                                  ),
+                                                  ElevatedButtonCustom(
+                                                    text: 'Done',
+                                                    fontSize: FontSize.s14,
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
+                                    child: TextCustom(
+                                      color: ColorManager.primary,
+                                      fontSize: FontSize.s14,
+                                      text: registerCubit.companyName.isEmpty
+                                          ? 'Select The Company'
+                                          : registerCubit.companyName,
+                                    ),
+                                  ),
+                                )
+                              : ShimmerCustom(
+                                  child: SizedBox(
+                                  height: AppSize.s50,
+                                  child: DropdownMenu(
+                                      width: context.width / 1.1,
+                                      hintText: 'Select the company',
+                                      key: const Key('2'),
+                                      inputDecorationTheme:
+                                          InputDecorationTheme(
+                                        filled: true,
+                                        fillColor: ColorManager.textFormColor,
+                                        isDense: true,
+                                        //floatingLabelBehavior: FloatingLabelBehavior.auto,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
+                                            color: ColorManager.textFormColor,
+                                            width: AppSize.s1_5,
                                           ),
                                         ),
-                                      )
-                                    : state is GetCompaniesError
-                                        ? const SizedBox()
-                                        : ShimmerCustom(
-                                            child: SizedBox(
-                                            height: AppSize.s50.h,
-                                            child: DropdownMenu(
-                                                width: context.width / 1.1,
-                                                hintText: 'Select the company',
-                                                key: const Key('2'),
-                                                inputDecorationTheme:
-                                                    InputDecorationTheme(
-                                                  filled: true,
-                                                  fillColor: ColorManager
-                                                      .textFormColor,
-                                                  isDense: true,
-                                                  //floatingLabelBehavior: FloatingLabelBehavior.auto,
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8.r),
-                                                    borderSide: BorderSide(
-                                                      color: ColorManager
-                                                          .textFormColor,
-                                                      width: AppSize.s1_5.w,
-                                                    ),
-                                                  ),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8.r),
-                                                    borderSide: BorderSide(
-                                                      color: ColorManager
-                                                          .textFormColor,
-                                                      width: AppSize.s1_5.w,
-                                                    ),
-                                                  ),
-                                                  contentPadding:
-                                                      EdgeInsets.symmetric(
-                                                    vertical: AppPadding.p8.h,
-                                                    horizontal:
-                                                        AppPadding.p16.w,
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8.r),
-                                                    borderSide: BorderSide(
-                                                      color: ColorManager
-                                                          .textFormColor,
-                                                      width: AppSize.s1_5.w,
-                                                    ),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8.r),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.red,
-                                                      width: AppSize.s1_5.w,
-                                                    ),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s8.r),
-                                                    borderSide:
-                                                        const BorderSide(
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                  suffixIconColor: ColorManager
-                                                      .textFormIconColor,
-                                                  focusColor: ColorManager
-                                                      .textFormColor,
-                                                ),
-                                                enabled: false,
-                                                trailingIcon: const Icon(
-                                                  Icons.arrow_drop_down_rounded,
-                                                  color: ColorManager.primary,
-                                                ),
-                                                dropdownMenuEntries: const []),
-                                          ));
-                              },
-                            ),
-                          ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
+                                            color: ColorManager.textFormColor,
+                                            width: AppSize.s1_5,
+                                          ),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                          vertical: AppPadding.p8,
+                                          horizontal: AppPadding.p16,
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
+                                            color: ColorManager.textFormColor,
+                                            width: AppSize.s1_5,
+                                          ),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
+                                            color: Colors.red,
+                                            width: AppSize.s1_5,
+                                          ),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(AppSize.s8),
+                                          borderSide: const BorderSide(
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                        suffixIconColor:
+                                            ColorManager.textFormIconColor,
+                                        focusColor: ColorManager.textFormColor,
+                                      ),
+                                      enabled: false,
+                                      trailingIcon: const Icon(
+                                        Icons.arrow_drop_down_rounded,
+                                        color: ColorManager.primary,
+                                      ),
+                                      dropdownMenuEntries: const []),
+                                )),
                         ),
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
-                      const TextCustom(
+                      TextCustom(
+                        fontSize: FontSize.s14,
                         text: AppStrings.name,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.nameController,
@@ -338,46 +286,39 @@ class RegisterScreen extends StatelessWidget {
                         suffixIcon: IconsAssets.personIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
-                      const TextCustom(
+                      TextCustom(
+                        fontSize: FontSize.s14,
                         text: AppStrings.email,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.emailController,
                         validate: (value) {
-                          if (value!.trim().isEmpty || value == ' ') {
-                            return AppStrings.emailTextField;
-                          }
-                          if (!RegExp(
-                                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                              .hasMatch(value)) {
-                            return AppStrings.emailValidTextField;
-                          }
                           return null;
                         },
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: IconsAssets.emailIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
-                      const TextCustom(
+                      TextCustom(
+                        fontSize: FontSize.s14,
                         text: AppStrings.phone,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
-
                       TextFormFieldCustom(
                         controller: registerCubit.phoneNumberController,
                         validate: (value) {
@@ -386,22 +327,25 @@ class RegisterScreen extends StatelessWidget {
                           }
                           return null;
                         },
+                        prefix: true, isRegister: true,
+                        hint: "5x xxx xxxx",
                         keyboardType: TextInputType.phone,
                         suffixIcon: IconsAssets.phoneIcon,
                         suffix: true,
 
                         // textInputAction: TextInputAction.done,
                       ),
-                      SizedBox(
-                        height: AppSize.s30.h,
+                      const SizedBox(
+                        height: AppSize.s30,
                       ),
-                      const TextCustom(
+                      TextCustom(
+                        fontSize: FontSize.s14,
                         text: AppStrings.password,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s4.h,
+                      const SizedBox(
+                        height: AppSize.s4,
                       ),
                       TextFormFieldCustom(
                         controller: registerCubit.passwordController,
@@ -422,16 +366,42 @@ class RegisterScreen extends StatelessWidget {
                           registerCubit.changePasswordVisibility();
                         },
                       ),
-                      SizedBox(
-                        height: AppSize.s40.h,
+                      const SizedBox(
+                        height: AppSize.s30,
+                      ),
+                      TextCustom(
+                        fontSize: FontSize.s14,
+                        text: AppStrings.employeeCode,
+                        textAlign: TextAlign.start,
+                        color: ColorManager.textFormLabelColor,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s4,
+                      ),
+                      TextFormFieldCustom(
+                        controller: registerCubit.employeeCode,
+                        validate: (value) {
+                          if (value!.trim().isEmpty || value == ' ') {
+                            return AppStrings.nameTextField;
+                          }
+
+                          return null;
+                        },
+                        keyboardType: TextInputType.number,
+                        suffixIcon: IconsAssets.personIcon,
+                        suffix: true,
+                      ),
+                      const SizedBox(
+                        height: AppSize.s40,
                       ),
                       Center(
                         child: state is RegisterLoadingState
-                            ? CupertinoActivityIndicator(
+                            ? const CupertinoActivityIndicator(
                                 color: ColorManager.primary,
-                                radius: AppSize.s16.r,
+                                radius: AppSize.s16,
                               )
                             : ElevatedButtonCustom(
+                                fontSize: FontSize.s14,
                                 textColor: ColorManager.white,
                                 onPressed: () async {
                                   await registerCubit.getUniqueDeviceId();
@@ -449,6 +419,7 @@ class RegisterScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextCustom(
+                            fontSize: FontSize.s14,
                             text: AppStrings.haveAccount,
                             color: ColorManager.grey,
                             fontWeight: FontWeight.w600,
@@ -457,12 +428,14 @@ class RegisterScreen extends StatelessWidget {
                             onPressed: () {
                               navigatorAndRemove(context, Routes.loginRoute);
                             },
-                            child: const TextCustom(
+                            child: TextCustom(
+                                color: ColorManager.primary,
+                                fontSize: FontSize.s14,
                                 text: AppStrings.login,
                                 decoration: TextDecoration.underline),
                           ),
-                          SizedBox(
-                            height: AppSize.s40.h,
+                          const SizedBox(
+                            height: AppSize.s40,
                           ),
                         ],
                       ),

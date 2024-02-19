@@ -6,7 +6,6 @@ import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/text_custom/text_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -44,17 +43,17 @@ class HelpAndFeedbackScreen extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     ImageAssets.logoImg,
-                    height: AppSize.s80.h * 2,
-                    width: AppSize.s80.h * 2,
+                    height: AppSize.s80 * 2,
+                    width: AppSize.s80 * 2,
                   ),
                 ),
-                SizedBox(
-                  height: AppSize.s30.h,
+                const SizedBox(
+                  height: AppSize.s30,
                 ),
                 TextCustom(
                   text: 'Social Media',
                   color: ColorManager.secondary,
-                  fontSize: FontSize.s18.sp,
+                  fontSize: FontSize.s18,
                   fontWeight: FontWeight.w600,
                 ),
                 Wrap(
@@ -71,7 +70,7 @@ class HelpAndFeedbackScreen extends StatelessWidget {
                                 },
                                 child: SvgPicture.asset(
                                   icons[index],
-                                  height: AppSize.s40.h * 1.3,
+                                  height: AppSize.s40 * 1.3,
                                 )),
                           )),
                 )

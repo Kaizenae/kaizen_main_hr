@@ -15,7 +15,13 @@ class AttendanceRemoteDataSourceImpl implements AttendanceRemoteDataSource {
   Future<AttendanceModel> attendance({required int userId}) async {
     final response = await apiConsumer.get(EndPoints.attendance, data: {
       "jsonrpc": "2.0",
+<<<<<<< HEAD
       "params": {"user_id": userId}
+=======
+      "params": {
+        "user_id": userId,
+      }
+>>>>>>> main
     });
     return AttendanceModel.fromJson(response);
   }

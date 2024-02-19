@@ -1,5 +1,10 @@
 import 'dart:io';
 
+<<<<<<< HEAD
+=======
+import 'package:Attendace/core/utils/color_manager.dart';
+import 'package:Attendace/core/utils/font_manager.dart';
+>>>>>>> main
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/features/create_loan/presentation/screens/create_loan_screen.dart';
@@ -7,8 +12,16 @@ import 'package:Attendace/features/create_request/presentation/screens/apply_req
 import 'package:Attendace/features/create_timeOff/presentation/screens/create_timeOff_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_company_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_location_screen.dart';
+<<<<<<< HEAD
 import 'package:Attendace/features/help_and_feedback/presentation/screens/help_and_feedback_screen.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
+=======
+import 'package:Attendace/features/forget_password/presentation/screens/create_new_password_screen.dart';
+import 'package:Attendace/features/forget_password/presentation/screens/forget_password_screen.dart';
+import 'package:Attendace/features/forget_password/presentation/screens/otp_screen.dart';
+import 'package:Attendace/features/help_and_feedback/presentation/screens/help_and_feedback_screen.dart';
+import 'package:Attendace/features/hr_policies/presentation/screens/hr_policies_screen.dart';
+>>>>>>> main
 import 'package:Attendace/features/login/presentation/screens/baseUrl_screen.dart';
 import 'package:Attendace/features/main_page_admin_screen.dart';
 import 'package:Attendace/features/main_page_screen.dart';
@@ -71,6 +84,13 @@ class Routes {
   static const String createLoanRoute = "CreateLoanScreen";
   static const String lateInRequestRoute = "lateInRequestRoute";
   static const String earlyOutRequestRoute = "earlyOutRequestRoute";
+<<<<<<< HEAD
+=======
+  static const String forgetPasswordRoute = "forrgetPasswordRoute";
+  static const String otpScreenRoute = "otpScreenRoute";
+  static const String createNewPasswordRoute = "createNewPasswordRoute";
+  static const String hrPoliciesRoute = "hrPoliciesRoute";
+>>>>>>> main
 
   static Route createRoute(String screen) {
     if (Platform.isAndroid) {
@@ -138,10 +158,19 @@ class RoutesMap {
           const CreateLoanScreen(),
       Routes.localAuthRoute: (BuildContext context) => const LocalAuthScreen(),
       Routes.splashRoute: (BuildContext context) => const SplashScreen(),
+<<<<<<< HEAD
       Routes.lateInRequestRoute: (BuildContext context) =>
           const LateInEarlyOutScreen(title: AppStrings.lateInRequest),
       Routes.earlyOutRequestRoute: (BuildContext context) =>
           const LateInEarlyOutScreen(title: AppStrings.earlyOutRequest),
+=======
+      Routes.forgetPasswordRoute: (BuildContext context) =>
+          const ForgetPasswordScreen(),
+      Routes.otpScreenRoute: (BuildContext context) => const OTPScreen(),
+      Routes.createNewPasswordRoute: (BuildContext context) =>
+          const CreateNewPasswordScreen(),
+      Routes.hrPoliciesRoute: (BuildContext context) => const HrPoliciesScreen()
+>>>>>>> main
 
       // 'userData': (BuildContext context) => const UserScreen(),
       // 'adminScreen': (BuildContext context) => const AdminHomeScreen(),
@@ -173,6 +202,12 @@ class RoutesMap {
       case Routes.createRequestRoute:
         return const ApplyRequestScreen();
 
+<<<<<<< HEAD
+=======
+      case Routes.forgetPasswordRoute:
+        return const ForgetPasswordScreen();
+
+>>>>>>> main
       case Routes.mainRoute:
         return const MainPage();
       case Routes.mainRouteAdmin:
@@ -207,16 +242,38 @@ class RoutesMap {
       case Routes.splashRoute:
         return const SplashScreen();
 
+<<<<<<< HEAD
       default:
         return const ScaffoldCustom(
           appBarCustom: AppBarCustom(
             text: AppStrings.noRouteFound,
           ),
           body: Center(child: TextCustom(text: AppStrings.noRouteFound)),
+=======
+      case Routes.otpScreenRoute:
+        return const OTPScreen();
+      case Routes.createNewPasswordRoute:
+        return const CreateNewPasswordScreen();
+      case Routes.hrPoliciesRoute:
+        return const HrPoliciesScreen();
+
+      default:
+        return ScaffoldCustom(
+          appBarCustom: const AppBarCustom(
+            text: AppStrings.noRouteFound,
+          ),
+          body: Center(
+              child: TextCustom(
+            color: ColorManager.primary,
+            text: AppStrings.noRouteFound,
+            fontSize: FontSize.s14,
+          )),
+>>>>>>> main
         );
     }
   }
 }
+<<<<<<< HEAD
 
 // class RouteGenerator {
 //   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -257,3 +314,5 @@ class RoutesMap {
 //             ));
 //   }
 // }
+=======
+>>>>>>> main

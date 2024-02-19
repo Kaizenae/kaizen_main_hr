@@ -46,6 +46,10 @@ class RegisterParams extends Equatable {
   final String uniqueDeviceId;
   final String phoneNumber;
   final int companyId;
+<<<<<<< HEAD
+=======
+  final String employeeCode;
+>>>>>>> main
 
   const RegisterParams({
     required this.email,
@@ -54,6 +58,10 @@ class RegisterParams extends Equatable {
     required this.name,
     required this.companyId,
     required this.phoneNumber,
+<<<<<<< HEAD
+=======
+    required this.employeeCode,
+>>>>>>> main
   });
 
   @override
@@ -63,6 +71,10 @@ class RegisterParams extends Equatable {
         password,
         uniqueDeviceId,
         phoneNumber,
+<<<<<<< HEAD
+=======
+        employeeCode,
+>>>>>>> main
       ];
 }
 

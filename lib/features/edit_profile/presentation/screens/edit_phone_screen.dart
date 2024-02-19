@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
+import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
@@ -34,10 +35,10 @@ class EditPhoneScreen extends StatelessWidget {
       body: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {
           if (state is EditProfileSuccessState) {
-            showToast(
-              message: state.editProfileEntity.resultEntity.message[0],
-              color: ColorManager.primary,
-            );
+            SnackBar snackBar = SnackBar(
+                content: Text(
+                    state.editProfileEntity.resultEntity.message.toString()));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
             AppConstants.admin
                 ? navigatorAndRemove(context, Routes.mainRouteAdmin)
                 : navigatorAndRemove(context, Routes.mainRoute);
@@ -45,14 +46,16 @@ class EditPhoneScreen extends StatelessWidget {
             if (kDebugMode) {
               print(state.message);
             }
-            showToast(message: state.message, color: Colors.red);
+            SnackBar snackBar =
+                SnackBar(content: Text(state.message.toString()));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         builder: (context, state) {
           var editProfileCubit = EditProfileCubit.get(context);
           return SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppPadding.p20.w),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               child: Form(
                 key: editProfileCubit.formKey,
                 child: SingleChildScrollView(
@@ -60,13 +63,14 @@ class EditPhoneScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const TextCustom(
+                      TextCustom(
                         text: 'Work Phone',
+                        fontSize: FontSize.s14,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
-                      SizedBox(
-                        height: AppSize.s8.h,
+                      const SizedBox(
+                        height: AppSize.s8,
                       ),
                       TextFormFieldCustom(
                         controller: editProfileCubit.phoneNumberController,
@@ -81,18 +85,20 @@ class EditPhoneScreen extends StatelessWidget {
                         suffixIcon: IconsAssets.phoneIcon,
                         suffix: true,
                       ),
-                      SizedBox(
-                        height: AppSize.s40.h,
+                      const SizedBox(
+                        height: AppSize.s40,
                       ),
                       Center(
                         child: state is EditProfileLoadingState
-                            ? CupertinoActivityIndicator(
+                            ? const CupertinoActivityIndicator(
                                 color: ColorManager.primary,
-                                radius: AppSize.s16.r,
+                                radius: AppSize.s16,
                               )
                             : ElevatedButtonCustom(
+                                fontSize: FontSize.s14,
+
                                 textColor: ColorManager.white,
-                                height: AppSize.s50.h,
+
                                 // width: 100,
                                 onPressed: () async {
                                   if (editProfileCubit.formKey.currentState!
@@ -104,7 +110,7 @@ class EditPhoneScreen extends StatelessWidget {
                                         .reset();
                                   }
                                 },
-                                text: 'Update',
+                                text: AppStrings.update,
                               ),
                       ),
                     ],

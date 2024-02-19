@@ -1,6 +1,5 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/error_widget.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -20,12 +19,12 @@ class AttendanceScreen extends StatelessWidget {
     return ScaffoldCustom(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(AppPadding.p16.r),
-          margin: EdgeInsets.symmetric(
-              horizontal: AppPadding.p16.w, vertical: AppPadding.p12.h),
+          padding: const EdgeInsets.all(AppPadding.p16),
+          margin: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p16, vertical: AppPadding.p12),
           decoration: BoxDecoration(
             color: ColorManager.white,
-            borderRadius: BorderRadius.circular(AppSize.s10.r),
+            borderRadius: BorderRadius.circular(AppSize.s10),
           ),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -34,37 +33,37 @@ class AttendanceScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextCustom(
+                    const TextCustom(
                       text: 'Date',
                       color: ColorManager.black,
-                      fontSize: AppSize.s16.sp,
+                      fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
                     const SizedBox(
                       width: AppSize.s40,
                     ),
-                    TextCustom(
+                    const TextCustom(
                       text: 'Punch in',
                       color: ColorManager.primary,
-                      fontSize: AppSize.s16.sp,
+                      fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
-                    SizedBox(
-                      width: AppSize.s10.w,
+                    const SizedBox(
+                      width: AppSize.s10,
                     ),
                     TextCustom(
                       text: 'Punch out',
                       color: ColorManager.error,
-                      fontSize: AppSize.s16.sp,
+                      fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
-                    SizedBox(
-                      width: AppSize.s10.w,
+                    const SizedBox(
+                      width: AppSize.s10,
                     ),
-                    TextCustom(
+                    const TextCustom(
                       text: 'Hours',
                       color: ColorManager.secondary,
-                      fontSize: AppSize.s16.sp,
+                      fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
                   ],
@@ -81,13 +80,14 @@ class AttendanceScreen extends StatelessWidget {
                               physics: const BouncingScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (context, index) => Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: AppPadding.p12.h),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.p12),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     TextCustom(
+                                      fontSize: FontSize.s14,
                                       text: DateFormat('dd , MMM').format(
                                           DateTime.parse(state
                                               .attendanceEntity
@@ -97,6 +97,7 @@ class AttendanceScreen extends StatelessWidget {
                                       color: ColorManager.black,
                                     ),
                                     TextCustom(
+                                      fontSize: FontSize.s14,
                                       text: DateFormat('hh: mm a').format(
                                           DateTime.parse(state
                                               .attendanceEntity
@@ -106,6 +107,7 @@ class AttendanceScreen extends StatelessWidget {
                                       color: ColorManager.primary,
                                     ),
                                     TextCustom(
+                                      fontSize: FontSize.s14,
                                       text: state.attendanceEntity.resultEntity
                                                   .response[index].checkOut !=
                                               'false'
@@ -119,6 +121,7 @@ class AttendanceScreen extends StatelessWidget {
                                       color: ColorManager.error,
                                     ),
                                     TextCustom(
+                                      fontSize: FontSize.s14,
                                       text: state.attendanceEntity.resultEntity
                                           .response[index].workedHours
                                           .toStringAsFixed(1),
@@ -135,21 +138,24 @@ class AttendanceScreen extends StatelessWidget {
                                   child: ListView.builder(
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) => Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: AppPadding.p12.h),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: AppPadding.p12),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const TextCustom(
+                                        TextCustom(
+                                          fontSize: FontSize.s14,
                                           text: '20 sep',
                                           color: ColorManager.black,
                                         ),
-                                        const TextCustom(
+                                        TextCustom(
+                                          fontSize: FontSize.s14,
                                           text: '09:00 am',
                                           color: ColorManager.primary,
                                         ),
                                         TextCustom(
+                                          fontSize: FontSize.s14,
                                           text: '06:00 pm',
                                           color: ColorManager.error,
                                         ),

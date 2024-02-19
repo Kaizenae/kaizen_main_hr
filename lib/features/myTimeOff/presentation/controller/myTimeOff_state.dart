@@ -58,3 +58,46 @@ class GetMyTimeOffPendingError extends MyTimeOffState {
   @override
   List<Object> get props => [message];
 }
+<<<<<<< HEAD
+=======
+
+class GetTimeOffValueLoading extends MyTimeOffState {
+  @override
+  List<Object> get props => [];
+}
+
+class GetTimeOffValueSuccess extends MyTimeOffState {
+  const GetTimeOffValueSuccess();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetTimeOffValueError extends MyTimeOffState {
+  const GetTimeOffValueError();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetTimeOffNameAndValueLoading extends MyTimeOffState {
+  const GetTimeOffNameAndValueLoading();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class GetTimeOffNameAndValueSuccess extends MyTimeOffState {
+  const GetTimeOffNameAndValueSuccess();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class GetTimeOffNameAndValueError extends MyTimeOffState {
+  const GetTimeOffNameAndValueError();
+
+  @override
+  List<Object?> get props => [];
+}
+>>>>>>> main

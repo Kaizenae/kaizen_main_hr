@@ -11,7 +11,10 @@ import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import 'package:Attendace/features/myRequests/presentation/controller/myRequests_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< HEAD
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+=======
+>>>>>>> main
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
@@ -30,7 +33,11 @@ class MyRequestsScreen extends StatelessWidget {
         text: AppStrings.myRequests,
       ),
       body: Padding(
+<<<<<<< HEAD
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.r),
+=======
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+>>>>>>> main
         child: SafeArea(
           child: Column(
             children: [
@@ -44,10 +51,17 @@ class MyRequestsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
+<<<<<<< HEAD
                           padding: EdgeInsets.all(AppPadding.p12.r),
                           decoration: BoxDecoration(
                             color: ColorManager.white,
                             borderRadius: BorderRadius.circular(AppSize.s10.r),
+=======
+                          padding: const EdgeInsets.all(AppPadding.p12),
+                          decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius: BorderRadius.circular(AppSize.s10),
+>>>>>>> main
                           ),
                           child: Column(
                             children: [
@@ -56,22 +70,37 @@ class MyRequestsScreen extends StatelessWidget {
                                     ? '${state.myRequestsEntity.resultEntity.response.length}'
                                     : '0',
                                 color: ColorManager.secondary,
+<<<<<<< HEAD
                                 fontSize: FontSize.s32.sp,
+=======
+                                fontSize: FontSize.s32,
+>>>>>>> main
                                 fontWeight: FontWeight.w600,
                               ),
                               TextCustom(
                                 text: 'Total Requests',
                                 color: ColorManager.black,
+<<<<<<< HEAD
                                 fontSize: FontSize.s18.sp,
+=======
+                                fontSize: FontSize.s18,
+>>>>>>> main
                               ),
                             ],
                           ),
                         ),
                         Container(
+<<<<<<< HEAD
                           padding: EdgeInsets.all(AppPadding.p12.r),
                           decoration: BoxDecoration(
                             color: ColorManager.white,
                             borderRadius: BorderRadius.circular(AppSize.s10.r),
+=======
+                          padding: const EdgeInsets.all(AppPadding.p12),
+                          decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius: BorderRadius.circular(AppSize.s10),
+>>>>>>> main
                           ),
                           child: Column(
                             children: [
@@ -80,13 +109,21 @@ class MyRequestsScreen extends StatelessWidget {
                                     ? '${state.myRequestsEntity.resultEntity.response.length}'
                                     : '0',
                                 color: ColorManager.secondary,
+<<<<<<< HEAD
                                 fontSize: FontSize.s32.sp,
+=======
+                                fontSize: FontSize.s32,
+>>>>>>> main
                                 fontWeight: FontWeight.w600,
                               ),
                               TextCustom(
                                 text: 'Used Requests',
                                 color: ColorManager.black,
+<<<<<<< HEAD
                                 fontSize: FontSize.s18.sp,
+=======
+                                fontSize: FontSize.s18,
+>>>>>>> main
                               ),
                             ],
                           ),
@@ -96,10 +133,18 @@ class MyRequestsScreen extends StatelessWidget {
                   },
                 ),
               ),
+<<<<<<< HEAD
               SizedBox(
                 height: AppSize.s16.h,
               ),
               ElevatedButtonCustom(
+=======
+              const SizedBox(
+                height: AppSize.s16,
+              ),
+              ElevatedButtonCustom(
+                fontSize: FontSize.s14,
+>>>>>>> main
                 colors: ColorManager.secondary,
                 width: context.width / 1.6,
                 text: 'Apply Request',
@@ -107,8 +152,13 @@ class MyRequestsScreen extends StatelessWidget {
                   navigator(context, Routes.createRequestRoute);
                 },
               ),
+<<<<<<< HEAD
               SizedBox(
                 height: AppSize.s18.h,
+=======
+              const SizedBox(
+                height: AppSize.s18,
+>>>>>>> main
               ),
               TabBarCustom(
                 onTap: (v) {

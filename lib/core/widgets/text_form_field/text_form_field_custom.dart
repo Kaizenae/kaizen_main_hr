@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../utils/color_manager.dart';
@@ -33,6 +32,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final int? maxLines;
   final Color? fillColor;
   final Color? boarderColor;
+  final bool isRegister;
 
   const TextFormFieldCustom(
       {super.key,
@@ -46,12 +46,13 @@ class TextFormFieldCustom extends StatelessWidget {
       this.suffix = false,
       this.suffixOnPressed,
       this.prefixOnPressed,
-      required this.validate,
+      this.validate,
       this.keyboardType,
       this.maxDigit = 100,
       this.onChanged,
       this.textInputAction,
       this.onTab,
+      this.isRegister = false,
       this.onSaved,
       this.onEditingComplete,
       this.focus,
@@ -74,6 +75,7 @@ class TextFormFieldCustom extends StatelessWidget {
       focusNode: focus,
       // autofocus: true,
       enabled: enable,
+      style: Theme.of(context).textTheme.titleMedium,
       initialValue: initial,
       controller: controller,
       textInputAction: textInputAction ?? TextInputAction.done,
@@ -84,9 +86,8 @@ class TextFormFieldCustom extends StatelessWidget {
       onEditingComplete: onEditingComplete,
 
       obscureText: obSecure,
-      validator: (value) {
-        return validate!(value);
-      },
+      validator: validate,
+
       onSaved: onSaved,
       keyboardType: keyboardType,
       cursorColor: ColorManager.primary,
@@ -103,39 +104,39 @@ class TextFormFieldCustom extends StatelessWidget {
         isDense: true,
         //floatingLabelBehavior: FloatingLabelBehavior.auto,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s8.r),
+          borderRadius: BorderRadius.circular(AppSize.s8),
           borderSide: BorderSide(
             color: boarderColor!,
-            width: AppSize.s1_5.w,
+            width: AppSize.s1_5,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s8.r),
-          borderSide: BorderSide(
+          borderRadius: BorderRadius.circular(AppSize.s8),
+          borderSide: const BorderSide(
             color: ColorManager.textFormColor,
-            width: AppSize.s1_5.w,
+            width: AppSize.s1_5,
           ),
         ),
         contentPadding: EdgeInsets.symmetric(
           vertical: padding!,
-          horizontal: AppPadding.p16.w,
+          horizontal: AppPadding.p16,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s8.r),
+          borderRadius: BorderRadius.circular(AppSize.s8),
           borderSide: BorderSide(
             color: boarderColor!,
-            width: AppSize.s1_5.w,
+            width: AppSize.s1_5,
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s8.r),
-          borderSide: BorderSide(
+          borderRadius: BorderRadius.circular(AppSize.s8),
+          borderSide: const BorderSide(
             color: Colors.red,
-            width: AppSize.s1_5.w,
+            width: AppSize.s1_5,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s8.r),
+          borderRadius: BorderRadius.circular(AppSize.s8),
           borderSide: const BorderSide(
             color: Colors.red,
           ),
@@ -145,7 +146,7 @@ class TextFormFieldCustom extends StatelessWidget {
 
         prefixIcon: prefix
             ? Padding(
-                padding: EdgeInsets.all(AppPadding.p16.r),
+                padding: const EdgeInsets.all(AppPadding.p16),
                 child: InkWell(
                   onTap: prefixOnPressed != null
                       ? () {
@@ -153,16 +154,18 @@ class TextFormFieldCustom extends StatelessWidget {
                           // suffixOnPressed!();
                         }
                       : null,
-                  child: SvgPicture.asset(
-                    prefixIcon!,
-                    height: AppSize.s20.h,
-                  ),
+                  child: isRegister
+                      ? const Text("+971")
+                      : SvgPicture.asset(
+                          prefixIcon!,
+                          height: AppSize.s20,
+                        ),
                 ),
               )
             : null,
         suffixIcon: suffix
             ? Padding(
-                padding: EdgeInsets.all(AppPadding.p16.r),
+                padding: const EdgeInsets.all(AppPadding.p16),
                 child: InkWell(
                   onTap: suffixOnPressed != null
                       ? () {
@@ -172,7 +175,7 @@ class TextFormFieldCustom extends StatelessWidget {
                       : null,
                   child: SvgPicture.asset(
                     suffixIcon!,
-                    height: AppSize.s20.h,
+                    height: AppSize.s20,
                   ),
                 ),
               )
@@ -181,11 +184,11 @@ class TextFormFieldCustom extends StatelessWidget {
         hintText: hint,
         labelStyle: TextStyle(
           color: ColorManager.grey,
-          fontSize: AppSize.s16.sp,
+          fontSize: AppSize.s16,
         ),
-        floatingLabelStyle: TextStyle(
+        floatingLabelStyle: const TextStyle(
           color: ColorManager.primary,
-          fontSize: AppSize.s16.sp,
+          fontSize: AppSize.s16,
         ),
       ),
     );

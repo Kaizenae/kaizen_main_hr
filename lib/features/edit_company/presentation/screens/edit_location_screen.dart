@@ -1,6 +1,7 @@
+import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/routes_manager.dart';
+import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import 'package:flutter/foundation.dart';
@@ -32,16 +33,18 @@ class EditLocationScreen extends StatelessWidget {
         child: BlocConsumer<EditCompanyCubit, EditCompanyStates>(
           listener: (context, state) {
             if (state is EditCompanySuccessState) {
-              showToast(
-                message: state.editCompanyEntity.resultEntity.message,
-                color: ColorManager.primary,
-              );
+              SnackBar snackBar = SnackBar(
+                  content: Text(
+                      state.editCompanyEntity.resultEntity.message.toString()));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
               navigatorAndRemove(context, Routes.mainRouteAdmin);
             } else if (state is EditCompanyErrorState) {
               if (kDebugMode) {
                 print(state.message);
               }
-              showToast(message: state.message, color: Colors.red);
+              SnackBar snackBar =
+                  SnackBar(content: Text(state.message.toString()));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },
           builder: (context, state) {
@@ -57,13 +60,14 @@ class EditLocationScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const TextCustom(
+                        TextCustom(
+                          fontSize: FontSize.s14,
                           text: 'Latitude',
                           textAlign: TextAlign.start,
                           color: ColorManager.textFormLabelColor,
                         ),
-                        SizedBox(
-                          height: AppSize.s8.h,
+                        const SizedBox(
+                          height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
                           controller: editCompanyCubit.latController,
@@ -78,16 +82,17 @@ class EditLocationScreen extends StatelessWidget {
                           suffixIcon: IconsAssets.locationIcon,
                           suffix: true,
                         ),
-                        SizedBox(
-                          height: AppSize.s16.h,
+                        const SizedBox(
+                          height: AppSize.s16,
                         ),
-                        const TextCustom(
+                        TextCustom(
                           text: 'Longitude',
+                          fontSize: FontSize.s14,
                           textAlign: TextAlign.start,
                           color: ColorManager.textFormLabelColor,
                         ),
-                        SizedBox(
-                          height: AppSize.s8.h,
+                        const SizedBox(
+                          height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
                           controller: editCompanyCubit.longController,
@@ -102,18 +107,20 @@ class EditLocationScreen extends StatelessWidget {
                           suffixIcon: IconsAssets.locationIcon,
                           suffix: true,
                         ),
-                        SizedBox(
-                          height: AppSize.s40.h,
+                        const SizedBox(
+                          height: AppSize.s40,
                         ),
                         Center(
                           child: state is EditCompanyLoadingState
-                              ? CupertinoActivityIndicator(
+                              ? const CupertinoActivityIndicator(
                                   color: ColorManager.primary,
-                                  radius: AppSize.s16.r,
+                                  radius: AppSize.s16,
                                 )
                               : ElevatedButtonCustom(
+                                  fontSize: FontSize.s14,
+
                                   textColor: ColorManager.white,
-                                  height: AppSize.s50.h,
+
                                   // width: 100,
                                   onPressed: () async {
                                     if (editCompanyCubit.formKey.currentState!
@@ -124,7 +131,7 @@ class EditLocationScreen extends StatelessWidget {
                                           .reset();
                                     }
                                   },
-                                  text: 'Update',
+                                  text: AppStrings.update,
                                 ),
                         ),
                       ],

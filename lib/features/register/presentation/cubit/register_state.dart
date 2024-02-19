@@ -39,3 +39,16 @@ class ChangeForgetPasswordState extends RegisterStates {}
 class ChangeEmailValidateState extends RegisterStates {}
 
 class ChangePasswordValidateState extends RegisterStates {}
+<<<<<<< HEAD
+=======
+
+class ChangeNameOfCompanyState extends RegisterStates {}
+
+class GetCompaniesLoadingState extends RegisterStates {}
+
+class GetCompaniesSuccessState extends RegisterStates {}
+
+class GetCompaniesErrorState extends RegisterStates {}
+
+class ChangeCompaniesState extends RegisterStates {}
+>>>>>>> main

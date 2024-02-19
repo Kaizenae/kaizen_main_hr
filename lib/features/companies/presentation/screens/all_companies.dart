@@ -23,7 +23,8 @@ class AllCompaniesScreen extends StatelessWidget {
         const SizedBox(
           height: AppSize.s24,
         ),
-        const TextCustom(
+        TextCustom(
+          fontSize: FontSize.s14,
           text: 'Companies',
           textAlign: TextAlign.start,
           color: ColorManager.textFormLabelColor,

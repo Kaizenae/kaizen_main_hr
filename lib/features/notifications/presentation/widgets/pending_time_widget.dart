@@ -5,7 +5,6 @@ import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_s
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_timeOff/accept_reject_request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -32,7 +31,7 @@ class PendingTimeWidget extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.all(AppPadding.p12.r),
+                    padding: const EdgeInsets.all(AppPadding.p12),
                     child: Column(
                       children: [
                         UserRequestWidget(
@@ -83,10 +82,10 @@ class PendingTimeWidget extends StatelessWidget {
                                     .acceptRejectFun();
                                 await cubit.getAllTimeOffFun();
                               },
-                              child: SvgPictureCustom(
+                              child: const SvgPictureCustom(
                                 assetsName: IconsAssets.acceptIcon,
                                 color: null,
-                                height: AppSize.s40.h,
+                                height: AppSize.s40,
                               ),
                             ),
                             InkWell(
@@ -103,7 +102,7 @@ class PendingTimeWidget extends StatelessWidget {
                                 child: SvgPictureCustom(
                                   assetsName: IconsAssets.rejectIcon,
                                   color: ColorManager.error,
-                                  height: AppSize.s40.h,
+                                  height: AppSize.s40,
                                 )),
                           ],
                         ),

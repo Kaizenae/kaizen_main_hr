@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:Attendace/features/all_employee/presentation/screens/all_employees_screen.dart';
-import 'package:Attendace/features/attendance/presentation/controller/attendance_cubit.dart';
-import 'package:Attendace/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,24 +26,20 @@ class MainPageAdminState extends State<MainPageAdmin> {
   final _screens = [
     const HomeScreen(),
     const AllEmployeesScreen(),
-    const AttendanceScreen(),
+    // const AttendanceScreen(),
     const ProfileScreen(),
-
-    // const CategoryScreen(),
-    //
-    // const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
     IconsAssets.searchIcon,
-    IconsAssets.attendIcon,
+    // IconsAssets.attendIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
     AppStrings.employees,
-    AppStrings.attendance,
+    // AppStrings.attendance,
     AppStrings.profile,
   ];
 
@@ -142,9 +136,10 @@ class MainPageAdminState extends State<MainPageAdmin> {
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
+            // if (index == 2) {
+            //   BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
+            // } else
             if (index == 2) {
-              BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
-            } else if (index == 3) {
               ProfileCubit.get(context).getEmployeeFun();
             } else if (index == 1) {
               AllEmployeesCubit.get(context).getEmployeesFun();
@@ -159,37 +154,17 @@ class MainPageAdminState extends State<MainPageAdmin> {
               (index) => bottom(
                     icon: _icons[index],
                     label: _labels[index],
-                  ))
-          // [
-          //   BottomNavigationBarItem(
-          //     icon: SvgPictureCustom(
-          //         assetsName: IconsAssets.homeIcon, color: ColorManager.grey1),
-          //     label: AppStrings.assigned,
-          //     activeIcon: SvgPictureCustom(assetsName: IconsAssets.homeIcon),
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: SvgPictureCustom(
-          //         assetsName: IconsAssets.checklistIcon,
-          //         color: ColorManager.grey1),
-          //     label: AppStrings.myChecklist,
-          //     activeIcon: SvgPictureCustom(assetsName: IconsAssets.checklistIcon),
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: SvgPictureCustom(
-          //         assetsName: IconsAssets.personIcon, color: ColorManager.grey1),
-          //     label: AppStrings.profile,
-          //     activeIcon: SvgPictureCustom(
-          //         assetsName: IconsAssets.personIcon, color: ColorManager.black),
-          //   ),
-          // ],
-          ),
+                  ))),
     );
   }
 
   BottomNavigationBarItem bottom(
       {required String icon, required String label}) {
     return BottomNavigationBarItem(
-      icon: SvgPictureCustom(assetsName: icon, color: ColorManager.grey1),
+      icon: SvgPictureCustom(
+        assetsName: icon,
+        color: ColorManager.grey1,
+      ),
       label: label,
       activeIcon: SvgPictureCustom(assetsName: icon),
     );
