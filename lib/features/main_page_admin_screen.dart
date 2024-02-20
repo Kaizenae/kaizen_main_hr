@@ -12,6 +12,7 @@ import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
 import 'all_employee/presentation/cubit/all_employees_cubit.dart';
+import 'attendance/presentation/screens/attendance_screen.dart';
 import 'edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'home/presentation/screens/home_screen.dart';
 
@@ -26,20 +27,20 @@ class MainPageAdminState extends State<MainPageAdmin> {
   final _screens = [
     const HomeScreen(),
     const AllEmployeesScreen(),
-    // const AttendanceScreen(),
+    const AttendanceScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
     IconsAssets.searchIcon,
-    // IconsAssets.attendIcon,
+    IconsAssets.attendIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
     AppStrings.employees,
-    // AppStrings.attendance,
+    AppStrings.attendance,
     AppStrings.profile,
   ];
 

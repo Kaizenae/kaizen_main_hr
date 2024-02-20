@@ -100,10 +100,11 @@ class AttendanceScreen extends StatelessWidget {
                                       fontSize: FontSize.s14,
                                       text: DateFormat('hh: mm a').format(
                                           DateTime.parse(state
-                                              .attendanceEntity
-                                              .resultEntity
-                                              .response[index]
-                                              .checkIn)),
+                                                  .attendanceEntity
+                                                  .resultEntity
+                                                  .response[index]
+                                                  .checkIn)
+                                              .add(const Duration(hours: 4))),
                                       color: ColorManager.primary,
                                     ),
                                     TextCustom(
@@ -113,10 +114,12 @@ class AttendanceScreen extends StatelessWidget {
                                               'false'
                                           ? DateFormat('hh: mm a').format(
                                               DateTime.tryParse(state
-                                                  .attendanceEntity
-                                                  .resultEntity
-                                                  .response[index]
-                                                  .checkOut)!)
+                                                      .attendanceEntity
+                                                      .resultEntity
+                                                      .response[index]
+                                                      .checkOut)!
+                                                  .add(
+                                                      const Duration(hours: 4)))
                                           : '00: 00: 00',
                                       color: ColorManager.error,
                                     ),
