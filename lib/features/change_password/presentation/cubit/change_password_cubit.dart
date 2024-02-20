@@ -21,7 +21,7 @@ class ChangePasswordCubit extends Cubit<ChangePasswordStates> {
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
 
-  Future<void> changePasswordFun() async {
+  changePasswordFun() async {
     emit(ChangePasswordLoadingState());
     Either<Failure, ChangePasswordEntity> response =
         await editChangePasswordUsecase(ChangePasswordParams(

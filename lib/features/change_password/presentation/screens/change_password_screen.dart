@@ -129,14 +129,11 @@ class ChangePasswordScreen extends StatelessWidget {
                                   textColor: ColorManager.white,
 
                                   // width: 100,
-                                  onPressed: () async {
+                                  onPressed: () {
                                     if (changePasswordCubit
                                         .formKey.currentState!
                                         .validate()) {
-                                      await changePasswordCubit
-                                          .changePasswordFun();
-                                      changePasswordCubit.formKey.currentState
-                                          ?.reset();
+                                      changePasswordCubit.changePasswordFun();
                                     }
                                   },
                                   text: AppStrings.update,

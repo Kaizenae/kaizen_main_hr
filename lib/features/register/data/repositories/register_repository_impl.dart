@@ -1,5 +1,3 @@
-// ignore_for_file: valid_regexps
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/error_handler.dart';
@@ -37,13 +35,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
           // await  registerLocalDataSource.cacheRegister(remoteRegister);
           return Right(remoteRegister);
         } else {
-          return Left(Failure(
-              400,
-              remoteRegister.resultEntity.message
-                  .toString()
-                  .replaceAll(RegExp("["), " ")
-                  .replaceAll(RegExp("]"), " ")
-                  .replaceAll(RegExp('"'), " ")));
+          return Left(Failure(400, remoteRegister.resultEntity.message[0]));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
