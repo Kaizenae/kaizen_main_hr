@@ -90,7 +90,7 @@ class PendingWidget extends StatelessWidget {
                                     await MyLoansCubit.get(context)
                                         .updatetMyLoansFun(state: 'cancel');
                                   },
-                                  child: SvgPictureCustom(
+                                  child: const SvgPictureCustom(
                                     assetsName: IconsAssets.rejectIcon,
                                     color: ColorManager.error,
                                     height: AppSize.s40,

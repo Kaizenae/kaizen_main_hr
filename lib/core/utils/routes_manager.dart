@@ -36,6 +36,7 @@ import '../../features/login/presentation/screens/login_screen.dart';
 // import '../screens/admin/requests_screen.dart';
 import '../../features/myLoans/presentation/screens/myLoans_screen.dart';
 import '../../features/register/presentation/screens/register.dart';
+import '../../features/shift_allocation/presentation/screen/shift_allocation_screen.dart';
 import '../../features/webViews/webView_screen.dart';
 import '../widgets/app_bar/app_bar_custom.dart';
 import '../widgets/text_custom/text_custom.dart';
@@ -80,6 +81,7 @@ class Routes {
   static const String otpScreenRoute = "otpScreenRoute";
   static const String createNewPasswordRoute = "createNewPasswordRoute";
   static const String hrPoliciesRoute = "hrPoliciesRoute";
+  static const String shiftAllocationRoute = "shiftAllocationRoute";
 
   static Route createRoute(String screen) {
     if (Platform.isAndroid) {
@@ -152,7 +154,10 @@ class RoutesMap {
       Routes.otpScreenRoute: (BuildContext context) => const OTPScreen(),
       Routes.createNewPasswordRoute: (BuildContext context) =>
           const CreateNewPasswordScreen(),
-      Routes.hrPoliciesRoute: (BuildContext context) => const HrPoliciesScreen()
+      Routes.hrPoliciesRoute: (BuildContext context) =>
+          const HrPoliciesScreen(),
+      Routes.shiftAllocationRoute: (BuildContext context) =>
+          const ShiftAllocationScreen(),
 
       // 'userData': (BuildContext context) => const UserScreen(),
       // 'adminScreen': (BuildContext context) => const AdminHomeScreen(),
@@ -227,7 +232,8 @@ class RoutesMap {
         return const CreateNewPasswordScreen();
       case Routes.hrPoliciesRoute:
         return const HrPoliciesScreen();
-
+      case Routes.shiftAllocationRoute:
+        return const ShiftAllocationScreen();
       default:
         return ScaffoldCustom(
           appBarCustom: const AppBarCustom(

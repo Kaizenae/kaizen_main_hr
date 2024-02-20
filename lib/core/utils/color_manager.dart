@@ -16,7 +16,7 @@ class ColorManager {
   static Color grey2 = const Color(0xff797979);
   static const Color white = Color(0xffFFFFFF);
   static const Color scaffoldColor = Color(0xffF9F9F9);
-  static Color error = const Color(0xffe61f34); // red color
+  static const Color error = Color(0xffe61f34); // red color
 
 // Text Form Field
   static Color textBackgroundColor = const Color(0xffEDEDED);

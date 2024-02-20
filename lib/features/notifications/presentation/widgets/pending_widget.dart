@@ -155,7 +155,7 @@ class PendingWidget extends StatelessWidget {
                                   cubit.userId = '';
                                   cubit.getMyRequestsPendingFun();
                                 },
-                                child: SvgPictureCustom(
+                                child: const SvgPictureCustom(
                                   assetsName: IconsAssets.rejectIcon,
                                   color: ColorManager.error,
                                   height: AppSize.s40,

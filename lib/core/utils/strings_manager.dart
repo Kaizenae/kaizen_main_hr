@@ -104,4 +104,11 @@ class AppStrings {
   static const String employeeCode = "Employee Code";
   static const String youDontHaveLeaveBalance = "You don't have leave balance";
   static const String hrPolices = "HR Polices";
+  static const String myShiftAllocation = "My Shift Allocation";
+  static const String myNotification = "myNotification";
+  static const String dateFrom = "Date From";
+  static const String dateTo = "Date To";
+  static const String shiftScheme = "Shift Scheme";
+  static const String state = "State";
+  static const String description = "Description";
 }

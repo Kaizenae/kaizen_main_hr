@@ -30,25 +30,25 @@ class AttendanceScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const TextCustom(
+                    TextCustom(
                       text: 'Date',
                       color: ColorManager.black,
                       fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: AppSize.s40,
                     ),
-                    const TextCustom(
+                    TextCustom(
                       text: 'Punch in',
                       color: ColorManager.primary,
                       fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: AppSize.s10,
                     ),
                     TextCustom(
@@ -57,10 +57,10 @@ class AttendanceScreen extends StatelessWidget {
                       fontSize: AppSize.s16,
                       fontWeight: FontWeight.w500,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: AppSize.s10,
                     ),
-                    const TextCustom(
+                    TextCustom(
                       text: 'Hours',
                       color: ColorManager.secondary,
                       fontSize: AppSize.s16,

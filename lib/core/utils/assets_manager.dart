@@ -6,7 +6,9 @@ class ImageAssets {
   static const String lateInImg = "$imagePath/late_in.png";
   static const String checkOut = "$imagePath/check_out.png";
   static const String policyImg = "$imagePath/policy.png";
+  static const String shiftAllocationImg = "$imagePath/shift_allocatin.png";
   static const String timeOffImg = "$imagePath/time_off.png";
+  static const String notificationImg = "$imagePath/notification.png";
 }
 
 class IconsAssets {

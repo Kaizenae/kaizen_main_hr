@@ -99,7 +99,7 @@ class PendingTimeWidget extends StatelessWidget {
                                       .acceptRejectFun();
                                   await cubit.getAllTimeOffFun();
                                 },
-                                child: SvgPictureCustom(
+                                child: const SvgPictureCustom(
                                   assetsName: IconsAssets.rejectIcon,
                                   color: ColorManager.error,
                                   height: AppSize.s40,
