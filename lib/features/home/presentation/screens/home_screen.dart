@@ -4,11 +4,11 @@ import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/cached_image_custom/cached_network_image.dart';
-import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
+import '../../../late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import '../controller/home_cubit.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -266,7 +266,7 @@ class HomeScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const LateInEarlyOutScreen(
+                                                  const LateInAndEarlyOutScreen(
                                                     title: AppStrings
                                                         .lateInRequest,
                                                   )));
@@ -289,7 +289,7 @@ class HomeScreen extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const LateInEarlyOutScreen(
+                                                const LateInAndEarlyOutScreen(
                                               title: AppStrings.earlyOutRequest,
                                             ),
                                           ));

@@ -98,13 +98,15 @@ class AttendanceScreen extends StatelessWidget {
                                     ),
                                     TextCustom(
                                       fontSize: FontSize.s14,
-                                      text: DateFormat('hh: mm a').format(
-                                          DateTime.parse(state
+                                      text: DateFormat('hh: mm a').format(DateTime
+                                              .parse(state
                                                   .attendanceEntity
                                                   .resultEntity
                                                   .response[index]
                                                   .checkIn)
-                                              .add(const Duration(hours: 4))),
+                                          .add(const Duration(
+                                              hours:
+                                                  4))), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
                                       color: ColorManager.primary,
                                     ),
                                     TextCustom(
@@ -112,14 +114,15 @@ class AttendanceScreen extends StatelessWidget {
                                       text: state.attendanceEntity.resultEntity
                                                   .response[index].checkOut !=
                                               'false'
-                                          ? DateFormat('hh: mm a').format(
-                                              DateTime.tryParse(state
+                                          ? DateFormat('hh: mm a').format(DateTime
+                                                  .tryParse(state
                                                       .attendanceEntity
                                                       .resultEntity
                                                       .response[index]
                                                       .checkOut)!
-                                                  .add(
-                                                      const Duration(hours: 4)))
+                                              .add(const Duration(
+                                                  hours:
+                                                      4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
                                           : '00: 00: 00',
                                       color: ColorManager.error,
                                     ),

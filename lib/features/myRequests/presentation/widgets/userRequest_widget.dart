@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, deprecated_member_use
 
 import 'package:Attendace/core/utils/font_manager.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -20,36 +21,40 @@ class UserRequestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: AppPadding.p4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SvgPicture.asset(
-            iconPath,
-            height: AppSize.s24,
-            color: ColorManager.secondary,
+    return BounceInLeft(
+      child: Padding(
+        padding: const EdgeInsets.only(top: AppPadding.p4),
+        child: SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SvgPicture.asset(
+                iconPath,
+                height: AppSize.s24,
+                color: ColorManager.secondary,
+              ),
+
+              // TextCustom(
+              //   text: '$text :',
+              //   color: ColorManager.black,
+              //   fontSize: FontSize.s16,
+              // ),
+              const SizedBox(
+                width: AppSize.s8,
+              ),
+              Expanded(
+                child: Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: TextCustom(
+                    text: subText,
+                    color: ColorManager.black,
+                    fontSize: FontSize.s16,
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            width: AppSize.s8,
-          ),
-          // TextCustom(
-          //   text: '$text :',
-          //   color: ColorManager.black,
-          //   fontSize: FontSize.s16,
-          // ),
-          const SizedBox(
-            width: AppSize.s4,
-          ),
-          TextCustom(
-            text: subText,
-            color: ColorManager.black,
-            fontSize: FontSize.s16,
-          ),
-          const SizedBox(
-            height: AppSize.s14,
-          ),
-        ],
+        ),
       ),
     );
   }

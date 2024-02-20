@@ -25,20 +25,18 @@ class MyTimeOffScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldCustom(
-      appBarCustom: const AppBarCustom(
-        text: AppStrings.myTimeOff,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-        child: SafeArea(
-          child: Column(
-            children: [
-              BlocProvider.value(
-                value: BlocProvider.of<MyTimeOffCubit>(context)
-                  ..getAllTimeOffValues()
-                  ..getMyTimeOffFun(),
-                child: BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
+    return BlocProvider.value(
+      value: BlocProvider.of<MyTimeOffCubit>(context)..getAllTimeOffValues(),
+      child: ScaffoldCustom(
+        appBarCustom: const AppBarCustom(
+          text: AppStrings.myTimeOff,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+          child: SafeArea(
+            child: Column(
+              children: [
+                BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
                   listener: (context, state) {},
                   builder: (context, state) {
                     return SizedBox(
@@ -108,87 +106,85 @@ class MyTimeOffScreen extends StatelessWidget {
                     );
                   },
                 ),
-              ),
-              const SizedBox(
-                height: AppSize.s16,
-              ),
-              ElevatedButtonCustom(
-                fontSize: FontSize.s14,
-                colors: ColorManager.secondary,
-                width: context.width / 1.6,
-                text: 'Apply Request',
-                onPressed: () {
-                  navigator(context, Routes.createTimeOffRoute);
-                },
-              ),
-              const SizedBox(
-                height: AppSize.s20,
-              ),
 
-              TabBarCustom(
-                onTap: (v) {
-                  MyTimeOffCubit.get(context).getMyTimeOffFun();
-                },
-                widgets: const [
-                  ApprovedWidget(),
-                  PendingTimeWidget(),
-                  RefusedWidget(),
-                ],
-                myTabs: const [
-                  Tab(
-                    text: AppStrings.approved,
-                  ),
-                  Tab(
-                    text: AppStrings.pending,
-                  ),
-                  Tab(
-                    text: AppStrings.refuse,
-                  )
-                ],
-              )
+                const SizedBox(
+                  height: AppSize.s16,
+                ),
+                ElevatedButtonCustom(
+                  fontSize: FontSize.s14,
+                  colors: ColorManager.secondary,
+                  width: context.width / 1.6,
+                  text: 'Apply Request',
+                  onPressed: () {
+                    navigator(context, Routes.createTimeOffRoute);
+                  },
+                ),
+                const SizedBox(
+                  height: AppSize.s20,
+                ),
 
-              // Expanded(
-              //   child: CupertinoTabScaffold(
-              //     backgroundColor: ColorManager.scaffoldColor,
-              //     tabBar: CupertinoTabBar(
-              //       backgroundColor: ColorManager.white,
-              //
-              //       onTap: (v) {
-              //         if (v == 0) {
-              //           MyTimeOffCubit.get(context).getMyTimeOffFun();
-              //         } else if (v == 1) {
-              //           MyTimeOffCubit.get(context).getMyTimeOffPendingFun();
-              //         }
-              //       },
-              //       items: const <BottomNavigationBarItem>[
-              //         BottomNavigationBarItem(
-              //           icon: Icon(CupertinoIcons.check_mark_circled),
-              //           label: AppStrings.approved,
-              //         ),
-              //         BottomNavigationBarItem(
-              //           icon: Icon(CupertinoIcons.clock),
-              //           label: AppStrings.pending,
-              //         ),
-              //
-              //       ],
-              //     ),
-              //     tabBuilder: (BuildContext context, int index) {
-              //       return CupertinoTabView(
-              //         builder: (BuildContext context) {
-              //           switch (index) {
-              //             case 0:
-              //               return ApprovedWidget();
-              //             case 1:
-              //               return PendingWidget();
-              //             default:
-              //               return ApprovedWidget();
-              //           }
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
-            ],
+                const TabBarCustom(
+                  widgets: [
+                    ApprovedWidget(),
+                    PendingTimeWidget(),
+                    RefusedWidget(),
+                  ],
+                  myTabs: [
+                    Tab(
+                      text: AppStrings.approved,
+                    ),
+                    Tab(
+                      text: AppStrings.pending,
+                    ),
+                    Tab(
+                      text: AppStrings.refuse,
+                    )
+                  ],
+                )
+
+                // Expanded(
+                //   child: CupertinoTabScaffold(
+                //     backgroundColor: ColorManager.scaffoldColor,
+                //     tabBar: CupertinoTabBar(
+                //       backgroundColor: ColorManager.white,
+                //
+                //       onTap: (v) {
+                //         if (v == 0) {
+                //           MyTimeOffCubit.get(context).getMyTimeOffFun();
+                //         } else if (v == 1) {
+                //           MyTimeOffCubit.get(context).getMyTimeOffPendingFun();
+                //         }
+                //       },
+                //       items: const <BottomNavigationBarItem>[
+                //         BottomNavigationBarItem(
+                //           icon: Icon(CupertinoIcons.check_mark_circled),
+                //           label: AppStrings.approved,
+                //         ),
+                //         BottomNavigationBarItem(
+                //           icon: Icon(CupertinoIcons.clock),
+                //           label: AppStrings.pending,
+                //         ),
+                //
+                //       ],
+                //     ),
+                //     tabBuilder: (BuildContext context, int index) {
+                //       return CupertinoTabView(
+                //         builder: (BuildContext context) {
+                //           switch (index) {
+                //             case 0:
+                //               return ApprovedWidget();
+                //             case 1:
+                //               return PendingWidget();
+                //             default:
+                //               return ApprovedWidget();
+                //           }
+                //         },
+                //       );
+                //     },
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),

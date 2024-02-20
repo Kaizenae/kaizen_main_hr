@@ -22,7 +22,7 @@ class RefusedWidget extends StatelessWidget {
         builder: (context, state) {
           var cubit = MyTimeOffCubit.get(context);
 
-          return state is GetMyTimeOffSuccess
+          return cubit.myTimeOffRefuse.isNotEmpty
               ? ListView.separated(
                   separatorBuilder: (context, index) => const Divider(),
                   physics: const BouncingScrollPhysics(),
