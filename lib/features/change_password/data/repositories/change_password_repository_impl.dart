@@ -1,3 +1,5 @@
+// ignore_for_file: valid_regexps
+
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
@@ -28,8 +30,13 @@ class ChangePasswordRepositoryImpl implements ChangePasswordRepository {
         if (remoteChangePassword.resultEntity.status == true) {
           return Right(remoteChangePassword);
         } else {
-          return Left(
-              Failure(400, remoteChangePassword.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteChangePassword.resultEntity.message
+                  .toString()
+                  .replaceAll(RegExp("["), " ")
+                  .replaceAll(RegExp("]"), " ")
+                  .replaceAll(RegExp('"'), " ")));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);

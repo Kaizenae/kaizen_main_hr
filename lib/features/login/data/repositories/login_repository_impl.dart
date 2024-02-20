@@ -1,3 +1,5 @@
+// ignore_for_file: valid_regexps
+
 import 'package:Attendace/core/local/cache_helper.dart';
 import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
@@ -42,7 +44,13 @@ class LoginRepositoryImpl implements LoginRepository {
           // await  loginLocalDataSource.cacheLogin(remoteLogin);
           return Right(remoteLogin);
         } else {
-          return Left(Failure(400, remoteLogin.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteLogin.resultEntity.message
+                  .toString()
+                  .replaceAll(RegExp("["), " ")
+                  .replaceAll(RegExp("]"), " ")
+                  .replaceAll(RegExp('"'), " ")));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);

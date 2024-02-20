@@ -111,4 +111,6 @@ class AppStrings {
   static const String shiftScheme = "Shift Scheme";
   static const String state = "State";
   static const String description = "Description";
+  static const String changeUserPhoto = "changeUserPhoto";
+  static const String editUserPhoto = "Edit User Photo";
 }

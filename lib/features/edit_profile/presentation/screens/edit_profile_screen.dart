@@ -1,6 +1,15 @@
+import 'package:animate_do/animate_do.dart';
+
+import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/routes_manager.dart';
+import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
+import '../../../../core/widgets/svg_pic/svg_pic.dart';
+import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,17 +32,51 @@ class EditProfileScreen extends StatelessWidget {
           builder: (context, state) {
             var profileCubit = EditProfileCubit.get(context);
             return Padding(
-              padding: const EdgeInsets.all(AppPadding.p20),
-              child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => ProfileComponent(
-                      iconName: profileCubit.profileIconName[index],
-                      name: profileCubit.profileNames[index],
-                      screen: profileCubit.screenNames[index]),
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemCount: profileCubit.profileNames.length),
-            );
+                padding: const EdgeInsets.all(AppPadding.p20),
+                child: Column(
+                  children: [
+                    const ProfileComponent(
+                      name: AppStrings.changeUserName,
+                      iconName: IconsAssets.personIcon,
+                      screen: Routes.editUserNameRoute,
+                    ),
+                    const Divider(),
+                    const ProfileComponent(
+                      name: AppStrings.changePhoneNumber,
+                      iconName: IconsAssets.phoneIcon,
+                      screen: Routes.editPhoneNumberRoute,
+                    ),
+                    const Divider(),
+                    SlideInLeft(
+                      child: InkWell(
+                        onTap: () {
+                          profileCubit.getProfileImage();
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p6),
+                          child: Row(
+                            children: [
+                              const SvgPictureCustom(
+                                assetsName: IconsAssets.personIcon,
+                                color: ColorManager.primary,
+                              ),
+                              const SizedBox(
+                                width: AppSize.s16,
+                              ),
+                              TextCustom(
+                                text: AppStrings.editUserPhoto,
+                                fontWeight: FontWeight.w200,
+                                fontSize: FontSize.s16,
+                                color: ColorManager.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ));
           },
         ),
       ),

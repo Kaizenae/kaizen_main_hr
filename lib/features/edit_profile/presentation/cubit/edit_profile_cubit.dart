@@ -1,13 +1,13 @@
+import 'dart:io';
+
 import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 
-import '../../../../core/utils/assets_manager.dart';
-import '../../../../core/utils/routes_manager.dart';
-import '../../../../core/utils/strings_manager.dart';
 import '../../domain/entities/edit_profile_entity.dart';
 import '../../domain/usecases/edit_profile_usecase.dart';
 import 'edit_profile_state.dart';
@@ -72,16 +72,24 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
             EditProfileSuccessState(editProfileEntity: editProfileEntity)));
   }
 
-  List<String> profileNames = [
-    AppStrings.changeUserName,
-    AppStrings.changePhoneNumber,
-  ];
-  List<String> screenNames = [
-    Routes.editUserNameRoute,
-    Routes.editPhoneNumberRoute,
-  ];
-  List<String> profileIconName = [
-    IconsAssets.personIcon,
-    IconsAssets.phoneIcon,
-  ];
+  File? profileImage;
+  var picker = ImagePicker();
+  Future<void> getProfileImage() async {
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      profileImage = File(pickedFile.path);
+    }
+  }
+
+  backgroundCoverImage() {
+    if (profileImage == null) {
+      return const NetworkImage(
+        "https://res.cloudinary.com/halqetelzekr/image/upload/v1678732276/placeholder_t7jyyi.png",
+      );
+    } else {
+      return FileImage(profileImage!);
+    }
+  }
 }
