@@ -130,7 +130,7 @@ class AttendanceScreen extends StatelessWidget {
                                       fontSize: FontSize.s14,
                                       text: state.attendanceEntity.resultEntity
                                           .response[index].workedHours
-                                          .toStringAsFixed(1),
+                                          .toStringAsFixed(0),
                                       color: ColorManager.secondary,
                                     ),
                                   ],
