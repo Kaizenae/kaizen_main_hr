@@ -10,8 +10,8 @@ import '../models/get_timeOff_model.dart';
 abstract class CreateTimeOffRemoteDataSource {
   Future<CreateTimeOffModel> createTimeOff({
     required int userId,
-    required String date,
-    required int days,
+    required String startDate,
+    required String endDate,
     required int holidayStatus,
   });
   Future<GetTimeOffModel> getTimeoff();
@@ -26,8 +26,8 @@ class CreateTimeOffRemoteDataSourceImpl
   @override
   Future<CreateTimeOffModel> createTimeOff({
     required int userId,
-    required String date,
-    required int days,
+    required String startDate,
+    required String endDate,
     required int holidayStatus,
   }) async {
     final response =
@@ -35,10 +35,10 @@ class CreateTimeOffRemoteDataSourceImpl
       "jsonrpc": "2.0",
       "params": {
         "user_id": userId,
-        "start": date,
+        "start": startDate,
         "holiday_status": holidayStatus,
-        "days": days,
-        "company_id": AppConstants.companyId
+        "company_id": AppConstants.companyId,
+        "end": endDate,
       }
     });
     return CreateTimeOffModel.fromJson(response);

@@ -24,13 +24,15 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
   static CreateTimeOffCubit get(context) => BlocProvider.of(context);
 
   GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController daysController = TextEditingController();
-  DateRangePickerController dateController = DateRangePickerController();
+  DateRangePickerController endDateController = DateRangePickerController();
+  DateRangePickerController startDateController = DateRangePickerController();
   String dateFormate = "MM/dd/yyyy";
-  String? selectedDate = DateFormat("MM/dd/yyyy").format(DateTime.now());
+  String? selectedStartDate = DateFormat("MM/dd/yyyy").format(DateTime.now());
+  String? selectedEndDate = DateFormat("MM/dd/yyyy").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;
-  String? selectDate;
+  String? selectStartDate;
+  String? selectEndDate;
 
   String dateCount = '';
   String range = '';
@@ -41,29 +43,47 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
     emit(TimeOffSuccess());
   }
 
-  onSelectionChanged({required DateRangePickerSelectionChangedArgs args}) {
-    selectDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+  onSelectionStartDateChanged(
+      {required DateRangePickerSelectionChangedArgs args}) {
+    selectStartDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
     if (args.value is PickerDateRange) {
       range = '${DateFormat('MM/dd/yyyy').format(args.value.startDate)} -'
           // ignore: lineslonger_than_80_chars
           ' ${DateFormat('MM/dd/yyyy').format(args.value.endDate ?? args.value.startDate)}';
     } else if (args.value is DateTime) {
-      selectedDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
-
-      emit(ChangeSelectedDateState());
+      selectedStartDate =
+          DateFormat("MM/dd/yyyy").format(args.value).toString();
     } else if (args.value is List<DateTime>) {
       dateCount = args.value.length.toString();
     } else {
       rangeCount = args.value.length.toString();
     }
+    emit(ChangeSelectedStartDateState());
+  }
+
+  onSelectionEndDateChanged(
+      {required DateRangePickerSelectionChangedArgs args}) {
+    selectEndDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+    if (args.value is PickerDateRange) {
+      range = '${DateFormat('MM/dd/yyyy').format(args.value.startDate)} -'
+          // ignore: lineslonger_than_80_chars
+          ' ${DateFormat('MM/dd/yyyy').format(args.value.endDate ?? args.value.startDate)}';
+    } else if (args.value is DateTime) {
+      selectedEndDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+    } else if (args.value is List<DateTime>) {
+      dateCount = args.value.length.toString();
+    } else {
+      rangeCount = args.value.length.toString();
+    }
+    emit(ChangeSelectedEndDateState());
   }
 
   Future<void> createTimeOffFun() async {
     emit(CreateTimeOffLoading());
     Either<Failure, CreateTimeOffEntity> response =
         await createTimeOffUsecase(CreateTimeOffParams(
-      date: selectedDate!,
-      days: int.parse(daysController.text),
+      startDate: selectedStartDate!,
+      endDate: selectedEndDate!,
       userId: AppConstants.token,
       holidayStatus: selectedValue,
     ));

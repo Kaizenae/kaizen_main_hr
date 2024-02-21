@@ -108,19 +108,24 @@ class CreateLoanParams extends Equatable {
 
 class CreateTimeOffParams extends Equatable {
   final int userId;
-  final String date;
-  final int days;
+  final String startDate;
+  final String endDate;
   final int holidayStatus;
 
   const CreateTimeOffParams({
-    required this.date,
-    required this.days,
+    required this.startDate,
+    required this.endDate,
     required this.userId,
     required this.holidayStatus,
   });
 
   @override
-  List<Object> get props => [userId, date, days];
+  List<Object> get props => [
+        userId,
+        startDate,
+        endDate,
+        holidayStatus,
+      ];
 }
 
 class EmployeeParams extends Equatable {

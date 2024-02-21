@@ -3,7 +3,6 @@ import 'package:animate_do/animate_do.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
-import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
@@ -13,7 +12,6 @@ import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../profile/presentation/screens/profile_component.dart';
 import '../cubit/edit_profile_state.dart';
 
 class EditProfileScreen extends StatelessWidget {

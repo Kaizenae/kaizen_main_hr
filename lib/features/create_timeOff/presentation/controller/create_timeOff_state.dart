@@ -38,7 +38,12 @@ class CurrencyLoading extends CreateTimeOffState {
   List<Object> get props => [];
 }
 
-class ChangeSelectedDateState extends CreateTimeOffState {
+class ChangeSelectedStartDateState extends CreateTimeOffState {
+  @override
+  List<Object> get props => [];
+}
+
+class ChangeSelectedEndDateState extends CreateTimeOffState {
   @override
   List<Object> get props => [];
 }

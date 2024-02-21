@@ -1,8 +1,6 @@
 // ignore_for_file: file_names, deprecated_member_use
-import 'dart:io';
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/media_query_values.dart';
-import 'package:Attendace/core/widgets/text_form_field/text_form_field_custom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -208,7 +206,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                   ),
                                   TextCustom(
                                     fontSize: FontSize.s14,
-                                    text: 'Date',
+                                    text: 'Start Date',
                                     color: ColorManager.textFormLabelColor,
                                   ),
                                   const SizedBox(
@@ -231,7 +229,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                             builder: (context) {
                                               return SfDateRangePicker(
                                                 onSubmit: (v) {
-                                                  cubit.selectedDate =
+                                                  cubit.selectedStartDate =
                                                       DateFormat("MM/dd/yyyy")
                                                           .format(
                                                               DateTime.parse(v
@@ -240,7 +238,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                   Navigator.pop(context);
                                                 },
                                                 controller:
-                                                    cubit.dateController,
+                                                    cubit.startDateController,
                                                 confirmText: 'done',
                                                 cancelText: 'cancel',
                                                 showActionButtons: true,
@@ -253,7 +251,8 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                 onSelectionChanged:
                                                     (DateRangePickerSelectionChangedArgs
                                                         arg) {
-                                                  cubit.onSelectionChanged(
+                                                  cubit
+                                                      .onSelectionStartDateChanged(
                                                     args: arg,
                                                   );
                                                 },
@@ -268,7 +267,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           TextCustom(
-                                            text: cubit.selectedDate!,
+                                            text: cubit.selectedStartDate!,
                                             color: ColorManager.black,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 12,
@@ -287,69 +286,80 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                   ),
                                   TextCustom(
                                     fontSize: FontSize.s14,
-                                    text: 'Days',
+                                    text: 'End Date',
                                     color: ColorManager.textFormLabelColor,
                                   ),
                                   const SizedBox(
                                     height: AppSize.s4,
                                   ),
-                                  Platform.isAndroid
-                                      ? TextFormFieldCustom(
-                                          controller: cubit.daysController,
-                                          keyboardType: TextInputType.number,
-                                          validate: (validate) {
-                                            if (validate!.isEmpty) {
-                                              return 'Please Enter the days';
-                                            }
-                                            return null;
-                                          })
-                                      : Expanded(
-                                          child: SizedBox(
-                                            height: AppSize.s100,
-                                            child: CupertinoTextFormFieldRow(
-                                              controller: cubit.daysController,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    ColorManager.textFormColor,
-                                                //floatingLabelBehavior: FloatingLabelBehavior.auto,
-                                                border: Border.all(
-                                                  color: ColorManager
-                                                      .textFormColor,
-                                                  width: AppSize.s1_5,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s8),
-                                              ),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineMedium!
-                                                  .copyWith(
-                                                      color:
-                                                          ColorManager.primary,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: FontSize.s14),
-                                              showCursor: true,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: AppPadding.p16,
-                                                horizontal: AppPadding.p16,
-                                              ),
-                                              validator: (validate) {
-                                                if (validate!.isEmpty) {
-                                                  return 'Please Enter the days';
-                                                }
-                                                return null;
-                                              },
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              textInputAction:
-                                                  TextInputAction.done,
-                                              maxLines: null,
-                                            ),
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: ColorManager.textFormColor,
+                                      border: Border.all(
+                                          color: ColorManager.textFormColor,
+                                          width: 2),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return SfDateRangePicker(
+                                                onSubmit: (v) {
+                                                  cubit.selectedEndDate =
+                                                      DateFormat("MM/dd/yyyy")
+                                                          .format(
+                                                              DateTime.parse(v
+                                                                  .toString()));
+
+                                                  Navigator.pop(context);
+                                                },
+                                                controller:
+                                                    cubit.endDateController,
+                                                confirmText: 'done',
+                                                cancelText: 'cancel',
+                                                showActionButtons: true,
+                                                initialDisplayDate:
+                                                    DateTime.now(),
+                                                minDate: DateTime.now(),
+                                                onCancel: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                onSelectionChanged:
+                                                    (DateRangePickerSelectionChangedArgs
+                                                        arg) {
+                                                  cubit
+                                                      .onSelectionEndDateChanged(
+                                                    args: arg,
+                                                  );
+                                                },
+                                                selectionMode:
+                                                    DateRangePickerSelectionMode
+                                                        .single,
+                                              );
+                                            });
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextCustom(
+                                            text: cubit.selectedEndDate!,
+                                            color: ColorManager.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
                                           ),
-                                        ),
+                                          SvgPicture.asset(
+                                            'assets/icons/calender.svg',
+                                            width: 24,
+                                            height: 24,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                   const SizedBox(
                                     height: AppSize.s16,
                                   ),
