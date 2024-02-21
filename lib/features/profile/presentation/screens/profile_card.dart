@@ -191,16 +191,16 @@ class ProfileCard extends StatelessWidget {
                                   AppConstants.admin
                                       ? const Divider()
                                       : const SizedBox(),
-                                  AppConstants.admin
-                                      ? const ProfileComponent(
-                                          iconName: IconsAssets.homeIcon,
-                                          name: AppStrings.updateCompany,
-                                          screen: Routes.editCompanyRoute,
-                                        )
-                                      : const SizedBox(),
-                                  AppConstants.admin
-                                      ? const Divider()
-                                      : const SizedBox(),
+                                  // AppConstants.admin
+                                  //     ? const ProfileComponent(
+                                  //         iconName: IconsAssets.homeIcon,
+                                  //         name: AppStrings.updateCompany,
+                                  //         screen: Routes.editCompanyRoute,
+                                  //       )
+                                  //     : const SizedBox(),
+                                  // AppConstants.admin
+                                  //     ? const Divider()
+                                  //     : const SizedBox(),
                                 ],
                               ),
                             ),

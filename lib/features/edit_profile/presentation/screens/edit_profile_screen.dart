@@ -35,18 +35,18 @@ class EditProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(AppPadding.p20),
                 child: Column(
                   children: [
-                    const ProfileComponent(
-                      name: AppStrings.changeUserName,
-                      iconName: IconsAssets.personIcon,
-                      screen: Routes.editUserNameRoute,
-                    ),
-                    const Divider(),
-                    const ProfileComponent(
-                      name: AppStrings.changePhoneNumber,
-                      iconName: IconsAssets.phoneIcon,
-                      screen: Routes.editPhoneNumberRoute,
-                    ),
-                    const Divider(),
+                    // const ProfileComponent(
+                    //   name: AppStrings.changeUserName,
+                    //   iconName: IconsAssets.personIcon,
+                    //   screen: Routes.editUserNameRoute,
+                    // ),
+                    // const Divider(),
+                    // const ProfileComponent(
+                    //   name: AppStrings.changePhoneNumber,
+                    //   iconName: IconsAssets.phoneIcon,
+                    //   screen: Routes.editPhoneNumberRoute,
+                    // ),
+                    // const Divider(),
                     SlideInLeft(
                       child: InkWell(
                         onTap: () {
