@@ -52,4 +52,5 @@ class EndPoints {
   static String hrPoliciesPath = "$baseUrl/get_hr_policy";
   static String getLateInPath = "$baseUrl/get_late_in";
   static String getEarlyOutPath = "$baseUrl/get_early_out";
+  static String shiftAllocationPath = "$baseUrl/get_shift_allocation";
 }

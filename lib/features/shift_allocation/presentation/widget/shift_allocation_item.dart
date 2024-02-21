@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import '../../utils/color_manager.dart';
-import '../../utils/font_manager.dart';
-import '../../utils/values_manager.dart';
-import '../text_custom/text_custom.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/values_manager.dart';
+import '../../../../core/widgets/text_custom/text_custom.dart';
+import '../../data/shift_allocation_model.dart';
 
 class ShiftAllocationItem extends StatelessWidget {
-  const ShiftAllocationItem({super.key});
-
+  const ShiftAllocationItem({
+    super.key,
+    required this.item,
+  });
+  final ResponseModel item;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,22 +22,22 @@ class ShiftAllocationItem extends StatelessWidget {
         children: [
           TextCustom(
             fontSize: FontSize.s14,
-            text: "14/02",
+            text: DateFormat('dd , MMM').format(DateTime.parse(item.from)),
             color: ColorManager.black,
           ),
           TextCustom(
             fontSize: FontSize.s14,
-            text: "16/02",
+            text: DateFormat('dd , MMM').format(DateTime.parse(item.to)),
             color: ColorManager.primary,
           ),
           TextCustom(
             fontSize: FontSize.s14,
-            text: "IDC-M 9-12",
+            text: item.shiftScheme.name,
             color: ColorManager.error,
           ),
           TextCustom(
             fontSize: FontSize.s14,
-            text: "DRAFT",
+            text: item.state,
             color: ColorManager.secondary,
           ),
         ],
