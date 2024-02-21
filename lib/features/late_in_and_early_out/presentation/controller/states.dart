@@ -33,3 +33,15 @@ class LateInErrorState extends EarlyOutLateInStates {
 class ChangeSelectedDateState extends EarlyOutLateInStates {}
 
 class ChangeFileNameState extends EarlyOutLateInStates {}
+
+class GetLateInLoadingState extends EarlyOutLateInStates {}
+
+class GetLateInSuccessState extends EarlyOutLateInStates {}
+
+class GetLateInErrorState extends EarlyOutLateInStates {}
+
+class GetEarlyOutLoadingState extends EarlyOutLateInStates {}
+
+class GetEarlyOutSuccessState extends EarlyOutLateInStates {}
+
+class GetEarlyOutErrorState extends EarlyOutLateInStates {}

@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:dio/dio.dart';
@@ -11,6 +13,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/utils/constants_manager.dart';
+import '../../data/late_in_early_out_model.dart';
 
 class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   EarlyOutLateInCubit() : super(EarlyOutLateInInitState());
@@ -84,5 +87,42 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     final file = result.files.first;
     fileName = file.name;
     emit(ChangeFileNameState());
+  }
+
+  LateinEarlyOutModel lateinModel = LateinEarlyOutModel();
+  void getLateIn() {
+    emit(GetLateInLoadingState());
+    Dio().get(EndPoints.getLateInPath, data: {
+      "jsonrpc": "2.0",
+      "params": {
+        "company_id": AppConstants.companyId,
+        "user_id": CacheHelper.get(key: AppConstants.userId),
+      }
+    }).then((value) {
+      lateinModel = LateinEarlyOutModel.fromJson(value.data);
+      emit(GetLateInSuccessState());
+    }).catchError((error) {
+      emit(GetLateInErrorState());
+    });
+  }
+
+  LateinEarlyOutModel earlyOutModel = LateinEarlyOutModel();
+  void getEarlyOut() {
+    emit(GetEarlyOutLoadingState());
+    Dio().get(EndPoints.getEarlyOutPath, data: {
+      "jsonrpc": "2.0",
+      "params": {
+        "company_id": AppConstants.companyId,
+        "user_id": CacheHelper.get(key: AppConstants.userId),
+      }
+    }).then((value) {
+      log(AppConstants.companyId.toString());
+      earlyOutModel = LateinEarlyOutModel.fromJson(value.data);
+      log(CacheHelper.get(key: AppConstants.userId).toString());
+      emit(GetEarlyOutSuccessState());
+    }).catchError((error) {
+      log(error.toString());
+      emit(GetEarlyOutErrorState());
+    });
   }
 }
