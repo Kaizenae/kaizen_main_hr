@@ -22,7 +22,10 @@ class EditProfileRepositoryImpl implements EditProfileRepository {
         if (remoteEditProfile.resultEntity.status == true) {
           return Right(remoteEditProfile);
         } else {
-          return Left(Failure(400, remoteEditProfile.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteEditProfile.resultEntity.message.toString()
+                ..replaceAll(RegExp('"'), " ")));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
@@ -45,7 +48,11 @@ class EditProfileRepositoryImpl implements EditProfileRepository {
         if (remoteEditProfile.resultEntity.status == true) {
           return Right(remoteEditProfile);
         } else {
-          return Left(Failure(400, remoteEditProfile.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteEditProfile.resultEntity.message
+                  .toString()
+                  .replaceAll(RegExp('"'), " ")));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
@@ -64,7 +71,12 @@ class EditProfileRepositoryImpl implements EditProfileRepository {
         if (remoteEditProfile.resultEntity.status == true) {
           return Right(remoteEditProfile);
         } else {
-          return Left(Failure(400, remoteEditProfile.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteEditProfile.resultEntity.message
+                  .toString()
+                  .replaceAll(RegExp('"'), " ")
+                  .replaceAll(RegExp(r'[\[\]]'), '')));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);

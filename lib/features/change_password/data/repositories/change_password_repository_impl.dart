@@ -31,12 +31,12 @@ class ChangePasswordRepositoryImpl implements ChangePasswordRepository {
           return Right(remoteChangePassword);
         } else {
           return Left(Failure(
-              400,
-              remoteChangePassword.resultEntity.message
-                  .toString()
-                  .replaceAll(RegExp("["), " ")
-                  .replaceAll(RegExp("]"), " ")
-                  .replaceAll(RegExp('"'), " ")));
+            400,
+            remoteChangePassword.resultEntity.message
+                .toString()
+                .replaceAll(RegExp('"'), " ")
+                .replaceAll(RegExp(r'[\[\]]'), ''),
+          ));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);

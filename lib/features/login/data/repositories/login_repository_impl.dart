@@ -42,7 +42,12 @@ class LoginRepositoryImpl implements LoginRepository {
           // await  loginLocalDataSource.cacheLogin(remoteLogin);
           return Right(remoteLogin);
         } else {
-          return Left(Failure(400, remoteLogin.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteLogin.resultEntity.message
+                  .toString()
+                  .replaceAll(RegExp('"'), " ")
+                  .replaceAll(RegExp(r'[\[\]]'), '')));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);

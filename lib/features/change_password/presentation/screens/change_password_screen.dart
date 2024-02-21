@@ -16,24 +16,33 @@ import '../../../../injection_container.dart';
 import '../cubit/change_password_cubit.dart';
 import '../cubit/change_password_state.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
+class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
 
   @override
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+}
+
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  GlobalKey<FormState> formKey = GlobalKey();
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    return ScaffoldCustom(
-      appBarCustom: const AppBarCustom(
-        text: 'Change Password',
-      ),
-      body: BlocProvider(
-        create: (context) => sl<ChangePasswordCubit>(),
-        child: BlocConsumer<ChangePasswordCubit, ChangePasswordStates>(
+    return BlocProvider(
+      create: (context) => ChangePasswordCubit(editChangePasswordUsecase: sl()),
+      child: ScaffoldCustom(
+        appBarCustom: const AppBarCustom(
+          text: 'Change Password',
+        ),
+        body: BlocConsumer<ChangePasswordCubit, ChangePasswordStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
               SnackBar snackBar = SnackBar(
-                  content: Text(state
-                      .changePasswordEntity.resultEntity.message[0]
-                      .toString()));
+                  content: Text(
+                      state.changePasswordEntity.resultEntity.message.toString()
+                        ..replaceAll(RegExp('"'), " ").toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Navigator.pop(context);
             } else if (state is ChangePasswordErrorState) {
@@ -51,7 +60,7 @@ class ChangePasswordScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
                 child: Form(
-                  key: changePasswordCubit.formKey,
+                  key: formKey,
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
@@ -67,7 +76,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
-                          controller: changePasswordCubit.oldPasswordController,
+                          controller: oldPasswordController,
                           validate: (v) {
                             if (v!.isEmpty) {
                               return 'Old Password must be not empty';
@@ -96,7 +105,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
-                          controller: changePasswordCubit.newPasswordController,
+                          controller: newPasswordController,
                           validate: (v) {
                             if (v!.isEmpty) {
                               return 'New Password must be not empty';
@@ -106,9 +115,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           keyboardType: TextInputType.visiblePassword,
                           suffixIcon: changePasswordCubit.suffixConfirm,
                           suffix: true,
-                          obSecure: changePasswordCubit.isPasswordConfirm
-                              ? true
-                              : false,
+                          obSecure: changePasswordCubit.isPasswordConfirm,
                           suffixOnPressed: () {
                             changePasswordCubit
                                 .changePasswordConfirmVisibility();
@@ -130,10 +137,11 @@ class ChangePasswordScreen extends StatelessWidget {
 
                                   // width: 100,
                                   onPressed: () {
-                                    if (changePasswordCubit
-                                        .formKey.currentState!
-                                        .validate()) {
-                                      changePasswordCubit.changePasswordFun();
+                                    if (formKey.currentState!.validate()) {
+                                      changePasswordCubit.changePasswordFun(
+                                        oldPassword: oldPasswordController.text,
+                                        newPassword: newPasswordController.text,
+                                      );
                                     }
                                   },
                                   text: AppStrings.update,

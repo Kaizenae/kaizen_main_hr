@@ -1,6 +1,5 @@
 import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -17,17 +16,16 @@ class ChangePasswordCubit extends Cubit<ChangePasswordStates> {
 
   static ChangePasswordCubit get(context) => BlocProvider.of(context);
 
-  GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController oldPasswordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-
-  changePasswordFun() async {
+  changePasswordFun({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
     emit(ChangePasswordLoadingState());
     Either<Failure, ChangePasswordEntity> response =
         await editChangePasswordUsecase(ChangePasswordParams(
       userId: AppConstants.token,
-      oldPassword: oldPasswordController.text,
-      newPassword: newPasswordController.text,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
     ));
 
     emit(response.fold(

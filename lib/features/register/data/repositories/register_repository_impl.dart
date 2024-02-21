@@ -35,7 +35,12 @@ class RegisterRepositoryImpl implements RegisterRepository {
           // await  registerLocalDataSource.cacheRegister(remoteRegister);
           return Right(remoteRegister);
         } else {
-          return Left(Failure(400, remoteRegister.resultEntity.message[0]));
+          return Left(Failure(
+              400,
+              remoteRegister.resultEntity.message
+                  .toString()
+                  .replaceAll(RegExp('"'), " ")
+                  .replaceAll(RegExp(r'[\[\]]'), '')));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
