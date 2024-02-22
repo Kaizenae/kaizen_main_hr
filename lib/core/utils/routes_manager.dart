@@ -4,6 +4,7 @@ import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
+import 'package:Attendace/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:Attendace/features/create_loan/presentation/screens/create_loan_screen.dart';
 import 'package:Attendace/features/create_request/presentation/screens/apply_request_screen.dart';
 import 'package:Attendace/features/create_timeOff/presentation/screens/create_timeOff_screen.dart';
@@ -82,6 +83,7 @@ class Routes {
   static const String createNewPasswordRoute = "createNewPasswordRoute";
   static const String hrPoliciesRoute = "hrPoliciesRoute";
   static const String shiftAllocationRoute = "shiftAllocationRoute";
+  static const String attendanceRoute = "attendanceRoute";
 
   static Route createRoute(String screen) {
     if (Platform.isAndroid) {
@@ -158,6 +160,8 @@ class RoutesMap {
           const HrPoliciesScreen(),
       Routes.shiftAllocationRoute: (BuildContext context) =>
           const ShiftAllocationScreen(),
+      Routes.attendanceRoute: (BuildContext context) =>
+          const AttendanceScreen(),
 
       // 'userData': (BuildContext context) => const UserScreen(),
       // 'adminScreen': (BuildContext context) => const AdminHomeScreen(),
@@ -234,6 +238,8 @@ class RoutesMap {
         return const HrPoliciesScreen();
       case Routes.shiftAllocationRoute:
         return const ShiftAllocationScreen();
+      case Routes.attendanceRoute:
+        return const AttendanceScreen();
       default:
         return ScaffoldCustom(
           appBarCustom: const AppBarCustom(

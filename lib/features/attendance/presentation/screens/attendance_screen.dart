@@ -1,3 +1,6 @@
+import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
+
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -17,6 +20,9 @@ class AttendanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
+      appBarCustom: const AppBarCustom(
+        text: AppStrings.attendance,
+      ),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(AppPadding.p16),
@@ -76,69 +82,77 @@ class AttendanceScreen extends StatelessWidget {
                     listener: (context, state) {},
                     builder: (context, state) {
                       return state is GetAttendanceSuccess
-                          ? ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: AppPadding.p12),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextCustom(
-                                      fontSize: FontSize.s14,
-                                      text: DateFormat('dd , MMM').format(
-                                          DateTime.parse(state
-                                              .attendanceEntity
-                                              .resultEntity
-                                              .response[index]
-                                              .checkIn)),
-                                      color: ColorManager.black,
-                                    ),
-                                    TextCustom(
-                                      fontSize: FontSize.s14,
-                                      text: DateFormat('hh: mm a').format(DateTime
-                                              .parse(state
+                          ? state.attendanceEntity.resultEntity.response.isEmpty
+                              ? const ErrorsWidget()
+                              : ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: AppPadding.p12),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextCustom(
+                                          fontSize: FontSize.s14,
+                                          text: DateFormat('dd , MMM').format(
+                                              DateTime.parse(state
                                                   .attendanceEntity
                                                   .resultEntity
                                                   .response[index]
-                                                  .checkIn)
-                                          .add(const Duration(
-                                              hours:
-                                                  4))), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
-                                      color: ColorManager.primary,
-                                    ),
-                                    TextCustom(
-                                      fontSize: FontSize.s14,
-                                      text: state.attendanceEntity.resultEntity
-                                                  .response[index].checkOut !=
-                                              'false'
-                                          ? DateFormat('hh: mm a').format(DateTime
-                                                  .tryParse(state
+                                                  .checkIn)),
+                                          color: ColorManager.black,
+                                        ),
+                                        TextCustom(
+                                          fontSize: FontSize.s14,
+                                          text: DateFormat('hh: mm a').format(
+                                              DateTime.parse(state
                                                       .attendanceEntity
                                                       .resultEntity
                                                       .response[index]
-                                                      .checkOut)!
-                                              .add(const Duration(
-                                                  hours:
-                                                      4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
-                                          : '00: 00: 00',
-                                      color: ColorManager.error,
+                                                      .checkIn)
+                                                  .add(const Duration(
+                                                      hours:
+                                                          4))), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                          color: ColorManager.primary,
+                                        ),
+                                        TextCustom(
+                                          fontSize: FontSize.s14,
+                                          text: state
+                                                      .attendanceEntity
+                                                      .resultEntity
+                                                      .response[index]
+                                                      .checkOut !=
+                                                  'false'
+                                              ? DateFormat('hh: mm a').format(
+                                                  DateTime.tryParse(state
+                                                          .attendanceEntity
+                                                          .resultEntity
+                                                          .response[index]
+                                                          .checkOut)!
+                                                      .add(const Duration(
+                                                          hours:
+                                                              4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                              : '00: 00: 00',
+                                          color: ColorManager.error,
+                                        ),
+                                        TextCustom(
+                                          fontSize: FontSize.s14,
+                                          text: state
+                                              .attendanceEntity
+                                              .resultEntity
+                                              .response[index]
+                                              .workedHours
+                                              .toStringAsFixed(0),
+                                          color: ColorManager.secondary,
+                                        ),
+                                      ],
                                     ),
-                                    TextCustom(
-                                      fontSize: FontSize.s14,
-                                      text: state.attendanceEntity.resultEntity
-                                          .response[index].workedHours
-                                          .toStringAsFixed(0),
-                                      color: ColorManager.secondary,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              itemCount: state.attendanceEntity.resultEntity
-                                  .response.length,
-                            )
+                                  ),
+                                  itemCount: state.attendanceEntity.resultEntity
+                                      .response.length,
+                                )
                           : state is GetAttendanceLoading
                               ? ShimmerCustom(
                                   child: ListView.builder(

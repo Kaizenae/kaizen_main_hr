@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:Attendace/features/all_employee/presentation/screens/all_employees_screen.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
 import 'all_employee/presentation/cubit/all_employees_cubit.dart';
-import 'attendance/presentation/screens/attendance_screen.dart';
 import 'edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'home/presentation/screens/home_screen.dart';
 
@@ -26,21 +24,21 @@ class MainPageAdmin extends StatefulWidget {
 class MainPageAdminState extends State<MainPageAdmin> {
   final _screens = [
     const HomeScreen(),
-    const AllEmployeesScreen(),
-    const AttendanceScreen(),
+    // const AllEmployeesScreen(),
+    // const AttendanceScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
-    IconsAssets.searchIcon,
-    IconsAssets.attendIcon,
+    // IconsAssets.searchIcon,
+    // IconsAssets.attendIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
-    AppStrings.employees,
-    AppStrings.attendance,
+    // AppStrings.employees,
+    // AppStrings.attendance,
     AppStrings.profile,
   ];
 

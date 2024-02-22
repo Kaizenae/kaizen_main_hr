@@ -9,6 +9,7 @@ class ImageAssets {
   static const String shiftAllocationImg = "$imagePath/shift_allocatin.png";
   static const String timeOffImg = "$imagePath/time_off.png";
   static const String notificationImg = "$imagePath/notification.png";
+  static const String attendanceImg = "$imagePath/attendance.png";
 }
 
 class IconsAssets {

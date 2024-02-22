@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
+import '../../../../core/widgets/shimmer_custom/shimmer_custom.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 
 class ShiftAllocationScreen extends StatelessWidget {
@@ -23,10 +25,13 @@ class ShiftAllocationScreen extends StatelessWidget {
         appBarCustom: const AppBarCustom(
           text: AppStrings.myShiftAllocation,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 10,
+        body: Container(
+          padding: const EdgeInsets.all(AppPadding.p16),
+          margin: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p16, vertical: AppPadding.p12),
+          decoration: BoxDecoration(
+            color: ColorManager.white,
+            borderRadius: BorderRadius.circular(AppSize.s10),
           ),
           child: Column(
             children: [
@@ -75,28 +80,62 @@ class ShiftAllocationScreen extends StatelessWidget {
               Expanded(child:
                   BlocBuilder<ShiftAllocationCubit, ShiftAllocationStates>(
                 builder: (context, state) {
-                  return ShiftAllocationCubit.get(context)
-                          .shiftAllocationModel
-                          .result
-                          .responseModel
-                          .isEmpty
-                      ? const ErrorsWidget()
-                      : ListView.separated(
-                          itemBuilder: (context, index) => ShiftAllocationItem(
-                            item: ShiftAllocationCubit.get(context)
-                                .shiftAllocationModel
-                                .result
-                                .responseModel[index],
+                  return state is ShiftAllocationLoadingState
+                      ? ShimmerCustom(
+                          child: ListView.builder(
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: AppPadding.p12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextCustom(
+                                  fontSize: FontSize.s14,
+                                  text: '20 sep',
+                                  color: ColorManager.black,
+                                ),
+                                TextCustom(
+                                  fontSize: FontSize.s14,
+                                  text: '09:00 am',
+                                  color: ColorManager.primary,
+                                ),
+                                TextCustom(
+                                  fontSize: FontSize.s14,
+                                  text: '06:00 pm',
+                                  color: ColorManager.error,
+                                ),
+                              ],
+                            ),
                           ),
-                          separatorBuilder: (context, index) => const SizedBox(
-                            height: 20,
-                          ),
-                          itemCount: ShiftAllocationCubit.get(context)
-                              .shiftAllocationModel
-                              .result
-                              .responseModel
-                              .length,
-                        );
+                          itemCount: 10,
+                        ))
+                      : state is ShiftAllocationSuccessState
+                          ? ShiftAllocationCubit.get(context)
+                                  .shiftAllocationModel
+                                  .result
+                                  .responseModel
+                                  .isEmpty
+                              ? const ErrorsWidget()
+                              : ListView.separated(
+                                  itemBuilder: (context, index) =>
+                                      ShiftAllocationItem(
+                                    item: ShiftAllocationCubit.get(context)
+                                        .shiftAllocationModel
+                                        .result
+                                        .responseModel[index],
+                                  ),
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                    height: 20,
+                                  ),
+                                  itemCount: ShiftAllocationCubit.get(context)
+                                      .shiftAllocationModel
+                                      .result
+                                      .responseModel
+                                      .length,
+                                )
+                          : const ErrorsWidget();
                 },
               )),
             ],

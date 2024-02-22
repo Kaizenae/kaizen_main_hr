@@ -34,13 +34,11 @@ class ChangeSelectedDateState extends EarlyOutLateInStates {}
 
 class ChangeFileNameState extends EarlyOutLateInStates {}
 
-class GetLateInLoadingState extends EarlyOutLateInStates {}
-
 class GetLateInSuccessState extends EarlyOutLateInStates {}
 
 class GetLateInErrorState extends EarlyOutLateInStates {}
 
-class GetEarlyOutLoadingState extends EarlyOutLateInStates {}
+class GetLateInEarlyOutLoadingState extends EarlyOutLateInStates {}
 
 class GetEarlyOutSuccessState extends EarlyOutLateInStates {}
 

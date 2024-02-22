@@ -325,7 +325,16 @@ class HomeScreen extends StatelessWidget {
                           const SizedBox(
                             width: 12,
                           ),
-                          const Expanded(child: SizedBox()),
+                          CustomHomeItem(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.attendanceRoute,
+                              );
+                            },
+                            icon: ImageAssets.attendanceImg,
+                            label: AppStrings.myAttendance,
+                          ),
                         ],
                       ),
                     ),

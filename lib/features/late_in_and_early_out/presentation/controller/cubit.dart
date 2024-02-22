@@ -91,7 +91,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
 
   LateinEarlyOutModel lateinModel = LateinEarlyOutModel();
   void getLateIn() {
-    emit(GetLateInLoadingState());
+    emit(GetLateInEarlyOutLoadingState());
     Dio().get(EndPoints.getLateInPath, data: {
       "jsonrpc": "2.0",
       "params": {
@@ -108,7 +108,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
 
   LateinEarlyOutModel earlyOutModel = LateinEarlyOutModel();
   void getEarlyOut() {
-    emit(GetEarlyOutLoadingState());
+    emit(GetLateInEarlyOutLoadingState());
     Dio().get(EndPoints.getEarlyOutPath, data: {
       "jsonrpc": "2.0",
       "params": {

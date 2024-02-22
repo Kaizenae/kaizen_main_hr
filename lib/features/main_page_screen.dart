@@ -9,7 +9,6 @@ import '../core/utils/assets_manager.dart';
 import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
-import 'attendance/presentation/screens/attendance_screen.dart';
 import 'edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'home/presentation/screens/home_screen.dart';
 
@@ -24,7 +23,7 @@ class MainPageState extends State<MainPage> {
   final _screens = [
     const HomeScreen(),
 
-    const AttendanceScreen(),
+    // const AttendanceScreen(),
     const ProfileScreen(),
 
     // const CategoryScreen(),
@@ -33,13 +32,13 @@ class MainPageState extends State<MainPage> {
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
-    IconsAssets.attendIcon,
+    // IconsAssets.attendIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
-    AppStrings.attendance,
+    // AppStrings.attendance,
     AppStrings.profile,
   ];
 
