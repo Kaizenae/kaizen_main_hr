@@ -40,44 +40,68 @@ class HelpAndFeedbackScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(AppPadding.p16),
           child: SafeArea(
-            child: Column(
-              children: [
-                Center(
-                  child: AspectRatio(
-                    aspectRatio: 3 / 2,
-                    child: Image.asset(
-                      ImageAssets.logoImg,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: AspectRatio(
+                      aspectRatio: 3 / 1,
+                      child: Image.asset(
+                        ImageAssets.logoImg,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: AppSize.s30,
-                ),
-                TextCustom(
-                  text: 'Social Media',
-                  color: ColorManager.secondary,
-                  fontSize: FontSize.s18,
-                  fontWeight: FontWeight.w600,
-                ),
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  alignment: WrapAlignment.center,
-                  children: List.generate(
-                      icons.length,
-                      (index) => Padding(
-                            padding: const EdgeInsets.all(AppPadding.p8),
-                            child: InkWell(
-                                onTap: () async {
-                                  await launchInBrowser(
-                                      Uri.parse(links[index]));
-                                },
-                                child: SvgPicture.asset(
-                                  icons[index],
-                                  height: AppSize.s40 * 1.3,
-                                )),
-                          )),
-                )
-              ],
+                  const SizedBox(
+                    height: AppSize.s30,
+                  ),
+                  Text(
+                    "PO Box: 130652, Office 262, 2nd Floor WAFRA Square Building, Reem Island, Abu Dhabi, UAE.",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(
+                    height: AppSize.s10,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await launchInBrowser(Uri.parse("tel:+971 2 3051500"));
+                    },
+                    child: Text(
+                      "Contact number : +971 2 3051500 ",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: ColorManager.darkGrey,
+                          ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.s10,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await launchInBrowser(
+                          Uri.parse("mailto:hr.helpdesk@ideacrate.net"));
+                    },
+                    child: Text(
+                      "Email : hr.helpdesk@ideacrate.net",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: AppSize.s10,
+                  ),
+                  InkWell(
+                      onTap: () async {
+                        await launchInBrowser(Uri.parse(
+                            "https://www.linkedin.com/company/ideacrateuae/mycompany/"));
+                      },
+                      child: SvgPicture.asset(
+                        IconsAssets.linkedinIcon,
+                        height: AppSize.s40 * 1.3,
+                      )),
+                ],
+              ),
             ),
           ),
         ));
@@ -92,3 +116,9 @@ class HelpAndFeedbackScreen extends StatelessWidget {
     }
   }
 }
+
+
+/**
+ await launchInBrowser(
+                                      Uri.parse(links[index]));
+ */
