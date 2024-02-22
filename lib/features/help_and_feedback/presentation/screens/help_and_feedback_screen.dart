@@ -1,10 +1,8 @@
 import 'package:Attendace/core/utils/color_manager.dart';
-import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/utils/values_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
-import 'package:Attendace/core/widgets/text_custom/text_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -116,9 +114,3 @@ class HelpAndFeedbackScreen extends StatelessWidget {
     }
   }
 }
-
-
-/**
- await launchInBrowser(
-                                      Uri.parse(links[index]));
- */
