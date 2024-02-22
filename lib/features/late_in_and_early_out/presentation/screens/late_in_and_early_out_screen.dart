@@ -60,26 +60,32 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                     height: AppSize.s20,
                   ),
                   state is GetLateInEarlyOutLoadingState
-                      ? ShimmerCustom(
-                          child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => const Column(
-                            children: [
-                              UserRequestWidget(
-                                iconPath: IconsAssets.emailIcon,
-                                text: AppStrings.message,
-                                subText: '',
+                      ? Expanded(
+                          child: ShimmerCustom(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) => const Column(
+                                  children: [
+                                    UserRequestWidget(
+                                      iconPath: IconsAssets.emailIcon,
+                                      text: AppStrings.message,
+                                      subText: 'Loading',
+                                    ),
+                                    UserRequestWidget(
+                                      iconPath: IconsAssets.clockIcon,
+                                      text: AppStrings.status,
+                                      subText: 'Loading.....',
+                                    ),
+                                  ],
+                                ),
+                                itemCount: 10,
                               ),
-                              UserRequestWidget(
-                                iconPath: IconsAssets.clockIcon,
-                                text: AppStrings.status,
-                                subText: 'Loading.....',
-                              ),
-                            ],
+                            ),
                           ),
-                          itemCount: 2,
-                        ))
+                        )
                       : Expanded(
                           child: EarlyAndLateList(
                           title: title,
