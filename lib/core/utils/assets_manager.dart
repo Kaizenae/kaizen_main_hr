@@ -8,8 +8,8 @@ class ImageAssets {
   static const String policyImg = "$imagePath/policy.png";
   static const String shiftAllocationImg = "$imagePath/shift_allocatin.png";
   static const String timeOffImg = "$imagePath/time_off.png";
-  static const String notificationImg = "$imagePath/notification.png";
   static const String attendanceImg = "$imagePath/attendance.png";
+  static const String noDataImg = "$imagePath/no_data.png";
 }
 
 class IconsAssets {

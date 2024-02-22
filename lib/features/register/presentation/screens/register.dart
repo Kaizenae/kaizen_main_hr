@@ -61,10 +61,13 @@ class RegisterScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                        child: Image.asset(
-                          ImageAssets.logoImg,
-                          height: AppSize.s100,
-                          width: AppSize.s100,
+                        child: AspectRatio(
+                          aspectRatio: 3 / 1.2,
+                          child: Image.asset(
+                            ImageAssets.logoImg,
+                            // height: AppSize.s150,
+                            // width: AppSize.s120,
+                          ),
                         ),
                       ),
                       const SizedBox(height: AppSize.s30),

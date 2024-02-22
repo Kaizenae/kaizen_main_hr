@@ -57,7 +57,7 @@ class EditProfileScreen extends StatelessWidget {
                             children: [
                               const SvgPictureCustom(
                                 assetsName: IconsAssets.personIcon,
-                                color: ColorManager.primary,
+                                color: ColorManager.skyColor,
                               ),
                               const SizedBox(
                                 width: AppSize.s16,

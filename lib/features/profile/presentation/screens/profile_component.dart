@@ -39,7 +39,7 @@ class ProfileComponent extends StatelessWidget {
             children: [
               SvgPictureCustom(
                 assetsName: iconName,
-                color: ColorManager.primary,
+                color: ColorManager.skyColor,
               ),
               const SizedBox(
                 width: AppSize.s16,
@@ -48,7 +48,7 @@ class ProfileComponent extends StatelessWidget {
                 text: name,
                 fontWeight: FontWeight.w200,
                 fontSize: FontSize.s16,
-                color: ColorManager.black,
+                color: ColorManager.primary,
               ),
             ],
           ),

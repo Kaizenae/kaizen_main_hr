@@ -63,7 +63,7 @@ class _LocalAuthScreenState extends State<LocalAuthScreen> {
               },
               child: const SvgPictureCustom(
                   assetsName: IconsAssets.fingerprintIcon,
-                  color: null,
+                  color: ColorManager.skyColor,
                   height: AppSize.s100 * 1.8)),
         ],
       ),

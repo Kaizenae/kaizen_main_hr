@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -131,14 +133,14 @@ class TextFormFieldCustom extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
           borderSide: const BorderSide(
-            color: Colors.red,
+            color: ColorManager.error,
             width: AppSize.s1_5,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
           borderSide: const BorderSide(
-            color: Colors.red,
+            color: ColorManager.error,
           ),
         ),
         suffixIconColor: ColorManager.textFormIconColor,
@@ -176,6 +178,7 @@ class TextFormFieldCustom extends StatelessWidget {
                   child: SvgPicture.asset(
                     suffixIcon!,
                     height: AppSize.s20,
+                    color: ColorManager.skyColor,
                   ),
                 ),
               )

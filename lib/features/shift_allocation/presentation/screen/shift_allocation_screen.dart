@@ -38,40 +38,48 @@ class ShiftAllocationScreen extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: TextCustom(
-                      text: 'From',
-                      color: ColorManager.black,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: TextCustom(
+                        text: 'From',
+                        color: ColorManager.primary,
+                        fontSize: AppSize.s16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: TextCustom(
-                      text: 'To',
-                      color: ColorManager.primary,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: TextCustom(
+                        text: 'To',
+                        color: ColorManager.primary,
+                        fontSize: AppSize.s16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: TextCustom(
-                      text: 'Scheme',
-                      color: ColorManager.error,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: TextCustom(
+                        text: 'Scheme',
+                        color: ColorManager.error,
+                        fontSize: AppSize.s16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: TextCustom(
-                      text: 'State',
-                      color: ColorManager.secondary,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                  Expanded(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: TextCustom(
+                        text: 'State',
+                        color: ColorManager.secondary,
+                        fontSize: AppSize.s16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],

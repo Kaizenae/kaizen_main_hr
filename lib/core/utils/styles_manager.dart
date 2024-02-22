@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'font_manager.dart';
 
 TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
-  return GoogleFonts.poppins(
+  return GoogleFonts.montserrat(
       fontWeight: fontWeight, color: color, fontSize: fontSize);
 }
 

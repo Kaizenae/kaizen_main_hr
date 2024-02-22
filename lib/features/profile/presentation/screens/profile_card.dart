@@ -61,7 +61,7 @@ class ProfileCard extends StatelessWidget {
                                       .response[0].name,
                                   fontWeight: FontWeight.w600,
                                   fontSize: FontSize.s16,
-                                  color: ColorManager.black,
+                                  color: ColorManager.primary,
                                 ),
                                 const SizedBox(
                                   height: AppSize.s16,
@@ -81,7 +81,7 @@ class ProfileCard extends StatelessWidget {
                                           text: state.employeeEntity
                                               .resultEntity.response[0].email,
                                           fontSize: FontSize.s16,
-                                          color: ColorManager.grey2,
+                                          color: ColorManager.primary,
                                         ),
                                       ),
                                 state.employeeEntity.resultEntity.response[0]

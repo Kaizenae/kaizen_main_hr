@@ -54,10 +54,11 @@ class ElevatedButtonCustom extends StatelessWidget {
               .copyWith(color: textColor)),
       child: widget ??
           TextCustom(
-              color: textColor ?? ColorManager.primary,
-              text: text!,
-              fontSize: fontSize,
-              textAlign: TextAlign.center),
+            color: textColor ?? ColorManager.primary,
+            text: text!,
+            fontSize: fontSize,
+            textAlign: TextAlign.center,
+          ),
     );
   }
 }

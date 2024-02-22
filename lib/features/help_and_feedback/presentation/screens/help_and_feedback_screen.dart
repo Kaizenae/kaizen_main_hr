@@ -34,17 +34,20 @@ class HelpAndFeedbackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-        appBarCustom: const AppBarCustom(),
+        appBarCustom: const AppBarCustom(
+          text: AppStrings.helpsFeedback,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(AppPadding.p16),
           child: SafeArea(
             child: Column(
               children: [
                 Center(
-                  child: Image.asset(
-                    ImageAssets.logoImg,
-                    height: AppSize.s80 * 2,
-                    width: AppSize.s80 * 2,
+                  child: AspectRatio(
+                    aspectRatio: 3 / 2,
+                    child: Image.asset(
+                      ImageAssets.logoImg,
+                    ),
                   ),
                 ),
                 const SizedBox(

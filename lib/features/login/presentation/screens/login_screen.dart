@@ -68,10 +68,13 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                        child: Image.asset(
-                          ImageAssets.logoImg,
-                          height: AppSize.s100,
-                          width: AppSize.s100,
+                        child: AspectRatio(
+                          aspectRatio: 3 / 1.2,
+                          child: Image.asset(
+                            ImageAssets.logoImg,
+                            height: AppSize.s100,
+                            width: AppSize.s100,
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -81,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                         child: TextCustom(
                           color: ColorManager.primary,
                           text: AppStrings.welcomeBack,
-                          fontSize: FontSize.s16,
+                          fontSize: FontSize.s20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -92,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                         fontSize: FontSize.s14,
                         text: AppStrings.email,
                         textAlign: TextAlign.start,
-                        color: ColorManager.textFormLabelColor,
+                        color: ColorManager.primary,
                       ),
                       const SizedBox(
                         height: AppSize.s4,
@@ -147,7 +150,7 @@ class LoginScreen extends StatelessWidget {
                                 radius: AppSize.s16,
                               )
                             : ElevatedButtonCustom(
-                                fontSize: FontSize.s14,
+                                fontSize: FontSize.s16,
                                 textColor: ColorManager.white,
                                 onPressed: () async {
                                   if (loginCubit.formKey.currentState!

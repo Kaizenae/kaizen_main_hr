@@ -92,7 +92,7 @@ class PendingWidget extends StatelessWidget {
                                   },
                                   child: const SvgPictureCustom(
                                     assetsName: IconsAssets.rejectIcon,
-                                    color: ColorManager.error,
+                                    color: ColorManager.skyColor,
                                     height: AppSize.s40,
                                   )),
                               InkWell(
@@ -107,7 +107,7 @@ class PendingWidget extends StatelessWidget {
                                   },
                                   child: const SvgPictureCustom(
                                     assetsName: IconsAssets.acceptIcon,
-                                    color: null,
+                                    color: ColorManager.skyColor,
                                     height: AppSize.s40,
                                   )),
                             ],

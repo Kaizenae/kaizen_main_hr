@@ -38,7 +38,6 @@ import '../../features/login/presentation/screens/login_screen.dart';
 import '../../features/myLoans/presentation/screens/myLoans_screen.dart';
 import '../../features/register/presentation/screens/register.dart';
 import '../../features/shift_allocation/presentation/screen/shift_allocation_screen.dart';
-import '../../features/webViews/webView_screen.dart';
 import '../widgets/app_bar/app_bar_custom.dart';
 import '../widgets/text_custom/text_custom.dart';
 
@@ -144,8 +143,8 @@ class RoutesMap {
       Routes.employeeRoute: (BuildContext context) => const EmployeeScreen(),
       Routes.changePasswordRoute: (BuildContext context) =>
           const ChangePasswordScreen(),
-      Routes.webViewExampleRoute: (BuildContext context) =>
-          const WebViewExample(),
+      // Routes.webViewExampleRoute: (BuildContext context) =>
+      //     const WebViewExample(),
       Routes.helpRoute: (BuildContext context) => HelpAndFeedbackScreen(),
       Routes.createLoanRoute: (BuildContext context) =>
           const CreateLoanScreen(),
@@ -217,8 +216,8 @@ class RoutesMap {
         return const EmployeeScreen();
       case Routes.changePasswordRoute:
         return const ChangePasswordScreen();
-      case Routes.webViewExampleRoute:
-        return const WebViewExample();
+      // case Routes.webViewExampleRoute:
+      //   return const WebViewExample();
       case Routes.helpRoute:
         return HelpAndFeedbackScreen();
       case Routes.createLoanRoute:

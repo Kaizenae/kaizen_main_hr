@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/assets_manager.dart';
+
 class ErrorsWidget extends StatelessWidget {
   final VoidCallback? onPress;
 
@@ -7,10 +9,14 @@ class ErrorsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Text(
-      "No Data!!",
-      style: Theme.of(context).textTheme.displayLarge,
+    return const Center(
+        child: AspectRatio(
+      aspectRatio: 2 / 1.5,
+      child: Image(
+        image: AssetImage(
+          ImageAssets.noDataImg,
+        ),
+      ),
     ));
     // return SingleChildScrollView(
     //   physics: const BouncingScrollPhysics(),

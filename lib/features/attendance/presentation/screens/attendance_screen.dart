@@ -25,7 +25,7 @@ class AttendanceScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.all(AppPadding.p16),
+          padding: const EdgeInsets.all(AppPadding.p12),
           margin: const EdgeInsets.symmetric(
               horizontal: AppPadding.p16, vertical: AppPadding.p12),
           decoration: BoxDecoration(
@@ -37,40 +37,50 @@ class AttendanceScreen extends StatelessWidget {
             child: Column(
               children: [
                 const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextCustom(
-                      text: 'Date',
-                      color: ColorManager.black,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: TextCustom(
+                          text: 'Date',
+                          color: ColorManager.black,
+                          fontSize: AppSize.s16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      width: AppSize.s40,
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: TextCustom(
+                          text: 'Punch in',
+                          color: ColorManager.primary,
+                          fontSize: AppSize.s16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
-                    TextCustom(
-                      text: 'Punch in',
-                      color: ColorManager.primary,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: TextCustom(
+                          text: 'Punch out',
+                          color: ColorManager.primary,
+                          fontSize: AppSize.s16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
-                    SizedBox(
-                      width: AppSize.s10,
-                    ),
-                    TextCustom(
-                      text: 'Punch out',
-                      color: ColorManager.error,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(
-                      width: AppSize.s10,
-                    ),
-                    TextCustom(
-                      text: 'Hours',
-                      color: ColorManager.secondary,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: TextCustom(
+                          text: 'Hours',
+                          color: ColorManager.error,
+                          fontSize: AppSize.s16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -89,63 +99,84 @@ class AttendanceScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) => Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: AppPadding.p12),
+                                      vertical: AppPadding.p12,
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        TextCustom(
-                                          fontSize: FontSize.s14,
-                                          text: DateFormat('dd , MMM').format(
-                                              DateTime.parse(state
-                                                  .attendanceEntity
-                                                  .resultEntity
-                                                  .response[index]
-                                                  .checkIn)),
-                                          color: ColorManager.black,
-                                        ),
-                                        TextCustom(
-                                          fontSize: FontSize.s14,
-                                          text: DateFormat('hh: mm a').format(
-                                              DateTime.parse(state
+                                        Expanded(
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: TextCustom(
+                                              fontSize: FontSize.s14,
+                                              text: DateFormat('dd , MMM')
+                                                  .format(DateTime.parse(state
                                                       .attendanceEntity
                                                       .resultEntity
                                                       .response[index]
-                                                      .checkIn)
-                                                  .add(const Duration(
-                                                      hours:
-                                                          4))), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
-                                          color: ColorManager.primary,
+                                                      .checkIn)),
+                                              color: ColorManager.black,
+                                            ),
+                                          ),
                                         ),
-                                        TextCustom(
-                                          fontSize: FontSize.s14,
-                                          text: state
-                                                      .attendanceEntity
-                                                      .resultEntity
-                                                      .response[index]
-                                                      .checkOut !=
-                                                  'false'
-                                              ? DateFormat('hh: mm a').format(
-                                                  DateTime.tryParse(state
+                                        Expanded(
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: TextCustom(
+                                              fontSize: FontSize.s14,
+                                              text: DateFormat('hh: mm a')
+                                                  .format(DateTime.parse(state
                                                           .attendanceEntity
                                                           .resultEntity
                                                           .response[index]
-                                                          .checkOut)!
+                                                          .checkIn)
                                                       .add(const Duration(
                                                           hours:
-                                                              4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
-                                              : '00: 00: 00',
-                                          color: ColorManager.error,
+                                                              4))), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                              color: ColorManager.primary,
+                                            ),
+                                          ),
                                         ),
-                                        TextCustom(
-                                          fontSize: FontSize.s14,
-                                          text: state
-                                              .attendanceEntity
-                                              .resultEntity
-                                              .response[index]
-                                              .workedHours
-                                              .toStringAsFixed(0),
-                                          color: ColorManager.secondary,
+                                        Expanded(
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: TextCustom(
+                                              fontSize: FontSize.s14,
+                                              text: state
+                                                          .attendanceEntity
+                                                          .resultEntity
+                                                          .response[index]
+                                                          .checkOut !=
+                                                      'false'
+                                                  ? DateFormat('hh: mm a').format(
+                                                      DateTime.tryParse(state
+                                                              .attendanceEntity
+                                                              .resultEntity
+                                                              .response[index]
+                                                              .checkOut)!
+                                                          .add(const Duration(
+                                                              hours:
+                                                                  4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                                  : '00: 00: 00',
+                                              color: ColorManager.primary,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: TextCustom(
+                                              fontSize: FontSize.s14,
+                                              text: state
+                                                  .attendanceEntity
+                                                  .resultEntity
+                                                  .response[index]
+                                                  .workedHours
+                                                  .toStringAsFixed(0),
+                                              color: ColorManager.error,
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),

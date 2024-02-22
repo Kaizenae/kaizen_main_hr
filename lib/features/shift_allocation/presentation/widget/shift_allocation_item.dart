@@ -20,25 +20,45 @@ class ShiftAllocationItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextCustom(
-            fontSize: FontSize.s14,
-            text: DateFormat('dd , MMM').format(DateTime.parse(item.from)),
-            color: ColorManager.black,
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: TextCustom(
+                fontSize: FontSize.s14,
+                text: DateFormat('dd , MMM').format(DateTime.parse(item.from)),
+                color: ColorManager.primary,
+              ),
+            ),
           ),
-          TextCustom(
-            fontSize: FontSize.s14,
-            text: DateFormat('dd , MMM').format(DateTime.parse(item.to)),
-            color: ColorManager.primary,
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: TextCustom(
+                fontSize: FontSize.s14,
+                text: DateFormat('dd , MMM').format(DateTime.parse(item.to)),
+                color: ColorManager.primary,
+              ),
+            ),
           ),
-          TextCustom(
-            fontSize: FontSize.s14,
-            text: item.shiftScheme.name,
-            color: ColorManager.error,
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: TextCustom(
+                fontSize: FontSize.s14,
+                text: item.shiftScheme.name,
+                color: ColorManager.error,
+              ),
+            ),
           ),
-          TextCustom(
-            fontSize: FontSize.s14,
-            text: item.state,
-            color: ColorManager.secondary,
+          Expanded(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: TextCustom(
+                fontSize: FontSize.s14,
+                text: item.state,
+                color: ColorManager.secondary,
+              ),
+            ),
           ),
         ],
       ),

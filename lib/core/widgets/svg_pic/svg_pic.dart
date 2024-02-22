@@ -21,7 +21,7 @@ class SvgPictureCustom extends StatelessWidget {
     required this.assetsName,
     this.height = AppSize.s20,
     this.width = AppSize.s20,
-    this.color = ColorManager.black,
+    this.color = ColorManager.skyColor,
     this.boxFit = BoxFit.contain,
   });
 
