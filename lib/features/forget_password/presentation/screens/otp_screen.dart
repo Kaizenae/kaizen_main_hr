@@ -1,3 +1,6 @@
+// ignore_for_file: unrelated_type_equality_checks
+
+import 'dart:async';
 import 'package:Attendace/core/utils/values_manager.dart';
 import 'package:Attendace/core/widgets/component.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +24,31 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   OtpFieldController otpController = OtpFieldController();
+  late Timer timer;
+  int start = 59;
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +57,9 @@ class _OTPScreenState extends State<OTPScreen> {
         text: 'OTP',
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 24),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextCustom(
@@ -55,7 +83,35 @@ class _OTPScreenState extends State<OTPScreen> {
                 onChanged: (pin) {},
                 onCompleted: (pin) {}),
             const SizedBox(
-              height: AppSize.s40,
+              height: AppSize.s20,
+            ),
+            start != 0
+                ? TextCustom(
+                    fontSize: FontSize.s14,
+                    text: "The code will expire after 00:$start",
+                    textAlign: TextAlign.start,
+                    color: ColorManager.darkGrey,
+                  )
+                : Align(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: GestureDetector(
+                      onTap: () {
+                        start = 59;
+                        startTimer();
+                        setState(() {});
+                      },
+                      child: TextCustom(
+                        fontSize: FontSize.s14,
+                        text: AppStrings.resendCode,
+                        textAlign: TextAlign.start,
+                        color: ColorManager.textFormLabelColor,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+            const SizedBox(
+              height: AppSize.s20,
             ),
             ElevatedButtonCustom(
               fontSize: FontSize.s14,
@@ -72,5 +128,11 @@ class _OTPScreenState extends State<OTPScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 }
