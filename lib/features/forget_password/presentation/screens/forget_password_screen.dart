@@ -41,15 +41,19 @@ class ForgetPasswordScreen extends StatelessWidget {
                     height: AppSize.s8,
                   ),
                   TextFormFieldCustom(
-                    validate: (v) {
-                      if (v!.isEmpty) {
-                        return AppStrings.userNameValidation;
+                    validate: (value) {
+                      if (value!.trim().isEmpty || value == ' ') {
+                        return AppStrings.phoneTextField;
                       }
                       return null;
                     },
-                    keyboardType: TextInputType.visiblePassword,
-                    suffixIcon: IconsAssets.emailIcon,
+                    prefix: true, isRegister: true,
+                    hint: "5x xxx xxxx",
+                    keyboardType: TextInputType.phone,
+                    suffixIcon: IconsAssets.phoneIcon,
                     suffix: true,
+
+                    // textInputAction: TextInputAction.done,
                   ),
                   const SizedBox(
                     height: AppSize.s40,
