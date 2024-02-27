@@ -33,7 +33,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 children: [
                   TextCustom(
                     fontSize: FontSize.s14,
-                    text: AppStrings.userName,
+                    text: AppStrings.phone,
                     textAlign: TextAlign.start,
                     color: ColorManager.textFormLabelColor,
                   ),
