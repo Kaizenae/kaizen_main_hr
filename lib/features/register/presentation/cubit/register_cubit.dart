@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/register/data/models/companies_data_model.dart';

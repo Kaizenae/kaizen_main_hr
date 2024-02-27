@@ -1,7 +1,5 @@
 // ignore_for_file: file_names
 
-import 'dart:developer';
-
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/core/local/cache_helper.dart';
 import 'package:dartz/dartz.dart';

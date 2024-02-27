@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/features/register/domain/usecases/register_usecase.dart';
