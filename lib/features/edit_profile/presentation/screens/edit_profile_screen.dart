@@ -66,7 +66,7 @@ class EditProfileScreen extends StatelessWidget {
                                 text: AppStrings.editUserPhoto,
                                 fontWeight: FontWeight.w200,
                                 fontSize: FontSize.s16,
-                                color: ColorManager.black,
+                                color: ColorManager.primary,
                               ),
                             ],
                           ),
