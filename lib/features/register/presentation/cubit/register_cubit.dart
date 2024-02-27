@@ -103,13 +103,9 @@ class RegisterCubit extends Cubit<RegisterStates> {
         "company_id": "",
       }
     }).then((value) {
-      log(value.data.toString());
-
       companiesDataModel = CompaniesDataModel.fromJson(value.data);
       emit(GetCompaniesSuccessState());
     }).catchError((error) {
-      log(error.toString());
-
       emit(GetCompaniesErrorState());
     });
   }

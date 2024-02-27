@@ -91,9 +91,6 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
         }
       },
     ).then((value) {
-      log(
-        CacheHelper.get(key: AppConstants.userId),
-      );
       allTimeOffValueModel = AllTimeOffValueModel.fromJson(value.data);
 
       emit(const GetTimeOffValueSuccess());

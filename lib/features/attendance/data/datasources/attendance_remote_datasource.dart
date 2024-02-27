@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../../../core/api/api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../models/attendance_model.dart';
@@ -21,7 +19,6 @@ class AttendanceRemoteDataSourceImpl implements AttendanceRemoteDataSource {
         "user_id": userId,
       }
     });
-    log(userId.toString());
     return AttendanceModel.fromJson(response);
   }
 }

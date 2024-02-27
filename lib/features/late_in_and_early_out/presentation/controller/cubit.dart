@@ -1,7 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
-import 'dart:developer';
-
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:dio/dio.dart';
@@ -116,12 +113,9 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "user_id": CacheHelper.get(key: AppConstants.userId),
       }
     }).then((value) {
-      log(AppConstants.companyId.toString());
       earlyOutModel = LateinEarlyOutModel.fromJson(value.data);
-      log(CacheHelper.get(key: AppConstants.userId).toString());
       emit(GetEarlyOutSuccessState());
     }).catchError((error) {
-      log(error.toString());
       emit(GetEarlyOutErrorState());
     });
   }

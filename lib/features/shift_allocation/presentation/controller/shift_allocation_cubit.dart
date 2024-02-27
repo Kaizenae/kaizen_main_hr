@@ -22,12 +22,10 @@ class ShiftAllocationCubit extends Cubit<ShiftAllocationStates> {
         "user_id": CacheHelper.get(key: AppConstants.userId),
       }
     }).then((value) {
-      log("value is     ${value.data}");
       shiftAllocationModel = ShiftAllocationModel.fromJson(value.data);
 
       emit(ShiftAllocationSuccessState());
     }).catchError((error) {
-      log(error.toString());
       emit(ShiftAllocationErrorState());
     });
   }

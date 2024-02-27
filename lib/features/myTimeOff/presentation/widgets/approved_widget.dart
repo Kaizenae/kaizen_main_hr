@@ -23,7 +23,6 @@ class ApprovedWidget extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = MyTimeOffCubit.get(context);
-          log(cubit.myTimeOff.toString());
           return cubit.myTimeOff.isNotEmpty
               ? ListView.separated(
                   separatorBuilder: (context, index) => const Divider(),

@@ -48,7 +48,6 @@ class RegisterScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            log(state.toString());
             var registerCubit = RegisterCubit.get(context);
             return Padding(
               padding: const EdgeInsets.all(AppPadding.p16),
