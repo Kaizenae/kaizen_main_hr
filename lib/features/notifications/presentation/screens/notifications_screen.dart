@@ -1,6 +1,5 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/utils/values_manager.dart';
-import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:flutter/material.dart';
 
@@ -16,11 +15,8 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-      appBarCustom: const AppBarCustom(
-        text: AppStrings.requests,
-      ),
       body: Padding(
-        padding: const EdgeInsets.all(AppPadding.p16),
+        padding: const EdgeInsets.all(AppPadding.p20),
         child: SafeArea(
           child: Column(
             children: [

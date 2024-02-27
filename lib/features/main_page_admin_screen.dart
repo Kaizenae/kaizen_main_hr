@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:Attendace/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,19 +27,20 @@ class MainPageAdminState extends State<MainPageAdmin> {
     const HomeScreen(),
     // const AllEmployeesScreen(),
     // const AttendanceScreen(),
+    const NotificationsScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
     // IconsAssets.searchIcon,
-    // IconsAssets.attendIcon,
+    IconsAssets.notificationIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
     // AppStrings.employees,
-    // AppStrings.attendance,
+    AppStrings.notifications,
     AppStrings.profile,
   ];
 

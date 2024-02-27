@@ -1,4 +1,3 @@
-import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 
@@ -170,36 +169,16 @@ class ProfileCard extends StatelessWidget {
                               screen: Routes.changePasswordRoute,
                             ),
                             const Divider(),
-                            AppConstants.admin
-                                ? const ProfileComponent(
-                                    iconName: IconsAssets.notificationIcon,
-                                    name: AppStrings.notifications,
-                                    screen: Routes.notificationsRoute,
-                                  )
-                                : const SizedBox(),
-                            AppConstants.admin
-                                ? const Divider()
-                                : const SizedBox(),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: ColorManager.white,
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s10)),
-                              child: const Column(
-                                children: [
-                                  ProfileComponent(
-                                    iconName: IconsAssets.attendIcon,
-                                    name: AppStrings.termsConditions,
-                                    screen: '',
-                                  ),
-                                  Divider(),
-                                  ProfileComponent(
-                                    iconName: IconsAssets.messageQuestionIcon,
-                                    name: AppStrings.helpsFeedback,
-                                    screen: Routes.helpRoute,
-                                  ),
-                                ],
-                              ),
+                            const ProfileComponent(
+                              iconName: IconsAssets.attendIcon,
+                              name: AppStrings.termsConditions,
+                              screen: '',
+                            ),
+                            const Divider(),
+                            const ProfileComponent(
+                              iconName: IconsAssets.messageQuestionIcon,
+                              name: AppStrings.helpsFeedback,
+                              screen: Routes.helpRoute,
                             ),
                             const SizedBox(
                               height: AppSize.s20,
