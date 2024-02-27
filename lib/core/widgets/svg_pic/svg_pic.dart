@@ -20,9 +20,9 @@ class SvgPictureCustom extends StatelessWidget {
     super.key,
     required this.assetsName,
     this.height = AppSize.s20,
-    this.width = AppSize.s20,
+    this.width = AppSize.s30,
     this.color = ColorManager.skyColor,
-    this.boxFit = BoxFit.contain,
+    this.boxFit = BoxFit.cover,
   });
 
   @override

@@ -149,10 +149,7 @@ class ProfileCard extends StatelessWidget {
                                   },
                                 ),
                       const SizedBox(
-                        height: AppSize.s16,
-                      ),
-                      const SizedBox(
-                        height: AppSize.s20,
+                        height: AppSize.s40,
                       ),
                       Container(
                         padding: const EdgeInsets.all(AppPadding.p12),
@@ -167,43 +164,22 @@ class ProfileCard extends StatelessWidget {
                               screen: Routes.editProfileRoute,
                             ),
                             const Divider(),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: ColorManager.white,
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s10)),
-                              child: Column(
-                                children: [
-                                  const ProfileComponent(
-                                    iconName: IconsAssets.lockIcon,
-                                    name: AppStrings.changePassword,
-                                    screen: Routes.changePasswordRoute,
-                                  ),
-                                  const Divider(),
-                                  AppConstants.admin
-                                      ? const ProfileComponent(
-                                          iconName:
-                                              IconsAssets.notificationIcon,
-                                          name: AppStrings.notifications,
-                                          screen: Routes.notificationsRoute,
-                                        )
-                                      : const SizedBox(),
-                                  AppConstants.admin
-                                      ? const Divider()
-                                      : const SizedBox(),
-                                  // AppConstants.admin
-                                  //     ? const ProfileComponent(
-                                  //         iconName: IconsAssets.homeIcon,
-                                  //         name: AppStrings.updateCompany,
-                                  //         screen: Routes.editCompanyRoute,
-                                  //       )
-                                  //     : const SizedBox(),
-                                  // AppConstants.admin
-                                  //     ? const Divider()
-                                  //     : const SizedBox(),
-                                ],
-                              ),
+                            const ProfileComponent(
+                              iconName: IconsAssets.lockIcon,
+                              name: AppStrings.changePassword,
+                              screen: Routes.changePasswordRoute,
                             ),
+                            const Divider(),
+                            AppConstants.admin
+                                ? const ProfileComponent(
+                                    iconName: IconsAssets.notificationIcon,
+                                    name: AppStrings.notifications,
+                                    screen: Routes.notificationsRoute,
+                                  )
+                                : const SizedBox(),
+                            AppConstants.admin
+                                ? const Divider()
+                                : const SizedBox(),
                             Container(
                               decoration: BoxDecoration(
                                   color: ColorManager.white,
