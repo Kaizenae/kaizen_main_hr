@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 
