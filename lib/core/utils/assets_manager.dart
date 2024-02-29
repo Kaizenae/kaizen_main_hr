@@ -10,6 +10,7 @@ class ImageAssets {
   static const String timeOffImg = "$imagePath/time_off.png";
   static const String attendanceImg = "$imagePath/attendance.png";
   static const String noDataImg = "$imagePath/no_data.png";
+  static const String userPhotoImg = "$imagePath/user_photo.png";
 }
 
 class IconsAssets {

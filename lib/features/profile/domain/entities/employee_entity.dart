@@ -47,6 +47,7 @@ class ResponseEntity extends Equatable {
   final String companyName;
   final String noId;
   final String salary;
+  final String photo;
 
   const ResponseEntity(
       {required this.id,
@@ -59,9 +60,19 @@ class ResponseEntity extends Equatable {
       required this.email,
       required this.noId,
       required this.salary,
+      required this.photo,
       required this.birthday});
 
   @override
-  List<Object> get props =>
-      [id, companyId, name, mobilePhone, email, gender, birthday, companyName];
+  List<Object> get props => [
+        id,
+        companyId,
+        name,
+        mobilePhone,
+        email,
+        gender,
+        birthday,
+        companyName,
+        photo,
+      ];
 }

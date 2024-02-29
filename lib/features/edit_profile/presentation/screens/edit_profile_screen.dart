@@ -26,7 +26,16 @@ class EditProfileScreen extends StatelessWidget {
       body: BlocProvider.value(
         value: BlocProvider.of<EditProfileCubit>(context),
         child: BlocConsumer<EditProfileCubit, EditProfileStates>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is EditUserPhotoSuccessState) {
+              SnackBar snackBar = const SnackBar(content: Text("Success"));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            } else if (state is EditUserPhotoErrorState) {
+              SnackBar snackBar = const SnackBar(
+                  content: Text("Some thing went wrong, Try again later"));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          },
           builder: (context, state) {
             var profileCubit = EditProfileCubit.get(context);
             return Padding(

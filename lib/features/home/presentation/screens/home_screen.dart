@@ -1,13 +1,16 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:convert';
+
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
-import 'package:Attendace/core/widgets/cached_image_custom/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
 import '../../../late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
+import '../../../profile/presentation/cubit/profile_cubit.dart';
+import '../../../profile/presentation/cubit/profile_state.dart';
 import '../controller/home_cubit.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -54,14 +57,45 @@ class HomeScreen extends StatelessWidget {
                           height: AppSize.s100,
                           width: AppSize.s150,
                         ),
-                        const CircleAvatar(
-                          radius: AppSize.s30,
-                          backgroundColor: ColorManager.scaffoldColor,
-                          child: CachedNetworkImageCustom(
-                            url:
-                                'https://res.cloudinary.com/halqetelzekr/image/upload/v1678732276/placeholder_t7jyyi.png',
-                          ),
-                        ),
+                        BlocProvider.value(
+                            value: BlocProvider.of<ProfileCubit>(context)
+                              ..getEmployeeFun(),
+                            child: BlocBuilder<ProfileCubit, ProfileState>(
+                              builder: (context, state) {
+                                return state is GetEmployeeSuccess
+                                    ? CircleAvatar(
+                                        radius: AppSize.s30,
+                                        backgroundColor:
+                                            ColorManager.scaffoldColor,
+                                        child: state.employeeEntity.resultEntity
+                                                .response[0].photo.isEmpty
+                                            ? const Image(
+                                                image: AssetImage(
+                                                  ImageAssets.userPhotoImg,
+                                                ),
+                                              )
+                                            : Image(
+                                                fit: BoxFit.cover,
+                                                image: MemoryImage(base64Decode(
+                                                    state
+                                                        .employeeEntity
+                                                        .resultEntity
+                                                        .response[0]
+                                                        .photo)),
+                                              ),
+                                      )
+                                    : const CircleAvatar(
+                                        radius: AppSize.s30,
+                                        backgroundColor:
+                                            ColorManager.scaffoldColor,
+                                        child: Image(
+                                          image: AssetImage(
+                                            ImageAssets.userPhotoImg,
+                                          ),
+                                        ),
+                                      );
+                              },
+                            )),
                       ],
                     ),
                     const SizedBox(

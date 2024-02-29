@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 
@@ -6,7 +8,6 @@ import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
-import '../../../../core/widgets/cached_image_custom/cached_network_image.dart';
 import '../../../../core/widgets/component.dart';
 
 import 'package:flutter/material.dart';
@@ -44,13 +45,23 @@ class ProfileCard extends StatelessWidget {
                       state is GetEmployeeSuccess
                           ? Column(
                               children: [
-                                const CircleAvatar(
+                                CircleAvatar(
                                   radius: AppSize.s30,
                                   backgroundColor: ColorManager.scaffoldColor,
-                                  child: CachedNetworkImageCustom(
-                                    url:
-                                        'https://res.cloudinary.com/halqetelzekr/image/upload/v1678732276/placeholder_t7jyyi.png',
-                                  ),
+                                  child: state.employeeEntity.resultEntity
+                                          .response[0].photo.isEmpty
+                                      ? const Image(
+                                          image: AssetImage(
+                                          ImageAssets.userPhotoImg,
+                                        ))
+                                      : Image(
+                                          fit: BoxFit.cover,
+                                          image: MemoryImage(base64Decode(state
+                                              .employeeEntity
+                                              .resultEntity
+                                              .response[0]
+                                              .photo)),
+                                        ),
                                 ),
                                 const SizedBox(
                                   height: AppSize.s16,

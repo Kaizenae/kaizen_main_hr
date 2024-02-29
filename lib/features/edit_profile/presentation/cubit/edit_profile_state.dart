@@ -17,3 +17,9 @@ class EditProfileErrorState extends EditProfileStates {
 
   EditProfileErrorState({required this.message});
 }
+
+class EditUserPhotoLoadingState extends EditProfileStates {}
+
+class EditUserPhotoErrorState extends EditProfileStates {}
+
+class EditUserPhotoSuccessState extends EditProfileStates {}

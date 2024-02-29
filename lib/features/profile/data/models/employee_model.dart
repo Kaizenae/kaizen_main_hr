@@ -39,21 +39,22 @@ class ResponseModel extends ResponseEntity {
     String? email,
     bool? isAdmin,
     String? birthday,
+    String? photo,
     String? noId,
     String? salary,
   }) : super(
-          id: id ?? 0,
-          name: name ?? '',
-          companyId: companyId ?? 0,
-          companyName: companyName ?? '',
-          email: email ?? '',
-          birthday: birthday ?? '',
-          gender: gender ?? '',
-          isAdmin: isAdmin ?? false,
-          mobilePhone: mobilePhone ?? '',
-          salary: salary ?? '',
-          noId: noId ?? '',
-        );
+            id: id ?? 0,
+            name: name ?? '',
+            companyId: companyId ?? 0,
+            companyName: companyName ?? '',
+            email: email ?? '',
+            birthday: birthday ?? '',
+            gender: gender ?? '',
+            isAdmin: isAdmin ?? false,
+            mobilePhone: mobilePhone ?? '',
+            salary: salary ?? '',
+            noId: noId ?? '',
+            photo: photo ?? "");
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
         name: json['name'],
@@ -65,6 +66,7 @@ class ResponseModel extends ResponseEntity {
         isAdmin: json['is_admin'],
         companyId: json['company_id'],
         companyName: json['work_place'],
+        photo: json["photo"],
         salary: json['wage'].toString(),
         noId: json['notification_id'] == false ? '' : json['notification_id'],
       );

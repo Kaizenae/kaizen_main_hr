@@ -1,11 +1,16 @@
-import 'dart:io';
+import 'dart:convert';
+import 'dart:io' as io;
+import 'dart:typed_data';
 
+import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/error/failure.dart';
+import '../../../../core/local/cache_helper.dart';
 import '../../../../core/usecases/usecase.dart';
 
 import '../../domain/entities/edit_profile_entity.dart';
@@ -72,24 +77,31 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
             EditProfileSuccessState(editProfileEntity: editProfileEntity)));
   }
 
-  File? profileImage;
+  io.File? profileImage;
   var picker = ImagePicker();
   Future<void> getProfileImage() async {
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
-      profileImage = File(pickedFile.path);
-    }
-  }
-
-  backgroundCoverImage() {
-    if (profileImage == null) {
-      return const NetworkImage(
-        "https://res.cloudinary.com/halqetelzekr/image/upload/v1678732276/placeholder_t7jyyi.png",
-      );
-    } else {
-      return FileImage(profileImage!);
+      profileImage = io.File(pickedFile.path);
+      Uint8List imagebytes =
+          await profileImage!.readAsBytes(); //convert to bytes
+      String base64string = base64.encode(imagebytes);
+      Dio().post(
+        EndPoints.editUserPhotoPath,
+        data: {
+          "jsonrpc": "2.0",
+          "params": {
+            "user_id": CacheHelper.get(key: AppConstants.userId).toString(),
+            "photo": base64string,
+          }
+        },
+      ).then((value) {
+        emit(EditUserPhotoSuccessState());
+      }).catchError((error) {
+        emit(EditUserPhotoErrorState());
+      });
     }
   }
 }

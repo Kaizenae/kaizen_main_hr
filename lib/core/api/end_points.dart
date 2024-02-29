@@ -53,4 +53,5 @@ class EndPoints {
   static String getLateInPath = "$baseUrl/get_late_in";
   static String getEarlyOutPath = "$baseUrl/get_early_out";
   static String shiftAllocationPath = "$baseUrl/get_shift_allocation";
+  static String editUserPhotoPath = "$baseUrl/update_user_data";
 }
