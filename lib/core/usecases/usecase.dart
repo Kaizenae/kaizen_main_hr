@@ -111,12 +111,14 @@ class CreateTimeOffParams extends Equatable {
   final String startDate;
   final String endDate;
   final int holidayStatus;
+  final String attachment;
 
   const CreateTimeOffParams({
     required this.startDate,
     required this.endDate,
     required this.userId,
     required this.holidayStatus,
+    required this.attachment,
   });
 
   @override
@@ -125,6 +127,7 @@ class CreateTimeOffParams extends Equatable {
         startDate,
         endDate,
         holidayStatus,
+        attachment,
       ];
 }
 

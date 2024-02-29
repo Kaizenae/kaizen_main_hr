@@ -1,4 +1,8 @@
 // ignore_for_file: deprecated_member_use
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:dio/dio.dart';
@@ -50,6 +54,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "company_id": AppConstants.companyId.toString().toString(),
         "reason": reasonController.text.toString(),
         "date": selectedDate.toString(),
+        "attachment": base64string,
       }
     }).then((value) {
       emit(EarlyOutSuccessState(message: "Success"));
@@ -67,6 +72,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "company_id": AppConstants.companyId.toString(),
         "reason": reasonController.text.toString(),
         "date": selectedDate.toString(),
+        "attachment": base64string,
       }
     }).then((value) {
       emit(LateInSuccessState(message: "Success"));
@@ -76,14 +82,21 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   }
 
   String? fileName;
+  String base64string = "";
+  File? filePath;
+
   pickFileFromDevice() async {
     final result = await FilePicker.platform.pickFiles();
     if (result == null) {
       return null;
+    } else {
+      final file = result.files.first;
+      filePath = File(result.paths.first!);
+      fileName = file.name;
+      Uint8List filebytes = await filePath!.readAsBytes(); //convert to bytes
+      base64string = base64.encode(filebytes);
+      emit(ChangeFileNameState());
     }
-    final file = result.files.first;
-    fileName = file.name;
-    emit(ChangeFileNameState());
   }
 
   LateinEarlyOutModel lateinModel = LateinEarlyOutModel();

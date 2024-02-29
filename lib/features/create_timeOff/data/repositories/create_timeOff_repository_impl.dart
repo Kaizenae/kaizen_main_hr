@@ -28,6 +28,7 @@ class CreateTimeOffRepositoryImpl implements CreateTimeOffRepository {
           endDate: createTimeOffParams.endDate,
           userId: createTimeOffParams.userId,
           holidayStatus: createTimeOffParams.holidayStatus,
+          attachment: createTimeOffParams.attachment,
         );
 
         if (remoteLogin.resultEntity.status == 200) {

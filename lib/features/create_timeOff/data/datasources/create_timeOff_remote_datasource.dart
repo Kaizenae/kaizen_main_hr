@@ -13,6 +13,7 @@ abstract class CreateTimeOffRemoteDataSource {
     required String startDate,
     required String endDate,
     required int holidayStatus,
+    required String attachment,
   });
   Future<GetTimeOffModel> getTimeoff();
 }
@@ -29,6 +30,7 @@ class CreateTimeOffRemoteDataSourceImpl
     required String startDate,
     required String endDate,
     required int holidayStatus,
+    required String attachment,
   }) async {
     final response =
         await apiConsumer.post(EndPoints.createTimeOffEndpoint, body: {
@@ -39,6 +41,7 @@ class CreateTimeOffRemoteDataSourceImpl
         "holiday_status": holidayStatus,
         "company_id": AppConstants.companyId,
         "end": endDate,
+        "attachment": attachment,
       }
     });
     return CreateTimeOffModel.fromJson(response);
