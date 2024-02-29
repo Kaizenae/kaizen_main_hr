@@ -71,9 +71,8 @@ class HomeScreen extends StatelessWidget {
                                                 .response[0].photo.isEmpty
                                             ? const Image(
                                                 image: AssetImage(
-                                                  ImageAssets.userPhotoImg,
-                                                ),
-                                              )
+                                                ImageAssets.userPhotoImg,
+                                              ))
                                             : Image(
                                                 fit: BoxFit.cover,
                                                 image: MemoryImage(base64Decode(

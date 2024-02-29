@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io' as io;
 import 'dart:typed_data';
 
@@ -79,6 +80,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
 
   io.File? profileImage;
   var picker = ImagePicker();
+  String base64string = "";
   Future<void> getProfileImage() async {
     final pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
@@ -87,21 +89,27 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
       profileImage = io.File(pickedFile.path);
       Uint8List imagebytes =
           await profileImage!.readAsBytes(); //convert to bytes
-      String base64string = base64.encode(imagebytes);
-      Dio().post(
-        EndPoints.editUserPhotoPath,
-        data: {
-          "jsonrpc": "2.0",
-          "params": {
-            "user_id": CacheHelper.get(key: AppConstants.userId).toString(),
-            "photo": base64string,
-          }
-        },
-      ).then((value) {
-        emit(EditUserPhotoSuccessState());
-      }).catchError((error) {
-        emit(EditUserPhotoErrorState());
-      });
+      base64string = base64.encode(imagebytes);
+      base64string.isNotEmpty ? updatePhoto() : null;
     }
+  }
+
+  void updatePhoto() {
+    emit(EditUserPhotoLoadingState());
+    Dio().post(
+      EndPoints.editUserPhotoPath,
+      data: {
+        "jsonrpc": "2.0",
+        "params": {
+          "user_id": CacheHelper.get(key: AppConstants.userId),
+          "photo": base64string,
+        }
+      },
+    ).then((value) {
+      emit(EditUserPhotoSuccessState(
+          message: value.data["result"]["message"][0].toString()));
+    }).catchError((error) {
+      emit(EditUserPhotoErrorState());
+    });
   }
 }

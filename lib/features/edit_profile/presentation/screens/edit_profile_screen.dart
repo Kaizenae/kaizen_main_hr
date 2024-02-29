@@ -28,7 +28,7 @@ class EditProfileScreen extends StatelessWidget {
         child: BlocConsumer<EditProfileCubit, EditProfileStates>(
           listener: (context, state) {
             if (state is EditUserPhotoSuccessState) {
-              SnackBar snackBar = const SnackBar(content: Text("Success"));
+              SnackBar snackBar = SnackBar(content: Text(state.message));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is EditUserPhotoErrorState) {
               SnackBar snackBar = const SnackBar(

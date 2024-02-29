@@ -22,4 +22,7 @@ class EditUserPhotoLoadingState extends EditProfileStates {}
 
 class EditUserPhotoErrorState extends EditProfileStates {}
 
-class EditUserPhotoSuccessState extends EditProfileStates {}
+class EditUserPhotoSuccessState extends EditProfileStates {
+  final String message;
+  EditUserPhotoSuccessState({required this.message});
+}
