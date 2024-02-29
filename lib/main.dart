@@ -7,12 +7,10 @@ import 'package:Attendace/features/notifications/presentation/controllers/accept
 
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'core/local/cache_helper.dart';
 import 'features/all_employee/presentation/cubit/all_employees_cubit.dart';
 import 'features/attendance/presentation/controller/attendance_cubit.dart';
@@ -28,7 +26,6 @@ import 'features/myLoans/presentation/controller/myLoans_cubit.dart';
 import 'features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
 import 'features/notifications/presentation/controllers/accept_reject_request/accept_reject_request_cubit.dart';
 import 'features/register/presentation/cubit/register_cubit.dart';
-import 'firebase_options.dart';
 import 'injection_container.dart';
 import 'observer.dart';
 import 'core/utils/constants_manager.dart';
@@ -44,18 +41,6 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await CacheHelper.init();
   await di.init();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  //Remove this method to stop OneSignal Debugging
-  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-
-  OneSignal.shared.setAppId("5ba556fc-28d8-4500-8d4a-f151fea9e04d");
-
-// The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-  OneSignal.shared
-      .promptUserForPushNotificationPermission()
-      .then((accepted) {});
 
   Bloc.observer = MyBlocObserver();
 

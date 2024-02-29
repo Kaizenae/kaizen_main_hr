@@ -117,9 +117,6 @@ class PendingWidget extends StatelessWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                AcceptRejectRequestCubit.get(context).playerId =
-                                    state.myRequestsEntity.resultEntity
-                                        .response[index].noId;
                                 AcceptRejectRequestCubit.get(context).id = state
                                     .myRequestsEntity
                                     .resultEntity

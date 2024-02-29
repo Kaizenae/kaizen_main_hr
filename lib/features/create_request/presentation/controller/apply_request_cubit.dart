@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'dart:math' as math;
 
 import '../../../../core/error/failure.dart';
@@ -128,27 +127,7 @@ class ApplyRequestCubit extends Cubit<ApplyRequestState> {
       return ApplyRequestError(message: failure.message);
     }, (applyRequestEntity) {
       formKey.currentState?.reset();
-      handleSendNotification();
       return ApplyRequestSuccess(applyRequestEntity: applyRequestEntity);
     }));
-  }
-
-  Future<void> handleSendNotification() async {
-    var notification = OSCreateNotification(
-      playerIds: AppConstants.admins,
-      content: " New Request",
-      heading: "KAIZEN HR",
-      iosAttachments: {"id1": 'ic_stat_onesignal_default'},
-      androidSound: 'onesignal_default_sound',
-      androidSmallIcon: 'ic_stat_onesignal_default',
-      androidLargeIcon: 'ic_stat_onesignal_default',
-      mutableContent: true,
-    );
-
-    await OneSignal.shared.postNotification(notification);
-    //
-    // this.setState(() {
-    //   _debugLabelString = "Sent notification with response: $response";
-    // });
   }
 }

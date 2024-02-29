@@ -2,14 +2,11 @@
 
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../core/utils/assets_manager.dart';
 import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
-import 'edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'home/presentation/screens/home_screen.dart';
 
 class MainPage extends StatefulWidget {
@@ -52,53 +49,6 @@ class MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    if (!mounted) return;
-
-    // OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-
-    await addNoId();
-    OneSignal.shared
-        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
-      setState(() {
-        debugLabelString =
-            "Opened notification:${result.notification.title} \n${result.notification.jsonRepresentation().replaceAll("\\n", "\n")}";
-      });
-    });
-
-    OneSignal.shared.setNotificationWillShowInForegroundHandler(
-        (OSNotificationReceivedEvent event) {
-      /// Display Notification, send null to not display
-      event.complete(event.notification);
-
-      setState(() {
-        debugLabelString =
-            "Notification received in foreground notification: \n${event.notification.jsonRepresentation().replaceAll("\\n", "\n")}";
-      });
-    });
-
-    OneSignal.shared
-        .setSubscriptionObserver((OSSubscriptionStateChanges changes) {});
-
-    OneSignal.shared
-        .setPermissionObserver((OSPermissionStateChanges changes) {});
-
-// NOTE: Replace with your own app ID from https://www.onesignal.com
-    await OneSignal.shared.setAppId("5ba556fc-28d8-4500-8d4a-f151fea9e04d");
-  }
-
-  Future<void> addNoId() async {
-    var deviceState = await OneSignal.shared.getDeviceState();
-
-    if (deviceState == null || deviceState.userId == null) return;
-
-    var playerId = deviceState.userId!;
-    BlocProvider.of<EditProfileCubit>(context).noId = playerId;
-
-    BlocProvider.of<EditProfileCubit>(context).editNoIdFun();
   }
 
   @override

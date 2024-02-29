@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../../../../../core/error/failure.dart';
 import '../../../../../core/usecases/usecase.dart';
 import '../../../../create_timeOff/domain/entities/create_timeOff_entity.dart';
@@ -36,24 +35,7 @@ class AcceptRejectTimeOffCubit extends Cubit<AcceptRejectTimeOffState> {
 
   String playerId = '';
 
-  Future<void> handleSendNotification({required String status}) async {
-    var notification = OSCreateNotification(
-      playerIds: [playerId],
-      content: "Your request has been $status",
-      heading: "KAIZEN HR",
-      iosAttachments: {"id1": 'ic_stat_onesignal_default'},
-      androidSound: 'onesignal_default_sound',
-      androidSmallIcon: 'ic_stat_onesignal_default',
-      androidLargeIcon: 'ic_stat_onesignal_default',
-      mutableContent: true,
-    );
-
-    await OneSignal.shared.postNotification(notification);
-    //
-    // this.setState(() {
-    //   _debugLabelString = "Sent notification with response: $response";
-    // });
-  }
+  Future<void> handleSendNotification({required String status}) async {}
 
   String typeFun(String value) {
     if (value == 'check_in') {
