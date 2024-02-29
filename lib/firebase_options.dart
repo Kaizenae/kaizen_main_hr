@@ -65,6 +65,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'kaizen-hr.appspot.com',
     iosClientId:
         '888625483054-4hboft63gm56vdcd1okm1hf324l6h40t.apps.googleusercontent.com',
-    iosBundleId: 'com.example.attendace',
+    iosBundleId: 'com.idea_crate.attendance',
   );
 }
