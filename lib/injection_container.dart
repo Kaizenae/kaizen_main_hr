@@ -1,5 +1,4 @@
 import 'package:Attendace/features/change_password/domain/usecases/change_password_usecase.dart';
-import 'package:Attendace/features/create_request/presentation/controller/apply_request_cubit.dart';
 import 'package:Attendace/features/edit_company/domain/repositories/edit_company_repository.dart';
 import 'package:Attendace/features/edit_company/domain/usecases/edit_company_usecase.dart';
 import 'package:Attendace/features/edit_company/presentation/cubit/edit_company_cubit.dart';
@@ -37,10 +36,6 @@ import 'features/create_loan/domain/repositories/create_loan_repository.dart';
 import 'features/create_loan/domain/usecases/create_loan_usecase.dart';
 import 'features/create_loan/presentation/controller/create_loan_cubit.dart';
 import 'features/create_loan/presentation/controller/currency_controller/currency_cubit.dart';
-import 'features/create_request/data/datasources/apply_request_remote_datasource.dart';
-import 'features/create_request/data/repositories/apply_request_repository_impl.dart';
-import 'features/create_request/domain/repositories/apply_request_repository.dart';
-import 'features/create_request/domain/usecases/apply_request_usecase.dart';
 import 'features/create_timeOff/data/datasources/create_timeOff_remote_datasource.dart';
 import 'features/create_timeOff/data/repositories/create_timeOff_repository_impl.dart';
 import 'features/create_timeOff/domain/repositories/create_timeOff_repository.dart';
@@ -114,8 +109,6 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeCubit>(() => HomeCubit(punchInOutUsecase: sl()));
   sl.registerLazySingleton<MyRequestsCubit>(() =>
       MyRequestsCubit(myRequestsUsecase: sl(), myRequestsPendingUsecase: sl()));
-  sl.registerLazySingleton<ApplyRequestCubit>(
-      () => ApplyRequestCubit(applyRequestUsecase: sl()));
   sl.registerLazySingleton<EditProfileCubit>(() => EditProfileCubit(
       editProfileUsecase: sl(),
       editDepartmentUsecase: sl(),
@@ -179,8 +172,6 @@ Future<void> init() async {
   sl.registerLazySingleton<MyRequestsUsecase>(() => MyRequestsUsecase(sl()));
   sl.registerLazySingleton<MyRequestsPendingUsecase>(
       () => MyRequestsPendingUsecase(sl()));
-  sl.registerLazySingleton<ApplyRequestUsecase>(
-      () => ApplyRequestUsecase(sl()));
   sl.registerLazySingleton<EditUserNameUsecase>(
       () => EditUserNameUsecase(sl()));
   sl.registerLazySingleton<EditDepartmentUsecase>(
@@ -236,12 +227,6 @@ Future<void> init() async {
         myRequestsRemoteDataSource: sl(),
         networkInfo: sl(),
       ));
-
-  sl.registerLazySingleton<ApplyRequestRepository>(
-      () => ApplyRequestRepositoryImpl(
-            applyRequestRemoteDataSource: sl(),
-            networkInfo: sl(),
-          ));
   sl.registerLazySingleton<EditProfileRepository>(
       () => EditProfileRepositoryImpl(
             editProfileRemoteDataSource: sl(),
@@ -326,10 +311,6 @@ Future<void> init() async {
           ));
   sl.registerLazySingleton<MyRequestsRemoteDataSource>(
       () => MyRequestsRemoteDataSourceImpl(
-            apiConsumer: sl(),
-          ));
-  sl.registerLazySingleton<ApplyRequestRemoteDataSource>(
-      () => ApplyRequestRemoteDataSourceImpl(
             apiConsumer: sl(),
           ));
   sl.registerLazySingleton<EditProfileRemoteDataSource>(

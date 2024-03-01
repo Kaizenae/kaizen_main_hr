@@ -6,7 +6,6 @@ import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:Attendace/features/create_loan/presentation/screens/create_loan_screen.dart';
-import 'package:Attendace/features/create_request/presentation/screens/apply_request_screen.dart';
 import 'package:Attendace/features/create_timeOff/presentation/screens/create_timeOff_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_company_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_location_screen.dart';
@@ -123,8 +122,7 @@ class RoutesMap {
       Routes.myTimeOffRoute: (BuildContext context) => const MyTimeOffScreen(),
       Routes.notificationsRoute: (BuildContext context) =>
           const NotificationsScreen(),
-      Routes.createRequestRoute: (BuildContext context) =>
-          const ApplyRequestScreen(),
+
       Routes.createTimeOffRoute: (BuildContext context) =>
           const CreateTimeOffScreen(),
       Routes.mainRoute: (BuildContext context) => const MainPage(),
@@ -186,10 +184,6 @@ class RoutesMap {
 
       case Routes.notificationsRoute:
         return const NotificationsScreen();
-
-      case Routes.createRequestRoute:
-        return const ApplyRequestScreen();
-
       case Routes.forgetPasswordRoute:
         return const ForgetPasswordScreen();
 

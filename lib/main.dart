@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:Attendace/features/create_request/presentation/controller/apply_request_cubit.dart';
 import 'package:Attendace/features/create_timeOff/presentation/controller/create_timeOff_cubit.dart';
 import 'package:Attendace/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_timeOff/accept_reject_request_cubit.dart';
@@ -67,7 +66,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<CurrencyCubit>()),
         BlocProvider(create: (context) => sl<MyTimeOffCubit>()),
         BlocProvider(create: (context) => sl<TimeOffCubit>()),
-        BlocProvider(create: (context) => sl<ApplyRequestCubit>()),
         BlocProvider(create: (context) => sl<EditProfileCubit>()),
         BlocProvider(create: (context) => sl<EditCompanyCubit>()),
         BlocProvider(create: (context) => sl<AllEmployeesCubit>()),
