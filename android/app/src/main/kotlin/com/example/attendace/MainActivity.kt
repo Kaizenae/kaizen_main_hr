@@ -1,4 +1,4 @@
-package com.idea_crate.attendance
+package com.ideacrate.attendance
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
