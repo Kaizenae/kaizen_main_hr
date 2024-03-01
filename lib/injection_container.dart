@@ -313,6 +313,7 @@ Future<void> init() async {
       () => MyRequestsRemoteDataSourceImpl(
             apiConsumer: sl(),
           ));
+
   sl.registerLazySingleton<EditProfileRemoteDataSource>(
       () => EditProfileRemoteDataSourceImpl(
             apiConsumer: sl(),
