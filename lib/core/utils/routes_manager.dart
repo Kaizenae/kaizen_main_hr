@@ -22,7 +22,6 @@ import 'package:Attendace/features/myRequests/presentation/screens/myRequests_sc
 import 'package:Attendace/features/myTimeOff/presentation/screens/myTimeOff_screen.dart';
 import 'package:Attendace/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:Attendace/features/splash_screen/splash_screen.dart';
-import 'package:Attendace/local_auth_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../features/all_employee/presentation/screens/employee_screen.dart';
@@ -148,7 +147,6 @@ class RoutesMap {
       Routes.helpRoute: (BuildContext context) => HelpAndFeedbackScreen(),
       Routes.createLoanRoute: (BuildContext context) =>
           const CreateLoanScreen(),
-      Routes.localAuthRoute: (BuildContext context) => const LocalAuthScreen(),
       Routes.splashRoute: (BuildContext context) => const SplashScreen(),
       Routes.forgetPasswordRoute: (BuildContext context) =>
           const ForgetPasswordScreen(),
@@ -224,8 +222,7 @@ class RoutesMap {
         return const CreateLoanScreen();
       case Routes.createTimeOffRoute:
         return const CreateTimeOffScreen();
-      case Routes.localAuthRoute:
-        return const LocalAuthScreen();
+
       case Routes.splashRoute:
         return const SplashScreen();
 
