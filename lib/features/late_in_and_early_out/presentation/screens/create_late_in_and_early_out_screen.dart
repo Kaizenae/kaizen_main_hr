@@ -13,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -46,11 +45,12 @@ class _CreateLateInEarlyOutScreenState
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is EarlyOutSuccessState) {
               Navigator.pop(context);
-
+              Navigator.pop(context);
               SnackBar snackBar =
                   SnackBar(content: Text(state.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is LateInSuccessState) {
+              Navigator.pop(context);
               Navigator.pop(context);
               SnackBar snackBar =
                   SnackBar(content: Text(state.message.toString()));

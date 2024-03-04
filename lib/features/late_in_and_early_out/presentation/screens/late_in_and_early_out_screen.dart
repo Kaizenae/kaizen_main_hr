@@ -5,15 +5,15 @@ import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
-import '../../../../core/widgets/shimmer_custom/shimmer_custom.dart';
-import '../../../myLoans/presentation/widgets/userRequest_widget.dart';
+import '../../../../core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import '../controller/cubit.dart';
-import '../widget/early_and_late_list.dart';
+import '../widget/approved_widget.dart';
+import '../widget/pending_time_widget.dart';
+import '../widget/refuse_widget.dart';
 import 'create_late_in_and_early_out_screen.dart';
 
 class LateInAndEarlyOutScreen extends StatelessWidget {
@@ -59,46 +59,30 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                   const SizedBox(
                     height: AppSize.s20,
                   ),
-                  state is GetLateInEarlyOutLoadingState
-                      ? Expanded(
-                          child: ShimmerCustom(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) => const Column(
-                                  children: [
-                                    UserRequestWidget(
-                                      iconPath: IconsAssets.emailIcon,
-                                      text: AppStrings.message,
-                                      subText: 'Loading',
-                                    ),
-                                    UserRequestWidget(
-                                      iconPath: IconsAssets.clockIcon,
-                                      text: AppStrings.status,
-                                      subText: 'Loading.....',
-                                    ),
-                                  ],
-                                ),
-                                itemCount: 10,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Expanded(
-                          child: EarlyAndLateList(
-                          title: title,
-                          list: title == AppStrings.lateInRequest
-                              ? BlocProvider.of<EarlyOutLateInCubit>(context)
-                                  .lateinModel
-                                  .result
-                                  .responseModel
-                              : BlocProvider.of<EarlyOutLateInCubit>(context)
-                                  .earlyOutModel
-                                  .result
-                                  .responseModel,
-                        ))
+                  TabBarCustom(
+                    widgets: [
+                      ApprovedWidget(
+                        title: title,
+                      ),
+                      PendingWidget(
+                        title: title,
+                      ),
+                      RefusedWidget(
+                        title: title,
+                      ),
+                    ],
+                    myTabs: const [
+                      Tab(
+                        text: AppStrings.approved,
+                      ),
+                      Tab(
+                        text: AppStrings.pending,
+                      ),
+                      Tab(
+                        text: AppStrings.refuse,
+                      )
+                    ],
+                  ),
                 ],
               );
             },

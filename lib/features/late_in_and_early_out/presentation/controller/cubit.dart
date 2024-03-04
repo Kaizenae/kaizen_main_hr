@@ -18,6 +18,8 @@ import '../../data/late_in_early_out_model.dart';
 
 class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   EarlyOutLateInCubit() : super(EarlyOutLateInInitState());
+  static EarlyOutLateInCubit get(context) => BlocProvider.of(context);
+
   TextEditingController reasonController = TextEditingController();
   DateRangePickerController dateController = DateRangePickerController();
   String dateFormate = "MM/dd/yyyy";
@@ -57,9 +59,11 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "attachment": base64string,
       }
     }).then((value) {
-      emit(EarlyOutSuccessState(message: "Success"));
+      emit(EarlyOutSuccessState(
+          message: value.data["result"]["message"].toString()));
     }).catchError((error) {
-      emit(EarlyOutErrorState(message: "Faild! You Return to the admin"));
+      emit(EarlyOutErrorState(
+          message: "Some thing went wrong, Try again later!!"));
     });
   }
 
@@ -75,9 +79,11 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "attachment": base64string,
       }
     }).then((value) {
-      emit(LateInSuccessState(message: "Success"));
+      emit(LateInSuccessState(
+          message: value.data["result"]["message"].toString()));
     }).catchError((error) {
-      emit(LateInErrorState(message: "Faild! You Return to the admin"));
+      emit(LateInErrorState(
+          message: "Some thing went wrong, Try again later!!"));
     });
   }
 
@@ -99,8 +105,14 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     }
   }
 
+  List lateInPending = [];
+  List lateInRefuse = [];
+  List lateInDone = [];
   LateinEarlyOutModel lateinModel = LateinEarlyOutModel();
   void getLateIn() {
+    lateInPending = [];
+    lateInRefuse = [];
+    lateInDone = [];
     emit(GetLateInEarlyOutLoadingState());
     Dio().get(EndPoints.getLateInPath, data: {
       "jsonrpc": "2.0",
@@ -110,14 +122,30 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       }
     }).then((value) {
       lateinModel = LateinEarlyOutModel.fromJson(value.data);
+      for (var element in lateinModel.result.responseModel) {
+        if (element.state == "submitted") {
+          lateInPending.add(element);
+        } else if (element.state == 'done') {
+          lateInDone.add(element);
+        } else {
+          lateInRefuse.add(element);
+        }
+      }
       emit(GetLateInSuccessState());
     }).catchError((error) {
       emit(GetLateInErrorState());
     });
   }
 
+  List earlyOutPending = [];
+  List earlyOutRefuse = [];
+  List earlyOutDone = [];
+
   LateinEarlyOutModel earlyOutModel = LateinEarlyOutModel();
   void getEarlyOut() {
+    earlyOutPending = [];
+    earlyOutRefuse = [];
+    earlyOutDone = [];
     emit(GetLateInEarlyOutLoadingState());
     Dio().get(EndPoints.getEarlyOutPath, data: {
       "jsonrpc": "2.0",
@@ -127,6 +155,15 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       }
     }).then((value) {
       earlyOutModel = LateinEarlyOutModel.fromJson(value.data);
+      for (var element in earlyOutModel.result.responseModel) {
+        if (element.state == "submitted") {
+          earlyOutPending.add(element);
+        } else if (element.state == 'done') {
+          earlyOutDone.add(element);
+        } else {
+          earlyOutRefuse.add(element);
+        }
+      }
       emit(GetEarlyOutSuccessState());
     }).catchError((error) {
       emit(GetEarlyOutErrorState());

@@ -2,7 +2,9 @@ import 'package:animate_do/animate_do.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
