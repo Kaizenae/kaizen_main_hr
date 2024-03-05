@@ -29,12 +29,14 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
         ..getEarlyOut()
         ..getLateIn(),
       child: ScaffoldCustom(
-          appBarCustom: AppBarCustom(
-            text: title,
-          ),
-          body: BlocBuilder<EarlyOutLateInCubit, EarlyOutLateInStates>(
-            builder: (context, state) {
-              return Column(
+        appBarCustom: AppBarCustom(
+          text: title,
+        ),
+        body: BlocBuilder<EarlyOutLateInCubit, EarlyOutLateInStates>(
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
                 children: [
                   const SizedBox(
                     height: AppSize.s16,
@@ -47,12 +49,13 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                       text: 'Apply Request',
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateLateInEarlyOutScreen(
-                                title: title,
-                              ),
-                            ));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateLateInEarlyOutScreen(
+                              title: title,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -84,9 +87,11 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                     ],
                   ),
                 ],
-              );
-            },
-          )),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
