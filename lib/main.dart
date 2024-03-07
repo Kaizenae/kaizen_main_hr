@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
             data: MediaQuery.of(context)
                 .copyWith(textScaler: const TextScaler.linear(1.0)),
             child: Material(child: child!)),
-        title: 'KAIZEN HR',
+        title: 'IDC HR',
         theme: getApplicationTheme(),
         routes: RoutesMap.routesMap(),
 
