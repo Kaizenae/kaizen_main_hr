@@ -9,9 +9,7 @@ import 'package:Attendace/features/create_loan/presentation/screens/create_loan_
 import 'package:Attendace/features/create_timeOff/presentation/screens/create_timeOff_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_company_screen.dart';
 import 'package:Attendace/features/edit_company/presentation/screens/edit_location_screen.dart';
-import 'package:Attendace/features/forget_password/presentation/screens/create_new_password_screen.dart';
 import 'package:Attendace/features/forget_password/presentation/screens/forget_password_screen.dart';
-import 'package:Attendace/features/forget_password/presentation/screens/otp_screen.dart';
 import 'package:Attendace/features/help_and_feedback/presentation/screens/help_and_feedback_screen.dart';
 import 'package:Attendace/features/hr_policies/presentation/screens/hr_policies_screen.dart';
 import 'package:Attendace/features/login/presentation/screens/baseUrl_screen.dart';
@@ -148,9 +146,7 @@ class RoutesMap {
       Routes.splashRoute: (BuildContext context) => const SplashScreen(),
       Routes.forgetPasswordRoute: (BuildContext context) =>
           const ForgetPasswordScreen(),
-      Routes.otpScreenRoute: (BuildContext context) => const OTPScreen(),
-      Routes.createNewPasswordRoute: (BuildContext context) =>
-          const CreateNewPasswordScreen(),
+
       Routes.hrPoliciesRoute: (BuildContext context) =>
           const HrPoliciesScreen(),
       Routes.shiftAllocationRoute: (BuildContext context) =>
@@ -220,10 +216,6 @@ class RoutesMap {
       case Routes.splashRoute:
         return const SplashScreen();
 
-      case Routes.otpScreenRoute:
-        return const OTPScreen();
-      case Routes.createNewPasswordRoute:
-        return const CreateNewPasswordScreen();
       case Routes.hrPoliciesRoute:
         return const HrPoliciesScreen();
       case Routes.shiftAllocationRoute:

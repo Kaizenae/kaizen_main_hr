@@ -13,8 +13,11 @@ import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 
 class CreateNewPasswordScreen extends StatelessWidget {
-  const CreateNewPasswordScreen({super.key});
-
+  const CreateNewPasswordScreen({
+    super.key,
+    required this.phoneNumber,
+  });
+  final String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(

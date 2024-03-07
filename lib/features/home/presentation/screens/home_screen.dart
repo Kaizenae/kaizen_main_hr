@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
@@ -34,9 +33,6 @@ class HomeScreen extends StatelessWidget {
                       state.punchInOutEntity.resultEntity.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is CheckInAndOutError) {
-              if (kDebugMode) {
-                print(state.message);
-              }
               SnackBar snackBar =
                   SnackBar(content: Text(state.message.toString()));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);

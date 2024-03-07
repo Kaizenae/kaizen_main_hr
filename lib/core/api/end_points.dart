@@ -54,4 +54,5 @@ class EndPoints {
   static String getEarlyOutPath = "$baseUrl/get_early_out";
   static String shiftAllocationPath = "$baseUrl/get_shift_allocation";
   static String editUserPhotoPath = "$baseUrl/update_user_data";
+  static String otpPath = "https://ndm-solutions.com/sms/api";
 }

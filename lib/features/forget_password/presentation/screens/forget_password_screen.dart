@@ -1,11 +1,10 @@
 import 'package:Attendace/core/utils/assets_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
-import 'package:Attendace/core/widgets/component.dart';
+import 'package:Attendace/features/forget_password/presentation/screens/otp_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/font_manager.dart';
-import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
@@ -13,9 +12,15 @@ import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
 
+  @override
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+}
+
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  final TextEditingController phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
@@ -52,7 +57,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     keyboardType: TextInputType.phone,
                     suffixIcon: IconsAssets.phoneIcon,
                     suffix: true,
-
+                    controller: phoneNumberController,
                     // textInputAction: TextInputAction.done,
                   ),
                   const SizedBox(
@@ -70,9 +75,13 @@ class ForgetPasswordScreen extends StatelessWidget {
                       fontSize: FontSize.s14,
                       textColor: ColorManager.white,
                       onPressed: () {
-                        navigator(
+                        Navigator.push(
                           context,
-                          Routes.otpScreenRoute,
+                          MaterialPageRoute(
+                            builder: (context) => OTPScreen(
+                              phoneNumber: phoneNumberController.text,
+                            ),
+                          ),
                         );
                       },
                       text: AppStrings.submit,
