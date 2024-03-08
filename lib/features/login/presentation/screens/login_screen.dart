@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       body: BlocProvider.value(
-        value: BlocProvider.of<LoginCubit>(context)..getUniqueDeviceId(),
+        value: BlocProvider.of<LoginCubit>(context),
         child: BlocConsumer<LoginCubit, LoginStates>(
           listener: (context, state) {
             if (state is LoginSuccessState) {

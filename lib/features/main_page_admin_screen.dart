@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:Attendace/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import '../core/utils/assets_manager.dart';
 import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
-import 'all_employee/presentation/cubit/all_employees_cubit.dart';
 import 'home/presentation/screens/home_screen.dart';
 
 class MainPageAdmin extends StatefulWidget {
@@ -24,20 +22,20 @@ class MainPageAdminState extends State<MainPageAdmin> {
     const HomeScreen(),
     // const AllEmployeesScreen(),
     // const AttendanceScreen(),
-    const NotificationsScreen(),
+    //   const NotificationsScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
     // IconsAssets.searchIcon,
-    IconsAssets.notificationIcon,
+    // IconsAssets.notificationIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
     // AppStrings.employees,
-    AppStrings.notifications,
+    // AppStrings.notifications,
     AppStrings.profile,
   ];
 
@@ -90,10 +88,8 @@ class MainPageAdminState extends State<MainPageAdmin> {
             // if (index == 2) {
             //   BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
             // } else
-            if (index == 2) {
+            if (index == 1) {
               ProfileCubit.get(context).getEmployeeFun();
-            } else if (index == 1) {
-              AllEmployeesCubit.get(context).getEmployeesFun();
             }
             setState(() {
               _selectedIndex = index;

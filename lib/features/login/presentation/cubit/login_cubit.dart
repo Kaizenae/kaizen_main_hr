@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:Attendace/core/local/cache_helper.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/login/data/models/login_model.dart';
 import 'package:dartz/dartz.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/error/failure.dart';
@@ -63,21 +61,4 @@ class LoginCubit extends Cubit<LoginStates> {
   }
 
   String uniqueDeviceId = '';
-
-  getUniqueDeviceId() async {
-    var deviceInfo = DeviceInfoPlugin();
-
-    if (Platform.isIOS) {
-      // import 'dart:io'
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      uniqueDeviceId =
-          '${iosDeviceInfo.systemName}:${iosDeviceInfo.identifierForVendor}';
-      // unique ID on iOS
-    } else if (Platform.isAndroid) {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-
-      uniqueDeviceId =
-          '${androidDeviceInfo.model}:${androidDeviceInfo.id}'; // unique ID on Android
-    }
-  }
 }

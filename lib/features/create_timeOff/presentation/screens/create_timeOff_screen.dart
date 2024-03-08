@@ -234,7 +234,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                 return SfDateRangePicker(
                                                   onSubmit: (v) {
                                                     cubit.selectedStartDate =
-                                                        DateFormat("MM/dd/yyyy")
+                                                        DateFormat("yyyy-MM-dd")
                                                             .format(
                                                                 DateTime.parse(v
                                                                     .toString()));
@@ -313,7 +313,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                 return SfDateRangePicker(
                                                   onSubmit: (v) {
                                                     cubit.selectedEndDate =
-                                                        DateFormat("MM/dd/yyyy")
+                                                        DateFormat("yyyy-MM-dd")
                                                             .format(
                                                                 DateTime.parse(v
                                                                     .toString()));

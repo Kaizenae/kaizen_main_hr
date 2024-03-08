@@ -28,7 +28,6 @@ class RegisterScreen extends StatelessWidget {
       body: BlocProvider(
         create: (context) =>
             RegisterCubit(registerUsecase: sl<RegisterUsecase>())
-              ..getUniqueDeviceId()
               ..getCompaniesData(),
         child: BlocConsumer<RegisterCubit, RegisterStates>(
           listener: (context, state) {
@@ -404,8 +403,6 @@ class RegisterScreen extends StatelessWidget {
                                 fontSize: FontSize.s14,
                                 textColor: ColorManager.white,
                                 onPressed: () async {
-                                  await registerCubit.getUniqueDeviceId();
-
                                   if (registerCubit.formKey.currentState!
                                       .validate()) {
                                     await registerCubit.registerFun();

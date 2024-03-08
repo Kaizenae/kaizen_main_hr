@@ -110,7 +110,7 @@ class _CreateLateInEarlyOutScreenState
                                           return SfDateRangePicker(
                                             onSubmit: (v) {
                                               cubit.selectedDate =
-                                                  DateFormat("MM/dd/yyyy")
+                                                  DateFormat("yyyy-MM-dd")
                                                       .format(DateTime.parse(
                                                           v.toString()));
 

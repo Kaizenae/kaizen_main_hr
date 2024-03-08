@@ -22,8 +22,8 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
 
   TextEditingController reasonController = TextEditingController();
   DateRangePickerController dateController = DateRangePickerController();
-  String dateFormate = "MM/dd/yyyy";
-  String? selectedDate = DateFormat("MM/dd/yyyy").format(DateTime.now());
+  String dateFormate = "yyyy-MM-dd";
+  String? selectedDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;
   String? selectDate;
@@ -32,13 +32,13 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   String range = '';
   String rangeCount = '';
   onSelectionChanged({required DateRangePickerSelectionChangedArgs args}) {
-    selectDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+    selectDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
     if (args.value is PickerDateRange) {
-      range = '${DateFormat('MM/dd/yyyy').format(args.value.startDate)} -'
+      range = '${DateFormat('yyyy-MM-dd').format(args.value.startDate)} -'
           // ignore: lineslonger_than_80_chars
-          ' ${DateFormat('MM/dd/yyyy').format(args.value.endDate ?? args.value.startDate)}';
+          ' ${DateFormat('yyyy-MM-dd').format(args.value.endDate ?? args.value.startDate)}';
     } else if (args.value is DateTime) {
-      selectedDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+      selectedDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
     } else if (args.value is List<DateTime>) {
       dateCount = args.value.length.toString();
     } else {

@@ -30,9 +30,9 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
   GlobalKey<FormState> formKey = GlobalKey();
   DateRangePickerController endDateController = DateRangePickerController();
   DateRangePickerController startDateController = DateRangePickerController();
-  String dateFormate = "MM/dd/yyyy";
-  String? selectedStartDate = DateFormat("MM/dd/yyyy").format(DateTime.now());
-  String? selectedEndDate = DateFormat("MM/dd/yyyy").format(DateTime.now());
+  String dateFormate = "yyyy-MM-dd";
+  String? selectedStartDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+  String? selectedEndDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;
   String? selectStartDate;
@@ -49,14 +49,14 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
 
   onSelectionStartDateChanged(
       {required DateRangePickerSelectionChangedArgs args}) {
-    selectStartDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+    selectStartDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
     if (args.value is PickerDateRange) {
-      range = '${DateFormat('MM/dd/yyyy').format(args.value.startDate)} -'
+      range = '${DateFormat('yyyy-MM-dd').format(args.value.startDate)} -'
           // ignore: lineslonger_than_80_chars
-          ' ${DateFormat('MM/dd/yyyy').format(args.value.endDate ?? args.value.startDate)}';
+          ' ${DateFormat('yyyy-MM-dd').format(args.value.endDate ?? args.value.startDate)}';
     } else if (args.value is DateTime) {
       selectedStartDate =
-          DateFormat("MM/dd/yyyy").format(args.value).toString();
+          DateFormat("yyyy-MM-dd").format(args.value).toString();
     } else if (args.value is List<DateTime>) {
       dateCount = args.value.length.toString();
     } else {
@@ -67,13 +67,13 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
 
   onSelectionEndDateChanged(
       {required DateRangePickerSelectionChangedArgs args}) {
-    selectEndDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+    selectEndDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
     if (args.value is PickerDateRange) {
-      range = '${DateFormat('MM/dd/yyyy').format(args.value.startDate)} -'
+      range = '${DateFormat('yyyy-MM-dd').format(args.value.startDate)} -'
           // ignore: lineslonger_than_80_chars
-          ' ${DateFormat('MM/dd/yyyy').format(args.value.endDate ?? args.value.startDate)}';
+          ' ${DateFormat('yyyy-MM-dd').format(args.value.endDate ?? args.value.startDate)}';
     } else if (args.value is DateTime) {
-      selectedEndDate = DateFormat("MM/dd/yyyy").format(args.value).toString();
+      selectedEndDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
     } else if (args.value is List<DateTime>) {
       dateCount = args.value.length.toString();
     } else {
