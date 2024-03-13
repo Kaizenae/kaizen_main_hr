@@ -8,6 +8,7 @@ import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
 import 'home/presentation/screens/home_screen.dart';
+import 'profile/presentation/cubit/profile_cubit.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -90,6 +91,9 @@ class MainPageState extends State<MainPage> {
             // } else if (AppConstants.admin ? index == 3 : index == 2) {
             //   ProfileCubit.get(context).getEmployeeFun();
             // }
+            if (index == 1) {
+              ProfileCubit.get(context).getEmployeeFun();
+            }
             setState(() {
               _selectedIndex = index;
             });

@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
@@ -28,15 +30,21 @@ class ProfileCard extends StatelessWidget {
         child: BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
             if (state is GetEmployeeError) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ProfileCubit.get(context).getEmployeeFun();
             }
             if (state is LogoutState) {
               navigatorAndRemove(context, Routes.loginRoute);
             }
           },
           builder: (context, state) {
+            log(state.toString());
             return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -45,24 +53,37 @@ class ProfileCard extends StatelessWidget {
                       state is GetEmployeeSuccess
                           ? Column(
                               children: [
-                                CircleAvatar(
-                                  radius: AppSize.s30,
-                                  backgroundColor: ColorManager.scaffoldColor,
-                                  child: state.employeeEntity.resultEntity
-                                          .response[0].photo.isEmpty
-                                      ? const Image(
-                                          image: AssetImage(
-                                          ImageAssets.userPhotoImg,
-                                        ))
-                                      : Image(
-                                          fit: BoxFit.cover,
-                                          image: MemoryImage(base64Decode(state
-                                              .employeeEntity
-                                              .resultEntity
-                                              .response[0]
-                                              .photo)),
-                                        ),
-                                ),
+                                state.employeeEntity.resultEntity.response[0]
+                                        .photo.isEmpty
+                                    ? Container(
+                                        width: 65,
+                                        height: 65,
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                ImageAssets.userPhotoImg,
+                                              ),
+                                            )),
+                                      )
+                                    : Container(
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        width: 65,
+                                        height: 65,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: MemoryImage(base64Decode(
+                                                    state
+                                                        .employeeEntity
+                                                        .resultEntity
+                                                        .response[0]
+                                                        .photo)))),
+                                      ),
                                 const SizedBox(
                                   height: AppSize.s16,
                                 ),

@@ -36,8 +36,12 @@ class EditPhoneScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is EditProfileSuccessState) {
             SnackBar snackBar = SnackBar(
-                content: Text(
-                    state.editProfileEntity.resultEntity.message.toString()));
+              content:
+                  Text(state.editProfileEntity.resultEntity.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
             AppConstants.admin
                 ? navigatorAndRemove(context, Routes.mainRouteAdmin)
@@ -46,8 +50,12 @@ class EditPhoneScreen extends StatelessWidget {
             if (kDebugMode) {
               print(state.message);
             }
-            SnackBar snackBar =
-                SnackBar(content: Text(state.message.toString()));
+            SnackBar snackBar = SnackBar(
+              content: Text(state.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import '../../../../core/utils/strings_manager.dart';
@@ -9,9 +9,11 @@ class ApprovedWidget extends StatelessWidget {
   ApprovedWidget({
     super.key,
     required this.title,
+    required this.state,
   });
   final String title;
   late List doneList;
+  var state;
   @override
   Widget build(BuildContext context) {
     if (title == AppStrings.earlyOutRequest) {
@@ -19,11 +21,13 @@ class ApprovedWidget extends StatelessWidget {
       return EarlyAndLateList(
         list: doneList,
         title: title,
+        state: state,
       );
     } else if (title == AppStrings.lateInRequest) {
       doneList = EarlyOutLateInCubit.get(context).lateInDone;
       return EarlyAndLateList(
         list: doneList,
+        state: state,
         title: title,
       );
     } else {

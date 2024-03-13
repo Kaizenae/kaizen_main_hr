@@ -1,18 +1,17 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:convert';
-
 import 'package:Attendace/core/utils/routes_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
-import '../../../late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
 import '../../../profile/presentation/cubit/profile_state.dart';
 import '../controller/home_cubit.dart';
 import '../../../../core/utils/assets_manager.dart';
-import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../controller/home_state.dart';
@@ -29,12 +28,20 @@ class HomeScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is CheckInAndOutSuccess) {
               SnackBar snackBar = SnackBar(
-                  content: Text(
-                      state.punchInOutEntity.resultEntity.message.toString()));
+                content: Text(
+                    state.punchInOutEntity.resultEntity.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is CheckInAndOutError) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },
@@ -59,35 +66,50 @@ class HomeScreen extends StatelessWidget {
                             child: BlocBuilder<ProfileCubit, ProfileState>(
                               builder: (context, state) {
                                 return state is GetEmployeeSuccess
-                                    ? CircleAvatar(
-                                        radius: AppSize.s30,
-                                        backgroundColor:
-                                            ColorManager.scaffoldColor,
-                                        child: state.employeeEntity.resultEntity
-                                                .response[0].photo.isEmpty
-                                            ? const Image(
-                                                image: AssetImage(
+                                    ? state.employeeEntity.resultEntity
+                                            .response[0].photo.isEmpty
+                                        ? Container(
+                                            width: 65,
+                                            height: 65,
+                                            clipBehavior:
+                                                Clip.antiAliasWithSaveLayer,
+                                            decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                    ImageAssets.userPhotoImg,
+                                                  ),
+                                                )),
+                                          )
+                                        : Container(
+                                            clipBehavior:
+                                                Clip.antiAliasWithSaveLayer,
+                                            width: 65,
+                                            height: 65,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: MemoryImage(
+                                                        base64Decode(state
+                                                            .employeeEntity
+                                                            .resultEntity
+                                                            .response[0]
+                                                            .photo)))),
+                                          )
+                                    : Container(
+                                        width: 65,
+                                        height: 65,
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: AssetImage(
                                                 ImageAssets.userPhotoImg,
-                                              ))
-                                            : Image(
-                                                fit: BoxFit.cover,
-                                                image: MemoryImage(base64Decode(
-                                                    state
-                                                        .employeeEntity
-                                                        .resultEntity
-                                                        .response[0]
-                                                        .photo)),
                                               ),
-                                      )
-                                    : const CircleAvatar(
-                                        radius: AppSize.s30,
-                                        backgroundColor:
-                                            ColorManager.scaffoldColor,
-                                        child: Image(
-                                          image: AssetImage(
-                                            ImageAssets.userPhotoImg,
-                                          ),
-                                        ),
+                                            )),
                                       );
                               },
                             )),
@@ -285,15 +307,17 @@ class HomeScreen extends StatelessWidget {
                           CustomHomeItem(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LateInAndEarlyOutScreen(
-                                            title: AppStrings.lateInRequest,
-                                          )));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const LateInAndEarlyOutScreen(
+                                    title: AppStrings.lateInRequest,
+                                  ),
+                                ),
+                              );
                             },
                             icon: ImageAssets.lateInImg,
-                            label: AppStrings.myLateIn,
+                            label: AppStrings.lateInRequest,
                           )
                         ],
                       ),

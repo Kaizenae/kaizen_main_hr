@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
@@ -23,8 +24,12 @@ class PendingWidget extends StatelessWidget {
     return BlocConsumer<MyLoansCubit, MyLoansState>(
       listener: (context, state) {
         if (state is CancelMyLoansSuccess) {
-          SnackBar snackBar =
-              const SnackBar(content: Text("Loan Canceled Successfuly"));
+          SnackBar snackBar = SnackBar(
+            content: const Text("Loan Canceled Successfuly"),
+            duration: Duration(
+              seconds: AppConstants.snackBarTime,
+            ),
+          );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },

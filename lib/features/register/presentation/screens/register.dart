@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -33,14 +34,22 @@ class RegisterScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is RegisterSuccessState) {
               SnackBar snackBar = SnackBar(
-                  content: Text(
-                      state.registerEntity.resultEntity.message.toString()));
+                content:
+                    Text(state.registerEntity.resultEntity.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
               navigatorAndRemove(context, Routes.loginRoute);
               // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => const HomeScreen()) ,(route) => false,);
             } else if (state is RegisterErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },

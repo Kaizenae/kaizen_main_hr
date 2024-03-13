@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
@@ -39,12 +40,20 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
             if (state is CreateTimeOffSuccess) {
               Navigator.pop(context);
               SnackBar snackBar = SnackBar(
-                  content: Text(state.createTimeOffEntity.resultEntity.message
-                      .toString()));
+                content: Text(
+                    state.createTimeOffEntity.resultEntity.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else if (state is CreateTimeOffError) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },

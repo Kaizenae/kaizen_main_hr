@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -11,6 +12,7 @@ import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../profile/presentation/cubit/profile_cubit.dart';
 import '../cubit/edit_profile_state.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -27,11 +29,21 @@ class EditProfileScreen extends StatelessWidget {
         child: BlocConsumer<EditProfileCubit, EditProfileStates>(
           listener: (context, state) {
             if (state is EditUserPhotoSuccessState) {
-              SnackBar snackBar = SnackBar(content: Text(state.message));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ProfileCubit.get(context).getEmployeeFun();
             } else if (state is EditUserPhotoErrorState) {
-              SnackBar snackBar = const SnackBar(
-                  content: Text("Some thing went wrong, Try again later"));
+              SnackBar snackBar = SnackBar(
+                content: const Text("Some thing went wrong, Try again later"),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
@@ -40,17 +41,25 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
               SnackBar snackBar = SnackBar(
-                  content: Text(
-                      state.changePasswordEntity.resultEntity.message.toString()
-                        ..replaceAll(RegExp('"'), " ").toString()));
+                content: Text(
+                    state.changePasswordEntity.resultEntity.message.toString()
+                      ..replaceAll(RegExp('"'), " ").toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
               Navigator.pop(context);
             } else if (state is ChangePasswordErrorState) {
               if (kDebugMode) {
                 print(state.message);
               }
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },

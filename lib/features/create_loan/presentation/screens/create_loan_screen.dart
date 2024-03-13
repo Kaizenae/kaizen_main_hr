@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/media_query_values.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
@@ -33,13 +34,21 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
         listener: (context, state) {
           if (state is CreateLoanSuccess) {
             SnackBar snackBar = SnackBar(
-                content: Text(
-                    state.createLoanEntity.resultEntity.message.toString()));
+              content:
+                  Text(state.createLoanEntity.resultEntity.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
             Navigator.pop(context);
           } else if (state is CreateLoanError) {
-            SnackBar snackBar =
-                SnackBar(content: Text(state.message.toString()));
+            SnackBar snackBar = SnackBar(
+              content: Text(state.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },

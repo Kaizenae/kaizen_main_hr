@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -44,9 +45,15 @@ class EmployeeScreen extends StatelessWidget {
                     child: BlocConsumer<ProfileCubit, ProfileState>(
                       listener: (context, state) {
                         if (state is GetEmployeeError) {
-                          SnackBar snackBar =
-                              SnackBar(content: Text(state.message.toString()));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          SnackBar snackBar = SnackBar(
+                            content: Text(state.message.toString()),
+                            duration: Duration(
+                              seconds: AppConstants.snackBarTime,
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            snackBar,
+                          );
                         }
                       },
                       builder: (context, state) {

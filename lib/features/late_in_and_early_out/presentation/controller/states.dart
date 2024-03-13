@@ -38,7 +38,9 @@ class GetLateInSuccessState extends EarlyOutLateInStates {}
 
 class GetLateInErrorState extends EarlyOutLateInStates {}
 
-class GetLateInEarlyOutLoadingState extends EarlyOutLateInStates {}
+class GetLateInLoadingState extends EarlyOutLateInStates {}
+
+class GetEarlyOutLoadingState extends EarlyOutLateInStates {}
 
 class GetEarlyOutSuccessState extends EarlyOutLateInStates {}
 

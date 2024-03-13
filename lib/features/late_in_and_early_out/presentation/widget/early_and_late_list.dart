@@ -1,21 +1,53 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable
+
+import 'dart:developer';
+
 import 'package:Attendace/features/late_in_and_early_out/presentation/widget/early_out_late_in_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/widgets/error_widget.dart';
+import '../../../../core/widgets/shimmer_custom/shimmer_custom.dart';
+import '../../../notifications/presentation/widgets/userRequest_widget.dart';
+import '../controller/states.dart';
 
 class EarlyAndLateList extends StatelessWidget {
-  const EarlyAndLateList({
+  EarlyAndLateList({
     super.key,
     required this.list,
+    required this.state,
     required this.title,
   });
   final List list;
+  var state;
   final String title;
   @override
   Widget build(BuildContext context) {
+    log(state.toString());
     if (title == AppStrings.lateInRequest) {
-      if (list.isEmpty) {
+      if (state is GetLateInLoadingState) {
+        return ShimmerCustom(
+            child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) => const Column(
+            children: [
+              UserRequestWidget(
+                iconPath: IconsAssets.emailIcon,
+                text: AppStrings.message,
+                subText: 'Loading.....',
+              ),
+              UserRequestWidget(
+                iconPath: IconsAssets.clockIcon,
+                text: AppStrings.status,
+                subText: 'Loading.....',
+              ),
+            ],
+          ),
+          itemCount: 5,
+        ));
+      } else if (list.isEmpty) {
         return const ErrorsWidget();
       } else {
         return ListView.separated(
@@ -30,7 +62,28 @@ class EarlyAndLateList extends StatelessWidget {
         );
       }
     } else if (title == AppStrings.earlyOutRequest) {
-      if (list.isEmpty) {
+      if (state is GetEarlyOutLoadingState) {
+        return ShimmerCustom(
+            child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) => const Column(
+            children: [
+              UserRequestWidget(
+                iconPath: IconsAssets.emailIcon,
+                text: AppStrings.message,
+                subText: 'Loading.....',
+              ),
+              UserRequestWidget(
+                iconPath: IconsAssets.clockIcon,
+                text: AppStrings.status,
+                subText: 'Loading.....',
+              ),
+            ],
+          ),
+          itemCount: 5,
+        ));
+      } else if (list.isEmpty) {
         return const ErrorsWidget();
       } else {
         return ListView.separated(

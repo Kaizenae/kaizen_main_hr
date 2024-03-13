@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
@@ -26,14 +28,15 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => EarlyOutLateInCubit()
-        ..getEarlyOut()
-        ..getLateIn(),
+        ..getLateIn()
+        ..getEarlyOut(),
       child: ScaffoldCustom(
         appBarCustom: AppBarCustom(
           text: title,
         ),
         body: BlocBuilder<EarlyOutLateInCubit, EarlyOutLateInStates>(
           builder: (context, state) {
+            log(state.toString());
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Column(
@@ -66,12 +69,15 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                     widgets: [
                       ApprovedWidget(
                         title: title,
+                        state: state,
                       ),
                       PendingWidget(
                         title: title,
+                        state: state,
                       ),
                       RefusedWidget(
                         title: title,
+                        state: state,
                       ),
                     ],
                     myTabs: const [

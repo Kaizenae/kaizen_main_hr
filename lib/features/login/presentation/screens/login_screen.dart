@@ -31,8 +31,12 @@ class LoginScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is LoginSuccessState) {
               SnackBar snackBar = SnackBar(
-                  content:
-                      Text(state.loginEntity.resultEntity.message.toString()));
+                content:
+                    Text(state.loginEntity.resultEntity.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
               CacheHelper.put(
                   key: AppConstants.userId,
@@ -51,8 +55,12 @@ class LoginScreen extends StatelessWidget {
               if (kDebugMode) {
                 print(state.message);
               }
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
+              SnackBar snackBar = SnackBar(
+                content: Text(state.message.toString()),
+                duration: Duration(
+                  seconds: AppConstants.snackBarTime,
+                ),
+              );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
           },
@@ -83,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                       Center(
                         child: TextCustom(
                           color: ColorManager.primary,
-                          text: AppStrings.welcomeBack,
+                          text: AppStrings.welcome,
                           fontSize: FontSize.s20,
                           fontWeight: FontWeight.bold,
                         ),

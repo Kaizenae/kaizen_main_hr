@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -113,26 +114,31 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     lateInPending = [];
     lateInRefuse = [];
     lateInDone = [];
-    emit(GetLateInEarlyOutLoadingState());
-    Dio().get(EndPoints.getLateInPath, data: {
-      "jsonrpc": "2.0",
-      "params": {
-        "company_id": AppConstants.companyId,
-        "user_id": CacheHelper.get(key: AppConstants.userId),
-      }
-    }).then((value) {
+    emit(GetLateInLoadingState());
+    Dio()
+        .get(
+      EndPoints.getLateInPath,
+      data: {
+        "jsonrpc": "2.0",
+        "params": {
+          "company_id": AppConstants.companyId,
+          "user_id": CacheHelper.get(key: AppConstants.userId),
+        }
+      },
+      options: Options(receiveTimeout: const Duration(seconds: 20)),
+    )
+        .then((value) {
       lateinModel = LateinEarlyOutModel.fromJson(value.data);
       for (var element in lateinModel.result.responseModel) {
-        if (element.state == "submitted") {
-          lateInPending.add(element);
-        } else if (element.state == 'done') {
+        if (element.state == 'done') {
           lateInDone.add(element);
         } else {
-          lateInRefuse.add(element);
+          lateInPending.add(element);
         }
       }
       emit(GetLateInSuccessState());
     }).catchError((error) {
+      log(error.toString());
       emit(GetLateInErrorState());
     });
   }
@@ -146,7 +152,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     earlyOutPending = [];
     earlyOutRefuse = [];
     earlyOutDone = [];
-    emit(GetLateInEarlyOutLoadingState());
+    emit(GetEarlyOutLoadingState());
     Dio().get(EndPoints.getEarlyOutPath, data: {
       "jsonrpc": "2.0",
       "params": {
@@ -156,12 +162,10 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     }).then((value) {
       earlyOutModel = LateinEarlyOutModel.fromJson(value.data);
       for (var element in earlyOutModel.result.responseModel) {
-        if (element.state == "submitted") {
-          earlyOutPending.add(element);
-        } else if (element.state == 'done') {
+        if (element.state == 'done') {
           earlyOutDone.add(element);
         } else {
-          earlyOutRefuse.add(element);
+          earlyOutPending.add(element);
         }
       }
       emit(GetEarlyOutSuccessState());
