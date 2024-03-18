@@ -21,8 +21,10 @@ class OTPScreen extends StatefulWidget {
   const OTPScreen({
     super.key,
     required this.phoneNumber,
+    required this.userID,
   });
   final String phoneNumber;
+  final int userID;
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
@@ -125,6 +127,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => CreateNewPasswordScreen(
+                                userID: widget.userID,
                                 phoneNumber: widget.phoneNumber,
                               ),
                             ),

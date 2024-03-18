@@ -101,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextCustom(
                         fontSize: FontSize.s14,
-                        text: AppStrings.email,
+                        text: AppStrings.emailOrPhone,
                         textAlign: TextAlign.start,
                         color: ColorManager.primary,
                       ),

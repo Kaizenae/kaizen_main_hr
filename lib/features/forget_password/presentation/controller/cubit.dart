@@ -39,4 +39,47 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
           SendOtpErrorState(message: "Some thing went wrong, Try again later"));
     });
   }
+
+  late int userId;
+
+  void getUserId({required String phoneNumber}) {
+    emit(GetUserIdLoadingState());
+    Dio().post(
+      EndPoints.getUserIDPath,
+      data: {
+        "jsonrpc": "2.0",
+        "params": {
+          "phone": "0$phoneNumber",
+        }
+      },
+    ).then((value) {
+      userId = value.data["result"]["user_id"] as int;
+      emit(GetUserIdSuccessState(
+          message: value.data["result"]["message"], userID: userId));
+    }).catchError((error) {
+      emit(GetUserIdErrorState(
+          message: "Some thing went wrong, Try again later"));
+    });
+  }
+
+  void changePassword(
+      {required String phoneNunber,
+      required String userId,
+      required String newPassword}) {
+    emit(ChangePasswordLoadingState());
+    Dio().post(EndPoints.forgetPasswordPath, data: {
+      "jsonrpc": "2.0",
+      "params": {
+        "user_id": userId,
+        "phone": "0$phoneNunber",
+        "new_password": newPassword,
+      }
+    }).then((value) {
+      emit(
+          ChangePasswordSuccessState(message: value.data["result"]["message"]));
+    }).catchError((error) {
+      emit(ChangePasswordErrorState(
+          message: "Some thing went wrong, Try again later"));
+    });
+  }
 }

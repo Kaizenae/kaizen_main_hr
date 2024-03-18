@@ -115,4 +115,5 @@ class AppStrings {
   static const String editUserPhoto = "Edit User Photo";
   static const String myAttendance = "My Attendance";
   static const String resendCode = "Resend Code";
+  static const String emailOrPhone = "Email Or Phone";
 }

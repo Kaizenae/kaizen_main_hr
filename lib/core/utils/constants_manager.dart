@@ -12,5 +12,5 @@ class AppConstants {
   static String employeeName = '';
   static bool connected = true;
   static String punchIn = '';
-  static int snackBarTime = 4;
+  static int snackBarTime = 8;
 }

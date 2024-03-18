@@ -317,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                               );
                             },
                             icon: ImageAssets.lateInImg,
-                            label: AppStrings.lateInRequest,
+                            label: AppStrings.myLateIn,
                           )
                         ],
                       ),

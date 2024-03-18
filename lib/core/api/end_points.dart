@@ -55,4 +55,6 @@ class EndPoints {
   static String shiftAllocationPath = "$baseUrl/get_shift_allocation";
   static String editUserPhotoPath = "$baseUrl/update_user_data";
   static String otpPath = "https://ndm-solutions.com/sms/api";
+  static String getUserIDPath = "$baseUrl/api/get_user_id";
+  static String forgetPasswordPath = "$baseUrl/api/reset_password";
 }
