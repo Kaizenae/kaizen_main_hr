@@ -168,13 +168,8 @@ class AttendanceScreen extends StatelessWidget {
                                             fit: BoxFit.scaleDown,
                                             child: TextCustom(
                                               fontSize: FontSize.s14,
-                                              text: state
-                                                  .attendanceEntity
-                                                  .resultEntity
-                                                  .response[index]
-                                                  .workedHours
-                                                  .floor()
-                                                  .toString(),
+                                              text:
+                                                  "${state.attendanceEntity.resultEntity.response[index].workedHours.floor().toString()}:${(double.parse(".${state.attendanceEntity.resultEntity.response[index].workedHours.toString().split(".").last}") * 60).round()}",
                                               color: ColorManager.error,
                                             ),
                                           ),
