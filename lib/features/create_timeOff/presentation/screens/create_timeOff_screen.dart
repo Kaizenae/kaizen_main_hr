@@ -1,4 +1,6 @@
 // ignore_for_file: file_names, deprecated_member_use
+import 'dart:io';
+
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +17,7 @@ import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
 import '../../../../core/widgets/progress_indicator/progress_indicator.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
+import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 import '../../../../injection_container.dart';
 import '../controller/create_timeOff_cubit.dart';
 import '../controller/create_timeOff_state.dart';
@@ -29,6 +32,7 @@ class CreateTimeOffScreen extends StatefulWidget {
 }
 
 class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
+  final reasonTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -374,6 +378,71 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                       ),
                                     ),
                                     const SizedBox(
+                                      height: AppSize.s20,
+                                    ),
+                                    TextCustom(
+                                      fontSize: FontSize.s14,
+                                      text: 'Reason',
+                                      color: ColorManager.textFormLabelColor,
+                                    ),
+                                    const SizedBox(
+                                      height: AppSize.s8,
+                                    ),
+                                    Platform.isAndroid
+                                        ? TextFormFieldCustom(
+                                            controller: reasonTextController,
+                                            keyboardType: TextInputType.text,
+                                            validate: (validate) {
+                                              if (validate!.isEmpty) {
+                                                return 'Please Enter the Reason';
+                                              }
+                                              return null;
+                                            })
+                                        : SizedBox(
+                                            height: AppSize.s100,
+                                            child: CupertinoTextFormFieldRow(
+                                              controller: reasonTextController,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    ColorManager.textFormColor,
+                                                //floatingLabelBehavior: FloatingLabelBehavior.auto,
+                                                border: Border.all(
+                                                  color: ColorManager
+                                                      .textFormColor,
+                                                  width: AppSize.s1_5,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppSize.s8),
+                                              ),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineMedium!
+                                                  .copyWith(
+                                                      color:
+                                                          ColorManager.primary,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: FontSize.s14),
+                                              showCursor: true,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: AppPadding.p16,
+                                                horizontal: AppPadding.p16,
+                                              ),
+                                              validator: (validate) {
+                                                if (validate!.isEmpty) {
+                                                  return 'Please Enter the Reason';
+                                                }
+                                                return null;
+                                              },
+                                              keyboardType: TextInputType.text,
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              maxLines: null,
+                                            ),
+                                          ),
+                                    const SizedBox(
                                       height: AppSize.s16,
                                     ),
                                     TextCustom(
@@ -443,7 +512,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                           if (cubit.formKey.currentState!
                                               .validate()) {
                                             // ProfileCubit.get(context)..getEmployeesFun();
-                                            cubit.createTimeOffFun();
+                                            cubit.createTimeOffFun(
+                                              reason: reasonTextController.text,
+                                            );
                                             cubit.formKey.currentState!.reset();
                                           }
                                         }),

@@ -26,6 +26,7 @@ class CreateTimeOffRepositoryImpl implements CreateTimeOffRepository {
         final remoteLogin = await applyRequestRemoteDataSource.createTimeOff(
           startDate: createTimeOffParams.startDate,
           endDate: createTimeOffParams.endDate,
+          reason: createTimeOffParams.reason,
           userId: createTimeOffParams.userId,
           holidayStatus: createTimeOffParams.holidayStatus,
           attachment: createTimeOffParams.attachment,

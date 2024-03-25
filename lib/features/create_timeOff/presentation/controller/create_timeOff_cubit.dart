@@ -82,12 +82,13 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
     emit(ChangeSelectedEndDateState());
   }
 
-  Future<void> createTimeOffFun() async {
+  Future<void> createTimeOffFun({required String reason}) async {
     emit(CreateTimeOffLoading());
     Either<Failure, CreateTimeOffEntity> response =
         await createTimeOffUsecase(CreateTimeOffParams(
       startDate: selectedStartDate!,
       endDate: selectedEndDate!,
+      reason: reason,
       userId: AppConstants.token,
       holidayStatus: selectedValue,
       attachment: base64string,

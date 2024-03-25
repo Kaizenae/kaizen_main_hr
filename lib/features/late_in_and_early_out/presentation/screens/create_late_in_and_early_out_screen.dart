@@ -210,7 +210,7 @@ class _CreateLateInEarlyOutScreenState
                                           }
                                           return null;
                                         },
-                                        keyboardType: TextInputType.number,
+                                        keyboardType: TextInputType.text,
                                         textInputAction: TextInputAction.done,
                                         maxLines: null,
                                       ),

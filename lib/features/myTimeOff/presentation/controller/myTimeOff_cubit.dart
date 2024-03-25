@@ -40,12 +40,12 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
       return GetMyTimeOffError(message: failure.message);
     }, (myTimeOffEntity) {
       for (var element in myTimeOffEntity.resultEntity.response) {
-        if (element.state == 'confirm') {
-          myTimeOffPending.add(element);
-        } else if (element.state == 'validate') {
+        if (element.state == 'Refused') {
+          myTimeOffRefuse.add(element);
+        } else if (element.state == 'Approved') {
           myTimeOff.add(element);
         } else {
-          myTimeOffRefuse.add(element);
+          myTimeOffPending.add(element);
         }
       }
       return GetMyTimeOffSuccess(myTimeOffEntity: myTimeOffEntity);
