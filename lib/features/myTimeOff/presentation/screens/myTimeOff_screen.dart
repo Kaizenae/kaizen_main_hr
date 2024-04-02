@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:developer';
+
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/core/utils/routes_manager.dart';
@@ -39,6 +41,7 @@ class MyTimeOffScreen extends StatelessWidget {
                 BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
                   listener: (context, state) {},
                   builder: (context, state) {
+                    log(state.toString());
                     return SizedBox(
                       height: AppSize.s120,
                       child: BlocProvider.of<MyTimeOffCubit>(context)
@@ -125,19 +128,19 @@ class MyTimeOffScreen extends StatelessWidget {
 
                 const TabBarCustom(
                   widgets: [
-                    ApprovedWidget(),
                     PendingTimeWidget(),
+                    ApprovedWidget(),
                     RefusedWidget(),
                   ],
                   myTabs: [
                     Tab(
-                      text: AppStrings.approved,
-                    ),
-                    Tab(
                       text: AppStrings.pending,
                     ),
                     Tab(
-                      text: AppStrings.refuse,
+                      text: AppStrings.approved,
+                    ),
+                    Tab(
+                      text: AppStrings.rejected,
                     )
                   ],
                 )

@@ -57,4 +57,7 @@ class EndPoints {
   static String otpPath = "https://ndm-solutions.com/sms/api";
   static String getUserIDPath = "$baseUrl/api/get_user_id";
   static String forgetPasswordPath = "$baseUrl/api/reset_password";
+  static String getPendingRequests = "$baseUrl/org/get_my_pending_requests";
+  static String approveRequest = "$baseUrl/org/approve_request";
+  static String rejectRequest = "$baseUrl/org/refuse_request";
 }

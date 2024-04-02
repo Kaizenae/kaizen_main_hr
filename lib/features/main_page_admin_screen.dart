@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:Attendace/features/notifications/presentation/controllers/requests_controller/bloc.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../core/utils/color_manager.dart';
 import '../core/utils/strings_manager.dart';
 import '../core/widgets/svg_pic/svg_pic.dart';
 import 'home/presentation/screens/home_screen.dart';
+import 'notifications/presentation/screens/notifications_screen.dart';
 
 class MainPageAdmin extends StatefulWidget {
   const MainPageAdmin({super.key});
@@ -22,20 +24,20 @@ class MainPageAdminState extends State<MainPageAdmin> {
     const HomeScreen(),
     // const AllEmployeesScreen(),
     // const AttendanceScreen(),
-    //   const NotificationsScreen(),
+    const NotificationsScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
     // IconsAssets.searchIcon,
-    // IconsAssets.notificationIcon,
+    IconsAssets.notificationIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
     // AppStrings.employees,
-    // AppStrings.notifications,
+    AppStrings.notifications,
     AppStrings.profile,
   ];
 
@@ -85,10 +87,9 @@ class MainPageAdminState extends State<MainPageAdmin> {
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
-            // if (index == 2) {
-            //   BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
-            // } else
             if (index == 1) {
+              RequestsBloc.get(context).getRequests();
+            } else if (index == 2) {
               ProfileCubit.get(context).getEmployeeFun();
             }
             setState(() {

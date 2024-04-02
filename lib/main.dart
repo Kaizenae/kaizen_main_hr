@@ -3,6 +3,7 @@
 import 'package:Attendace/features/create_timeOff/presentation/controller/create_timeOff_cubit.dart';
 import 'package:Attendace/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_timeOff/accept_reject_request_cubit.dart';
+import 'package:Attendace/features/notifications/presentation/controllers/requests_controller/bloc.dart';
 
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<CurrencyCubit>()),
         BlocProvider(create: (context) => sl<MyTimeOffCubit>()),
         BlocProvider(create: (context) => sl<TimeOffCubit>()),
+        BlocProvider(create: (context) => RequestsBloc()),
         BlocProvider(create: (context) => sl<EditProfileCubit>()),
         BlocProvider(create: (context) => sl<EditCompanyCubit>()),
         BlocProvider(create: (context) => sl<AllEmployeesCubit>()),

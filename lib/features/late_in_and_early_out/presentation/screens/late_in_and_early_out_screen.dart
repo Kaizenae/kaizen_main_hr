@@ -67,11 +67,11 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                   ),
                   TabBarCustom(
                     widgets: [
-                      ApprovedWidget(
+                      PendingWidget(
                         title: title,
                         state: state,
                       ),
-                      PendingWidget(
+                      ApprovedWidget(
                         title: title,
                         state: state,
                       ),
@@ -82,13 +82,13 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                     ],
                     myTabs: const [
                       Tab(
-                        text: AppStrings.approved,
-                      ),
-                      Tab(
                         text: AppStrings.pending,
                       ),
                       Tab(
-                        text: AppStrings.refuse,
+                        text: AppStrings.approved,
+                      ),
+                      Tab(
+                        text: AppStrings.rejected,
                       )
                     ],
                   ),

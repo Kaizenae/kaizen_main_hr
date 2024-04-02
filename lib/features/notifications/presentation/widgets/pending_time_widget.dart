@@ -1,16 +1,18 @@
+import 'dart:developer';
+
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
-import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
-import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_state.dart';
-import 'package:Attendace/features/notifications/presentation/controllers/accept_reject_timeOff/accept_reject_request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
+import '../controllers/requests_controller/bloc.dart';
+import '../controllers/requests_controller/states.dart';
 import 'userRequest_widget.dart';
 
 class PendingTimeWidget extends StatelessWidget {
@@ -18,14 +20,56 @@ class PendingTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: BlocProvider.of<MyTimeOffCubit>(context)..getAllTimeOffFun(),
-      child: BlocConsumer<MyTimeOffCubit, MyTimeOffState>(
-        listener: (context, state) {},
+    return BlocProvider(
+      create: (context) => RequestsBloc()..getRequests(),
+      child: BlocConsumer<RequestsBloc, RequestsStates>(
+        listener: (context, state) {
+          if (state is ApproveRequestSuccessState) {
+            SnackBar snackBar = SnackBar(
+              content: Text(state.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            RequestsBloc.get(context).getRequests();
+          } else if (state is ApproveRequestErrorState) {
+            SnackBar snackBar = SnackBar(
+              content: Text(state.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            RequestsBloc.get(context).getRequests();
+          } else if (state is RejectRequestSuccessState) {
+            SnackBar snackBar = SnackBar(
+              content: Text(state.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            RequestsBloc.get(context).getRequests();
+          } else if (state is RejectRequestErrorState) {
+            SnackBar snackBar = SnackBar(
+              content: Text(state.message.toString()),
+              duration: Duration(
+                seconds: AppConstants.snackBarTime,
+              ),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            RequestsBloc.get(context).getRequests();
+          }
+        },
         builder: (context, state) {
-          var cubit = MyTimeOffCubit.get(context);
-
-          return state is GetMyTimeOffSuccess
+          log(state.toString());
+          return state is RequestSuccessState &&
+                  RequestsBloc.get(context)
+                      .requestsModel
+                      .result
+                      .responseModel
+                      .isNotEmpty
               ? ListView.separated(
                   separatorBuilder: (context, index) => const Divider(),
                   physics: const BouncingScrollPhysics(),
@@ -37,50 +81,78 @@ class PendingTimeWidget extends StatelessWidget {
                         UserRequestWidget(
                           iconPath: IconsAssets.personIcon,
                           text: AppStrings.message,
-                          subText: cubit.myTimeOffPending[index].employeeName,
+                          subText: RequestsBloc.get(context)
+                              .requestsModel
+                              .result
+                              .responseModel[index]
+                              .employeeName,
                         ),
                         UserRequestWidget(
                           iconPath: IconsAssets.emailIcon,
                           text: AppStrings.message,
-                          subText: cubit.myTimeOffPending[index].holidayStatus,
+                          subText: RequestsBloc.get(context)
+                              .requestsModel
+                              .result
+                              .responseModel[index]
+                              .type,
+                        ),
+                        UserRequestWidget(
+                          iconPath: IconsAssets.emailIcon,
+                          text: AppStrings.message,
+                          subText: RequestsBloc.get(context)
+                              .requestsModel
+                              .result
+                              .responseModel[index]
+                              .reason,
                         ),
                         UserRequestWidget(
                             iconPath: IconsAssets.calenderIcon,
                             text: AppStrings.date,
                             subText: DateFormat('EEE, MMM dd, yyyy').format(
-                                DateTime.parse(
-                                    cubit.myTimeOffPending[index].start))),
+                                DateTime.parse(RequestsBloc.get(context)
+                                    .requestsModel
+                                    .result
+                                    .responseModel[index]
+                                    .startDate))),
                         UserRequestWidget(
-                            iconPath: IconsAssets.calenderIcon,
-                            text: AppStrings.date,
-                            subText: DateFormat('EEE, MMM dd, yyyy').format(
-                                DateTime.parse(
-                                    cubit.myTimeOffPending[index].end))),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.distanceIcon,
-                          text: AppStrings.distance,
-                          subText: cubit.myTimeOffPending[index].description,
+                          iconPath: IconsAssets.calenderIcon,
+                          text: AppStrings.date,
+                          subText: DateFormat('EEE, MMM dd, yyyy').format(
+                            DateTime.parse(
+                              RequestsBloc.get(context)
+                                  .requestsModel
+                                  .result
+                                  .responseModel[index]
+                                  .endDate,
+                            ),
+                          ),
                         ),
                         UserRequestWidget(
-                            iconPath: IconsAssets.clockIcon,
-                            text: AppStrings.status,
-                            subText: cubit.myTimeOffPending[index].state),
-                        const SizedBox(
-                          height: AppSize.s10,
+                          iconPath: IconsAssets.clockIcon,
+                          text: AppStrings.duration,
+                          subText: RequestsBloc.get(context)
+                              .requestsModel
+                              .result
+                              .responseModel[index]
+                              .duration
+                              .toString(),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             InkWell(
                               onTap: () async {
-                                AcceptRejectTimeOffCubit.get(context).leavesId =
-                                    cubit.myTimeOffPending[index].id;
-                                AcceptRejectTimeOffCubit.get(context).states =
-                                    'validate';
-
-                                await AcceptRejectTimeOffCubit.get(context)
-                                    .acceptRejectFun();
-                                await cubit.getAllTimeOffFun();
+                                RequestsBloc.get(context).approveRequest(
+                                    requestId: RequestsBloc.get(context)
+                                        .requestsModel
+                                        .result
+                                        .responseModel[index]
+                                        .id,
+                                    type: RequestsBloc.get(context)
+                                        .requestsModel
+                                        .result
+                                        .responseModel[index]
+                                        .type);
                               },
                               child: const SvgPictureCustom(
                                 assetsName: IconsAssets.acceptIcon,
@@ -90,14 +162,17 @@ class PendingTimeWidget extends StatelessWidget {
                             ),
                             InkWell(
                                 onTap: () async {
-                                  AcceptRejectTimeOffCubit.get(context)
-                                          .leavesId =
-                                      cubit.myTimeOffPending[index].id;
-                                  AcceptRejectTimeOffCubit.get(context).states =
-                                      'refuse';
-                                  await AcceptRejectTimeOffCubit.get(context)
-                                      .acceptRejectFun();
-                                  await cubit.getAllTimeOffFun();
+                                  RequestsBloc.get(context).rejectRequest(
+                                      requestId: RequestsBloc.get(context)
+                                          .requestsModel
+                                          .result
+                                          .responseModel[index]
+                                          .id,
+                                      type: RequestsBloc.get(context)
+                                          .requestsModel
+                                          .result
+                                          .responseModel[index]
+                                          .type);
                                 },
                                 child: const SvgPictureCustom(
                                   assetsName: IconsAssets.rejectIcon,
@@ -109,9 +184,13 @@ class PendingTimeWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  itemCount: cubit.myTimeOffPending.length,
+                  itemCount: RequestsBloc.get(context)
+                      .requestsModel
+                      .result
+                      .responseModel
+                      .length,
                 )
-              : state is GetMyTimeOffLoading
+              : state is RequestLoadingState
                   ? ShimmerCustom(
                       child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -128,9 +207,7 @@ class PendingTimeWidget extends StatelessWidget {
                       itemCount: 2,
                     ))
                   : ErrorsWidget(
-                      onPress: () {
-                        cubit.getAllTimeOffFun();
-                      },
+                      onPress: () {},
                     );
         },
       ),

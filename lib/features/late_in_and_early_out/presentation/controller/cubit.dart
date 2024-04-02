@@ -130,10 +130,12 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         .then((value) {
       lateinModel = LateinEarlyOutModel.fromJson(value.data);
       for (var element in lateinModel.result.responseModel) {
-        if (element.state == 'done') {
+        if (element.state == 'Approved') {
           lateInDone.add(element);
-        } else {
+        } else if (element.state == "Submitted") {
           lateInPending.add(element);
+        } else if (element.state == "Rejected") {
+          lateInRefuse.add(element);
         }
       }
       emit(GetLateInSuccessState());
@@ -162,10 +164,12 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     }).then((value) {
       earlyOutModel = LateinEarlyOutModel.fromJson(value.data);
       for (var element in earlyOutModel.result.responseModel) {
-        if (element.state == 'done') {
+        if (element.state == 'Approved') {
           earlyOutDone.add(element);
-        } else {
+        } else if (element.state == "Submitted") {
           earlyOutPending.add(element);
+        } else if (element.state == "Rejected") {
+          earlyOutRefuse.add(element);
         }
       }
       emit(GetEarlyOutSuccessState());

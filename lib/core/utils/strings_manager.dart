@@ -58,9 +58,9 @@ class AppStrings {
       'Please enter a valid email address';
   static const String approved = 'Approved';
 
-  static const String pending = 'pending';
+  static const String pending = 'Pending';
   static const String timeOffRequests = 'Leave Requests';
-  static const String refuse = 'Refused';
+  static const String rejected = 'Rejected';
   static const String checkIn = 'CheckIn';
   static const String checkOut = 'CheckOut';
   static const String employeeInfo = 'Employee Info';
@@ -116,4 +116,5 @@ class AppStrings {
   static const String myAttendance = "My Attendance";
   static const String resendCode = "Resend Code";
   static const String emailOrPhone = "Email Or Phone";
+  static const String duration = "Duration";
 }
