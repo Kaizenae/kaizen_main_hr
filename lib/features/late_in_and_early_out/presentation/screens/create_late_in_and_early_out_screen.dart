@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -104,46 +103,66 @@ class _CreateLateInEarlyOutScreenState
                                 ),
                                 child: InkWell(
                                   onTap: () {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        builder: (context) {
-                                          return SfDateRangePicker(
-                                            onSubmit: (v) {
-                                              cubit.selectedDate =
-                                                  DateFormat("yyyy-MM-dd")
-                                                      .format(DateTime.parse(
-                                                          v.toString()));
+                                    showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now().subtract(
+                                                const Duration(days: 365)),
+                                            lastDate: DateTime.now())
+                                        .then(
+                                      (value) {
+                                        cubit.selectedDate =
+                                            DateFormat("yyyy-MM-dd").format(
+                                                DateTime.parse(
+                                                    value.toString()));
 
-                                              Navigator.pop(context);
-                                            },
-                                            controller: cubit.dateController,
-                                            confirmText: 'done',
-                                            cancelText: 'cancel',
-                                            showActionButtons: true,
-                                            initialDisplayDate: DateTime.now(),
-                                            minDate: DateTime.now(),
-                                            onCancel: () {
-                                              Navigator.pop(context);
-                                            },
-                                            onSelectionChanged:
-                                                (DateRangePickerSelectionChangedArgs
-                                                    arg) {
-                                              cubit.onSelectionChanged(
-                                                args: arg,
-                                              );
-                                            },
-                                            selectionMode:
-                                                DateRangePickerSelectionMode
-                                                    .single,
-                                          );
-                                        });
+                                        EarlyOutLateInCubit.get(context)
+                                            .changeDate(DateFormat("dd-MM-yyyy")
+                                                .format(DateTime.parse(
+                                                    value.toString())));
+                                      },
+                                    );
+                                    // showModalBottomSheet(
+                                    //     context: context,
+                                    //     builder: (context) {
+                                    //       return SfDateRangePicker(
+                                    //         onSubmit: (v) {
+                                    //           cubit.selectedDate =
+                                    //               DateFormat("yyyy-MM-dd")
+                                    //                   .format(DateTime.parse(
+                                    //                       v.toString()));
+
+                                    //           Navigator.pop(context);
+                                    //         },
+                                    //         controller: cubit.dateController,
+                                    //         confirmText: 'done',
+                                    //         cancelText: 'cancel',
+                                    //         showActionButtons: true,
+                                    //         initialDisplayDate: DateTime.now()
+                                    //             .add(const Duration(days: 4)),
+                                    //         minDate: DateTime.now(),
+                                    //         onCancel: () {
+                                    //           Navigator.pop(context);
+                                    //         },
+                                    //         onSelectionChanged:
+                                    //             (DateRangePickerSelectionChangedArgs
+                                    //                 arg) {
+                                    //           cubit.onSelectionChanged(
+                                    //             args: arg,
+                                    //           );
+                                    //         },
+                                    //         selectionMode:
+                                    //             DateRangePickerSelectionMode
+                                    //                 .single,
+                                    //       );
+                                    //     });
                                   },
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       TextCustom(
-                                        text: cubit.selectedDate!,
+                                        text: cubit.selectedDateShow!,
                                         color: ColorManager.black,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,

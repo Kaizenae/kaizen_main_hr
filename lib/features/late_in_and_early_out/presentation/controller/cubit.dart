@@ -11,7 +11,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/utils/constants_manager.dart';
@@ -22,30 +21,18 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   static EarlyOutLateInCubit get(context) => BlocProvider.of(context);
 
   TextEditingController reasonController = TextEditingController();
-  DateRangePickerController dateController = DateRangePickerController();
-  String dateFormate = "yyyy-MM-dd";
+  String? selectedDateShow = DateFormat("dd-MM-yyyy").format(DateTime.now());
   String? selectedDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;
-  String? selectDate;
 
   String dateCount = '';
   String range = '';
   String rangeCount = '';
-  onSelectionChanged({required DateRangePickerSelectionChangedArgs args}) {
-    selectDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
-    if (args.value is PickerDateRange) {
-      range = '${DateFormat('yyyy-MM-dd').format(args.value.startDate)} -'
-          // ignore: lineslonger_than_80_chars
-          ' ${DateFormat('yyyy-MM-dd').format(args.value.endDate ?? args.value.startDate)}';
-    } else if (args.value is DateTime) {
-      selectedDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
-    } else if (args.value is List<DateTime>) {
-      dateCount = args.value.length.toString();
-    } else {
-      rangeCount = args.value.length.toString();
-    }
-    emit(ChangeSelectedDateState());
+  void changeDate(String date) {
+    selectedDateShow = date;
+
+    emit(ChangeDateState());
   }
 
   void earlyOutRequest() {
@@ -63,6 +50,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       emit(EarlyOutSuccessState(
           message: value.data["result"]["message"].toString()));
     }).catchError((error) {
+      log(error.toString());
       emit(EarlyOutErrorState(
           message: "Some thing went wrong, Try again later!!"));
     });

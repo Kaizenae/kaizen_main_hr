@@ -1,9 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/requests_controller/bloc.dart';
+import 'package:Attendace/features/notifications/presentation/controllers/requests_controller/states.dart';
 import 'package:Attendace/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../core/utils/assets_manager.dart';
 import '../core/utils/color_manager.dart';
@@ -101,18 +104,56 @@ class MainPageAdminState extends State<MainPageAdmin> {
               _screens.length,
               (index) => bottom(
                     icon: _icons[index],
+                    index: index,
                     label: _labels[index],
                   ))),
     );
   }
 
   BottomNavigationBarItem bottom(
-      {required String icon, required String label}) {
+      {required String icon, required String label, required int index}) {
     return BottomNavigationBarItem(
-      icon: SvgPictureCustom(
-        assetsName: icon,
-        color: ColorManager.grey1,
-      ),
+      icon: index != 1
+          ? SvgPictureCustom(
+              assetsName: icon,
+              color: ColorManager.grey1,
+            )
+          : Stack(
+              clipBehavior: Clip.none,
+              children: [
+                SvgPictureCustom(
+                  assetsName: icon,
+                  color: ColorManager.grey1,
+                ),
+                Positioned(
+                    top: -8,
+                    right: -5,
+                    child: BlocBuilder<RequestsBloc, RequestsStates>(
+                      builder: (context, state) {
+                        return RequestsBloc.get(context)
+                                .requestsModel
+                                .result
+                                .responseModel
+                                .isNotEmpty
+                            ? Container(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                padding: const EdgeInsets.all(3),
+                                decoration: const BoxDecoration(
+                                  color: ColorManager.error,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Text(
+                                  "300",
+                                  style: TextStyle(
+                                      color: ColorManager.white,
+                                      fontSize: FontSize.s8),
+                                ),
+                              )
+                            : const SizedBox();
+                      },
+                    )),
+              ],
+            ),
       label: label,
       activeIcon: SvgPictureCustom(assetsName: icon),
     );

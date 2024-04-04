@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -241,50 +240,39 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                       ),
                                       child: InkWell(
                                         onTap: () {
-                                          showModalBottomSheet(
-                                              context: context,
-                                              builder: (context) {
-                                                return SfDateRangePicker(
-                                                  onSubmit: (v) {
-                                                    cubit.selectedStartDate =
-                                                        DateFormat("yyyy-MM-dd")
-                                                            .format(
-                                                                DateTime.parse(v
-                                                                    .toString()));
-
-                                                    Navigator.pop(context);
-                                                  },
-                                                  controller:
-                                                      cubit.startDateController,
-                                                  confirmText: 'done',
-                                                  cancelText: 'cancel',
-                                                  showActionButtons: true,
-                                                  initialDisplayDate:
-                                                      DateTime.now(),
-                                                  minDate: DateTime.now(),
-                                                  onCancel: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  onSelectionChanged:
-                                                      (DateRangePickerSelectionChangedArgs
-                                                          arg) {
-                                                    cubit
-                                                        .onSelectionStartDateChanged(
-                                                      args: arg,
-                                                    );
-                                                  },
-                                                  selectionMode:
-                                                      DateRangePickerSelectionMode
-                                                          .single,
-                                                );
-                                              });
+                                          showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime.now()
+                                                      .subtract(const Duration(
+                                                          days: 1000)),
+                                                  lastDate: DateTime.now().add(
+                                                      const Duration(
+                                                          days: 1000)))
+                                              .then(
+                                            (value) {
+                                              cubit.selectedStartDate =
+                                                  DateFormat("yyyy-MM-dd")
+                                                      .format(DateTime.parse(
+                                                          value.toString()));
+                                              // cubit.selectedDate =
+                                              //     DateFormat("yyyy-MM-dd").format(
+                                              //         DateTime.parse(
+                                              //             value.toString()));
+                                              cubit.changeStartDate(
+                                                  DateFormat("dd-MM-yyyy")
+                                                      .format(DateTime.parse(
+                                                          value.toString())));
+                                            },
+                                          );
                                         },
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             TextCustom(
-                                              text: cubit.selectedStartDate!,
+                                              text:
+                                                  cubit.selectedStartDateShow!,
                                               color: ColorManager.black,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12,
@@ -320,50 +308,35 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                       ),
                                       child: InkWell(
                                         onTap: () {
-                                          showModalBottomSheet(
-                                              context: context,
-                                              builder: (context) {
-                                                return SfDateRangePicker(
-                                                  onSubmit: (v) {
-                                                    cubit.selectedEndDate =
-                                                        DateFormat("yyyy-MM-dd")
-                                                            .format(
-                                                                DateTime.parse(v
-                                                                    .toString()));
+                                          showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime.now()
+                                                      .subtract(const Duration(
+                                                          days: 1000)),
+                                                  lastDate: DateTime.now().add(
+                                                      const Duration(
+                                                          days: 1000)))
+                                              .then(
+                                            (value) {
+                                              cubit.selectedEndDate =
+                                                  DateFormat("yyyy-MM-dd")
+                                                      .format(DateTime.parse(
+                                                          value.toString()));
 
-                                                    Navigator.pop(context);
-                                                  },
-                                                  controller:
-                                                      cubit.endDateController,
-                                                  confirmText: 'done',
-                                                  cancelText: 'cancel',
-                                                  showActionButtons: true,
-                                                  initialDisplayDate:
-                                                      DateTime.now(),
-                                                  minDate: DateTime.now(),
-                                                  onCancel: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  onSelectionChanged:
-                                                      (DateRangePickerSelectionChangedArgs
-                                                          arg) {
-                                                    cubit
-                                                        .onSelectionEndDateChanged(
-                                                      args: arg,
-                                                    );
-                                                  },
-                                                  selectionMode:
-                                                      DateRangePickerSelectionMode
-                                                          .single,
-                                                );
-                                              });
+                                              cubit.changeEndDate(
+                                                  DateFormat("dd-MM-yyyy")
+                                                      .format(DateTime.parse(
+                                                          value.toString())));
+                                            },
+                                          );
                                         },
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             TextCustom(
-                                              text: cubit.selectedEndDate!,
+                                              text: cubit.selectedEndDateShow!,
                                               color: ColorManager.black,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12,

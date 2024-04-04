@@ -45,3 +45,5 @@ class GetEarlyOutLoadingState extends EarlyOutLateInStates {}
 class GetEarlyOutSuccessState extends EarlyOutLateInStates {}
 
 class GetEarlyOutErrorState extends EarlyOutLateInStates {}
+
+class ChangeDateState extends EarlyOutLateInStates {}

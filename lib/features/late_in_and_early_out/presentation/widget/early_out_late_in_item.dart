@@ -30,7 +30,7 @@ class EarlyOutLateInItem extends StatelessWidget {
             UserRequestWidget(
                 iconPath: IconsAssets.calenderIcon,
                 text: AppStrings.date,
-                subText: DateFormat('EEE, MMM dd, yyyy')
+                subText: DateFormat('EEE, MMM, dd, yyyy')
                     .format(DateTime.parse(item.date))),
             UserRequestWidget(
                 iconPath: IconsAssets.messageQuestionIcon,

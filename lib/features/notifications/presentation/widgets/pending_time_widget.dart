@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/svg_pic/svg_pic.dart';
@@ -20,15 +19,15 @@ class PendingTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => RequestsBloc()..getRequests(),
+    return BlocProvider.value(
+      value: BlocProvider.of<RequestsBloc>(context)..getRequests(),
       child: BlocConsumer<RequestsBloc, RequestsStates>(
         listener: (context, state) {
           if (state is ApproveRequestSuccessState) {
             SnackBar snackBar = SnackBar(
               content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
+              duration: const Duration(
+                seconds: 3,
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -36,8 +35,8 @@ class PendingTimeWidget extends StatelessWidget {
           } else if (state is ApproveRequestErrorState) {
             SnackBar snackBar = SnackBar(
               content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
+              duration: const Duration(
+                seconds: 3,
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -45,8 +44,8 @@ class PendingTimeWidget extends StatelessWidget {
           } else if (state is RejectRequestSuccessState) {
             SnackBar snackBar = SnackBar(
               content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
+              duration: const Duration(
+                seconds: 3,
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -54,8 +53,8 @@ class PendingTimeWidget extends StatelessWidget {
           } else if (state is RejectRequestErrorState) {
             SnackBar snackBar = SnackBar(
               content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
+              duration: const Duration(
+                seconds: 3,
               ),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -206,9 +205,30 @@ class PendingTimeWidget extends StatelessWidget {
                       )),
                       itemCount: 2,
                     ))
-                  : ErrorsWidget(
-                      onPress: () {},
-                    );
+                  : state is RequestErrorState ||
+                          RequestsBloc.get(context)
+                              .requestsModel
+                              .result
+                              .responseModel
+                              .isEmpty
+                      ? ErrorsWidget(
+                          onPress: () {},
+                        )
+                      : ShimmerCustom(
+                          child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => Column(
+                              children: List.generate(
+                            6,
+                            (index) => const UserRequestWidget(
+                              iconPath: IconsAssets.emailIcon,
+                              text: AppStrings.message,
+                              subText: 'Loading.....',
+                            ),
+                          )),
+                          itemCount: 2,
+                        ));
         },
       ),
     );

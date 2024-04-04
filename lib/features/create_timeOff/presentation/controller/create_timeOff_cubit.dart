@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -12,7 +13,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/create_timeOff_entity.dart';
@@ -28,15 +28,14 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
   static CreateTimeOffCubit get(context) => BlocProvider.of(context);
 
   GlobalKey<FormState> formKey = GlobalKey();
-  DateRangePickerController endDateController = DateRangePickerController();
-  DateRangePickerController startDateController = DateRangePickerController();
-  String dateFormate = "yyyy-MM-dd";
+
+  String? selectedStartDateShow =
+      DateFormat("dd-MM-yyyy").format(DateTime.now());
+  String? selectedEndDateShow = DateFormat("dd-MM-yyyy").format(DateTime.now());
   String? selectedStartDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String? selectedEndDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;
-  String? selectStartDate;
-  String? selectEndDate;
 
   String dateCount = '';
   String range = '';
@@ -47,47 +46,25 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
     emit(TimeOffSuccess());
   }
 
-  onSelectionStartDateChanged(
-      {required DateRangePickerSelectionChangedArgs args}) {
-    selectStartDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
-    if (args.value is PickerDateRange) {
-      range = '${DateFormat('yyyy-MM-dd').format(args.value.startDate)} -'
-          // ignore: lineslonger_than_80_chars
-          ' ${DateFormat('yyyy-MM-dd').format(args.value.endDate ?? args.value.startDate)}';
-    } else if (args.value is DateTime) {
-      selectedStartDate =
-          DateFormat("yyyy-MM-dd").format(args.value).toString();
-    } else if (args.value is List<DateTime>) {
-      dateCount = args.value.length.toString();
-    } else {
-      rangeCount = args.value.length.toString();
-    }
-    emit(ChangeSelectedStartDateState());
+  void changeStartDate(String date) {
+    selectedStartDateShow = date;
+    log(selectedStartDateShow.toString());
+
+    emit(ChangeStartDateState());
   }
 
-  onSelectionEndDateChanged(
-      {required DateRangePickerSelectionChangedArgs args}) {
-    selectEndDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
-    if (args.value is PickerDateRange) {
-      range = '${DateFormat('yyyy-MM-dd').format(args.value.startDate)} -'
-          // ignore: lineslonger_than_80_chars
-          ' ${DateFormat('yyyy-MM-dd').format(args.value.endDate ?? args.value.startDate)}';
-    } else if (args.value is DateTime) {
-      selectedEndDate = DateFormat("yyyy-MM-dd").format(args.value).toString();
-    } else if (args.value is List<DateTime>) {
-      dateCount = args.value.length.toString();
-    } else {
-      rangeCount = args.value.length.toString();
-    }
-    emit(ChangeSelectedEndDateState());
+  void changeEndDate(String date) {
+    selectedEndDateShow = date;
+    log(selectedEndDateShow.toString());
+    emit(ChangeEndDateState());
   }
 
   Future<void> createTimeOffFun({required String reason}) async {
     emit(CreateTimeOffLoading());
     Either<Failure, CreateTimeOffEntity> response =
         await createTimeOffUsecase(CreateTimeOffParams(
-      startDate: selectedStartDate!,
-      endDate: selectedEndDate!,
+      startDate: selectedStartDate!.toString(),
+      endDate: selectedEndDate!.toString(),
       reason: reason,
       userId: AppConstants.token,
       holidayStatus: selectedValue,
