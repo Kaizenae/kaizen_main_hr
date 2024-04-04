@@ -126,8 +126,8 @@ class MainPageAdminState extends State<MainPageAdmin> {
                   color: ColorManager.grey1,
                 ),
                 Positioned(
-                    top: -8,
-                    right: -5,
+                    top: -10,
+                    left: 9,
                     child: BlocBuilder<RequestsBloc, RequestsStates>(
                       builder: (context, state) {
                         return RequestsBloc.get(context)
@@ -137,16 +137,23 @@ class MainPageAdminState extends State<MainPageAdmin> {
                                 .isNotEmpty
                             ? Container(
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                                padding: const EdgeInsets.all(3),
-                                decoration: const BoxDecoration(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
                                   color: ColorManager.error,
-                                  shape: BoxShape.circle,
+                                  shape: BoxShape.rectangle,
                                 ),
                                 child: Text(
-                                  "300",
+                                  RequestsBloc.get(context)
+                                      .requestsModel
+                                      .result
+                                      .responseModel
+                                      .length
+                                      .toString(),
                                   style: TextStyle(
                                       color: ColorManager.white,
-                                      fontSize: FontSize.s8),
+                                      fontSize: FontSize.s14),
                                 ),
                               )
                             : const SizedBox();
