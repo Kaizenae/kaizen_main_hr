@@ -66,7 +66,6 @@ class ApproversEntity {
     required this.state,
     required this.userName,
   });
-  @override
   List<Object> get props => [
         id,
         userName,

@@ -22,6 +22,7 @@ class ResponseModel {
   late String reason;
   late String state;
   late String date;
+  List<ApproversModel> approvers = [];
 
   ResponseModel();
   ResponseModel.fromJson(Map<String, dynamic> json) {
@@ -30,5 +31,21 @@ class ResponseModel {
     reason = json["reason"];
     state = json["state"];
     date = json["date"];
+    json["approvers"].forEach((element) {
+      approvers.add(ApproversModel.fromJson(element));
+    });
+  }
+}
+
+class ApproversModel {
+  late int user;
+  late String userName;
+  late String state;
+
+  ApproversModel();
+  ApproversModel.fromJson(Map<String, dynamic> json) {
+    user = json["user"];
+    userName = json["user_name"];
+    state = json["state"];
   }
 }
