@@ -42,6 +42,7 @@ class ResponseModel extends ResponseEntity {
     String? start,
     String? end,
     String? description,
+    List<ApproversEntity>? approvers,
   }) : super(
           id: id ?? 0,
           employeeName: employeeName ?? '',
@@ -51,16 +52,28 @@ class ResponseModel extends ResponseEntity {
           start: start ?? DateFormat.MMMEd().format(DateTime.now()).toString(),
           end: end ?? DateFormat.MMMEd().format(DateTime.now()).toString(),
           description: description ?? '',
+          approvers: approvers ?? [],
         );
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
-        id: json['id'],
-        employeeName: json['employee'],
-        holidayStatus: json['holiday_status'],
-        holidayType: json['holiday_type'],
-        state: json['state'],
-        start: json['Start'],
-        end: json['End'],
-        description: json['Description'],
+      id: json['id'],
+      employeeName: json['employee'],
+      holidayStatus: json['holiday_status'],
+      holidayType: json['holiday_type'],
+      state: json['state'],
+      start: json['Start'],
+      end: json['End'],
+      description: json['Description'],
+      approvers: List<ApproversEntity>.from(
+          json["approvers"].map((e) => ApproversModel.fromJson(e))));
+}
+
+class ApproversModel extends ApproversEntity {
+  ApproversModel(
+      {required super.id, required super.state, required super.userName});
+  factory ApproversModel.fromJson(Map<String, dynamic> json) => ApproversModel(
+        id: json["user"],
+        state: json["state"],
+        userName: json["user_name"],
       );
 }

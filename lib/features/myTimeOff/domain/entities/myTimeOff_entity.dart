@@ -30,6 +30,7 @@ class ResponseEntity extends Equatable {
   final String start;
   final String end;
   final String description;
+  final List<ApproversEntity> approvers;
 
   const ResponseEntity({
     required this.id,
@@ -40,6 +41,7 @@ class ResponseEntity extends Equatable {
     required this.start,
     required this.end,
     required this.description,
+    required this.approvers,
   });
 
   @override
@@ -51,5 +53,23 @@ class ResponseEntity extends Equatable {
         state,
         start,
         end,
+        approvers,
+      ];
+}
+
+class ApproversEntity {
+  final int id;
+  final String userName;
+  final String state;
+  const ApproversEntity({
+    required this.id,
+    required this.state,
+    required this.userName,
+  });
+  @override
+  List<Object> get props => [
+        id,
+        userName,
+        state,
       ];
 }

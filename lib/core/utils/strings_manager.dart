@@ -117,4 +117,5 @@ class AppStrings {
   static const String resendCode = "Resend Code";
   static const String emailOrPhone = "Email Or Phone";
   static const String duration = "Duration";
+  static const String users = "Users";
 }

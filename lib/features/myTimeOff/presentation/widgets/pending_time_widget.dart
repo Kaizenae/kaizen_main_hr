@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import 'userRequest_widget.dart';
@@ -30,6 +32,7 @@ class PendingTimeWidget extends StatelessWidget {
                   itemBuilder: (context, index) => Padding(
                     padding: const EdgeInsets.all(AppPadding.p12),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         UserRequestWidget(
                           iconPath: IconsAssets.emailIcon,
@@ -57,6 +60,38 @@ class PendingTimeWidget extends StatelessWidget {
                             iconPath: IconsAssets.clockIcon,
                             text: AppStrings.status,
                             subText: cubit.myTimeOffPending[index].state),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          AppStrings.users,
+                          style: TextStyle(
+                              color: ColorManager.black,
+                              fontSize: FontSize.s18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => Row(
+                                  children: [
+                                    Expanded(
+                                      child: UserRequestWidget(
+                                        iconPath: IconsAssets.personIcon,
+                                        text: AppStrings.admin,
+                                        subText: cubit.myTimeOff[index]
+                                            .approvers[index].userName,
+                                      ),
+                                    ),
+                                    UserRequestWidget(
+                                      iconPath: "",
+                                      text: AppStrings.admin,
+                                      subText: cubit.myTimeOff[index]
+                                          .approvers[index].state,
+                                    ),
+                                  ],
+                                ),
+                            itemCount: cubit.myTimeOff[index].approvers.length),
                       ],
                     ),
                   ),
