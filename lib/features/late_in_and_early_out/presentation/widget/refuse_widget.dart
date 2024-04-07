@@ -20,6 +20,7 @@ class RefusedWidget extends StatelessWidget {
       refuseList = EarlyOutLateInCubit.get(context).earlyOutRefuse;
       return EarlyAndLateList(
         list: refuseList,
+        isPending: false,
         title: title,
         state: state,
       );
@@ -29,6 +30,7 @@ class RefusedWidget extends StatelessWidget {
         list: refuseList,
         state: state,
         title: title,
+        isPending: false,
       );
     } else {
       return const SizedBox();

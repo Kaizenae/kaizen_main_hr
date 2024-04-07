@@ -93,3 +93,27 @@ class GetTimeOffNameAndValueError extends MyTimeOffState {
   @override
   List<Object?> get props => [];
 }
+
+class CancelMyRequestLoadingState extends MyTimeOffState {
+  const CancelMyRequestLoadingState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class CancelMyRequestSuccessState extends MyTimeOffState {
+  final String message;
+  const CancelMyRequestSuccessState({required this.message});
+
+  @override
+  List<Object?> get props => [];
+}
+
+class CancelMyRequestErrorState extends MyTimeOffState {
+  final String message;
+
+  const CancelMyRequestErrorState({required this.message});
+
+  @override
+  List<Object?> get props => [];
+}

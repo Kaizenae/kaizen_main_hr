@@ -31,3 +31,8 @@ class RejectRequestErrorState extends RequestsStates {
   final String message;
   RejectRequestErrorState({required this.message});
 }
+
+class CannotOpenFileState extends RequestsStates {
+  final String message;
+  CannotOpenFileState({required this.message});
+}

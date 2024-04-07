@@ -58,6 +58,7 @@ class ElevatedButtonCustom extends StatelessWidget {
             text: text!,
             fontSize: fontSize,
             textAlign: TextAlign.center,
+            fontWeight: fontWeight ?? FontWeight.w500,
           ),
     );
   }

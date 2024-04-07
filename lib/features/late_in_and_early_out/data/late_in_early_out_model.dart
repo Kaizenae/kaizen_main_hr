@@ -18,6 +18,7 @@ class ResultsModel {
 
 class ResponseModel {
   late int userId;
+  late int id;
   late int companyId;
   late String reason;
   late String state;
@@ -27,6 +28,7 @@ class ResponseModel {
   ResponseModel();
   ResponseModel.fromJson(Map<String, dynamic> json) {
     userId = json["user_id"];
+    id = json["id"];
     companyId = json["company_id"];
     reason = json["reason"];
     state = json["state"];

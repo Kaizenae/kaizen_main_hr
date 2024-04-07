@@ -1,9 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_cubit.dart';
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -64,35 +67,59 @@ class RefusedWidget extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          AppStrings.users,
-                          style: TextStyle(
-                              color: ColorManager.black,
-                              fontSize: FontSize.s18,
-                              fontWeight: FontWeight.w600),
-                        ),
+                        cubit.myTimeOffRefuse[index].approvers.isNotEmpty
+                            ? Text(
+                                AppStrings.users,
+                                style: TextStyle(
+                                    color: ColorManager.black,
+                                    fontSize: FontSize.s18,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            : const SizedBox(),
                         ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) => Row(
                                   children: [
                                     Expanded(
-                                      child: UserRequestWidget(
-                                        iconPath: IconsAssets.personIcon,
-                                        text: AppStrings.admin,
-                                        subText: cubit.myTimeOff[index]
-                                            .approvers[index].userName,
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            IconsAssets.personIcon,
+                                            height: AppSize.s24,
+                                            color: ColorManager.skyColor,
+                                          ),
+                                          const SizedBox(
+                                            width: AppSize.s8,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              cubit.myTimeOffRefuse[index]
+                                                  .approvers[index].userName,
+                                              style: TextStyle(
+                                                color: ColorManager.primary,
+                                                fontSize: FontSize.s16,
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
-                                    UserRequestWidget(
-                                      iconPath: "",
-                                      text: AppStrings.admin,
-                                      subText: cubit.myTimeOff[index]
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(
+                                      cubit.myTimeOffRefuse[index]
                                           .approvers[index].state,
+                                      style: TextStyle(
+                                        color: ColorManager.primary,
+                                        fontSize: FontSize.s14,
+                                      ),
                                     ),
                                   ],
                                 ),
-                            itemCount: cubit.myTimeOff[index].approvers.length),
+                            itemCount:
+                                cubit.myTimeOffRefuse[index].approvers.length),
                       ],
                     ),
                   ),

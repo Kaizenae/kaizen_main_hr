@@ -125,6 +125,25 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
     });
   }
 
+  void cancelMyRequest({
+    required int requestId,
+  }) {
+    emit(const CancelMyRequestLoadingState());
+    Dio().post(EndPoints.cancelMyRequestPath, data: {
+      "jsonrpc": 2.0,
+      "params": {
+        "request_id": requestId,
+        "type": "Leave",
+      }
+    }).then((value) {
+      emit(CancelMyRequestSuccessState(
+          message: value.data["result"]["response"]));
+    }).catchError((error) {
+      emit(const CancelMyRequestErrorState(
+          message: "Some thing went wrong, Try again later!!"));
+    });
+  }
+
   @override
   void onChange(Change<MyTimeOffState> change) {
     super.onChange(change);

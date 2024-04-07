@@ -22,12 +22,14 @@ class ApprovedWidget extends StatelessWidget {
         list: doneList,
         title: title,
         state: state,
+        isPending: false,
       );
     } else if (title == AppStrings.lateInRequest) {
       doneList = EarlyOutLateInCubit.get(context).lateInDone;
       return EarlyAndLateList(
         list: doneList,
         state: state,
+        isPending: false,
         title: title,
       );
     } else {

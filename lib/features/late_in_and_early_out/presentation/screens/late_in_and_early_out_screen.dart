@@ -34,7 +34,20 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
         appBarCustom: AppBarCustom(
           text: title,
         ),
-        body: BlocBuilder<EarlyOutLateInCubit, EarlyOutLateInStates>(
+        body: BlocConsumer<EarlyOutLateInCubit, EarlyOutLateInStates>(
+          listener: (context, state) {
+            if (state is CancelMyRequestSuccessState) {
+              SnackBar snackBar =
+                  SnackBar(content: Text(state.message.toString()));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              EarlyOutLateInCubit.get(context).getEarlyOut();
+              EarlyOutLateInCubit.get(context).getLateIn();
+            } else if (state is CancelMyRequestErrorState) {
+              SnackBar snackBar =
+                  SnackBar(content: Text(state.message.toString()));
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          },
           builder: (context, state) {
             log(state.toString());
             return Padding(

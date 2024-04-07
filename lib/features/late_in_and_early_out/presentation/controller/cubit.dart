@@ -165,4 +165,24 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       emit(GetEarlyOutErrorState());
     });
   }
+
+  void cancelMyRequest({
+    required int requestId,
+    required String type,
+  }) {
+    emit(CancelMyRequestLoadingState());
+    Dio().post(EndPoints.cancelMyRequestPath, data: {
+      "jsonrpc": 2.0,
+      "params": {
+        "request_id": requestId,
+        "type": type,
+      }
+    }).then((value) {
+      emit(CancelMyRequestSuccessState(
+          message: value.data["result"]["response"]));
+    }).catchError((error) {
+      emit(CancelMyRequestErrorState(
+          message: "Some thing went wrong, Try again later!!"));
+    });
+  }
 }

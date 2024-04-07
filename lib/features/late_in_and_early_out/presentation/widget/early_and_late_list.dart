@@ -18,8 +18,10 @@ class EarlyAndLateList extends StatelessWidget {
     required this.list,
     required this.state,
     required this.title,
+    required this.isPending,
   });
   final List list;
+  final bool isPending;
   var state;
   final String title;
   @override
@@ -56,6 +58,8 @@ class EarlyAndLateList extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, index) => EarlyOutLateInItem(
             item: list[index],
+            type: "Late In",
+            isPending: isPending,
             title: title,
           ),
           itemCount: list.length,
@@ -93,6 +97,8 @@ class EarlyAndLateList extends StatelessWidget {
           itemBuilder: (context, index) => EarlyOutLateInItem(
             item: list[index],
             title: title,
+            type: "Early Out",
+            isPending: isPending,
           ),
           itemCount: list.length,
         );

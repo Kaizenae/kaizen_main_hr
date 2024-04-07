@@ -21,6 +21,7 @@ class PendingWidget extends StatelessWidget {
       return EarlyAndLateList(
         list: pendingList,
         title: title,
+        isPending: true,
         state: state,
       );
     } else if (title == AppStrings.lateInRequest) {
@@ -29,6 +30,7 @@ class PendingWidget extends StatelessWidget {
         list: pendingList,
         title: title,
         state: state,
+        isPending: true,
       );
     } else {
       return const SizedBox();

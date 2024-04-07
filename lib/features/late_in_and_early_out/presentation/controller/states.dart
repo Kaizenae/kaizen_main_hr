@@ -47,3 +47,17 @@ class GetEarlyOutSuccessState extends EarlyOutLateInStates {}
 class GetEarlyOutErrorState extends EarlyOutLateInStates {}
 
 class ChangeDateState extends EarlyOutLateInStates {}
+
+class CancelMyRequestLoadingState extends EarlyOutLateInStates {}
+
+class CancelMyRequestSuccessState extends EarlyOutLateInStates {
+  final String message;
+
+  CancelMyRequestSuccessState({required this.message});
+}
+
+class CancelMyRequestErrorState extends EarlyOutLateInStates {
+  final String message;
+
+  CancelMyRequestErrorState({required this.message});
+}

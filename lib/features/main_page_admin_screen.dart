@@ -131,9 +131,7 @@ class MainPageAdminState extends State<MainPageAdmin> {
                     child: BlocBuilder<RequestsBloc, RequestsStates>(
                       builder: (context, state) {
                         return RequestsBloc.get(context)
-                                .requestsModel
-                                .result
-                                .responseModel
+                                .pendingRequests
                                 .isNotEmpty
                             ? Container(
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -146,9 +144,7 @@ class MainPageAdminState extends State<MainPageAdmin> {
                                 ),
                                 child: Text(
                                   RequestsBloc.get(context)
-                                      .requestsModel
-                                      .result
-                                      .responseModel
+                                      .pendingRequests
                                       .length
                                       .toString(),
                                   style: TextStyle(

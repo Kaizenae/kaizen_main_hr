@@ -60,4 +60,5 @@ class EndPoints {
   static String getPendingRequests = "$baseUrl/org/get_my_requests";
   static String approveRequest = "$baseUrl/org/approve_request";
   static String rejectRequest = "$baseUrl/org/refuse_request";
+  static String cancelMyRequestPath = "$baseUrl//org/cancel_my_request";
 }

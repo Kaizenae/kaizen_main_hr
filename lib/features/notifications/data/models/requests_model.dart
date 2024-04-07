@@ -22,9 +22,12 @@ class ResponseModel {
   late String employeeName;
   late int companyId;
   late int duration;
+  late String state;
   late String reason;
   late String startDate;
   late String endDate;
+  late String attachment;
+  late String attachmentExtension;
 
   ResponseModel();
   ResponseModel.fromJson(Map<String, dynamic> json) {
@@ -34,7 +37,10 @@ class ResponseModel {
     reason = json["reason"];
     employeeName = json["employee_name"];
     duration = json["duration"];
+    state = json["state"];
     startDate = json["start_date"];
     endDate = json["end_date"];
+    attachmentExtension = json["attachment_extension"];
+    attachment = json["attachment"];
   }
 }
