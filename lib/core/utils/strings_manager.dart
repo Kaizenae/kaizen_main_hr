@@ -118,4 +118,7 @@ class AppStrings {
   static const String emailOrPhone = "Email Or Phone";
   static const String duration = "Duration";
   static const String users = "Users";
+  static const String allAtendance = "All Atendance";
+  static const String onlyPunchIn = "Only Punch in";
+  static const String onlyPunchOut = "Only Punch out";
 }

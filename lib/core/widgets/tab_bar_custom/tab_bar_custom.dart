@@ -44,7 +44,7 @@ class TabBarCustom extends StatelessWidget {
                 tabs: myTabs,
                 labelStyle: TextStyle(
                   fontSize: FontSize.s14,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
                 enableFeedback: true,
                 labelColor: ColorManager.white,

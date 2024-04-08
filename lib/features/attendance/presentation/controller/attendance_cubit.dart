@@ -1,7 +1,11 @@
+import 'package:Attendace/core/api/end_points.dart';
+import 'package:Attendace/features/attendance/data/models/odd_punch_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/error/failure.dart';
+import '../../../../core/local/cache_helper.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../domain/entities/attendace_entity.dart';
@@ -40,5 +44,39 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       // print(attendanceEntity.resultEntity.response.first.checkOut);
       return GetEmployeeAttendanceSuccess(attendanceEntity: attendanceEntity);
     }));
+  }
+
+  OddPunchModel oddPunchInModel = OddPunchModel();
+  OddPunchModel oddPunchOutModel = OddPunchModel();
+  void getOddPunchIn() {
+    emit(GetOddPunchInLoadingState());
+    Dio().get(EndPoints.getOddPunchInPath, data: {
+      "jsonrpc": 2.0,
+      "params": {
+        "company_id": AppConstants.companyId,
+        "user_id": CacheHelper.get(key: AppConstants.userId),
+      }
+    }).then((value) {
+      oddPunchInModel = OddPunchModel.fromJson(value.data);
+      emit(const GetOddPunchInSuccessState());
+    }).catchError((error) {
+      emit(const GetOddPunchInErrorState());
+    });
+  }
+
+  void getOddPunchOut() {
+    emit(GetOddPunchInLoadingState());
+    Dio().get(EndPoints.getOddPunchOutPath, data: {
+      "jsonrpc": 2.0,
+      "params": {
+        "company_id": AppConstants.companyId,
+        "user_id": CacheHelper.get(key: AppConstants.userId),
+      }
+    }).then((value) {
+      oddPunchOutModel = OddPunchModel.fromJson(value.data);
+      emit(const GetOddPunchOutSuccessState());
+    }).catchError((error) {
+      emit(const GetOddPunchOutErrorState());
+    });
   }
 }

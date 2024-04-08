@@ -121,19 +121,12 @@ class RequestsBloc extends Cubit<RequestsStates> {
     try {
       List<int> decodedBytes = base64Decode(base64String);
       file.writeAsBytes(decodedBytes).then((File value) {
-        log("this file has this path  ${value.path}");
         OpenFile.open(value.path);
       }).catchError((error) {
-        log(error.toString());
-        log(error.toString());
-        log(error.toString());
         emit(CannotOpenFileState(
             message: "Cannot open file  ${error.toString()}"));
       });
     } catch (e) {
-      log(e.toString());
-      log(e.toString());
-      log(e.toString());
       emit(CannotOpenFileState(message: "Cannot open file  ${e.toString()}"));
     }
   }

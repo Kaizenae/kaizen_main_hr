@@ -55,3 +55,41 @@ class GetEmployeeAttendanceError extends AttendanceState {
   @override
   List<Object> get props => [message];
 }
+
+class GetOddPunchInLoadingState extends AttendanceState {
+  @override
+  List<Object> get props => [];
+}
+
+class GetOddPunchInSuccessState extends AttendanceState {
+  const GetOddPunchInSuccessState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetOddPunchInErrorState extends AttendanceState {
+  const GetOddPunchInErrorState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetOddPunchOutLoadingState extends AttendanceState {
+  @override
+  List<Object> get props => [];
+}
+
+class GetOddPunchOutSuccessState extends AttendanceState {
+  const GetOddPunchOutSuccessState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetOddPunchOutErrorState extends AttendanceState {
+  const GetOddPunchOutErrorState();
+
+  @override
+  List<Object> get props => [];
+}
