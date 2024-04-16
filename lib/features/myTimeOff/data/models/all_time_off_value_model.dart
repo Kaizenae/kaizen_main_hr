@@ -18,7 +18,7 @@ class ResultsModel {
 
 class ResponseModel {
   late int timeOffAllocation;
-  late int timeOffAllocationRemainingValue;
+  late double timeOffAllocationRemainingValue;
 
   ResponseModel();
   ResponseModel.fromJson(Map<String, dynamic> json) {

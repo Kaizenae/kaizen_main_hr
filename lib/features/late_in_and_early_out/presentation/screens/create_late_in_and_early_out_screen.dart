@@ -103,25 +103,51 @@ class _CreateLateInEarlyOutScreenState
                                 ),
                                 child: InkWell(
                                   onTap: () {
-                                    showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime.now().subtract(
-                                                const Duration(days: 365)),
-                                            lastDate: DateTime.now())
-                                        .then(
-                                      (value) {
-                                        cubit.selectedDate =
-                                            DateFormat("yyyy-MM-dd").format(
-                                                DateTime.parse(
-                                                    value.toString()));
+                                    if (widget.title ==
+                                        AppStrings.lateInRequest) {
+                                      showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime.now(),
+                                      ).then(
+                                        (value) {
+                                          cubit.selectedDate =
+                                              DateFormat("yyyy-MM-dd").format(
+                                                  DateTime.parse(
+                                                      value.toString()));
 
-                                        EarlyOutLateInCubit.get(context)
-                                            .changeDate(DateFormat("dd-MM-yyyy")
-                                                .format(DateTime.parse(
-                                                    value.toString())));
-                                      },
-                                    );
+                                          EarlyOutLateInCubit.get(context)
+                                              .changeDate(
+                                                  DateFormat("dd-MM-yyyy")
+                                                      .format(DateTime.parse(
+                                                          value.toString())));
+                                        },
+                                      );
+                                    } else if (widget.title ==
+                                        AppStrings.earlyOutRequest) {
+                                      showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime.now()
+                                            .add(const Duration(days: 1)),
+                                      ).then(
+                                        (value) {
+                                          cubit.selectedDate =
+                                              DateFormat("yyyy-MM-dd").format(
+                                                  DateTime.parse(
+                                                      value.toString()));
+
+                                          EarlyOutLateInCubit.get(context)
+                                              .changeDate(
+                                                  DateFormat("dd-MM-yyyy")
+                                                      .format(DateTime.parse(
+                                                          value.toString())));
+                                        },
+                                      );
+                                    }
+
                                     // showModalBottomSheet(
                                     //     context: context,
                                     //     builder: (context) {

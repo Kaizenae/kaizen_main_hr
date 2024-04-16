@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -55,18 +57,29 @@ class OddPunshInScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: TextCustom(
+                          text: 'Punch out',
+                          color: ColorManager.primary,
+                          fontSize: AppSize.s16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 const Divider(),
                 BlocProvider.value(
                   value: BlocProvider.of<AttendanceCubit>(context)
-                    ..getOddPunchIn(),
+                    ..getOddPunch(),
                   child: BlocConsumer<AttendanceCubit, AttendanceState>(
                     listener: (context, state) {},
                     builder: (context, state) {
-                      return state is GetOddPunchInSuccessState
+                      return state is GetOddPunchSuccessState
                           ? AttendanceCubit.get(context)
-                                  .oddPunchInModel
+                                  .oddPunchModel
                                   .result
                                   .responseModel
                                   .isEmpty
@@ -87,16 +100,27 @@ class OddPunshInScreen extends StatelessWidget {
                                             fit: BoxFit.scaleDown,
                                             child: TextCustom(
                                               fontSize: FontSize.s14,
-                                              text:
-                                                  DateFormat('dd , MMM').format(
-                                                DateTime.parse(
-                                                  AttendanceCubit.get(context)
-                                                      .oddPunchInModel
-                                                      .result
-                                                      .responseModel[index]
-                                                      .punchingTime,
-                                                ),
-                                              ),
+                                              text: AttendanceCubit.get(context)
+                                                          .oddPunchModel
+                                                          .result
+                                                          .responseModel[index]
+                                                          .checkIn !=
+                                                      ""
+                                                  ? DateFormat('dd , MMM').format(
+                                                      DateTime.parse(AttendanceCubit
+                                                              .get(context)
+                                                          .oddPunchModel
+                                                          .result
+                                                          .responseModel[index]
+                                                          .checkIn))
+                                                  : DateFormat('dd , MMM')
+                                                      .format(DateTime.parse(
+                                                          AttendanceCubit.get(
+                                                                  context)
+                                                              .oddPunchModel
+                                                              .result
+                                                              .responseModel[index]
+                                                              .checkOut)),
                                               color: ColorManager.black,
                                             ),
                                           ),
@@ -106,20 +130,52 @@ class OddPunshInScreen extends StatelessWidget {
                                             fit: BoxFit.scaleDown,
                                             child: TextCustom(
                                               fontSize: FontSize.s14,
-                                              text:
-                                                  DateFormat('hh: mm a').format(
-                                                DateTime.parse(AttendanceCubit
-                                                            .get(context)
-                                                        .oddPunchInModel
-                                                        .result
-                                                        .responseModel[index]
-                                                        .punchingTime)
-                                                    .add(
-                                                  const Duration(
-                                                    hours: 4,
-                                                  ),
-                                                ),
-                                              ), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                              text: AttendanceCubit.get(context)
+                                                          .oddPunchModel
+                                                          .result
+                                                          .responseModel[index]
+                                                          .checkIn !=
+                                                      ""
+                                                  ? DateFormat('hh: mm a')
+                                                      .format(DateTime.parse(
+                                                              AttendanceCubit.get(
+                                                                      context)
+                                                                  .oddPunchModel
+                                                                  .result
+                                                                  .responseModel[
+                                                                      index]
+                                                                  .checkIn)
+                                                          .add(const Duration(
+                                                              hours: 4)))
+                                                  : '00: 00: 00', // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                              color: ColorManager.primary,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: FittedBox(
+                                            fit: BoxFit.scaleDown,
+                                            child: TextCustom(
+                                              fontSize: FontSize.s14,
+                                              text: AttendanceCubit.get(context)
+                                                          .oddPunchModel
+                                                          .result
+                                                          .responseModel[index]
+                                                          .checkOut !=
+                                                      ""
+                                                  ? DateFormat('hh: mm a')
+                                                      .format(DateTime.parse(
+                                                              AttendanceCubit.get(
+                                                                      context)
+                                                                  .oddPunchModel
+                                                                  .result
+                                                                  .responseModel[
+                                                                      index]
+                                                                  .checkOut)
+                                                          .add(const Duration(
+                                                              hours:
+                                                                  4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                                  : '00: 00: 00',
                                               color: ColorManager.primary,
                                             ),
                                           ),
@@ -128,12 +184,12 @@ class OddPunshInScreen extends StatelessWidget {
                                     ),
                                   ),
                                   itemCount: AttendanceCubit.get(context)
-                                      .oddPunchInModel
+                                      .oddPunchModel
                                       .result
                                       .responseModel
                                       .length,
                                 )
-                          : state is GetOddPunchInLoadingState
+                          : state is GetOddPunchLoadingState
                               ? ShimmerCustom(
                                   child: ListView.builder(
                                   shrinkWrap: true,

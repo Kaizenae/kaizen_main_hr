@@ -17,12 +17,16 @@ class ResultsModel {
 }
 
 class ResponseModel {
-  late int recordId;
-  late String punchingTime;
+  late int id;
+  late String employeeId;
+  late String checkIn;
+  late String checkOut;
 
   ResponseModel();
   ResponseModel.fromJson(Map<String, dynamic> json) {
-    recordId = json["record_id"];
-    punchingTime = json["punching_time"];
+    id = json["id"];
+    employeeId = json["employee_id"];
+    checkIn = json["check_in"] == false ? "" : json["check_in"];
+    checkOut = json["check_out"] == false ? "" : json["check_out"];
   }
 }

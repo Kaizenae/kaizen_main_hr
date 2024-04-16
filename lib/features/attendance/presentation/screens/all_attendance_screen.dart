@@ -105,12 +105,26 @@ class AllAtendanceScreen extends StatelessWidget {
                                             fit: BoxFit.scaleDown,
                                             child: TextCustom(
                                               fontSize: FontSize.s14,
-                                              text: DateFormat('dd , MMM')
-                                                  .format(DateTime.parse(state
-                                                      .attendanceEntity
-                                                      .resultEntity
-                                                      .response[index]
-                                                      .checkIn)),
+                                              text: state
+                                                          .attendanceEntity
+                                                          .resultEntity
+                                                          .response[index]
+                                                          .checkIn !=
+                                                      ''
+                                                  ? DateFormat('dd , MMM')
+                                                      .format(DateTime.parse(
+                                                          state
+                                                              .attendanceEntity
+                                                              .resultEntity
+                                                              .response[index]
+                                                              .checkIn))
+                                                  : DateFormat('dd , MMM')
+                                                      .format(DateTime.parse(
+                                                          state
+                                                              .attendanceEntity
+                                                              .resultEntity
+                                                              .response[index]
+                                                              .checkOut)),
                                               color: ColorManager.black,
                                             ),
                                           ),
@@ -120,15 +134,21 @@ class AllAtendanceScreen extends StatelessWidget {
                                             fit: BoxFit.scaleDown,
                                             child: TextCustom(
                                               fontSize: FontSize.s14,
-                                              text: DateFormat('hh: mm a')
-                                                  .format(DateTime.parse(state
+                                              text: state
                                                           .attendanceEntity
                                                           .resultEntity
                                                           .response[index]
-                                                          .checkIn)
-                                                      .add(const Duration(
-                                                          hours:
-                                                              4))), // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                                          .checkIn !=
+                                                      ''
+                                                  ? DateFormat('hh: mm a').format(
+                                                      DateTime.parse(state
+                                                              .attendanceEntity
+                                                              .resultEntity
+                                                              .response[index]
+                                                              .checkIn)
+                                                          .add(const Duration(
+                                                              hours: 4)))
+                                                  : '00: 00: 00', // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
                                               color: ColorManager.primary,
                                             ),
                                           ),

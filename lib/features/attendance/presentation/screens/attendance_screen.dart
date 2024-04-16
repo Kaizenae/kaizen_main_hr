@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/attendance/presentation/screens/all_attendance_screen.dart';
 import 'package:Attendace/features/attendance/presentation/screens/odd_punch_in.dart';
-import 'package:Attendace/features/attendance/presentation/screens/odd_punch_out.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -33,18 +32,14 @@ class AttendanceScreen extends StatelessWidget {
                   widgets: [
                     AllAtendanceScreen(),
                     OddPunshInScreen(),
-                    OddPunshOutScreen(),
                   ],
                   myTabs: [
                     Tab(
                       text: AppStrings.allAtendance,
                     ),
                     Tab(
-                      text: AppStrings.onlyPunchIn,
+                      text: AppStrings.onlyPunchs,
                     ),
-                    Tab(
-                      text: AppStrings.onlyPunchOut,
-                    )
                   ],
                 )
               ],

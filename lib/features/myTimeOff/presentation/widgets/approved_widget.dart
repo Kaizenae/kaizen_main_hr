@@ -66,7 +66,7 @@ class ApprovedWidget extends StatelessWidget {
                         ),
                         cubit.myTimeOff[index].approvers.isNotEmpty
                             ? Text(
-                                AppStrings.users,
+                                AppStrings.approvers,
                                 style: TextStyle(
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18,

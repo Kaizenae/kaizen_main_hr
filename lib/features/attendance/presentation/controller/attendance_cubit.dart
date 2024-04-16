@@ -46,37 +46,20 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     }));
   }
 
-  OddPunchModel oddPunchInModel = OddPunchModel();
-  OddPunchModel oddPunchOutModel = OddPunchModel();
-  void getOddPunchIn() {
-    emit(GetOddPunchInLoadingState());
-    Dio().get(EndPoints.getOddPunchInPath, data: {
+  OddPunchModel oddPunchModel = OddPunchModel();
+  void getOddPunch() {
+    emit(GetOddPunchLoadingState());
+    Dio().get(EndPoints.getOddPunchPath, data: {
       "jsonrpc": 2.0,
       "params": {
         "company_id": AppConstants.companyId,
         "user_id": CacheHelper.get(key: AppConstants.userId),
       }
     }).then((value) {
-      oddPunchInModel = OddPunchModel.fromJson(value.data);
-      emit(const GetOddPunchInSuccessState());
+      oddPunchModel = OddPunchModel.fromJson(value.data);
+      emit(const GetOddPunchSuccessState());
     }).catchError((error) {
-      emit(const GetOddPunchInErrorState());
-    });
-  }
-
-  void getOddPunchOut() {
-    emit(GetOddPunchInLoadingState());
-    Dio().get(EndPoints.getOddPunchOutPath, data: {
-      "jsonrpc": 2.0,
-      "params": {
-        "company_id": AppConstants.companyId,
-        "user_id": CacheHelper.get(key: AppConstants.userId),
-      }
-    }).then((value) {
-      oddPunchOutModel = OddPunchModel.fromJson(value.data);
-      emit(const GetOddPunchOutSuccessState());
-    }).catchError((error) {
-      emit(const GetOddPunchOutErrorState());
+      emit(const GetOddPunchErrorState());
     });
   }
 }
