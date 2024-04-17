@@ -25,20 +25,27 @@ class ShiftAllocationItem extends StatelessWidget {
               fit: BoxFit.scaleDown,
               child: TextCustom(
                 fontSize: FontSize.s14,
-                text: DateFormat('dd , MMM').format(DateTime.parse(item.from)),
+                text:
+                    DateFormat("dd,MMM,yyyy").format(DateTime.parse(item.from)),
                 color: ColorManager.primary,
               ),
             ),
+          ),
+          const SizedBox(
+            width: 10,
           ),
           Expanded(
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: TextCustom(
                 fontSize: FontSize.s14,
-                text: DateFormat('dd , MMM').format(DateTime.parse(item.to)),
+                text: DateFormat("dd,MMM,yyyy").format(DateTime.parse(item.to)),
                 color: ColorManager.primary,
               ),
             ),
+          ),
+          const SizedBox(
+            width: 12,
           ),
           Expanded(
             child: FittedBox(

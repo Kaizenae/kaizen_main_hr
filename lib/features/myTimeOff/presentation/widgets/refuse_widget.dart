@@ -79,7 +79,7 @@ class RefusedWidget extends StatelessWidget {
                         ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => Row(
+                            itemBuilder: (context, ind) => Row(
                                   children: [
                                     Expanded(
                                       child: Row(
@@ -95,7 +95,7 @@ class RefusedWidget extends StatelessWidget {
                                           Expanded(
                                             child: Text(
                                               cubit.myTimeOffRefuse[index]
-                                                  .approvers[index].userName,
+                                                  .approvers[ind].userName,
                                               style: TextStyle(
                                                 color: ColorManager.primary,
                                                 fontSize: FontSize.s16,
@@ -110,7 +110,7 @@ class RefusedWidget extends StatelessWidget {
                                     ),
                                     Text(
                                       cubit.myTimeOffRefuse[index]
-                                          .approvers[index].state,
+                                          .approvers[ind].state,
                                       style: TextStyle(
                                         color: ColorManager.primary,
                                         fontSize: FontSize.s14,

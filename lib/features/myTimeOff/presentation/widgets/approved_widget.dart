@@ -76,7 +76,7 @@ class ApprovedWidget extends StatelessWidget {
                         ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => Row(
+                            itemBuilder: (context, ind) => Row(
                                   children: [
                                     Expanded(
                                       child: Row(
@@ -92,7 +92,7 @@ class ApprovedWidget extends StatelessWidget {
                                           Expanded(
                                             child: Text(
                                               cubit.myTimeOff[index]
-                                                  .approvers[index].userName,
+                                                  .approvers[ind].userName,
                                               style: TextStyle(
                                                 color: ColorManager.primary,
                                                 fontSize: FontSize.s16,
@@ -106,7 +106,7 @@ class ApprovedWidget extends StatelessWidget {
                                       width: 20,
                                     ),
                                     Text(
-                                      cubit.myTimeOff[index].approvers[index]
+                                      cubit.myTimeOff[index].approvers[ind]
                                           .state,
                                       style: TextStyle(
                                         color: ColorManager.primary,

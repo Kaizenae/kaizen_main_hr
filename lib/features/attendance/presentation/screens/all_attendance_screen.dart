@@ -44,6 +44,9 @@ class AllAtendanceScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
@@ -55,6 +58,9 @@ class AllAtendanceScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
@@ -65,6 +71,9 @@ class AllAtendanceScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      width: 10,
                     ),
                     Expanded(
                       child: FittedBox(
@@ -111,14 +120,14 @@ class AllAtendanceScreen extends StatelessWidget {
                                                           .response[index]
                                                           .checkIn !=
                                                       ''
-                                                  ? DateFormat('dd , MMM')
+                                                  ? DateFormat("dd,MMM,yyyy")
                                                       .format(DateTime.parse(
                                                           state
                                                               .attendanceEntity
                                                               .resultEntity
                                                               .response[index]
                                                               .checkIn))
-                                                  : DateFormat('dd , MMM')
+                                                  : DateFormat("dd,MMM,yyyy")
                                                       .format(DateTime.parse(
                                                           state
                                                               .attendanceEntity
@@ -128,6 +137,9 @@ class AllAtendanceScreen extends StatelessWidget {
                                               color: ColorManager.black,
                                             ),
                                           ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
                                         ),
                                         Expanded(
                                           child: FittedBox(

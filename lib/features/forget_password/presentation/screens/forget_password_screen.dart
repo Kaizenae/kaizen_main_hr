@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:Attendace/core/utils/assets_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/forget_password/presentation/controller/cubit.dart';
@@ -69,6 +71,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           }
         },
         builder: (context, state) {
+          log("state is in OTP   ${state.toString()}");
           return ScaffoldCustom(
             appBarCustom: const AppBarCustom(
               text: 'Forget Password',

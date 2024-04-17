@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:developer' as de;
 
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:dio/dio.dart';
@@ -57,8 +58,8 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
       emit(GetUserIdSuccessState(
           message: value.data["result"]["message"], userID: userId));
     }).catchError((error) {
-      emit(GetUserIdErrorState(
-          message: "Some thing went wrong, Try again later"));
+      de.log(error.toString());
+      emit(GetUserIdErrorState(message: "Not Registered Number!"));
     });
   }
 

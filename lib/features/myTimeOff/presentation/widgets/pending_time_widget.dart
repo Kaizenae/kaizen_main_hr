@@ -90,7 +90,7 @@ class PendingTimeWidget extends StatelessWidget {
                         ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => Row(
+                            itemBuilder: (context, ind) => Row(
                                   children: [
                                     Expanded(
                                       child: Row(
@@ -106,7 +106,7 @@ class PendingTimeWidget extends StatelessWidget {
                                           Expanded(
                                             child: Text(
                                               cubit.myTimeOffPending[index]
-                                                  .approvers[index].userName,
+                                                  .approvers[ind].userName,
                                               style: TextStyle(
                                                 color: ColorManager.primary,
                                                 fontSize: FontSize.s16,
@@ -121,7 +121,7 @@ class PendingTimeWidget extends StatelessWidget {
                                     ),
                                     Text(
                                       cubit.myTimeOffPending[index]
-                                          .approvers[index].state,
+                                          .approvers[ind].state,
                                       style: TextStyle(
                                         color: ColorManager.primary,
                                         fontSize: FontSize.s14,

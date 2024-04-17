@@ -106,14 +106,15 @@ class OddPunshInScreen extends StatelessWidget {
                                                           .responseModel[index]
                                                           .checkIn !=
                                                       ""
-                                                  ? DateFormat('dd , MMM').format(
-                                                      DateTime.parse(AttendanceCubit
-                                                              .get(context)
-                                                          .oddPunchModel
-                                                          .result
-                                                          .responseModel[index]
-                                                          .checkIn))
-                                                  : DateFormat('dd , MMM')
+                                                  ? DateFormat("dd,MMM,yyyy")
+                                                      .format(DateTime.parse(
+                                                          AttendanceCubit.get(context)
+                                                              .oddPunchModel
+                                                              .result
+                                                              .responseModel[
+                                                                  index]
+                                                              .checkIn))
+                                                  : DateFormat("dd,MMM,yyyy")
                                                       .format(DateTime.parse(
                                                           AttendanceCubit.get(
                                                                   context)

@@ -49,6 +49,9 @@ class ShiftAllocationScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Expanded(
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
