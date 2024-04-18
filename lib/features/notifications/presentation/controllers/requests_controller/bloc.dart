@@ -120,8 +120,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
       required String extension,
       required String base64String}) async {
     final appStorage = await getTemporaryDirectory();
-    final file = File("${appStorage.path}/$name");
-    log(file.toString());
+    final file = File("${appStorage.path}/$name.$extension");
     try {
       List<int> decodedBytes = base64Decode(base64String);
       file.writeAsBytes(decodedBytes).then((File value) {

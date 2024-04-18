@@ -113,8 +113,9 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
           if (item.id == element.timeOffAllocation) {
             allTimeOffNameAndValues.add({
               "timeOffName": item.name,
-              "timeOffValue":
-                  element.timeOffAllocationRemainingValue.toString(),
+              "timeOffValue": element.timeOffAllocationRemainingValue
+                  .toStringAsFixed(2)
+                  .toString(),
             });
           }
         }
