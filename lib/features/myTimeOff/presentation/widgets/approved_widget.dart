@@ -79,24 +79,39 @@ class ApprovedWidget extends StatelessWidget {
                             itemBuilder: (context, ind) => Row(
                                   children: [
                                     Expanded(
-                                      child: Row(
+                                      child: Column(
                                         children: [
-                                          SvgPicture.asset(
-                                            IconsAssets.personIcon,
-                                            height: AppSize.s24,
-                                            color: ColorManager.skyColor,
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                IconsAssets.personIcon,
+                                                height: AppSize.s24,
+                                                color: ColorManager.skyColor,
+                                              ),
+                                              const SizedBox(
+                                                width: AppSize.s8,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  cubit.myTimeOff[index]
+                                                      .approvers[ind].userName,
+                                                  style: TextStyle(
+                                                    color: ColorManager.primary,
+                                                    fontSize: FontSize.s16,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                           const SizedBox(
-                                            width: AppSize.s8,
+                                            height: 10,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              cubit.myTimeOff[index]
-                                                  .approvers[ind].userName,
-                                              style: TextStyle(
-                                                color: ColorManager.primary,
-                                                fontSize: FontSize.s16,
-                                              ),
+                                          Text(
+                                            cubit.myTimeOff[index]
+                                                .approvers[ind].reason,
+                                            style: TextStyle(
+                                              fontSize: FontSize.s14,
+                                              color: ColorManager.grey,
                                             ),
                                           )
                                         ],

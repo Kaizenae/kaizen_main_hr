@@ -61,14 +61,17 @@ class ApproversEntity {
   final int id;
   final String userName;
   final String state;
+  final String reason;
   const ApproversEntity({
     required this.id,
     required this.state,
     required this.userName,
+    required this.reason,
   });
   List<Object> get props => [
         id,
         userName,
         state,
+        reason,
       ];
 }

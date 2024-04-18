@@ -69,11 +69,16 @@ class ResponseModel extends ResponseEntity {
 }
 
 class ApproversModel extends ApproversEntity {
-  ApproversModel(
-      {required super.id, required super.state, required super.userName});
+  ApproversModel({
+    required super.id,
+    required super.state,
+    required super.userName,
+    required super.reason,
+  });
   factory ApproversModel.fromJson(Map<String, dynamic> json) => ApproversModel(
         id: json["user"],
         state: json["state"],
         userName: json["user_name"],
+        reason: json["reason"],
       );
 }
