@@ -36,3 +36,5 @@ class CannotOpenFileState extends RequestsStates {
   final String message;
   CannotOpenFileState({required this.message});
 }
+
+class AppChangeBottomSheetState extends RequestsStates {}

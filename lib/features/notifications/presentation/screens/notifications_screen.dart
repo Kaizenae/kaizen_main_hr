@@ -16,22 +16,22 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: BlocProvider.of<RequestsBloc>(context)..getRequests(),
-      child: const ScaffoldCustom(
+      child: ScaffoldCustom(
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p16),
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
           child: SafeArea(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 TabBarCustom(
                   widgets: [
                     PendingRequestsWidget(),
                     ApprovedRequestsWidget(),
-                    RejectedRequestsWidget(),
+                    const RejectedRequestsWidget(),
                   ],
-                  myTabs: [
+                  myTabs: const [
                     Tab(
                       text: AppStrings.pending,
                     ),

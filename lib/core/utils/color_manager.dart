@@ -30,4 +30,5 @@ class ColorManager {
   static const Color tabBarColor = Color(0xffF1F2F3);
   static const Color indicatorColor = Color(0xffF7F7F7);
   static const Color catCardColor = Color(0xffF3F7FA);
+  static const Color green = Color(0xff03B018);
 }

@@ -80,23 +80,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         useInheritedMediaQuery: true,
         builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(context)
-                .copyWith(textScaler: const TextScaler.linear(1.0)),
-            child: Material(child: child!)),
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: const TextScaler.linear(1.0)),
+          child: Material(child: child!),
+        ),
         title: 'IDC HR',
         theme: getApplicationTheme(),
         routes: RoutesMap.routesMap(),
-
         initialRoute: Routes.splashRoute,
-        // home: const LocalAuthScreen(),
-        // EndPoints.baseUrl().isEmpty
-        //     ? const BaseUrlScreen()
-        //     : AppConstants.token == AppStrings.empty ||
-        //             AppConstants.token == 0
-        //         ? const LoginScreen()
-        //         : AppConstants.admin
-        //             ? const MainPageAdmin()
-        //             : const MainPage(),
         debugShowCheckedModeBanner: false,
       ),
     );

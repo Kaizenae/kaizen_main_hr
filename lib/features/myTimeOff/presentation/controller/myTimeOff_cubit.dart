@@ -134,6 +134,7 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
       "params": {
         "request_id": requestId,
         "type": "Leave",
+        "reason": "",
       }
     }).then((value) {
       emit(CancelMyRequestSuccessState(

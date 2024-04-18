@@ -6,6 +6,7 @@ import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/notifications/data/models/requests_model.dart';
 import 'package:Attendace/features/notifications/presentation/controllers/requests_controller/states.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -61,6 +62,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
   void approveRequest({
     required int requestId,
     required String type,
+    required String reason,
   }) {
     emit(ApproveRequestLoadingState());
     Dio()
@@ -71,7 +73,8 @@ class RequestsBloc extends Cubit<RequestsStates> {
         "params": {
           "user_id": CacheHelper.get(key: AppConstants.userId),
           "request_id": requestId,
-          "type": type
+          "type": type,
+          "reason": reason
         }
       },
       options: Options(receiveTimeout: const Duration(seconds: 20)),
@@ -85,10 +88,8 @@ class RequestsBloc extends Cubit<RequestsStates> {
     });
   }
 
-  void rejectRequest({
-    required int requestId,
-    required String type,
-  }) {
+  void rejectRequest(
+      {required int requestId, required String type, required String reason}) {
     emit(RejectRequestLoadingState());
     Dio()
         .post(
@@ -98,7 +99,8 @@ class RequestsBloc extends Cubit<RequestsStates> {
         "params": {
           "user_id": CacheHelper.get(key: AppConstants.userId),
           "request_id": requestId,
-          "type": type
+          "type": type,
+          "reason": reason,
         }
       },
       options: Options(receiveTimeout: const Duration(seconds: 20)),
@@ -131,5 +133,14 @@ class RequestsBloc extends Cubit<RequestsStates> {
     } catch (e) {
       emit(CannotOpenFileState(message: "Cannot open file  ${e.toString()}"));
     }
+  }
+
+  bool isBottomSheetShown = false;
+  TextEditingController reasonController = TextEditingController();
+  void changeBottomSheet({
+    required bool isShow,
+  }) {
+    isBottomSheetShown = isShow;
+    emit(AppChangeBottomSheetState());
   }
 }

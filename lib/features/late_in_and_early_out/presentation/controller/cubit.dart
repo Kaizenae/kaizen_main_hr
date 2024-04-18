@@ -176,6 +176,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       "params": {
         "request_id": requestId,
         "type": type,
+        "reason": "",
       }
     }).then((value) {
       emit(CancelMyRequestSuccessState(
