@@ -38,7 +38,7 @@ class AttendanceScreen extends StatelessWidget {
                       text: AppStrings.allAtendance,
                     ),
                     Tab(
-                      text: AppStrings.onlyPunchs,
+                      text: AppStrings.onlyPunch,
                     ),
                   ],
                 )

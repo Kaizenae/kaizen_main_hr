@@ -21,7 +21,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   static EarlyOutLateInCubit get(context) => BlocProvider.of(context);
 
   TextEditingController reasonController = TextEditingController();
-  String? selectedDateShow = DateFormat("dd-MM-yyyy").format(DateTime.now());
+  String? selectedDateShow = DateFormat("dd,MMM,yyyy").format(DateTime.now());
   String? selectedDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;

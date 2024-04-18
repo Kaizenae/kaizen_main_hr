@@ -119,5 +119,5 @@ class AppStrings {
   static const String duration = "Duration";
   static const String approvers = "Approvers";
   static const String allAtendance = "All Atendance";
-  static const String onlyPunchs = "Odd Punchs";
+  static const String onlyPunch = "Odd Punch";
 }

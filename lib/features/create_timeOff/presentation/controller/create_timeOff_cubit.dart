@@ -30,8 +30,9 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
   GlobalKey<FormState> formKey = GlobalKey();
 
   String? selectedStartDateShow =
-      DateFormat("dd-MM-yyyy").format(DateTime.now());
-  String? selectedEndDateShow = DateFormat("dd-MM-yyyy").format(DateTime.now());
+      DateFormat("dd,MMM,yyyy").format(DateTime.now());
+  String? selectedEndDateShow =
+      DateFormat("dd,MMM,yyyy").format(DateTime.now());
   String? selectedStartDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String? selectedEndDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
@@ -46,16 +47,21 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
     emit(TimeOffSuccess());
   }
 
-  void changeStartDate(String date) {
+  DateTime initDate = DateTime.now();
+
+  void changeStartDate({required String date, required DateTime dateTime}) {
     selectedStartDateShow = date;
+    initDate = dateTime;
     log(selectedStartDateShow.toString());
 
     emit(ChangeStartDateState());
   }
 
-  void changeEndDate(String date) {
+  void changeEndDate({required String date, required DateTime dateTime}) {
     selectedEndDateShow = date;
+    initDate = dateTime;
     log(selectedEndDateShow.toString());
+
     emit(ChangeEndDateState());
   }
 

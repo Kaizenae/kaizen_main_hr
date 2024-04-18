@@ -242,7 +242,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                         onTap: () {
                                           showDatePicker(
                                                   context: context,
-                                                  initialDate: DateTime.now(),
+                                                  initialDate: cubit.initDate,
                                                   firstDate: DateTime.now()
                                                       .subtract(const Duration(
                                                           days: 1000)),
@@ -260,7 +260,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                               //         DateTime.parse(
                                               //             value.toString()));
                                               cubit.changeStartDate(
-                                                  DateFormat("dd-MM-yyyy")
+                                                  dateTime: value!,
+                                                  date: DateFormat(
+                                                          "dd,MMM,yyyy")
                                                       .format(DateTime.parse(
                                                           value.toString())));
                                             },
@@ -310,7 +312,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                         onTap: () {
                                           showDatePicker(
                                                   context: context,
-                                                  initialDate: DateTime.now(),
+                                                  initialDate: cubit.initDate,
                                                   firstDate: DateTime.now()
                                                       .subtract(const Duration(
                                                           days: 1000)),
@@ -325,7 +327,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                                           value.toString()));
 
                                               cubit.changeEndDate(
-                                                  DateFormat("dd-MM-yyyy")
+                                                  dateTime: value!,
+                                                  date: DateFormat(
+                                                          "dd,MMM,yyyy")
                                                       .format(DateTime.parse(
                                                           value.toString())));
                                             },

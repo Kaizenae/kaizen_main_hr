@@ -38,7 +38,9 @@ class RequestsBloc extends Cubit<RequestsStates> {
       options: Options(receiveTimeout: const Duration(seconds: 20)),
     )
         .then((value) {
-      log(value.data.toString());
+      pendingRequests = [];
+      approvedRequests = [];
+      rejectedRequests = [];
       requestsModel = RequestsModel.fromJson(value.data);
       for (var item in requestsModel.result.responseModel) {
         if (item.state == "Rejected") {

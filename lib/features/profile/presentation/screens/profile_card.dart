@@ -115,12 +115,9 @@ class ProfileCard extends StatelessWidget {
                                           color: ColorManager.primary,
                                         ),
                                       ),
-                                state.employeeEntity.resultEntity.response[0]
-                                        .email.isEmpty
-                                    ? const SizedBox()
-                                    : const SizedBox(
-                                        height: AppSize.s20,
-                                      ),
+                                const SizedBox(
+                                  height: AppSize.s16,
+                                ),
                                 state.employeeEntity.resultEntity.response[0]
                                         .mobilePhone.isEmpty
                                     ? const SizedBox()
@@ -129,6 +126,32 @@ class ProfileCard extends StatelessWidget {
                                             .response[0].mobilePhone,
                                         fontSize: FontSize.s12,
                                         color: ColorManager.primary,
+                                      ),
+                                state.employeeEntity.resultEntity.response[0]
+                                        .mobilePhone.isEmpty
+                                    ? const SizedBox()
+                                    : const SizedBox(
+                                        height: AppSize.s20,
+                                      ),
+                                state.employeeEntity.resultEntity.response[0]
+                                        .companyName.isEmpty
+                                    ? const SizedBox()
+                                    : Container(
+                                        padding: const EdgeInsets.all(
+                                            AppPadding.p8 / 2),
+                                        decoration: BoxDecoration(
+                                            color: ColorManager.scaffoldColor,
+                                            borderRadius: BorderRadius.circular(
+                                                AppSize.s10)),
+                                        child: TextCustom(
+                                          text: state
+                                              .employeeEntity
+                                              .resultEntity
+                                              .response[0]
+                                              .companyName,
+                                          fontSize: FontSize.s14,
+                                          color: ColorManager.grey,
+                                        ),
                                       ),
                               ],
                             )
@@ -189,12 +212,6 @@ class ProfileCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(AppSize.s10)),
                         child: Column(
                           children: [
-                            const ProfileComponent(
-                              iconName: IconsAssets.personIcon,
-                              name: AppStrings.editProfile,
-                              screen: Routes.editProfileRoute,
-                            ),
-                            const Divider(),
                             const ProfileComponent(
                               iconName: IconsAssets.lockIcon,
                               name: AppStrings.changePassword,

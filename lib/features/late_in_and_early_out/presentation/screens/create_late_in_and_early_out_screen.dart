@@ -141,7 +141,7 @@ class _CreateLateInEarlyOutScreenState
 
                                           EarlyOutLateInCubit.get(context)
                                               .changeDate(
-                                                  DateFormat("dd-MM-yyyy")
+                                                  DateFormat("dd,MMM,yyyy")
                                                       .format(DateTime.parse(
                                                           value.toString())));
                                         },
