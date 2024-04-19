@@ -23,8 +23,9 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   int? userId;
   Future<void> getAttendanceFun() async {
     emit(GetAttendanceLoading());
-    Either<Failure, AttendanceEntity> response =
-        await attendanceUsecase(EmployeeParams(userId: AppConstants.token));
+    Either<Failure, AttendanceEntity> response = await attendanceUsecase(
+        EmployeeParams(
+            userId: AppConstants.token, companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       return GetAttendanceError(message: failure.message);
@@ -35,8 +36,8 @@ class AttendanceCubit extends Cubit<AttendanceState> {
 
   Future<void> getEmployeeAttendanceFun() async {
     emit(GetEmployeeAttendanceLoading());
-    Either<Failure, AttendanceEntity> response =
-        await attendanceUsecase(EmployeeParams(userId: userId));
+    Either<Failure, AttendanceEntity> response = await attendanceUsecase(
+        EmployeeParams(userId: userId, companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       return GetEmployeeAttendanceError(message: failure.message);

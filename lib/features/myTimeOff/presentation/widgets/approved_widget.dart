@@ -80,6 +80,8 @@ class ApprovedWidget extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [

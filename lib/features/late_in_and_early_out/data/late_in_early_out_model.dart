@@ -43,11 +43,13 @@ class ApproversModel {
   late int user;
   late String userName;
   late String state;
+  late String reason;
 
   ApproversModel();
   ApproversModel.fromJson(Map<String, dynamic> json) {
     user = json["user"];
     userName = json["user_name"];
     state = json["state"];
+    reason = json["reason"];
   }
 }

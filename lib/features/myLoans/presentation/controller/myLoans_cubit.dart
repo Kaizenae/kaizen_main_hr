@@ -29,7 +29,9 @@ class MyLoansCubit extends Cubit<MyLoansState> {
     myLoans.clear();
     emit(GetMyLoansLoading());
     Either<Failure, MyLoansEntity> response = await myLeavesUsecase(
-        EmployeeParams(userId: userId ?? AppConstants.token));
+        EmployeeParams(
+            userId: userId ?? AppConstants.token,
+            companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       return GetMyLoansError(message: failure.message);

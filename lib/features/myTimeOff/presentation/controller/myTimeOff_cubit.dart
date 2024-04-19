@@ -34,7 +34,9 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
     myTimeOffRefuse = [];
     myTimeOff = [];
     Either<Failure, MyTimeOffEntity> response = await myTimeOffUsecase(
-        EmployeeParams(userId: userId ?? AppConstants.token));
+        EmployeeParams(
+            userId: userId ?? AppConstants.token,
+            companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       return GetMyTimeOffError(message: failure.message);

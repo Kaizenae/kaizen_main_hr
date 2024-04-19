@@ -22,8 +22,9 @@ class MyRequestsCubit extends Cubit<MyRequestsState> {
   dynamic userId;
   Future<void> getMyRequestsFun() async {
     emit(GetMyRequestsLoading());
-    Either<Failure, MyRequestsEntity> response =
-        await myRequestsUsecase(EmployeeParams(userId: AppConstants.token));
+    Either<Failure, MyRequestsEntity> response = await myRequestsUsecase(
+        EmployeeParams(
+            userId: AppConstants.token, companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       userId = null;
@@ -38,8 +39,8 @@ class MyRequestsCubit extends Cubit<MyRequestsState> {
 
   Future<void> getEmployeeRequestsFun() async {
     emit(GetEmployeeRequestsLoading());
-    Either<Failure, MyRequestsEntity> response =
-        await myRequestsUsecase(EmployeeParams(userId: userId));
+    Either<Failure, MyRequestsEntity> response = await myRequestsUsecase(
+        EmployeeParams(userId: userId, companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       return GetEmployeeRequestsError(message: failure.message);
@@ -51,7 +52,9 @@ class MyRequestsCubit extends Cubit<MyRequestsState> {
   Future<void> getMyRequestsPendingFun() async {
     emit(GetMyRequestsPendingLoading());
     Either<Failure, MyRequestsEntity> response = await myRequestsPendingUsecase(
-        EmployeeParams(userId: userId ?? AppConstants.token));
+        EmployeeParams(
+            userId: userId ?? AppConstants.token,
+            companyId: AppConstants.companyId));
 
     emit(response.fold((failure) {
       userId = null;

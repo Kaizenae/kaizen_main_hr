@@ -87,41 +87,56 @@ class EarlyOutLateInItem extends StatelessWidget {
             ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => Row(
+                itemBuilder: (context, index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                IconsAssets.personIcon,
-                                height: AppSize.s24,
-                                color: ColorManager.skyColor,
-                              ),
-                              const SizedBox(
-                                width: AppSize.s8,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  item.approvers[index].userName,
-                                  style: TextStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: FontSize.s16,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    IconsAssets.personIcon,
+                                    height: AppSize.s24,
+                                    color: ColorManager.skyColor,
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
+                                  const SizedBox(
+                                    width: AppSize.s8,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      item.approvers[index].userName,
+                                      style: TextStyle(
+                                        color: ColorManager.primary,
+                                        fontSize: FontSize.s16,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              item.approvers[index].state,
+                              style: TextStyle(
+                                color: ColorManager.primary,
+                                fontSize: FontSize.s14,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(
-                          width: 20,
+                          height: 10,
                         ),
                         Text(
-                          item.approvers[index].state,
+                          item.approvers[index].reason,
                           style: TextStyle(
-                            color: ColorManager.primary,
                             fontSize: FontSize.s14,
+                            color: ColorManager.grey,
                           ),
-                        ),
+                        )
                       ],
                     ),
                 itemCount: item.approvers.length),
