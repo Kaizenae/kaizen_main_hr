@@ -129,9 +129,9 @@ class _CreateLateInEarlyOutScreenState
                                       showDatePicker(
                                         context: context,
                                         initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime.now()
-                                            .add(const Duration(days: 1)),
+                                        firstDate: DateTime.now()
+                                            .subtract(const Duration(days: 1)),
+                                        lastDate: DateTime.now(),
                                       ).then(
                                         (value) {
                                           cubit.selectedDate =
