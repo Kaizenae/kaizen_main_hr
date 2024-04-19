@@ -105,7 +105,18 @@ class RefusedWidget extends StatelessWidget {
                                                     fontSize: FontSize.s16,
                                                   ),
                                                 ),
-                                              )
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                cubit.myTimeOffRefuse[index]
+                                                    .approvers[ind].state,
+                                                style: TextStyle(
+                                                  color: ColorManager.primary,
+                                                  fontSize: FontSize.s14,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                           const SizedBox(
@@ -118,19 +129,8 @@ class RefusedWidget extends StatelessWidget {
                                               fontSize: FontSize.s14,
                                               color: ColorManager.grey,
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      cubit.myTimeOffRefuse[index]
-                                          .approvers[ind].state,
-                                      style: TextStyle(
-                                        color: ColorManager.primary,
-                                        fontSize: FontSize.s14,
                                       ),
                                     ),
                                   ],

@@ -98,6 +98,8 @@ class PendingTimeWidget extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               SvgPicture.asset(
                                                 IconsAssets.personIcon,
@@ -116,7 +118,18 @@ class PendingTimeWidget extends StatelessWidget {
                                                     fontSize: FontSize.s16,
                                                   ),
                                                 ),
-                                              )
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                cubit.myTimeOffPending[index]
+                                                    .approvers[ind].state,
+                                                style: TextStyle(
+                                                  color: ColorManager.primary,
+                                                  fontSize: FontSize.s14,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                           const SizedBox(
@@ -131,17 +144,6 @@ class PendingTimeWidget extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      cubit.myTimeOffPending[index]
-                                          .approvers[ind].state,
-                                      style: TextStyle(
-                                        color: ColorManager.primary,
-                                        fontSize: FontSize.s14,
                                       ),
                                     ),
                                   ],

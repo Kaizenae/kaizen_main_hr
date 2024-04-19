@@ -102,7 +102,18 @@ class ApprovedWidget extends StatelessWidget {
                                                     fontSize: FontSize.s16,
                                                   ),
                                                 ),
-                                              )
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                cubit.myTimeOff[index]
+                                                    .approvers[ind].state,
+                                                style: TextStyle(
+                                                  color: ColorManager.primary,
+                                                  fontSize: FontSize.s14,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                           const SizedBox(
@@ -117,17 +128,6 @@ class ApprovedWidget extends StatelessWidget {
                                             ),
                                           )
                                         ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      cubit.myTimeOff[index].approvers[ind]
-                                          .state,
-                                      style: TextStyle(
-                                        color: ColorManager.primary,
-                                        fontSize: FontSize.s14,
                                       ),
                                     ),
                                   ],
