@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
               .copyWith(textScaler: const TextScaler.linear(1.0)),
           child: Material(child: child!),
         ),
-        title: 'IDC HR',
+        title: 'KAIZEN HR',
         theme: getApplicationTheme(),
         routes: RoutesMap.routesMap(),
         initialRoute: Routes.splashRoute,

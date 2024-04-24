@@ -2,9 +2,9 @@
 
 import 'dart:async';
 
-import 'package:Attendace/core/utils/assets_manager.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../core/api/end_points.dart';
 import '../../core/utils/constants_manager.dart';
@@ -16,67 +16,87 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<StatefulWidget> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Timer? _timer;
-
-  void _startDelay() {
-    _timer = Timer(
-      const Duration(
-        seconds: 5,
-      ),
-      _nextScreen,
-    );
-  }
+  VideoPlayerController? _controller;
+  bool _visible = false;
 
   @override
   void initState() {
     super.initState();
-    _startDelay();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
+    _controller = VideoPlayerController.asset("assets/images/splash.mp4");
+    _controller!.initialize().then((_) {
+      _controller!.setLooping(true);
+      Timer(const Duration(milliseconds: 100), () {
+        setState(() {
+          _controller!.play();
+          _visible = true;
+        });
+      });
+    });
+
+    Future.delayed(const Duration(seconds: 4), () {
+      navigatorAndRemove(
+        context,
+        EndPoints.baseUrl.isEmpty
+            ? Routes.baseUrlRoute
+            : AppConstants.token == AppStrings.empty || AppConstants.token == 0
+                ? Routes.loginRoute
+                : AppConstants.admin
+                    ? Routes.mainRouteAdmin
+                    : Routes.mainRoute,
+      );
+
+      // navigatorAndRemove(context, Routes.localAuthRoute);
+    });
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     super.dispose();
+    if (_controller != null) {
+      _controller?.dispose();
+      _controller = null;
+    }
+  }
+
+  _getVideoBackground() {
+    return AnimatedOpacity(
+      opacity: _visible ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 1000),
+      child: VideoPlayer(_controller!),
+    );
+  }
+
+  _getBackgroundColor() {
+    return Container(color: Colors.transparent //.withAlpha(120),
+        );
+  }
+
+  _getContent() {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SizedBox(
-        child: FadeInUp(
-          duration: const Duration(seconds: 3),
-          child: const Center(
-            child: AspectRatio(
-              aspectRatio: 1 / 3,
-              child: Image(
-                image: AssetImage(
-                  ImageAssets.logoImg,
-                ),
-              ),
-            ),
-          ),
+      body: Center(
+        child: Stack(
+          children: <Widget>[
+            _getVideoBackground(),
+          ],
         ),
       ),
     );
-  }
-
-  void _nextScreen() {
-    navigatorAndRemove(
-      context,
-      EndPoints.baseUrl.isEmpty
-          ? Routes.baseUrlRoute
-          : AppConstants.token == AppStrings.empty || AppConstants.token == 0
-              ? Routes.loginRoute
-              : AppConstants.admin
-                  ? Routes.mainRouteAdmin
-                  : Routes.mainRoute,
-    );
-
-    // navigatorAndRemove(context, Routes.localAuthRoute);
   }
 }
