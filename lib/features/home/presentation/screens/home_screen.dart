@@ -87,15 +87,20 @@ class HomeScreen extends StatelessWidget {
                                             width: 65,
                                             height: 65,
                                             decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image: MemoryImage(
-                                                        base64Decode(state
-                                                            .employeeEntity
-                                                            .resultEntity
-                                                            .response[0]
-                                                            .photo)))),
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: MemoryImage(
+                                                  base64Decode(
+                                                    state
+                                                        .employeeEntity
+                                                        .resultEntity
+                                                        .response[0]
+                                                        .photo,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           )
                                     : Container(
                                         width: 65,
@@ -293,6 +298,18 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           CustomHomeItem(
                             onTap: () {
+                              HomeCubit.get(context).changePunchInAndPunchOut();
+                            },
+                            icon: ImageAssets.punchInPunchOutImg,
+                            label: HomeCubit.get(context).isPunchIn
+                                ? AppStrings.punchOut
+                                : AppStrings.punchIn,
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          CustomHomeItem(
+                            onTap: () {
                               Navigator.pushNamed(
                                 context,
                                 Routes.myTimeOffRoute,
@@ -302,8 +319,22 @@ class HomeScreen extends StatelessWidget {
                             label: AppStrings.myLeave,
                           ),
                           const SizedBox(
-                            width: 12,
+                            width: 4,
                           ),
+                          CustomHomeItem(
+                            onTap: () {},
+                            icon: ImageAssets.overTimeImg,
+                            label: AppStrings.overTime,
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
                           CustomHomeItem(
                             onTap: () {
                               Navigator.push(
@@ -318,42 +349,37 @@ class HomeScreen extends StatelessWidget {
                             },
                             icon: ImageAssets.lateInImg,
                             label: AppStrings.myLateIn,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
                           CustomHomeItem(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const LateInAndEarlyOutScreen(
-                                      title: AppStrings.earlyOutRequest,
-                                    ),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const LateInAndEarlyOutScreen(
+                                    title: AppStrings.earlyOutRequest,
+                                  ),
+                                ),
+                              );
                             },
                             icon: ImageAssets.checkOut,
                             label: AppStrings.myEarlyOut,
                           ),
                           const SizedBox(
-                            width: 12,
+                            width: 4,
                           ),
                           CustomHomeItem(
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
-                                Routes.hrPoliciesRoute,
+                                Routes.expensesRoute,
                               );
                             },
-                            icon: ImageAssets.policyImg,
-                            label: AppStrings.hrPolicy,
+                            icon: ImageAssets.expensesImg,
+                            label: AppStrings.expenses,
                           ),
                         ],
                       ),
@@ -369,6 +395,19 @@ class HomeScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
+                                Routes.hrPoliciesRoute,
+                              );
+                            },
+                            icon: ImageAssets.policyImg,
+                            label: AppStrings.hrPolicy,
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          CustomHomeItem(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
                                 Routes.shiftAllocationRoute,
                               );
                             },
@@ -376,7 +415,7 @@ class HomeScreen extends StatelessWidget {
                             label: AppStrings.myShiftAllocation,
                           ),
                           const SizedBox(
-                            width: 12,
+                            width: 4,
                           ),
                           CustomHomeItem(
                             onTap: () {

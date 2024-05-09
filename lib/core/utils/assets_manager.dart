@@ -13,6 +13,9 @@ class ImageAssets {
   static const String noDataImg = "$imagePath/no_data.png";
   static const String userPhotoImg = "$imagePath/user_photo.png";
   static const String webIcon = "$imagePath/web.png";
+  static const String punchInPunchOutImg = "$imagePath/Punch-in-Punch-out.png";
+  static const String overTimeImg = "$imagePath/overtime.png";
+  static const String expensesImg = "$imagePath/laons.png";
 }
 
 class IconsAssets {

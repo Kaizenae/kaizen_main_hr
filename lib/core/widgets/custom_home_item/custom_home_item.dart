@@ -30,19 +30,20 @@ class CustomHomeItem extends StatelessWidget {
             children: [
               Expanded(
                 child: AspectRatio(
-                    aspectRatio: 1 / .8,
-                    child: Image(
-                      image: AssetImage(icon),
-                    )),
+                  aspectRatio: 1 / 1,
+                  child: Image(
+                    image: AssetImage(icon),
+                  ),
+                ),
               ),
               FittedBox(
-                fit: BoxFit.scaleDown,
+                fit: BoxFit.contain,
                 child: Text(
                   label,
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: FontSize.s17, color: ColorManager.black),
+                      fontSize: FontSize.s16, color: ColorManager.black),
                 ),
               )
             ],

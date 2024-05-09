@@ -55,4 +55,11 @@ class HomeCubit extends Cubit<HomeState> {
 
     emit(PunchChange());
   }
+
+  bool isPunchIn = false;
+  void changePunchInAndPunchOut() {
+    emit(ChangePunchAndInPunchOutLoadingState());
+    isPunchIn = !isPunchIn;
+    emit(ChangePunchAndInPunchOutSuccessState());
+  }
 }

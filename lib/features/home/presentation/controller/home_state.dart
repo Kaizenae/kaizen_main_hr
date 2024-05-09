@@ -46,3 +46,13 @@ class PunchChange extends HomeState {
   @override
   List<Object> get props => [];
 }
+
+class ChangePunchAndInPunchOutLoadingState extends HomeState {
+  @override
+  List<Object> get props => [];
+}
+
+class ChangePunchAndInPunchOutSuccessState extends HomeState {
+  @override
+  List<Object> get props => [];
+}

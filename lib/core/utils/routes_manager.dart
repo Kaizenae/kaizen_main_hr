@@ -26,6 +26,7 @@ import '../../features/change_password/presentation/screens/change_password_scre
 import '../../features/edit_profile/presentation/screens/edit_phone_screen.dart';
 import '../../features/edit_profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/edit_profile/presentation/screens/edit_userName_screen.dart';
+import '../../features/expenses/presentation/screens/screens/expenses_screen.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/login/presentation/screens/login_screen.dart';
 
@@ -79,6 +80,7 @@ class Routes {
   static const String hrPoliciesRoute = "hrPoliciesRoute";
   static const String shiftAllocationRoute = "shiftAllocationRoute";
   static const String attendanceRoute = "attendanceRoute";
+  static const String expensesRoute = "expensesRoute";
 
   static Route createRoute(String screen) {
     if (Platform.isAndroid) {
@@ -153,6 +155,7 @@ class RoutesMap {
           const ShiftAllocationScreen(),
       Routes.attendanceRoute: (BuildContext context) =>
           const AttendanceScreen(),
+      Routes.expensesRoute: (BuildContext context) => const ExpensesScreen(),
 
       // 'userData': (BuildContext context) => const UserScreen(),
       // 'adminScreen': (BuildContext context) => const AdminHomeScreen(),
@@ -220,6 +223,8 @@ class RoutesMap {
         return const HrPoliciesScreen();
       case Routes.shiftAllocationRoute:
         return const ShiftAllocationScreen();
+      case Routes.expensesRoute:
+        return const ExpensesScreen();
       case Routes.attendanceRoute:
         return const AttendanceScreen();
       default:
