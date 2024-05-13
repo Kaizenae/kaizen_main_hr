@@ -91,6 +91,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
         "new_password": newPassword,
       }
     }).then((value) {
+      de.log(value.data.toString());
       emit(
           ChangePasswordSuccessState(message: value.data["result"]["message"]));
     }).catchError((error) {

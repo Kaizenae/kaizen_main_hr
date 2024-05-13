@@ -25,7 +25,7 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
         "db": 'actan-4-staging-7489940',
         "login": email,
         "password": password,
-        "device_id": uniqueDeviceId
+        "device_id": ""
       }
     });
     return LoginModel.fromJson(response);

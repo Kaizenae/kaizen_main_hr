@@ -36,7 +36,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         await registerUsecase(RegisterParams(
       email: emailController.text.isNotEmpty
           ? emailController.text
-          : "0${phoneNumberController.text}",
+          : phoneNumberController.text,
       password: passwordController.text,
       name: nameController.text,
       phoneNumber: phoneNumberController.text,

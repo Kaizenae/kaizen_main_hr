@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          ImageAssets.logoImg,
+                          ImageAssets.homeIconImg,
                           height: AppSize.s100,
                           width: AppSize.s150,
                         ),
