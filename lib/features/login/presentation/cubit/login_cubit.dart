@@ -2,8 +2,10 @@ import 'package:Attendace/core/local/cache_helper.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/login/data/models/login_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/api/end_points.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../../core/utils/assets_manager.dart';
@@ -18,22 +20,10 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
-  GlobalKey<FormState> formKey = GlobalKey();
-  GlobalKey<FormState> baseKey = GlobalKey();
   TextEditingController baseUrlController = TextEditingController();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  cacheBaseUrl() async {
-    // emit(CacheUrlStateLoading());
-    // await CacheHelper.put(
-    //     key: AppStrings.baseUrl, value: baseUrlController.text.trim());
-    // EndPoints.baseUrl;
-    //
-    // print(    CacheHelper.get(key: AppStrings.baseUrl));
-    // emit(CacheUrlStateSuccess());
-  }
 
   Future<void> loginFun() async {
     emit(LoginLoadingState());
@@ -61,4 +51,21 @@ class LoginCubit extends Cubit<LoginStates> {
   }
 
   String uniqueDeviceId = '';
+  void changePassword({required String userId, required String newPassword}) {
+    emit(ChangePasswordLoadingState());
+    Dio().post(EndPoints.forgetPasswordPath, data: {
+      "jsonrpc": "2.0",
+      "params": {
+        "user_id": userId,
+        "phone": "",
+        "new_password": newPassword,
+      }
+    }).then((value) {
+      emit(
+          ChangePasswordSuccessState(message: value.data["result"]["message"]));
+    }).catchError((error) {
+      emit(ChangePasswordErrorState(
+          message: AppStrings.someThingWentWrongTryAgainLater));
+    });
+  }
 }

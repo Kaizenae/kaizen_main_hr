@@ -1,7 +1,5 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
 
-import 'dart:developer';
-
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +57,6 @@ class ApprovedRequestsWidget extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            log(state.toString());
             return RequestsBloc.get(context).approvedRequests.isNotEmpty
                 ? ListView.separated(
                     separatorBuilder: (context, index) => const Divider(),
@@ -202,7 +199,7 @@ class ApprovedRequestsWidget extends StatelessWidget {
                               borderColor: ColorManager.error,
                               fontWeight: FontWeight.w800,
                               width: double.infinity,
-                              text: 'Reject Request',
+                              text: AppStrings.rejectRequest,
                               onPressed: () {
                                 scaffoldKey.currentState!
                                     .showBottomSheet(
@@ -228,12 +225,14 @@ class ApprovedRequestsWidget extends StatelessWidget {
                                                       TextInputType.text,
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
-                                                      return ('Reason must not be empty');
+                                                      return (AppStrings
+                                                          .reasonMustNotBeEmpty);
                                                     }
                                                     return null;
                                                   },
                                                   decoration: InputDecoration(
-                                                    labelText: 'Reason',
+                                                    labelText:
+                                                        AppStrings.reason,
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -254,7 +253,8 @@ class ApprovedRequestsWidget extends StatelessWidget {
                                                       ColorManager.error,
                                                   fontWeight: FontWeight.w800,
                                                   width: double.infinity,
-                                                  text: 'Reject Request',
+                                                  text:
+                                                      AppStrings.rejectRequest,
                                                   onPressed: () {
                                                     if (formKey.currentState!
                                                         .validate()) {

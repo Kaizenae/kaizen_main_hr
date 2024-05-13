@@ -42,7 +42,7 @@ class ShiftAllocationScreen extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: TextCustom(
-                        text: 'From',
+                        text: AppStrings.from,
                         color: ColorManager.primary,
                         fontSize: AppSize.s16,
                         fontWeight: FontWeight.w500,
@@ -56,7 +56,7 @@ class ShiftAllocationScreen extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: TextCustom(
-                        text: 'To',
+                        text: AppStrings.to,
                         color: ColorManager.primary,
                         fontSize: AppSize.s16,
                         fontWeight: FontWeight.w500,
@@ -67,7 +67,7 @@ class ShiftAllocationScreen extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: TextCustom(
-                        text: 'Scheme',
+                        text: AppStrings.scheme,
                         color: ColorManager.error,
                         fontSize: AppSize.s16,
                         fontWeight: FontWeight.w500,
@@ -78,7 +78,7 @@ class ShiftAllocationScreen extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: TextCustom(
-                        text: 'State',
+                        text: AppStrings.state,
                         color: ColorManager.secondary,
                         fontSize: AppSize.s16,
                         fontWeight: FontWeight.w500,
@@ -94,33 +94,35 @@ class ShiftAllocationScreen extends StatelessWidget {
                   return state is ShiftAllocationLoadingState
                       ? ShimmerCustom(
                           child: ListView.builder(
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: AppPadding.p12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextCustom(
-                                  fontSize: FontSize.s14,
-                                  text: '20 sep',
-                                  color: ColorManager.black,
-                                ),
-                                TextCustom(
-                                  fontSize: FontSize.s14,
-                                  text: '09:00 am',
-                                  color: ColorManager.primary,
-                                ),
-                                TextCustom(
-                                  fontSize: FontSize.s14,
-                                  text: '06:00 pm',
-                                  color: ColorManager.error,
-                                ),
-                              ],
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: AppPadding.p12),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: '20 sep',
+                                    color: ColorManager.black,
+                                  ),
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: '09:00 am',
+                                    color: ColorManager.primary,
+                                  ),
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: '06:00 pm',
+                                    color: ColorManager.error,
+                                  ),
+                                ],
+                              ),
                             ),
+                            itemCount: 10,
                           ),
-                          itemCount: 10,
-                        ))
+                        )
                       : state is ShiftAllocationSuccessState
                           ? ShiftAllocationCubit.get(context)
                                   .shiftAllocationModel

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
@@ -49,7 +47,6 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            log(state.toString());
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Column(
@@ -62,7 +59,7 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                       fontSize: FontSize.s14,
                       colors: ColorManager.secondary,
                       width: context.width / 1.6,
-                      text: 'Apply Request',
+                      text: AppStrings.applyRequest,
                       onPressed: () {
                         Navigator.push(
                           context,

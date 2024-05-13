@@ -71,9 +71,15 @@ class RefusedWidget extends StatelessWidget {
                             ? Text(
                                 AppStrings.approvers,
                                 style: TextStyle(
-                                    color: ColorManager.black,
-                                    fontSize: FontSize.s18,
-                                    fontWeight: FontWeight.w600),
+                                  color: ColorManager.black,
+                                  fontSize: FontSize.s18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            : const SizedBox(),
+                        cubit.myTimeOffRefuse[index].approvers.isNotEmpty
+                            ? const SizedBox(
+                                height: 10,
                               )
                             : const SizedBox(),
                         ListView.builder(

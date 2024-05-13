@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/local/cache_helper.dart';
-import 'features/all_employee/presentation/cubit/all_employees_cubit.dart';
 import 'features/attendance/presentation/controller/attendance_cubit.dart';
 import 'features/companies/presentation/cubit/companies_cubit.dart';
 import 'features/create_loan/presentation/controller/create_loan_cubit.dart';
@@ -70,7 +69,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => RequestsBloc()),
         BlocProvider(create: (context) => sl<EditProfileCubit>()),
         BlocProvider(create: (context) => sl<EditCompanyCubit>()),
-        BlocProvider(create: (context) => sl<AllEmployeesCubit>()),
         BlocProvider(create: (context) => sl<CreateTimeOffCubit>()),
         BlocProvider(create: (context) => sl<AcceptRejectTimeOffCubit>()),
         BlocProvider(create: (context) => sl<AcceptRejectRequestCubit>()),

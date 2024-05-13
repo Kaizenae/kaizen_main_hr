@@ -73,6 +73,11 @@ class ApprovedWidget extends StatelessWidget {
                                     fontWeight: FontWeight.w600),
                               )
                             : const SizedBox(),
+                        cubit.myTimeOff[index].approvers.isNotEmpty
+                            ? const SizedBox(
+                                height: 10,
+                              )
+                            : const SizedBox(),
                         ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),

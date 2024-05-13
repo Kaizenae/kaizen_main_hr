@@ -221,12 +221,14 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         TextInputType.text,
                                                     validator: (value) {
                                                       if (value!.isEmpty) {
-                                                        return ('Reason must not be empty');
+                                                        return (AppStrings
+                                                            .reasonMustNotBeEmpty);
                                                       }
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
-                                                      labelText: 'Reason',
+                                                      labelText:
+                                                          AppStrings.reason,
                                                       border:
                                                           OutlineInputBorder(
                                                         borderRadius:
@@ -248,7 +250,8 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         ColorManager.green,
                                                     fontWeight: FontWeight.w800,
                                                     width: double.infinity,
-                                                    text: 'Approve Request',
+                                                    text: AppStrings
+                                                        .approveRequest,
                                                     onPressed: () {
                                                       if (formKey.currentState!
                                                           .validate()) {
@@ -324,12 +327,14 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         TextInputType.text,
                                                     validator: (value) {
                                                       if (value!.isEmpty) {
-                                                        return ('Reason must not be empty');
+                                                        return (AppStrings
+                                                            .reasonMustNotBeEmpty);
                                                       }
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
-                                                      labelText: 'Reason',
+                                                      labelText:
+                                                          AppStrings.reason,
                                                       border:
                                                           OutlineInputBorder(
                                                         borderRadius:
@@ -351,7 +356,8 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         ColorManager.error,
                                                     fontWeight: FontWeight.w800,
                                                     width: double.infinity,
-                                                    text: 'Reject Request',
+                                                    text: AppStrings
+                                                        .rejectRequest,
                                                     onPressed: () {
                                                       if (formKey.currentState!
                                                           .validate()) {

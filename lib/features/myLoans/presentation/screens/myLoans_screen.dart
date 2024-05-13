@@ -1,7 +1,5 @@
 // ignore_for_file: file_names
 
-import 'dart:io';
-
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/core/utils/routes_manager.dart';
@@ -11,7 +9,6 @@ import 'package:Attendace/core/widgets/component.dart';
 import 'package:Attendace/core/widgets/elevated_button/elevated_button_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/core/widgets/tab_bar_custom/tab_bar_custom.dart';
-import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -109,109 +106,27 @@ class MyLoansScreen extends StatelessWidget {
               const SizedBox(
                 height: AppSize.s18,
               ),
-              Platform.isAndroid
-                  ? TabBarCustom(
-                      onTap: (v) {
-                        if (v == 0) {
-                          MyLoansCubit.get(context).getMyLoansFun();
-                        } else if (v == 1) {
-                          MyLoansCubit.get(context).getMyLoansFun();
-                        }
-                      },
-                      widgets: const [
-                        ApprovedWidget(),
-                        PendingWidget(),
-                      ],
-                      myTabs: const [
-                        Tab(
-                          text: AppStrings.approved,
-                        ),
-                        Tab(
-                          text: AppStrings.pending,
-                        )
-                      ],
-                    )
-                  : Expanded(
-                      child: DefaultTabController(
-                        length: 2,
-                        child: Column(
-                          children: <Widget>[
-                            ButtonsTabBar(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: AppPadding.p12),
-                              backgroundColor: ColorManager.primary,
-                              unselectedBackgroundColor: Colors.grey[300],
-                              unselectedLabelStyle:
-                                  const TextStyle(color: Colors.black),
-                              labelStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: FontSize.s20),
-                              tabs: const [
-                                Tab(
-                                  // icon: Icon(Icons.directions_car),
-                                  text: AppStrings.approved,
-                                ),
-                                Tab(
-                                  // icon: Icon(Icons.directions_transit),
-                                  text: AppStrings.pending,
-                                ),
-                              ],
-                            ),
-                            const Expanded(
-                              child: TabBarView(
-                                children: <Widget>[
-                                  ApprovedWidget(),
-                                  PendingWidget(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-              // Expanded(
-              //   child: CupertinoTabScaffold(
-              //     backgroundColor: ColorManager.scaffoldColor,
-              //     tabBar: CupertinoTabBar(
-              //       backgroundColor: ColorManager.white,
-              //
-              //       onTap: (v) {
-              //         if (v == 0) {
-              //           MyLoansCubit.get(context).getMyLoansFun();
-              //         } else if (v == 1) {
-              //           MyLoansCubit.get(context).getMyLoansPendingFun();
-              //         }
-              //       },
-              //       items: const <BottomNavigationBarItem>[
-              //         BottomNavigationBarItem(
-              //           icon: Icon(CupertinoIcons.check_mark_circled),
-              //           label: AppStrings.approved,
-              //         ),
-              //         BottomNavigationBarItem(
-              //           icon: Icon(CupertinoIcons.clock),
-              //           label: AppStrings.pending,
-              //         ),
-              //
-              //       ],
-              //     ),
-              //     tabBuilder: (BuildContext context, int index) {
-              //       return CupertinoTabView(
-              //         builder: (BuildContext context) {
-              //           switch (index) {
-              //             case 0:
-              //               return ApprovedWidget();
-              //             case 1:
-              //               return PendingWidget();
-              //             default:
-              //               return ApprovedWidget();
-              //           }
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
+              TabBarCustom(
+                onTap: (v) {
+                  if (v == 0) {
+                    MyLoansCubit.get(context).getMyLoansFun();
+                  } else if (v == 1) {
+                    MyLoansCubit.get(context).getMyLoansFun();
+                  }
+                },
+                widgets: const [
+                  ApprovedWidget(),
+                  PendingWidget(),
+                ],
+                myTabs: const [
+                  Tab(
+                    text: AppStrings.approved,
+                  ),
+                  Tab(
+                    text: AppStrings.pending,
+                  )
+                ],
+              )
             ],
           ),
         ),

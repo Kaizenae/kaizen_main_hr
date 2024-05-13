@@ -81,13 +81,25 @@ class CreateNewPasswordScreen extends StatelessWidget {
                         TextFormFieldCustom(
                           validate: (v) {
                             if (v!.isEmpty) {
-                              return 'New Password must be not empty';
+                              return AppStrings.newPasswordMustBeNotEmpty;
                             }
                             return null;
                           },
                           controller: newPasswordController,
                           keyboardType: TextInputType.visiblePassword,
                           suffix: true,
+                          suffixIcon:
+                              BlocProvider.of<ForgetPasswordCubit>(context)
+                                  .suffix,
+                          obSecure:
+                              BlocProvider.of<ForgetPasswordCubit>(context)
+                                      .isPassword
+                                  ? true
+                                  : false,
+                          suffixOnPressed: () {
+                            BlocProvider.of<ForgetPasswordCubit>(context)
+                                .changePasswordVisibility();
+                          },
                         ),
                         const SizedBox(
                           height: AppSize.s40,
@@ -100,10 +112,7 @@ class CreateNewPasswordScreen extends StatelessWidget {
                                 )
                               : ElevatedButtonCustom(
                                   fontSize: FontSize.s14,
-
                                   textColor: ColorManager.white,
-
-                                  // width: 100,
                                   onPressed: () {
                                     BlocProvider.of<ForgetPasswordCubit>(
                                             context)

@@ -27,7 +27,7 @@ class EditLocationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       appBarCustom: const AppBarCustom(
-        text: 'Update Location',
+        text: AppStrings.updateLocation,
       ),
       body: BlocProvider(
         create: (context) => sl<EditCompanyCubit>(),

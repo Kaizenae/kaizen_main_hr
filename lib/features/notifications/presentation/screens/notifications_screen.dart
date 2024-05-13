@@ -42,49 +42,7 @@ class NotificationsScreen extends StatelessWidget {
                       text: AppStrings.rejected,
                     )
                   ],
-                )
-
-                // Expanded(
-                //   child: CupertinoTabScaffold(
-                //     backgroundColor: ColorManager.scaffoldColor,
-                //     tabBar: CupertinoTabBar(
-                //       backgroundColor: ColorManager.white,
-                //
-                //       onTap: (v) {
-                //         if (v == 0) {
-                //           MyTimeOffCubit.get(context).getMyTimeOffFun();
-                //         } else if (v == 1) {
-                //           MyTimeOffCubit.get(context).getMyTimeOffPendingFun();
-                //         }
-                //       },
-                //       items: const <BottomNavigationBarItem>[
-                //         BottomNavigationBarItem(
-                //           icon: Icon(CupertinoIcons.check_mark_circled),
-                //           label: AppStrings.approved,
-                //         ),
-                //         BottomNavigationBarItem(
-                //           icon: Icon(CupertinoIcons.clock),
-                //           label: AppStrings.pending,
-                //         ),
-                //
-                //       ],
-                //     ),
-                //     tabBuilder: (BuildContext context, int index) {
-                //       return CupertinoTabView(
-                //         builder: (BuildContext context) {
-                //           switch (index) {
-                //             case 0:
-                //               return ApprovedWidget();
-                //             case 1:
-                //               return PendingWidget();
-                //             default:
-                //               return ApprovedWidget();
-                //           }
-                //         },
-                //       );
-                //     },
-                //   ),
-                // ),
+                ),
               ],
             ),
           ),

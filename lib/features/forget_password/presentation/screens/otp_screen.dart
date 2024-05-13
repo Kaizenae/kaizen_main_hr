@@ -102,7 +102,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 .toString()) {
                           SnackBar snackBar = SnackBar(
                             content: const Text(
-                              "This code is invalid, Please enter valid code",
+                              AppStrings.thisCodeIsInvalidPleaseEnterValidCode,
                             ),
                             duration: Duration(
                               seconds: AppConstants.snackBarTime,
@@ -116,7 +116,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                 .otpNumber
                                 .toString()) {
                           SnackBar snackBar = SnackBar(
-                            content: const Text("This code is incorrect"),
+                            content: const Text(AppStrings.thisCodeIsIncorrect),
                             duration: Duration(
                               seconds: AppConstants.snackBarTime,
                             ),
@@ -142,7 +142,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   start != 0
                       ? TextCustom(
                           fontSize: FontSize.s14,
-                          text: "The code will expire after 00:$start",
+                          text: "${AppStrings.theCodeWillExpireAfter}:$start",
                           textAlign: TextAlign.start,
                           color: ColorManager.darkGrey,
                         )

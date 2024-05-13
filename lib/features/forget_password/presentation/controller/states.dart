@@ -42,3 +42,5 @@ class ChangePasswordErrorState extends ForgetPasswordStates {
   final String message;
   ChangePasswordErrorState({required this.message});
 }
+
+class ChangePasswordVisibilityState extends ForgetPasswordStates {}

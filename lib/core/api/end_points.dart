@@ -62,4 +62,5 @@ class EndPoints {
   static String rejectRequest = "$baseUrl/org/refuse_request";
   static String cancelMyRequestPath = "$baseUrl/org/cancel_my_request";
   static String getOddPunchPath = "$baseUrl/org/get_all_odds";
+  static String getVersionCodePath = "$baseUrl/org/get_version";
 }

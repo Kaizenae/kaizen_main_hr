@@ -5,6 +5,8 @@ import 'package:Attendace/core/api/end_points.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/strings_manager.dart';
 import 'states.dart';
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
@@ -22,23 +24,36 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
 
   void sendOtp({required String phoneNumber}) {
     createRandomOtp();
-    Dio().post(
-      EndPoints.otpPath,
-      queryParameters: {
-        "action": "send-sms",
-        "api_key":
-            "SWRlYWNyYXRlIFA6JDJ5JDEwJFdXWlYzOTNUYjQ5TmVvU0NmRURmSS53MkNTakYwVWdMNXhQUVV6dlZlVEpEelF4MHp0aWlh",
-        "to": "971$phoneNumber",
-        "from": "ORANGEWHEEL",
-        "sms": message,
-        "response": "json",
-      },
-    ).then((value) {
-      emit(SendOtpSuccessState());
-    }).catchError((error) {
-      emit(
-          SendOtpErrorState(message: "Some thing went wrong, Try again later"));
-    });
+    if (otpNumber.toString().length == 6) {
+      Dio().post(
+        EndPoints.otpPath,
+        queryParameters: {
+          "action": "send-sms",
+          "api_key":
+              "SWRlYWNyYXRlIFA6JDJ5JDEwJFdXWlYzOTNUYjQ5TmVvU0NmRURmSS53MkNTakYwVWdMNXhQUVV6dlZlVEpEelF4MHp0aWlh",
+          "to": "971$phoneNumber",
+          "from": "ORANGEWHEEL",
+          "sms": message,
+          "response": "json",
+        },
+      ).then((value) {
+        emit(SendOtpSuccessState());
+      }).catchError((error) {
+        emit(SendOtpErrorState(
+            message: AppStrings.someThingWentWrongTryAgainLater));
+      });
+    } else {
+      sendOtp(phoneNumber: phoneNumber);
+    }
+  }
+
+  bool isPassword = true;
+  String suffix = IconsAssets.hiddenIcon;
+
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix = isPassword ? IconsAssets.hiddenIcon : IconsAssets.hidden2Icon;
+    emit(ChangePasswordVisibilityState());
   }
 
   late int userId;
@@ -59,7 +74,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
           message: value.data["result"]["message"], userID: userId));
     }).catchError((error) {
       de.log(error.toString());
-      emit(GetUserIdErrorState(message: "Not Registered Number!"));
+      emit(GetUserIdErrorState(message: AppStrings.notRegisteredNumber));
     });
   }
 
@@ -80,7 +95,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
           ChangePasswordSuccessState(message: value.data["result"]["message"]));
     }).catchError((error) {
       emit(ChangePasswordErrorState(
-          message: "Some thing went wrong, Try again later"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 }

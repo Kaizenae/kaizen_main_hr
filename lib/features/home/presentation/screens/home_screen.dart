@@ -61,58 +61,64 @@ class HomeScreen extends StatelessWidget {
                           width: AppSize.s150,
                         ),
                         BlocProvider.value(
-                            value: BlocProvider.of<ProfileCubit>(context)
-                              ..getEmployeeFun(),
-                            child: BlocBuilder<ProfileCubit, ProfileState>(
-                              builder: (context, state) {
-                                return state is GetEmployeeSuccess
-                                    ? state.employeeEntity.resultEntity
-                                            .response[0].photo.isEmpty
-                                        ? Container(
-                                            width: 65,
-                                            height: 65,
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                    ImageAssets.userPhotoImg,
-                                                  ),
-                                                )),
-                                          )
-                                        : Container(
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            width: 65,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image: MemoryImage(
-                                                        base64Decode(state
-                                                            .employeeEntity
-                                                            .resultEntity
-                                                            .response[0]
-                                                            .photo)))),
-                                          )
-                                    : Container(
-                                        width: 65,
-                                        height: 65,
-                                        clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                        decoration: const BoxDecoration(
+                          value: BlocProvider.of<ProfileCubit>(context)
+                            ..getEmployeeFun(),
+                          child: BlocBuilder<ProfileCubit, ProfileState>(
+                            builder: (context, state) {
+                              return state is GetEmployeeSuccess
+                                  ? state.employeeEntity.resultEntity
+                                          .response[0].photo.isEmpty
+                                      ? Container(
+                                          width: 65,
+                                          height: 65,
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                  ImageAssets.userPhotoImg,
+                                                ),
+                                              )),
+                                        )
+                                      : Container(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          width: 65,
+                                          height: 65,
+                                          decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              image: AssetImage(
-                                                ImageAssets.userPhotoImg,
+                                              image: MemoryImage(
+                                                base64Decode(
+                                                  state
+                                                      .employeeEntity
+                                                      .resultEntity
+                                                      .response[0]
+                                                      .photo,
+                                                ),
                                               ),
-                                            )),
-                                      );
-                              },
-                            )),
+                                            ),
+                                          ),
+                                        )
+                                  : Container(
+                                      width: 65,
+                                      height: 65,
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                            ImageAssets.userPhotoImg,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(

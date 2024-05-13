@@ -45,15 +45,15 @@ class AppStrings {
   static const String login = 'Login';
   static const String signup = 'Sign up';
   static const String register = 'Register';
-  static const String mustBeNot = 'must be not Empty';
+  static const String mustBeNot = 'field is empty!';
   static const String doNotHaveAccount = 'Don’t Have an Account';
   static const String haveAccount = 'Have an Account ?';
   static const String searchTextField = 'Search $mustBeNot';
   static const String baseUrlTextField = 'URL $mustBeNot';
-  static const String emailTextField = 'Email $mustBeNot';
+  static const String emailTextField = 'Username field is empty!';
   static const String nameTextField = 'Name $mustBeNot';
-  static const String passwordTextField = 'Password $mustBeNot';
-  static const String phoneTextField = 'Phone $mustBeNot';
+  static const String passwordTextField = 'Password field is empty!';
+  static const String phoneTextField = 'Enter phone number';
   static const String emailValidTextField =
       'Please enter a valid email address';
   static const String approved = 'Approved';
@@ -115,9 +115,69 @@ class AppStrings {
   static const String editUserPhoto = "Edit User Photo";
   static const String myAttendance = "My Attendance";
   static const String resendCode = "Resend Code";
-  static const String emailOrPhone = "Email Or Phone";
+  static const String loginIdOrEmployeeCode = "Login ID / Employee Code";
   static const String duration = "Duration";
   static const String approvers = "Approvers";
   static const String allAtendance = "All Atendance";
   static const String onlyPunch = "Odd Punch";
+  static const String youCannotUseTheApplication =
+      "Let’s upgrade the application.";
+  static const String pleaseUpdateThisApplication =
+      "The application needs to be upgraded to the latest version to continue using it.";
+  static const String ok = "Ok";
+  static const String from = "From";
+  static const String to = "To";
+  static const String scheme = "Scheme";
+  static const String done = "Done";
+  static const String selectTheCompany = "Select The Company";
+  static const String logout = "Logout";
+  static const String rejectRequest = "Reject Request";
+  static const String reasonMustNotBeEmpty = "Reason must not be empty";
+  static const String reason = "Reason";
+  static const String approveRequest = "Approve Request";
+  static const String applyRequest = "Apply Request";
+  static const String usedRequests = "Used Requests";
+  static const String totalRequests = "Total Requests";
+  static const String newPasswordMustBeNotEmpty =
+      "New Password must be not empty";
+  static const String someThingWentWrongTryAgainLater =
+      "We are sorry, something went wrong. Please try again later.";
+  static const String pleaseEnterTheReasonEarlyOut =
+      'Please enter the reason for "Early Out".';
+  static const String pleaseEnterTheReasonLateIn =
+      'Please enter the reason for "Late In".';
+  static const String attachment = "Attachment";
+  static const String thisCodeIsInvalidPleaseEnterValidCode =
+      "Your OTP verification code has expired. Please try log in again.";
+  static const String thisCodeIsIncorrect =
+      "Failed to authenticate! Incorrect OTP";
+  static const String theCodeWillExpireAfter = "The code will expire after 00";
+  static const String notRegisteredNumber =
+      "Your Phone Number is not registered for the application!";
+  static const String updatePhone = "Update Phone";
+  static const String workPhone = "Work Phone";
+  static const String departmentMustBeNotEmpty = "Department must be not Empty";
+  static const String updateName = "Update Name";
+  static const String userNameMustBeNotEmpty = "User Name must be not Empty";
+  static const String editCompany = "Edit Company";
+  static const String updateLocation = "Update Location";
+  static const String applyLeaveRequest = "Apply Leave Request";
+  static const String selectType = "Select Type";
+  static const String startDate = "Start Date";
+  static const String endDate = "End Date";
+  static const String youMustChooseALeaveType = "You must choose a leave type";
+  static const String punchIn = "Punch in";
+  static const String punchOut = "Punch out";
+  static const String hours = "Hours";
+  static const String pleaseEnterTheReasonForLeave =
+      "Please enter the reason for leave.";
+  static const String oldPassword = "Old PAssword";
+  static const String oldPasswordFieldMustBeNotEmpty =
+      "Old Password field must be not empty!";
+  static const String newPasswordFieldMustBeNotEmpty =
+      "New Password field must be not empty!";
+  static const String pleaseEnterTheReasonForLateIn =
+      'Please enter the reason for "Late In".';
+  static const String pleaseEnterTheReasonForEarlyOut =
+      'Please enter the reason for "Early Out".';
 }

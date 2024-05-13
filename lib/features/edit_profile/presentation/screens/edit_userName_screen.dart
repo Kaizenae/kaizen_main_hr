@@ -30,7 +30,7 @@ class EditUserNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       appBarCustom: const AppBarCustom(
-        text: 'Update Name',
+        text: AppStrings.updateName,
       ),
       body: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {
@@ -73,7 +73,7 @@ class EditUserNameScreen extends StatelessWidget {
                     children: [
                       TextCustom(
                         fontSize: FontSize.s14,
-                        text: 'UserName',
+                        text: AppStrings.userName,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
@@ -84,7 +84,7 @@ class EditUserNameScreen extends StatelessWidget {
                         controller: editProfileCubit.userNameController,
                         validate: (value) {
                           if (value!.trim().isEmpty || value == ' ') {
-                            return 'UserName must be not Empty';
+                            return AppStrings.userNameMustBeNotEmpty;
                           }
 
                           return null;
@@ -104,10 +104,7 @@ class EditUserNameScreen extends StatelessWidget {
                               )
                             : ElevatedButtonCustom(
                                 fontSize: FontSize.s14,
-
                                 textColor: ColorManager.white,
-
-                                // width: 100,
                                 onPressed: () async {
                                   if (editProfileCubit.formKey.currentState!
                                       .validate()) {

@@ -30,7 +30,7 @@ class EditPhoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       appBarCustom: const AppBarCustom(
-        text: 'Update Phone',
+        text: AppStrings.updatePhone,
       ),
       body: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {
@@ -72,7 +72,7 @@ class EditPhoneScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextCustom(
-                        text: 'Work Phone',
+                        text: AppStrings.workPhone,
                         fontSize: FontSize.s14,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
@@ -84,9 +84,8 @@ class EditPhoneScreen extends StatelessWidget {
                         controller: editProfileCubit.phoneNumberController,
                         validate: (value) {
                           if (value!.trim().isEmpty || value == ' ') {
-                            return 'Department must be not Empty';
+                            return AppStrings.departmentMustBeNotEmpty;
                           }
-
                           return null;
                         },
                         keyboardType: TextInputType.phone,

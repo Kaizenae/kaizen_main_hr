@@ -12,11 +12,12 @@ class UserRequestWidget extends StatelessWidget {
   final String iconPath;
   final String text;
   final String subText;
-  const UserRequestWidget(
-      {super.key,
-      required this.iconPath,
-      required this.text,
-      required this.subText});
+  const UserRequestWidget({
+    super.key,
+    required this.iconPath,
+    required this.text,
+    required this.subText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,11 @@ class UserRequestWidget extends StatelessWidget {
           const SizedBox(
             width: AppSize.s8,
           ),
+          // TextCustom(
+          //   text: '$text :',
+          //   color: ColorManager.black,
+          //   fontSize: FontSize.s16,
+          // ),
           const SizedBox(
             width: AppSize.s4,
           ),
@@ -40,9 +46,6 @@ class UserRequestWidget extends StatelessWidget {
             text: subText,
             color: ColorManager.primary,
             fontSize: FontSize.s16,
-          ),
-          const SizedBox(
-            height: AppSize.s14,
           ),
         ],
       ),

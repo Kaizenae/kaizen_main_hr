@@ -5,6 +5,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:Attendace/core/api/end_points.dart';
+import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
@@ -52,7 +53,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
     }).catchError((error) {
       log(error.toString());
       emit(EarlyOutErrorState(
-          message: "Some thing went wrong, Try again later!!"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 
@@ -72,7 +73,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
           message: value.data["result"]["message"].toString()));
     }).catchError((error) {
       emit(LateInErrorState(
-          message: "Some thing went wrong, Try again later!!"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 
@@ -183,7 +184,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
           message: value.data["result"]["response"]));
     }).catchError((error) {
       emit(CancelMyRequestErrorState(
-          message: "Some thing went wrong, Try again later!!"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 }

@@ -1,61 +1,64 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/core/widgets/component.dart';
+import 'package:Attendace/features/login/presentation/cubit/login_state.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/local/cache_helper.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
-import '../../../../injection_container.dart';
+import '../cubit/login_cubit.dart';
 
-import '../cubit/change_password_cubit.dart';
-import '../cubit/change_password_state.dart';
-
-class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
-
-  @override
-  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
-}
-
-class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController oldPasswordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-
+class CreatePasswordAfterLoginScreen extends StatelessWidget {
+  CreatePasswordAfterLoginScreen({
+    super.key,
+    required this.userID,
+  });
+  final String userID;
+  final newPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ChangePasswordCubit(editChangePasswordUsecase: sl()),
+    return BlocProvider.value(
+      value: BlocProvider.of<LoginCubit>(context),
       child: ScaffoldCustom(
         appBarCustom: const AppBarCustom(
-          text: AppStrings.changePassword,
+          isNull: false,
+          text: AppStrings.createNewPassword,
         ),
-        body: BlocConsumer<ChangePasswordCubit, ChangePasswordStates>(
+        body: BlocConsumer<LoginCubit, LoginStates>(
           listener: (context, state) {
             if (state is ChangePasswordSuccessState) {
               SnackBar snackBar = SnackBar(
-                content: Text(
-                    state.changePasswordEntity.resultEntity.message.toString()
-                      ..replaceAll(RegExp('"'), " ").toString()),
+                content: Text(state.message),
                 duration: Duration(
                   seconds: AppConstants.snackBarTime,
                 ),
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              Navigator.pop(context);
+              CacheHelper.put(key: AppConstants.userId, value: userID);
+
+              AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
+
+              AppConstants.admin =
+                  CacheHelper.get(key: AppStrings.admin) ?? false;
+
+              navigatorAndRemove(
+                  context,
+                  AppConstants.admin
+                      ? Routes.mainRouteAdmin
+                      : Routes.mainRoute);
             } else if (state is ChangePasswordErrorState) {
-              if (kDebugMode) {
-                print(state.message);
-              }
               SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
+                content: Text(state.message),
                 duration: Duration(
                   seconds: AppConstants.snackBarTime,
                 ),
@@ -64,46 +67,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             }
           },
           builder: (context, state) {
-            var changePasswordCubit = ChangePasswordCubit.get(context);
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
                 child: Form(
-                  key: formKey,
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextCustom(
-                          fontSize: FontSize.s14,
-                          text: AppStrings.oldPassword,
-                          textAlign: TextAlign.start,
-                          color: ColorManager.textFormLabelColor,
-                        ),
-                        const SizedBox(
-                          height: AppSize.s8,
-                        ),
-                        TextFormFieldCustom(
-                          controller: oldPasswordController,
-                          validate: (v) {
-                            if (v!.isEmpty) {
-                              return AppStrings.oldPasswordFieldMustBeNotEmpty;
-                            }
-                            return null;
-                          },
-                          keyboardType: TextInputType.visiblePassword,
-                          suffixIcon: changePasswordCubit.suffix,
-                          suffix: true,
-                          obSecure:
-                              changePasswordCubit.isPassword ? true : false,
-                          suffixOnPressed: () {
-                            changePasswordCubit.changePasswordVisibility();
-                          },
-                        ),
-                        const SizedBox(
-                          height: AppSize.s24,
-                        ),
                         TextCustom(
                           fontSize: FontSize.s14,
                           text: AppStrings.newPassword,
@@ -114,20 +86,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           height: AppSize.s8,
                         ),
                         TextFormFieldCustom(
-                          controller: newPasswordController,
                           validate: (v) {
                             if (v!.isEmpty) {
-                              return AppStrings.newPasswordFieldMustBeNotEmpty;
+                              return AppStrings.newPasswordMustBeNotEmpty;
                             }
                             return null;
                           },
+                          controller: newPasswordController,
                           keyboardType: TextInputType.visiblePassword,
-                          suffixIcon: changePasswordCubit.suffixConfirm,
                           suffix: true,
-                          obSecure: changePasswordCubit.isPasswordConfirm,
+                          suffixIcon: LoginCubit.get(context).suffix,
+                          obSecure:
+                              LoginCubit.get(context).isPassword ? true : false,
                           suffixOnPressed: () {
-                            changePasswordCubit
-                                .changePasswordConfirmVisibility();
+                            LoginCubit.get(context).changePasswordVisibility();
                           },
                         ),
                         const SizedBox(
@@ -141,14 +113,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 )
                               : ElevatedButtonCustom(
                                   fontSize: FontSize.s14,
+
                                   textColor: ColorManager.white,
+
+                                  // width: 100,
                                   onPressed: () {
-                                    if (formKey.currentState!.validate()) {
-                                      changePasswordCubit.changePasswordFun(
-                                        oldPassword: oldPasswordController.text,
-                                        newPassword: newPasswordController.text,
-                                      );
-                                    }
+                                    BlocProvider.of<LoginCubit>(context)
+                                        .changePassword(
+                                      userId: userID.toString(),
+                                      newPassword: newPasswordController.text,
+                                    );
                                   },
                                   text: AppStrings.update,
                                 ),

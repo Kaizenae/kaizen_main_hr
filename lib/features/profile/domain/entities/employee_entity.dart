@@ -1,19 +1,3 @@
-/* {
-    "jsonrpc": "2.0",
-    "id": null,
-    "result": {
-        "status": 200,
-        "response": [
-            {
-                "id": 66,
-                "name": "Ahmed Emad",
-                "mobile_phone": "",
-                "gender": "",
-                "birthday": ""
-            }
-        ]
-    }
-}*/
 import 'package:equatable/equatable.dart';
 
 class EmployeeEntity extends Equatable {
