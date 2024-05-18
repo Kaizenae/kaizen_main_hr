@@ -1,3 +1,5 @@
+import 'package:Attendace/core/utils/strings_manager.dart';
+
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
@@ -14,7 +16,7 @@ class EditCompanyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       appBarCustom: const AppBarCustom(
-        text: 'Edit Company',
+        text: AppStrings.editCompany,
       ),
       body: BlocConsumer<EditCompanyCubit, EditCompanyStates>(
         listener: (context, state) {},

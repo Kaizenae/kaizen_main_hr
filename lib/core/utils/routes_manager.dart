@@ -12,7 +12,7 @@ import 'package:Attendace/features/edit_company/presentation/screens/edit_locati
 import 'package:Attendace/features/forget_password/presentation/screens/forget_password_screen.dart';
 import 'package:Attendace/features/help_and_feedback/presentation/screens/help_and_feedback_screen.dart';
 import 'package:Attendace/features/hr_policies/presentation/screens/hr_policies_screen.dart';
-import 'package:Attendace/features/login/presentation/screens/baseUrl_screen.dart';
+import 'package:Attendace/features/main_features/presentation/main_features_screen.dart';
 import 'package:Attendace/features/main_page_admin_screen.dart';
 import 'package:Attendace/features/main_page_screen.dart';
 import 'package:Attendace/features/myRequests/presentation/screens/myRequests_screen.dart';
@@ -21,7 +21,6 @@ import 'package:Attendace/features/notifications/presentation/screens/notificati
 import 'package:Attendace/features/splash_screen/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../features/all_employee/presentation/screens/employee_screen.dart';
 import '../../features/change_password/presentation/screens/change_password_screen.dart';
 import '../../features/edit_profile/presentation/screens/edit_phone_screen.dart';
 import '../../features/edit_profile/presentation/screens/edit_profile_screen.dart';
@@ -48,6 +47,7 @@ class Routes {
   static const String mainRoute = "mainPage";
   static const String localAuthRoute = "LocalAuth";
   static const String splashRoute = "SplashScreen";
+  static const String mainFeatureRoute = "MainFeatureScreen";
   static const String mainRouteAdmin = "mainPageAdmin";
   static const String homeRoute = "home";
   static const String registerRoute = "register";
@@ -113,7 +113,8 @@ class RoutesMap {
   static Map<String, Widget Function(BuildContext)> routesMap() {
     return {
       Routes.loginRoute: (BuildContext context) => const LoginScreen(),
-      Routes.baseUrlRoute: (BuildContext context) => const BaseUrlScreen(),
+      Routes.mainFeatureRoute: (BuildContext context) =>
+          const MainFeaturesScreen(),
       Routes.registerRoute: (BuildContext context) => const RegisterScreen(),
       Routes.homeRoute: (BuildContext context) => const HomeScreen(),
       Routes.myRequestsRoute: (BuildContext context) =>
@@ -137,7 +138,7 @@ class RoutesMap {
           const EditLocationScreen(),
       Routes.editPhoneNumberRoute: (BuildContext context) =>
           const EditPhoneScreen(),
-      Routes.employeeRoute: (BuildContext context) => const EmployeeScreen(),
+
       Routes.changePasswordRoute: (BuildContext context) =>
           const ChangePasswordScreen(),
       // Routes.webViewExampleRoute: (BuildContext context) =>
@@ -168,11 +169,12 @@ class RoutesMap {
     switch (screen) {
       case Routes.loginRoute:
         return const LoginScreen();
-      case Routes.baseUrlRoute:
-        return const BaseUrlScreen();
 
       case Routes.registerRoute:
         return const RegisterScreen();
+
+      case Routes.mainFeatureRoute:
+        return const MainFeaturesScreen();
 
       case Routes.myRequestsRoute:
         return const MyRequestsScreen();
@@ -203,8 +205,7 @@ class RoutesMap {
 
       case Routes.editPhoneNumberRoute:
         return const EditPhoneScreen();
-      case Routes.employeeRoute:
-        return const EmployeeScreen();
+
       case Routes.changePasswordRoute:
         return const ChangePasswordScreen();
       // case Routes.webViewExampleRoute:

@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 
+import '../utils/strings_manager.dart';
 import 'failure.dart';
 
 class ErrorHandler implements Exception {
@@ -131,10 +132,10 @@ class ResponseMessage {
       "User is unauthorised, Try again later"; // failure, user is not authorised
   static const String FORBIDDEN =
       "Forbidden request, Try again later"; //  failure, API rejected request
-  static const String INTERNAL_SERVER_ERROR =
-      "Some thing went wrong, Try again later"; // failure, crash in server side
-  static const String NOT_FOUND =
-      "Some thing went wrong, Try again later"; // failure, crash in server side
+  static const String INTERNAL_SERVER_ERROR = AppStrings
+      .someThingWentWrongTryAgainLater; // failure, crash in server side
+  static const String NOT_FOUND = AppStrings
+      .someThingWentWrongTryAgainLater; // failure, crash in server side
 
   // local status code
   static const String CONNECT_TIMEOUT = "Time out error, Try again later";
@@ -144,7 +145,7 @@ class ResponseMessage {
   static const String CACHE_ERROR = "Cache error, Try again later";
   static const String NO_INTERNET_CONNECTION =
       "Please check your internet connection";
-  static const String DEFAULT = "Some thing went wrong, Try again later";
+  static const String DEFAULT = AppStrings.someThingWentWrongTryAgainLater;
 }
 
 class ApiInternalStatus {

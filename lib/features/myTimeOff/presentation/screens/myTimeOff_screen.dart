@@ -109,7 +109,6 @@ class MyTimeOffScreen extends StatelessWidget {
                     );
                   },
                 ),
-
                 const SizedBox(
                   height: AppSize.s16,
                 ),
@@ -117,7 +116,7 @@ class MyTimeOffScreen extends StatelessWidget {
                   fontSize: FontSize.s14,
                   colors: ColorManager.secondary,
                   width: context.width / 1.6,
-                  text: 'Apply Request',
+                  text: AppStrings.applyRequest,
                   onPressed: () {
                     navigator(context, Routes.createTimeOffRoute);
                   },
@@ -125,7 +124,6 @@ class MyTimeOffScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s20,
                 ),
-
                 const TabBarCustom(
                   widgets: [
                     PendingTimeWidget(),
@@ -144,48 +142,6 @@ class MyTimeOffScreen extends StatelessWidget {
                     )
                   ],
                 )
-
-                // Expanded(
-                //   child: CupertinoTabScaffold(
-                //     backgroundColor: ColorManager.scaffoldColor,
-                //     tabBar: CupertinoTabBar(
-                //       backgroundColor: ColorManager.white,
-                //
-                //       onTap: (v) {
-                //         if (v == 0) {
-                //           MyTimeOffCubit.get(context).getMyTimeOffFun();
-                //         } else if (v == 1) {
-                //           MyTimeOffCubit.get(context).getMyTimeOffPendingFun();
-                //         }
-                //       },
-                //       items: const <BottomNavigationBarItem>[
-                //         BottomNavigationBarItem(
-                //           icon: Icon(CupertinoIcons.check_mark_circled),
-                //           label: AppStrings.approved,
-                //         ),
-                //         BottomNavigationBarItem(
-                //           icon: Icon(CupertinoIcons.clock),
-                //           label: AppStrings.pending,
-                //         ),
-                //
-                //       ],
-                //     ),
-                //     tabBuilder: (BuildContext context, int index) {
-                //       return CupertinoTabView(
-                //         builder: (BuildContext context) {
-                //           switch (index) {
-                //             case 0:
-                //               return ApprovedWidget();
-                //             case 1:
-                //               return PendingWidget();
-                //             default:
-                //               return ApprovedWidget();
-                //           }
-                //         },
-                //       );
-                //     },
-                //   ),
-                // ),
               ],
             ),
           ),

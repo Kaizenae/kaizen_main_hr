@@ -145,6 +145,13 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                         const SizedBox(
                           height: 12,
                         ),
+
+                        DropDownWidget(
+                          label: AppStrings.analytic,
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         TextCustom(
                           fontSize: FontSize.s14,
                           text: AppStrings.expenseDate,
@@ -195,6 +202,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                             ),
                           ),
                         ),
+
                         const SizedBox(
                           height: 12,
                         ),

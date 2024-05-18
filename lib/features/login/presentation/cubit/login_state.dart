@@ -35,3 +35,17 @@ class ChangeForgetPasswordState extends LoginStates {}
 class ChangeEmailValidateState extends LoginStates {}
 
 class ChangePasswordValidateState extends LoginStates {}
+
+class ChangePasswordLoadingState extends LoginStates {}
+
+class ChangePasswordSuccessState extends LoginStates {
+  final String message;
+
+  ChangePasswordSuccessState({required this.message});
+}
+
+class ChangePasswordErrorState extends LoginStates {
+  final String message;
+
+  ChangePasswordErrorState({required this.message});
+}

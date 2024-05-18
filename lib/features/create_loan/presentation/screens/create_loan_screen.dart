@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/widgets/progress_indicator/progress_indicator.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/core/widgets/text_form_field/text_form_field_custom.dart';
 import 'package:Attendace/features/create_loan/presentation/controller/currency_controller/currency_cubit.dart';
 import 'package:Attendace/features/create_loan/presentation/controller/currency_controller/currency_state.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/media_query_values.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
@@ -33,23 +33,13 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
       body: BlocConsumer<CreateLoanCubit, CreateLoanState>(
         listener: (context, state) {
           if (state is CreateLoanSuccess) {
-            SnackBar snackBar = SnackBar(
-              content:
-                  Text(state.createLoanEntity.resultEntity.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.createLoanEntity.resultEntity.message.toString(),
+                context: context));
             Navigator.pop(context);
           } else if (state is CreateLoanError) {
-            SnackBar snackBar = SnackBar(
-              content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
           }
         },
         builder: (context, state) {

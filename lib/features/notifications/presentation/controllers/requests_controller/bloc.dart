@@ -13,6 +13,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../../../core/local/cache_helper.dart';
 import '../../../../../core/utils/constants_manager.dart';
+import '../../../../../core/utils/strings_manager.dart';
 
 class RequestsBloc extends Cubit<RequestsStates> {
   RequestsBloc() : super(RequestInitState());
@@ -36,7 +37,9 @@ class RequestsBloc extends Cubit<RequestsStates> {
           "user_id": CacheHelper.get(key: AppConstants.userId),
         }
       },
-      options: Options(receiveTimeout: const Duration(seconds: 20)),
+      options: Options(
+          receiveTimeout: const Duration(seconds: 20),
+          sendTimeout: const Duration(seconds: 20)),
     )
         .then((value) {
       pendingRequests = [];
@@ -47,7 +50,13 @@ class RequestsBloc extends Cubit<RequestsStates> {
         if (item.state == "Rejected") {
           rejectedRequests.add(item);
         } else if (item.state == "Submitted") {
-          pendingRequests.add(item);
+          if (item.ownStatus == "New" || item.ownStatus == "Submitted") {
+            pendingRequests.add(item);
+          } else if (item.ownStatus == "Approved") {
+            approvedRequests.add(item);
+          } else if (item.ownStatus == "Rejected") {
+            rejectedRequests.add(item);
+          }
         } else if (item.state == "Approved") {
           approvedRequests.add(item);
         }
@@ -84,7 +93,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
           message: value.data["result"]["response"]));
     }).catchError((error) {
       emit(ApproveRequestErrorState(
-          message: "Some thing went wrong, Try again later"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 
@@ -111,7 +120,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
     }).catchError((error) {
       log(error.toString());
       emit(RejectRequestErrorState(
-          message: "Some thing went wrong, Try again later"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 
@@ -141,5 +150,41 @@ class RequestsBloc extends Cubit<RequestsStates> {
   }) {
     isBottomSheetShown = isShow;
     emit(AppChangeBottomSheetState());
+  }
+
+  Future openFile({
+    required String url,
+    String? fileName,
+  }) async {
+    final name = fileName ?? url.split("/").last;
+    final file = await downloadFile(
+      url,
+      name,
+    );
+    if (file == null) return;
+    OpenFile.open(file.path);
+  }
+
+  Future<File?> downloadFile(
+    String url,
+    String name,
+  ) async {
+    final appStorage = await getApplicationDocumentsDirectory();
+    final file = File("${appStorage.path}/$name");
+    try {
+      final response = await Dio().get(
+        url,
+        options: Options(
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+        ),
+      );
+      final raf = file.openSync(mode: FileMode.write);
+      raf.writeFromSync(response.data);
+      await raf.close();
+      return file;
+    } catch (error) {
+      return null;
+    }
   }
 }

@@ -1,10 +1,9 @@
 // ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:Attendace/core/utils/strings_manager.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../../../core/utils/assets_manager.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
@@ -30,33 +29,21 @@ class EditUserNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldCustom(
       appBarCustom: const AppBarCustom(
-        text: 'Update Name',
+        text: AppStrings.updateName,
       ),
       body: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {
           if (state is EditProfileSuccessState) {
-            SnackBar snackBar = SnackBar(
-              content:
-                  Text(state.editProfileEntity.resultEntity.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message:
+                    state.editProfileEntity.resultEntity.message.toString(),
+                context: context));
             AppConstants.admin
                 ? navigatorAndRemove(context, Routes.mainRouteAdmin)
                 : navigatorAndRemove(context, Routes.mainRoute);
           } else if (state is EditProfileErrorState) {
-            if (kDebugMode) {
-              print(state.message);
-            }
-            SnackBar snackBar = SnackBar(
-              content: Text(state.message.toString()),
-              duration: Duration(
-                seconds: AppConstants.snackBarTime,
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
           }
         },
         builder: (context, state) {
@@ -73,7 +60,7 @@ class EditUserNameScreen extends StatelessWidget {
                     children: [
                       TextCustom(
                         fontSize: FontSize.s14,
-                        text: 'UserName',
+                        text: AppStrings.userName,
                         textAlign: TextAlign.start,
                         color: ColorManager.textFormLabelColor,
                       ),
@@ -84,7 +71,7 @@ class EditUserNameScreen extends StatelessWidget {
                         controller: editProfileCubit.userNameController,
                         validate: (value) {
                           if (value!.trim().isEmpty || value == ' ') {
-                            return 'UserName must be not Empty';
+                            return AppStrings.userNameMustBeNotEmpty;
                           }
 
                           return null;
@@ -104,10 +91,7 @@ class EditUserNameScreen extends StatelessWidget {
                               )
                             : ElevatedButtonCustom(
                                 fontSize: FontSize.s14,
-
                                 textColor: ColorManager.white,
-
-                                // width: 100,
                                 onPressed: () async {
                                   if (editProfileCubit.formKey.currentState!
                                       .validate()) {

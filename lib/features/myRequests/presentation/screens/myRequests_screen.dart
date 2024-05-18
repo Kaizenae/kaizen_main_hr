@@ -59,7 +59,7 @@ class MyRequestsScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                               ),
                               TextCustom(
-                                text: 'Total Requests',
+                                text: AppStrings.totalRequests,
                                 color: ColorManager.black,
                                 fontSize: FontSize.s18,
                               ),
@@ -83,7 +83,7 @@ class MyRequestsScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                               ),
                               TextCustom(
-                                text: 'Used Requests',
+                                text: AppStrings.usedRequests,
                                 color: ColorManager.black,
                                 fontSize: FontSize.s18,
                               ),
@@ -102,7 +102,7 @@ class MyRequestsScreen extends StatelessWidget {
                 fontSize: FontSize.s14,
                 colors: ColorManager.secondary,
                 width: context.width / 1.6,
-                text: 'Apply Request',
+                text: AppStrings.applyRequest,
                 onPressed: () {
                   navigator(context, Routes.createRequestRoute);
                 },
@@ -131,48 +131,6 @@ class MyRequestsScreen extends StatelessWidget {
                   )
                 ],
               )
-
-              // Expanded(
-              //   child: CupertinoTabScaffold(
-              //     backgroundColor: ColorManager.scaffoldColor,
-              //     tabBar: CupertinoTabBar(
-              //       backgroundColor: ColorManager.white,
-              //
-              //       onTap: (v) {
-              //         if (v == 0) {
-              //           MyRequestsCubit.get(context).getMyRequestsFun();
-              //         } else if (v == 1) {
-              //           MyRequestsCubit.get(context).getMyRequestsPendingFun();
-              //         }
-              //       },
-              //       items: const <BottomNavigationBarItem>[
-              //         BottomNavigationBarItem(
-              //           icon: Icon(CupertinoIcons.check_mark_circled),
-              //           label: AppStrings.approved,
-              //         ),
-              //         BottomNavigationBarItem(
-              //           icon: Icon(CupertinoIcons.clock),
-              //           label: AppStrings.pending,
-              //         ),
-              //
-              //       ],
-              //     ),
-              //     tabBuilder: (BuildContext context, int index) {
-              //       return CupertinoTabView(
-              //         builder: (BuildContext context) {
-              //           switch (index) {
-              //             case 0:
-              //               return ApprovedWidget();
-              //             case 1:
-              //               return PendingWidget();
-              //             default:
-              //               return ApprovedWidget();
-              //           }
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
             ],
           ),
         ),

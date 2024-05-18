@@ -2,7 +2,19 @@ const String imagePath = "assets/images";
 const String iconPath = "assets/icons";
 
 class ImageAssets {
+  static const String logoName = "$imagePath/logo_name.png";
+  static const String back1 = "$imagePath/back1.jpg";
+  static const String back2 = "$imagePath/back2.jpg";
+  static const String back3 = "$imagePath/back3.jpg";
+  static const String back4 = "$imagePath/back4.jpg";
+  static const String back5 = "$imagePath/back5.jpg";
+  static const String back6 = "$imagePath/back6.jpg";
+  static const String back7 = "$imagePath/back7.jpg";
+  static const String back8 = "$imagePath/back8.jpg";
+  static const String back9 = "$imagePath/back9.jpg";
+  static const String back10 = "$imagePath/back10.jpg";
   static const String logoImg = "$imagePath/logo.png";
+  static const String logoWhiteImg = "$imagePath/logo_white.png";
   static const String homeIconImg = "$imagePath/playstore.png";
   static const String lateInImg = "$imagePath/late_in.png";
   static const String checkOut = "$imagePath/check_out.png";
@@ -13,9 +25,10 @@ class ImageAssets {
   static const String noDataImg = "$imagePath/no_data.png";
   static const String userPhotoImg = "$imagePath/user_photo.png";
   static const String webIcon = "$imagePath/web.png";
-  static const String punchInPunchOutImg = "$imagePath/Punch-in-Punch-out.png";
   static const String overTimeImg = "$imagePath/overtime.png";
-  static const String expensesImg = "$imagePath/laons.png";
+  static const String hrImg = "$imagePath/hr.png";
+  static const String expensesImg = "$imagePath/expenses.png";
+  static const String projectsImg = "$imagePath/projects.png";
 }
 
 class IconsAssets {

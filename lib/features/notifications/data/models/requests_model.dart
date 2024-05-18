@@ -24,6 +24,7 @@ class ResponseModel {
   late int duration;
   late String state;
   late String reason;
+  late String ownStatus;
   late String startDate;
   late String endDate;
   late String attachment;
@@ -39,6 +40,7 @@ class ResponseModel {
     duration = json["duration"];
     state = json["state"];
     startDate = json["start_date"];
+    ownStatus = json["own_status"];
     endDate = json["end_date"];
     attachmentExtension = json["attachment_extension"];
     attachment = json["attachment"];

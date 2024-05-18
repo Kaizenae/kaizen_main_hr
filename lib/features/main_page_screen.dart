@@ -55,14 +55,6 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-      // appBarCustom: AppBarCustom(
-      //     isNull: false,
-      //     // text: _selectedIndex == 0
-      //     //     ? AppStrings.home
-      //     //     : _selectedIndex == 1
-      //     //         ? AppStrings.attendance
-      //     //         : AppStrings.profile
-      // ),
       body: SafeArea(
         child: Stack(
           children: _screens
@@ -86,11 +78,6 @@ class MainPageState extends State<MainPage> {
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
-            // if (AppConstants.admin ? index == 2 : index == 1) {
-            //   BlocProvider.of<AttendanceCubit>(context).getAttendanceFun();
-            // } else if (AppConstants.admin ? index == 3 : index == 2) {
-            //   ProfileCubit.get(context).getEmployeeFun();
-            // }
             if (index == 1) {
               ProfileCubit.get(context).getEmployeeFun();
             }

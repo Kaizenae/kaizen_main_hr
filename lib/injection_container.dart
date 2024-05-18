@@ -11,11 +11,7 @@ import 'core/api/api_consumer.dart';
 import 'core/api/app_interceptors.dart';
 import 'core/api/dio_consumer.dart';
 import 'core/network/network_info.dart';
-import 'features/all_employee/data/datasources/employee_remote_datasource.dart';
-import 'features/all_employee/data/repositories/employee_repository_impl.dart';
-import 'features/all_employee/domain/repositories/employees_repository.dart';
-import 'features/all_employee/domain/usecases/employees_usecase.dart';
-import 'features/all_employee/presentation/cubit/all_employees_cubit.dart';
+
 import 'features/attendance/data/datasources/attendance_remote_datasource.dart';
 import 'features/attendance/data/repositories/attendance_repository_impl.dart';
 import 'features/attendance/domain/repositories/attendance_repository.dart';
@@ -116,9 +112,7 @@ Future<void> init() async {
   sl.registerLazySingleton<EditCompanyCubit>(() => EditCompanyCubit(
         editLocationUsecase: sl(),
       ));
-  sl.registerLazySingleton<AllEmployeesCubit>(() => AllEmployeesCubit(
-        employeeUsecase: sl(),
-      ));
+
   sl.registerLazySingleton<AcceptRejectRequestCubit>(
       () => AcceptRejectRequestCubit(
             acceptRejectRequestUsecase: sl(),
@@ -179,7 +173,6 @@ Future<void> init() async {
   sl.registerLazySingleton<EditNoIdUsecase>(() => EditNoIdUsecase(sl()));
   sl.registerLazySingleton<EditLocationUsecase>(
       () => EditLocationUsecase(sl()));
-  sl.registerLazySingleton<EmployeesUsecase>(() => EmployeesUsecase(sl()));
   sl.registerLazySingleton<AcceptRejectRequestUsecase>(
       () => AcceptRejectRequestUsecase(sl()));
   sl.registerLazySingleton<EditChangePasswordUsecase>(
@@ -237,11 +230,6 @@ Future<void> init() async {
             editCompanyRemoteDataSource: sl(),
             networkInfo: sl(),
           ));
-
-  sl.registerLazySingleton<EmployeesRepository>(() => EmployeesRepositoryImpl(
-        employeesRemoteDataSource: sl(),
-        networkInfo: sl(),
-      ));
 
   sl.registerLazySingleton<AcceptRejectRequestRepository>(
       () => AcceptRejectRequestRepositoryImpl(
@@ -322,10 +310,7 @@ Future<void> init() async {
       () => EditCompanyRemoteDataSourceImpl(
             apiConsumer: sl(),
           ));
-  sl.registerLazySingleton<EmployeesRemoteDataSource>(
-      () => EmployeesRemoteDataSourceImpl(
-            apiConsumer: sl(),
-          ));
+
   sl.registerLazySingleton<AcceptRejectRequestRemoteDataSource>(
       () => AcceptRejectRequestRemoteDataSourceImpl(
             apiConsumer: sl(),

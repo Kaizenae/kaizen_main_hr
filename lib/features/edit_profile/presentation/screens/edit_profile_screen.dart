@@ -1,7 +1,7 @@
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -29,72 +29,52 @@ class EditProfileScreen extends StatelessWidget {
         child: BlocConsumer<EditProfileCubit, EditProfileStates>(
           listener: (context, state) {
             if (state is EditUserPhotoSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  snackBarWidget(message: state.message, context: context));
               ProfileCubit.get(context).getEmployeeFun();
             } else if (state is EditUserPhotoErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: const Text("Some thing went wrong, Try again later"),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: AppStrings.someThingWentWrongTryAgainLater,
+                  context: context));
             }
           },
           builder: (context, state) {
             var profileCubit = EditProfileCubit.get(context);
             return Padding(
-                padding: const EdgeInsets.all(AppPadding.p20),
-                child: Column(
-                  children: [
-                    // const ProfileComponent(
-                    //   name: AppStrings.changeUserName,
-                    //   iconName: IconsAssets.personIcon,
-                    //   screen: Routes.editUserNameRoute,
-                    // ),
-                    // const Divider(),
-                    // const ProfileComponent(
-                    //   name: AppStrings.changePhoneNumber,
-                    //   iconName: IconsAssets.phoneIcon,
-                    //   screen: Routes.editPhoneNumberRoute,
-                    // ),
-                    // const Divider(),
-                    SlideInLeft(
-                      child: InkWell(
-                        onTap: () {
-                          profileCubit.getProfileImage();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: AppPadding.p6),
-                          child: Row(
-                            children: [
-                              const SvgPictureCustom(
-                                assetsName: IconsAssets.personIcon,
-                                color: ColorManager.skyColor,
-                              ),
-                              const SizedBox(
-                                width: AppSize.s16,
-                              ),
-                              TextCustom(
-                                text: AppStrings.editUserPhoto,
-                                fontWeight: FontWeight.w200,
-                                fontSize: FontSize.s16,
-                                color: ColorManager.primary,
-                              ),
-                            ],
-                          ),
+              padding: const EdgeInsets.all(AppPadding.p20),
+              child: Column(
+                children: [
+                  SlideInLeft(
+                    child: InkWell(
+                      onTap: () {
+                        profileCubit.getProfileImage();
+                      },
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: AppPadding.p6),
+                        child: Row(
+                          children: [
+                            const SvgPictureCustom(
+                              assetsName: IconsAssets.personIcon,
+                              color: ColorManager.skyColor,
+                            ),
+                            const SizedBox(
+                              width: AppSize.s16,
+                            ),
+                            TextCustom(
+                              text: AppStrings.editUserPhoto,
+                              fontWeight: FontWeight.w200,
+                              fontSize: FontSize.s16,
+                              color: ColorManager.primary,
+                            ),
+                          ],
                         ),
                       ),
-                    )
-                  ],
-                ));
+                    ),
+                  )
+                ],
+              ),
+            );
           },
         ),
       ),

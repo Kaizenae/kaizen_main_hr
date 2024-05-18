@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/widgets/elevated_button/elevated_button_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/core/widgets/text_custom/text_custom.dart';
 import 'package:Attendace/core/widgets/text_form_field/text_form_field_custom.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/cubit.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -39,25 +39,22 @@ class _CreateLateInEarlyOutScreenState
         child: BlocConsumer<EarlyOutLateInCubit, EarlyOutLateInStates>(
           listener: (context, state) {
             if (state is EarlyOutErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             } else if (state is EarlyOutSuccessState) {
               Navigator.pop(context);
               Navigator.pop(context);
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             } else if (state is LateInSuccessState) {
               Navigator.pop(context);
               Navigator.pop(context);
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             } else if (state is LateInErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {
@@ -68,278 +65,214 @@ class _CreateLateInEarlyOutScreenState
               child: SafeArea(
                 child: Form(
                   key: formKey,
-                  child: CustomScrollView(slivers: [
-                    SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
                               child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: AppSize.s10,
-                              ),
-
-                              TextCustom(
-                                fontSize: FontSize.s14,
-                                text: 'Date',
-                                color: ColorManager.textFormLabelColor,
-                              ),
-                              const SizedBox(
-                                height: AppSize.s8,
-                              ),
-                              //Date
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ColorManager.textFormColor,
-                                  border: Border.all(
-                                      color: ColorManager.textFormColor,
-                                      width: 2),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    if (widget.title ==
-                                        AppStrings.lateInRequest) {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime.now(),
-                                      ).then(
-                                        (value) {
-                                          cubit.selectedDate =
-                                              DateFormat("yyyy-MM-dd").format(
-                                                  DateTime.parse(
-                                                      value.toString()));
-
-                                          EarlyOutLateInCubit.get(context)
-                                              .changeDate(
-                                                  DateFormat("dd-MM-yyyy")
-                                                      .format(DateTime.parse(
-                                                          value.toString())));
-                                        },
-                                      );
-                                    } else if (widget.title ==
-                                        AppStrings.earlyOutRequest) {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now()
-                                            .subtract(const Duration(days: 1)),
-                                        lastDate: DateTime.now(),
-                                      ).then(
-                                        (value) {
-                                          cubit.selectedDate =
-                                              DateFormat("yyyy-MM-dd").format(
-                                                  DateTime.parse(
-                                                      value.toString()));
-
-                                          EarlyOutLateInCubit.get(context)
-                                              .changeDate(
-                                                  DateFormat("dd,MMM,yyyy")
-                                                      .format(DateTime.parse(
-                                                          value.toString())));
-                                        },
-                                      );
-                                    }
-
-                                    // showModalBottomSheet(
-                                    //     context: context,
-                                    //     builder: (context) {
-                                    //       return SfDateRangePicker(
-                                    //         onSubmit: (v) {
-                                    //           cubit.selectedDate =
-                                    //               DateFormat("yyyy-MM-dd")
-                                    //                   .format(DateTime.parse(
-                                    //                       v.toString()));
-
-                                    //           Navigator.pop(context);
-                                    //         },
-                                    //         controller: cubit.dateController,
-                                    //         confirmText: 'done',
-                                    //         cancelText: 'cancel',
-                                    //         showActionButtons: true,
-                                    //         initialDisplayDate: DateTime.now()
-                                    //             .add(const Duration(days: 4)),
-                                    //         minDate: DateTime.now(),
-                                    //         onCancel: () {
-                                    //           Navigator.pop(context);
-                                    //         },
-                                    //         onSelectionChanged:
-                                    //             (DateRangePickerSelectionChangedArgs
-                                    //                 arg) {
-                                    //           cubit.onSelectionChanged(
-                                    //             args: arg,
-                                    //           );
-                                    //         },
-                                    //         selectionMode:
-                                    //             DateRangePickerSelectionMode
-                                    //                 .single,
-                                    //       );
-                                    //     });
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextCustom(
-                                        text: cubit.selectedDateShow!,
-                                        color: ColorManager.black,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/icons/calender.svg',
-                                        width: 24,
-                                        height: 24,
-                                      )
-                                    ],
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: AppSize.s10,
                                   ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: AppSize.s20,
-                              ),
-                              TextCustom(
-                                fontSize: FontSize.s14,
-                                text: 'Reason',
-                                color: ColorManager.textFormLabelColor,
-                              ),
-                              const SizedBox(
-                                height: AppSize.s8,
-                              ),
-                              Platform.isAndroid
-                                  ? TextFormFieldCustom(
-                                      controller: cubit.reasonController,
-                                      keyboardType: TextInputType.text,
-                                      validate: (validate) {
-                                        if (validate!.isEmpty) {
-                                          return 'Please Enter the Reason';
-                                        }
-                                        return null;
-                                      })
-                                  : SizedBox(
-                                      height: AppSize.s100,
-                                      child: CupertinoTextFormFieldRow(
-                                        controller: cubit.reasonController,
-                                        decoration: BoxDecoration(
+
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: AppStrings.date,
+                                    color: ColorManager.textFormLabelColor,
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.s8,
+                                  ),
+                                  //Date
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: ColorManager.textFormColor,
+                                      border: Border.all(
                                           color: ColorManager.textFormColor,
-                                          //floatingLabelBehavior: FloatingLabelBehavior.auto,
-                                          border: Border.all(
-                                            color: ColorManager.textFormColor,
-                                            width: AppSize.s1_5,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(AppSize.s8),
-                                        ),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                                color: ColorManager.primary,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: FontSize.s14),
-                                        showCursor: true,
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: AppPadding.p16,
-                                          horizontal: AppPadding.p16,
-                                        ),
-                                        validator: (validate) {
-                                          if (validate!.isEmpty) {
-                                            return 'Please Enter the Reason';
-                                          }
-                                          return null;
-                                        },
-                                        keyboardType: TextInputType.text,
-                                        textInputAction: TextInputAction.done,
-                                        maxLines: null,
-                                      ),
+                                          width: 2),
                                     ),
-                              const SizedBox(
-                                height: AppSize.s20,
-                              ),
-                              TextCustom(
-                                fontSize: FontSize.s14,
-                                text: 'Attachment',
-                                color: ColorManager.textFormLabelColor,
-                              ),
-                              const SizedBox(
-                                height: AppSize.s8,
-                              ),
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ColorManager.textFormColor,
-                                  border: Border.all(
-                                      color: ColorManager.textFormColor,
-                                      width: 2),
-                                ),
-                                child: InkWell(
-                                  onTap: () async {
-                                    cubit.pickFileFromDevice();
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextCustom(
-                                        text: cubit.fileName ?? "File Name",
-                                        color: ColorManager.black,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                      ),
-                                      SvgPicture.asset(
-                                        'assets/icons/attachment.svg',
-                                        width: 24,
-                                        height: 24,
-                                        // ignore: deprecated_member_use
-                                        color: const Color(0xff3D8BD3),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                          const SizedBox(
-                            height: AppSize.s20,
-                          ),
-                          SizedBox(
-                            child: state is EarlyOutLoadingState ||
-                                    state is LateInLoadingState
-                                ? const Center(
-                                    child: CupertinoActivityIndicator(
-                                      color: ColorManager.primary,
-                                      radius: AppSize.s16,
-                                    ),
-                                  )
-                                : ElevatedButtonCustom(
-                                    text: 'Submit',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: FontSize.s18,
-                                    onPressed: () async {
-                                      if (formKey.currentState!.validate()) {
+                                    child: InkWell(
+                                      onTap: () {
                                         if (widget.title ==
                                             AppStrings.lateInRequest) {
-                                          cubit.lateIn();
+                                          showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now(),
+                                            lastDate: DateTime.now(),
+                                          ).then(
+                                            (value) {
+                                              cubit.selectedDate =
+                                                  DateFormat("yyyy-MM-dd")
+                                                      .format(DateTime.parse(
+                                                          value.toString()));
+
+                                              EarlyOutLateInCubit.get(context)
+                                                  .changeDate(DateFormat(
+                                                          "dd-MM-yyyy")
+                                                      .format(DateTime.parse(
+                                                          value.toString())));
+                                            },
+                                          );
                                         } else if (widget.title ==
                                             AppStrings.earlyOutRequest) {
-                                          cubit.earlyOutRequest();
+                                          showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now().subtract(
+                                                const Duration(days: 1)),
+                                            lastDate: DateTime.now(),
+                                          ).then(
+                                            (value) {
+                                              cubit.selectedDate =
+                                                  DateFormat("yyyy-MM-dd")
+                                                      .format(DateTime.parse(
+                                                          value.toString()));
+
+                                              EarlyOutLateInCubit.get(context)
+                                                  .changeDate(DateFormat(
+                                                          "dd,MMM,yyyy")
+                                                      .format(DateTime.parse(
+                                                          value.toString())));
+                                            },
+                                          );
                                         }
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextCustom(
+                                            text: cubit.selectedDateShow!,
+                                            color: ColorManager.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                          ),
+                                          SvgPicture.asset(
+                                            IconsAssets.calenderIcon,
+                                            width: 24,
+                                            height: 24,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.s20,
+                                  ),
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: AppStrings.reason,
+                                    color: ColorManager.textFormLabelColor,
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.s8,
+                                  ),
+                                  TextFormFieldCustom(
+                                    controller: cubit.reasonController,
+                                    keyboardType: TextInputType.text,
+                                    validate: (validate) {
+                                      if (validate!.isEmpty) {
+                                        return widget.title ==
+                                                AppStrings.lateInRequest
+                                            ? AppStrings
+                                                .pleaseEnterTheReasonForLateIn
+                                            : AppStrings
+                                                .pleaseEnterTheReasonEarlyOut;
                                       }
+                                      return null;
                                     },
                                   ),
-                          )
-                        ],
+                                  const SizedBox(
+                                    height: AppSize.s20,
+                                  ),
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: AppStrings.attachment,
+                                    color: ColorManager.textFormLabelColor,
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.s8,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: ColorManager.textFormColor,
+                                      border: Border.all(
+                                          color: ColorManager.textFormColor,
+                                          width: 2),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        cubit.pickFileFromDevice();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextCustom(
+                                            text: cubit.fileName ?? "File Name",
+                                            color: ColorManager.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                          ),
+                                          SvgPicture.asset(
+                                            IconsAssets.attachmentIcon,
+                                            width: 24,
+                                            height: 24,
+                                            // ignore: deprecated_member_use
+                                            color: const Color(0xff3D8BD3),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: AppSize.s20,
+                            ),
+                            SizedBox(
+                              child: state is EarlyOutLoadingState ||
+                                      state is LateInLoadingState
+                                  ? const Center(
+                                      child: CupertinoActivityIndicator(
+                                        color: ColorManager.primary,
+                                        radius: AppSize.s16,
+                                      ),
+                                    )
+                                  : ElevatedButtonCustom(
+                                      text: AppStrings.submit,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: FontSize.s18,
+                                      onPressed: () async {
+                                        if (formKey.currentState!.validate()) {
+                                          if (widget.title ==
+                                              AppStrings.lateInRequest) {
+                                            cubit.lateIn();
+                                          } else if (widget.title ==
+                                              AppStrings.earlyOutRequest) {
+                                            cubit.earlyOutRequest();
+                                          }
+                                        }
+                                      },
+                                    ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ]),
+                    ],
+                  ),
                 ),
               ),
             );

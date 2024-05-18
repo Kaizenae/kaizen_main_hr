@@ -1,5 +1,4 @@
 import 'package:Attendace/core/utils/routes_manager.dart';
-import 'package:Attendace/features/myRequests/presentation/controller/myRequests_cubit.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/widgets/component.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
+import '../../../myRequests/presentation/controller/myRequests_cubit.dart';
 
 class ProfileComponent extends StatelessWidget {
   final String iconName;

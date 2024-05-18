@@ -33,11 +33,6 @@ class UserRequestWidget extends StatelessWidget {
           const SizedBox(
             width: AppSize.s8,
           ),
-          // TextCustom(
-          //   text: '$text :',
-          //   color: ColorManager.black,
-          //   fontSize: FontSize.s16,
-          // ),
           const SizedBox(
             width: AppSize.s4,
           ),

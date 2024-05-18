@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:Attendace/core/widgets/elevated_button/elevated_button_custom.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,40 +33,20 @@ class PendingRequestsWidget extends StatelessWidget {
         child: BlocConsumer<RequestsBloc, RequestsStates>(
           listener: (context, state) {
             if (state is ApproveRequestSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               RequestsBloc.get(context).getRequests();
             } else if (state is ApproveRequestErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               RequestsBloc.get(context).getRequests();
             } else if (state is RejectRequestSuccessState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               RequestsBloc.get(context).getRequests();
             } else if (state is RejectRequestErrorState) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: const Duration(
-                  seconds: 3,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               RequestsBloc.get(context).getRequests();
             }
           },
@@ -221,12 +202,14 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         TextInputType.text,
                                                     validator: (value) {
                                                       if (value!.isEmpty) {
-                                                        return ('Reason must not be empty');
+                                                        return (AppStrings
+                                                            .reasonMustNotBeEmpty);
                                                       }
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
-                                                      labelText: 'Reason',
+                                                      labelText:
+                                                          AppStrings.reason,
                                                       border:
                                                           OutlineInputBorder(
                                                         borderRadius:
@@ -248,7 +231,8 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         ColorManager.green,
                                                     fontWeight: FontWeight.w800,
                                                     width: double.infinity,
-                                                    text: 'Approve Request',
+                                                    text: AppStrings
+                                                        .approveRequest,
                                                     onPressed: () {
                                                       if (formKey.currentState!
                                                           .validate()) {
@@ -324,12 +308,14 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         TextInputType.text,
                                                     validator: (value) {
                                                       if (value!.isEmpty) {
-                                                        return ('Reason must not be empty');
+                                                        return (AppStrings
+                                                            .reasonMustNotBeEmpty);
                                                       }
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
-                                                      labelText: 'Reason',
+                                                      labelText:
+                                                          AppStrings.reason,
                                                       border:
                                                           OutlineInputBorder(
                                                         borderRadius:
@@ -351,7 +337,8 @@ class PendingRequestsWidget extends StatelessWidget {
                                                         ColorManager.error,
                                                     fontWeight: FontWeight.w800,
                                                     width: double.infinity,
-                                                    text: 'Reject Request',
+                                                    text: AppStrings
+                                                        .rejectRequest,
                                                     onPressed: () {
                                                       if (formKey.currentState!
                                                           .validate()) {

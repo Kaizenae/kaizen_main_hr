@@ -1,5 +1,7 @@
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
+import 'package:Attendace/features/login/presentation/screens/create_password.dart';
+import 'package:Attendace/features/login/presentation/widgets/login_form_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/api/end_points.dart';
@@ -15,25 +17,40 @@ import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/component.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
-import '../../../../core/widgets/text_form_field/text_form_field_custom.dart';
 import '../cubit/login_cubit.dart';
 import '../cubit/login_state.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-      body: BlocProvider.value(
-        value: BlocProvider.of<LoginCubit>(context),
-        child: BlocConsumer<LoginCubit, LoginStates>(
-          listener: (context, state) {
-            if (state is LoginSuccessState) {
-              SnackBar snackBar = SnackBar(
-                  content:
-                      Text(state.loginEntity.resultEntity.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        body: BlocProvider.value(
+      value: BlocProvider.of<LoginCubit>(context),
+      child: BlocConsumer<LoginCubit, LoginStates>(
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            if (state.loginEntity.resultEntity.loginBefore == false) {
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.loginEntity.resultEntity.message.toString(),
+                  context: context));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CreatePasswordAfterLoginScreen(
+                          userID:
+                              state.loginEntity.resultEntity.id.toString())));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.loginEntity.resultEntity.message.toString(),
+                  context: context));
               CacheHelper.put(
                   key: AppConstants.userId,
                   value: state.loginEntity.resultEntity.id.toString());
@@ -42,24 +59,18 @@ class LoginScreen extends StatelessWidget {
 
               AppConstants.admin =
                   CacheHelper.get(key: AppStrings.admin) ?? false;
-              navigatorAndRemove(
-                  context,
-                  AppConstants.admin
-                      ? Routes.mainRouteAdmin
-                      : Routes.mainRoute);
-            } else if (state is LoginErrorState) {
-              if (kDebugMode) {
-                print(state.message);
-              }
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              navigatorAndRemove(context, Routes.mainFeatureRoute);
             }
-          },
-          builder: (context, state) {
-            var loginCubit = LoginCubit.get(context);
-            return Form(
-              key: loginCubit.formKey,
+          } else if (state is LoginErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
+          }
+        },
+        builder: (context, state) {
+          var loginCubit = LoginCubit.get(context);
+
+          return Form(
+              key: formKey,
               child: CustomScrollView(slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
@@ -98,58 +109,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 40,
                           ),
-                          TextCustom(
-                            fontSize: FontSize.s14,
-                            text: AppStrings.email,
-                            textAlign: TextAlign.start,
-                            color: ColorManager.white,
-                          ),
-                          const SizedBox(
-                            height: AppSize.s4,
-                          ),
-                          TextFormFieldCustom(
-                            controller: loginCubit.emailController,
-                            validate: (value) {
-                              if (value!.trim().isEmpty || value == ' ') {
-                                return AppStrings.emailTextField;
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.emailAddress,
-                            suffixIcon: IconsAssets.emailIcon,
-                            suffix: true,
-                          ),
-                          const SizedBox(
-                            height: AppSize.s30,
-                          ),
-                          TextCustom(
-                            fontSize: FontSize.s14,
-                            text: AppStrings.password,
-                            textAlign: TextAlign.start,
-                            color: ColorManager.white,
-                          ),
-                          const SizedBox(
-                            height: AppSize.s4,
-                          ),
-                          TextFormFieldCustom(
-                            controller: loginCubit.passwordController,
-                            validate: (v) {
-                              if (v!.isEmpty) {
-                                return AppStrings.passwordTextField;
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.visiblePassword,
-                            suffixIcon: loginCubit.suffix,
-                            suffix: true,
-                            obSecure: loginCubit.isPassword ? true : false,
-                            suffixOnPressed: () {
-                              loginCubit.changePasswordVisibility();
-                            },
-                          ),
-                          const SizedBox(
-                            height: AppSize.s40,
-                          ),
+                          LoginFormWidget(formKey: formKey),
                           Center(
                             child: state is LoginLoadingState
                                 ? const CupertinoActivityIndicator(
@@ -162,11 +122,9 @@ class LoginScreen extends StatelessWidget {
                                     textColor: ColorManager.white,
                                     borderColor: const Color(0xff8845A9),
                                     onPressed: () async {
-                                      if (loginCubit.formKey.currentState!
-                                          .validate()) {
+                                      if (formKey.currentState!.validate()) {
                                         await loginCubit.loginFun();
-                                        loginCubit.formKey.currentState!
-                                            .reset();
+                                        formKey.currentState!.reset();
                                       }
                                     },
                                     text: AppStrings.login,
@@ -227,11 +185,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ]),
-            );
-          },
-        ),
+              ]));
+        },
       ),
-    );
+    ));
   }
 }

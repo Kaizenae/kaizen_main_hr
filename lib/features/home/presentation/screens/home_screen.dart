@@ -1,13 +1,13 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:convert';
-import 'package:Attendace/core/utils/routes_manager.dart';
+import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
-import 'package:Attendace/features/late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/constants_manager.dart';
-import '../../../../core/widgets/custom_home_item/custom_home_item.dart';
+import '../../../late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
 import '../../../profile/presentation/cubit/profile_state.dart';
 import '../controller/home_cubit.dart';
@@ -15,6 +15,7 @@ import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../controller/home_state.dart';
+import '../widget/feature_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,321 +23,158 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
+      backgroundColor: ColorManager.primary,
       body: BlocProvider.value(
         value: BlocProvider.of<HomeCubit>(context),
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is CheckInAndOutSuccess) {
-              SnackBar snackBar = SnackBar(
-                content: Text(
-                    state.punchInOutEntity.resultEntity.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message:
+                      state.punchInOutEntity.resultEntity.message.toString(),
+                  context: context));
             } else if (state is CheckInAndOutError) {
-              SnackBar snackBar = SnackBar(
-                content: Text(state.message.toString()),
-                duration: Duration(
-                  seconds: AppConstants.snackBarTime,
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {
             var homeCubit = HomeCubit.get(context);
-            return Padding(
-              padding: const EdgeInsets.all(AppPadding.p16),
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            return SafeArea(
+                child: SizedBox(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(AppPadding.p16),
+                    child: Row(
                       children: [
-                        Image.asset(
-                          ImageAssets.homeIconImg,
-                          height: AppSize.s100,
-                          width: AppSize.s150,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                              color: ColorManager.scaffoldColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.arrow_back,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
                         ),
                         BlocProvider.value(
-                            value: BlocProvider.of<ProfileCubit>(context)
-                              ..getEmployeeFun(),
-                            child: BlocBuilder<ProfileCubit, ProfileState>(
-                              builder: (context, state) {
-                                return state is GetEmployeeSuccess
-                                    ? state.employeeEntity.resultEntity
-                                            .response[0].photo.isEmpty
-                                        ? Container(
-                                            width: 65,
-                                            height: 65,
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                    ImageAssets.userPhotoImg,
-                                                  ),
-                                                )),
-                                          )
-                                        : Container(
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            width: 65,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: MemoryImage(
-                                                  base64Decode(
-                                                    state
-                                                        .employeeEntity
-                                                        .resultEntity
-                                                        .response[0]
-                                                        .photo,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                    : Container(
-                                        width: 65,
-                                        height: 65,
-                                        clipBehavior:
-                                            Clip.antiAliasWithSaveLayer,
-                                        decoration: const BoxDecoration(
+                          value: BlocProvider.of<ProfileCubit>(context)
+                            ..getEmployeeFun(),
+                          child: BlocBuilder<ProfileCubit, ProfileState>(
+                            builder: (context, state) {
+                              return state is GetEmployeeSuccess
+                                  ? state.employeeEntity.resultEntity
+                                          .response[0].photo.isEmpty
+                                      ? Container(
+                                          width: 65,
+                                          height: 65,
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
-                                              fit: BoxFit.cover,
                                               image: AssetImage(
                                                 ImageAssets.userPhotoImg,
                                               ),
-                                            )),
-                                      );
-                              },
-                            )),
+                                            ),
+                                          ),
+                                        )
+                                      : Container(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          width: 65,
+                                          height: 65,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: MemoryImage(
+                                                base64Decode(
+                                                  state
+                                                      .employeeEntity
+                                                      .resultEntity
+                                                      .response[0]
+                                                      .photo,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                  : Container(
+                                      width: 65,
+                                      height: 65,
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                            ImageAssets.userPhotoImg,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                            },
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                ColorManager.scaffoldColor),
+                          ),
+                          color: ColorManager.primary,
+                          onPressed: () {
+                            HomeCubit.get(context).changePunchInAndPunchOut();
+                          },
+                          icon: Row(
+                            children: [
+                              const Icon(
+                                Icons.fingerprint,
+                              ),
+                              const SizedBox(
+                                width: 6,
+                              ),
+                              Text(
+                                HomeCubit.get(context).isPunchIn
+                                    ? AppStrings.punchOut
+                                    : AppStrings.punchIn,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    //
-
-                    ////////////////////////////////////// PUNCH IN PUNCH OUT item ///////////////////////////////
-
-                    //  StreamBuilder(
-                    //                           stream: Stream.periodic(const Duration(seconds: 1)),
-                    //                           builder: (context, snapshot) {
-                    //                             return Column(
-                    //                               crossAxisAlignment: CrossAxisAlignment.center,
-                    //                               children: [
-                    //                                 Row(
-                    //                                   mainAxisAlignment: MainAxisAlignment.center,
-                    //                                   crossAxisAlignment: CrossAxisAlignment.end,
-                    //                                   children: [
-                    //                                     TextCustom(
-                    //                                       text: DateFormat('hh: mm')
-                    //                                           .format(DateTime.now()),
-                    //                                       fontSize: FontSize.s32.sp,
-                    //                                       color: ColorManager.black,
-                    //                                     ),
-                    //                                     SizedBox(
-                    //                                       width: AppSize.s4.w,
-                    //                                     ),
-                    //                                     TextCustom(
-                    //                                       text: DateFormat('ss')
-                    //                                           .format(DateTime.now()),
-                    //                                       fontSize: FontSize.s22,
-                    //                                       color: ColorManager.black,
-                    //                                     ),
-                    //                                     SizedBox(
-                    //                                       width: AppSize.s4.w,
-                    //                                     ),
-                    //                                     TextCustom(
-                    //                                       text: DateFormat('a')
-                    //                                           .format(DateTime.now()),
-                    //                                       fontSize: FontSize.s22.sp,
-                    //                                     ),
-                    //                                   ],
-                    //                                 ),
-                    //                                 TextCustom(
-                    //                                   text: DateFormat('EEE, MMM dd, yyyy')
-                    //                                       .format(DateTime.now()),
-                    //                                   fontSize: FontSize.s20.sp,
-                    //                                   color: ColorManager.black,
-                    //                                 ),
-                    //                               ],
-                    //                             );
-                    //                           },
-                    //                         ),
-                    //                         SizedBox(
-                    //                           height: AppSize.s80.h,
-                    //                         ),
-
-                    //                         state is CheckInAndOutLoading
-                    //                             ? const Center(
-                    //                                 child: ProgressIndicatorCustom(),
-                    //                               )
-                    //                             : BlocProvider.value(
-                    //                                 value: BlocProvider.of<CompaniesCubit>(context)
-                    //                                   ..getCompanyFun(),
-                    //                                 child: BlocConsumer<CompaniesCubit,
-                    //                                     CompaniesState>(
-                    //                                   listener: (context, state) {},
-                    //                                   builder: (context, state) {
-                    //                                     return state is GetCompanySuccess
-                    //                                         ? InkWell(
-                    //                                             onTap: () async {
-                    //                                               // await homeCubit.punchInOutFun();
-                    //                                               homeCubit.lat = double.parse(state
-                    //                                                   .companiesEntity
-                    //                                                   .resultEntity
-                    //                                                   .response[0]
-                    //                                                   .lat);
-                    //                                               homeCubit.long = double.parse(
-                    //                                                   state
-                    //                                                       .companiesEntity
-                    //                                                       .resultEntity
-                    //                                                       .response[0]
-                    //                                                       .long);
-
-                    //                                               await homeCubit.checkDistance();
-
-                    //                                               if (homeCubit.checked) {
-                    //                                                 await homeCubit.punchInOutFun();
-                    //                                                 Future.delayed(
-                    //                                                   const Duration(
-                    //                                                       milliseconds: 100),
-                    //                                                   () async => await BlocProvider
-                    //                                                           .of<AttendanceCubit>(
-                    //                                                               context)
-                    //                                                       .getAttendanceFun(),
-                    //                                                 );
-                    //                                               } else {
-                    //                                                 Future.delayed(
-                    //                                                     const Duration(
-                    //                                                         milliseconds: 100),
-                    //                                                     () async => navigator(
-                    //                                                         context,
-                    //                                                         Routes
-                    //                                                             .createRequestRoute));
-                    //                                               }
-                    //                                             },
-                    //                                             child: state is CheckInAndOutLoading
-                    //                                                 ? ShimmerCustom(
-                    //                                                     child: SvgPicture.asset(
-                    //                                                       IconsAssets.punchinIcon,
-                    //                                                     ),
-                    //                                                   )
-                    //                                                 : FadeIn(
-                    //                                                     child: BlocProvider.value(
-                    //                                                       value: BlocProvider.of<
-                    //                                                               AttendanceCubit>(
-                    //                                                           context)
-                    //                                                         ..getAttendanceFun(),
-                    //                                                       child: BlocBuilder<
-                    //                                                           AttendanceCubit,
-                    //                                                           AttendanceState>(
-                    //                                                         builder:
-                    //                                                             (context, state) {
-                    //                                                           return state
-                    //                                                                   is GetAttendanceLoading
-                    //                                                               ? const Center(
-                    //                                                                   child:
-                    //                                                                       ProgressIndicatorCustom(),
-                    //                                                                 )
-                    //                                                               : state
-                    //                                                                       is GetAttendanceSuccess
-                    //                                                                   ? SvgPicture
-                    //                                                                       .asset(
-                    //                                                                       state.attendanceEntity.resultEntity.response.isEmpty ||
-                    //                                                                               state.attendanceEntity.resultEntity.response.first.checkOut !=
-                    //                                                                                   'false'
-                    //                                                                           ? IconsAssets
-                    //                                                                               .punchinIcon
-                    //                                                                           : IconsAssets
-                    //                                                                               .punchOutIcon,
-                    //                                                                     )
-                    //                                                                   : SvgPicture
-                    //                                                                       .asset(
-                    //                                                                       AppConstants.punchIn !=
-                    //                                                                               "false"
-                    //                                                                           ? IconsAssets
-                    //                                                                               .punchinIcon
-                    //                                                                           : IconsAssets
-                    //                                                                               .punchOutIcon,
-                    //                                                                     );
-                    //                                                         },
-                    //                                                       ),
-                    //                                                     ),
-                    //                                                   ),
-                    //                                           )
-                    //                                         : state is GetCompanySuccess
-                    //                                             ? const Center(
-                    //                                                 child:
-                    //                                                     ProgressIndicatorCustom(),
-                    //                                               )
-                    //                                             : ElevatedButtonCustom(
-                    //                                                 width: AppSize.s100.w,
-                    //                                                 text: 'Reload',
-                    //                                                 onPressed: () async {
-                    //                                                   await BlocProvider.of<
-                    //                                                               CompaniesCubit>(
-                    //                                                           context)
-                    //                                                       .getCompanyFun();
-                    //                                                 },
-                    //                                               );
-                    //                                   },
-                    //                                 ),
-                    //                               ),
-
-                    Expanded(
-                      child: Row(
-                        children: [
-                          CustomHomeItem(
-                            onTap: () {
-                              HomeCubit.get(context).changePunchInAndPunchOut();
-                            },
-                            icon: ImageAssets.punchInPunchOutImg,
-                            label: HomeCubit.get(context).isPunchIn
-                                ? AppStrings.punchOut
-                                : AppStrings.punchIn,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          CustomHomeItem(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.myTimeOffRoute,
-                              );
-                            },
-                            icon: ImageAssets.timeOffImg,
-                            label: AppStrings.myLeave,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          CustomHomeItem(
-                            onTap: () {},
-                            icon: ImageAssets.overTimeImg,
-                            label: AppStrings.overTime,
-                          )
-                        ],
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(AppPadding.p16),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        color: ColorManager.scaffoldColor,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          CustomHomeItem(
-                            onTap: () {
+                      child: ListView.separated(
+                        itemBuilder: (context, index) => FeatureItemWidget(
+                          backgroundImg:
+                              AppConstants.featureList[index].backgroundImg,
+                          title: AppConstants.featureList[index].title,
+                          icon: AppConstants.featureList[index].icon,
+                          onTap: () {
+                            if (AppConstants.featureList[index].route.isEmpty) {
+                            } else if (AppConstants.featureList[index].route ==
+                                "Late In") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -346,15 +184,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                               );
-                            },
-                            icon: ImageAssets.lateInImg,
-                            label: AppStrings.myLateIn,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          CustomHomeItem(
-                            onTap: () {
+                            } else if (AppConstants.featureList[index].route ==
+                                "Early Out") {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -364,79 +195,24 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                               );
-                            },
-                            icon: ImageAssets.checkOut,
-                            label: AppStrings.myEarlyOut,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          CustomHomeItem(
-                            onTap: () {
+                            } else {
                               Navigator.pushNamed(
                                 context,
-                                Routes.expensesRoute,
+                                AppConstants.featureList[index].route,
                               );
-                            },
-                            icon: ImageAssets.expensesImg,
-                            label: AppStrings.expenses,
-                          ),
-                        ],
+                            }
+                          },
+                        ),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 20,
+                        ),
+                        itemCount: AppConstants.featureList.length,
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          CustomHomeItem(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.hrPoliciesRoute,
-                              );
-                            },
-                            icon: ImageAssets.policyImg,
-                            label: AppStrings.hrPolicy,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          CustomHomeItem(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.shiftAllocationRoute,
-                              );
-                            },
-                            icon: ImageAssets.shiftAllocationImg,
-                            label: AppStrings.myShiftAllocation,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          CustomHomeItem(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.attendanceRoute,
-                              );
-                            },
-                            icon: ImageAssets.attendanceImg,
-                            label: AppStrings.myAttendance,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-            );
+            ));
           },
         ),
       ),

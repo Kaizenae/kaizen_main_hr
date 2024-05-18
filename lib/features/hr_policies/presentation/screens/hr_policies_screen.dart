@@ -17,9 +17,9 @@ class HrPoliciesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => HrPoliciesCubit()..getHrPolicies(),
-        child: BlocBuilder<HrPoliciesCubit, HrPoliciesStates>(
-            builder: (context, state) {
+      create: (context) => HrPoliciesCubit()..getHrPolicies(),
+      child: BlocBuilder<HrPoliciesCubit, HrPoliciesStates>(
+        builder: (context, state) {
           return Scaffold(
             appBar: const AppBarCustom(
               text: AppStrings.hrPolices,
@@ -119,6 +119,8 @@ class HrPoliciesScreen extends StatelessWidget {
                               .length),
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }

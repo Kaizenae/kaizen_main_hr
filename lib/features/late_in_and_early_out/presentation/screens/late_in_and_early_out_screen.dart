@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
+import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:Attendace/features/late_in_and_early_out/presentation/controller/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,19 +36,16 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
         body: BlocConsumer<EarlyOutLateInCubit, EarlyOutLateInStates>(
           listener: (context, state) {
             if (state is CancelMyRequestSuccessState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
               EarlyOutLateInCubit.get(context).getEarlyOut();
               EarlyOutLateInCubit.get(context).getLateIn();
             } else if (state is CancelMyRequestErrorState) {
-              SnackBar snackBar =
-                  SnackBar(content: Text(state.message.toString()));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                  message: state.message.toString(), context: context));
             }
           },
           builder: (context, state) {
-            log(state.toString());
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Column(
@@ -62,7 +58,7 @@ class LateInAndEarlyOutScreen extends StatelessWidget {
                       fontSize: FontSize.s14,
                       colors: ColorManager.secondary,
                       width: context.width / 1.6,
-                      text: 'Apply Request',
+                      text: AppStrings.applyRequest,
                       onPressed: () {
                         Navigator.push(
                           context,

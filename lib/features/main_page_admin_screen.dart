@@ -25,21 +25,17 @@ class MainPageAdmin extends StatefulWidget {
 class MainPageAdminState extends State<MainPageAdmin> {
   final _screens = [
     const HomeScreen(),
-    // const AllEmployeesScreen(),
-    // const AttendanceScreen(),
     const NotificationsScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
-    // IconsAssets.searchIcon,
     IconsAssets.notificationIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
-    // AppStrings.employees,
     AppStrings.notifications,
     AppStrings.profile,
   ];
@@ -59,14 +55,6 @@ class MainPageAdminState extends State<MainPageAdmin> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
-      // appBarCustom: AppBarCustom(
-      //     isNull: false,
-      //     // text: _selectedIndex == 0
-      //     //     ? AppStrings.home
-      //     //     : _selectedIndex == 1
-      //     //         ? AppStrings.attendance
-      //     //         : AppStrings.profile
-      // ),
       body: SafeArea(
         child: Stack(
           children: _screens
@@ -85,28 +73,30 @@ class MainPageAdminState extends State<MainPageAdmin> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            if (index == 1) {
-              RequestsBloc.get(context).getRequests();
-            } else if (index == 2) {
-              ProfileCubit.get(context).getEmployeeFun();
-            }
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          iconSize: 24,
-          items: List.generate(
-              _screens.length,
-              (index) => bottom(
-                    icon: _icons[index],
-                    index: index,
-                    label: _labels[index],
-                  ))),
+        currentIndex: _selectedIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          if (index == 1) {
+            RequestsBloc.get(context).getRequests();
+          } else if (index == 2) {
+            ProfileCubit.get(context).getEmployeeFun();
+          }
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        iconSize: 24,
+        items: List.generate(
+          _screens.length,
+          (index) => bottom(
+            icon: _icons[index],
+            index: index,
+            label: _labels[index],
+          ),
+        ),
+      ),
     );
   }
 

@@ -2,6 +2,7 @@
 
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/core/local/cache_helper.dart';
+import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -144,7 +145,7 @@ class MyTimeOffCubit extends Cubit<MyTimeOffState> {
           message: value.data["result"]["response"]));
     }).catchError((error) {
       emit(const CancelMyRequestErrorState(
-          message: "Some thing went wrong, Try again later!!"));
+          message: AppStrings.someThingWentWrongTryAgainLater));
     });
   }
 

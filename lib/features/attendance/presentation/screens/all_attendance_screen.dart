@@ -1,3 +1,4 @@
+import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,7 @@ class AllAtendanceScreen extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: TextCustom(
-                          text: 'Date',
+                          text: AppStrings.date,
                           color: ColorManager.black,
                           fontSize: AppSize.s16,
                           fontWeight: FontWeight.w500,
@@ -51,7 +52,7 @@ class AllAtendanceScreen extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: TextCustom(
-                          text: 'Punch in',
+                          text: AppStrings.punchIn,
                           color: ColorManager.primary,
                           fontSize: AppSize.s16,
                           fontWeight: FontWeight.w500,
@@ -65,7 +66,7 @@ class AllAtendanceScreen extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: TextCustom(
-                          text: 'Punch out',
+                          text: AppStrings.punchOut,
                           color: ColorManager.primary,
                           fontSize: AppSize.s16,
                           fontWeight: FontWeight.w500,
@@ -79,7 +80,7 @@ class AllAtendanceScreen extends StatelessWidget {
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: TextCustom(
-                          text: 'Hours',
+                          text: AppStrings.hours,
                           color: ColorManager.error,
                           fontSize: AppSize.s16,
                           fontWeight: FontWeight.w500,

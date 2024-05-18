@@ -36,7 +36,7 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
   String? selectedStartDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String? selectedEndDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String checkType = '';
-  int selectedValue = 0;
+  int? selectedValue;
 
   String dateCount = '';
   String range = '';
@@ -73,7 +73,7 @@ class CreateTimeOffCubit extends Cubit<CreateTimeOffState> {
       endDate: selectedEndDate!.toString(),
       reason: reason,
       userId: AppConstants.token,
-      holidayStatus: selectedValue,
+      holidayStatus: selectedValue!,
       attachment: base64string,
     ));
 

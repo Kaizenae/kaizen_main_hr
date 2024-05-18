@@ -10,9 +10,9 @@ import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
-import '../../../myLoans/presentation/widgets/userRequest_widget.dart';
 import '../../data/late_in_early_out_model.dart';
 import '../controller/cubit.dart';
+import 'userRequest_widget.dart';
 
 class EarlyOutLateInItem extends StatelessWidget {
   const EarlyOutLateInItem(
@@ -82,6 +82,11 @@ class EarlyOutLateInItem extends StatelessWidget {
                         color: ColorManager.black,
                         fontSize: FontSize.s18,
                         fontWeight: FontWeight.w600),
+                  )
+                : const SizedBox(),
+            item.approvers.isNotEmpty
+                ? const SizedBox(
+                    height: 10,
                   )
                 : const SizedBox(),
             ListView.builder(

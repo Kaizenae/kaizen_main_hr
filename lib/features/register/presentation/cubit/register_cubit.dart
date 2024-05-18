@@ -18,7 +18,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
-  GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController baseUrlController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -29,15 +28,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
   String companyName = "";
   String checkType = '';
   String selectedValue = '';
-
-  cacheBseUrl() async {
-    // emit(CacheUrlStateLoading());
-    //
-    // EndPoints.baseUrl;
-    // print(    CacheHelper.get(key: AppStrings.baseUrl));
-    //
-    // emit(CacheUrlStateSuccess());
-  }
 
   Future<void> registerFun() async {
     emit(RegisterLoadingState());
