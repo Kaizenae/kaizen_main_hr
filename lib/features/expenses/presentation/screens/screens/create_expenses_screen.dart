@@ -58,6 +58,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                               AppStrings.total,
                               style: TextStyle(
                                 color: ColorManager.primary,
+                                fontFamily: FontConstants.fontFamily,
                               ),
                             ),
                             border: OutlineInputBorder(),
@@ -79,6 +80,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                               style: TextStyle(
                                 color: ColorManager.primary,
                                 fontSize: FontSize.s16,
+                                fontFamily: FontConstants.fontFamily,
                               ),
                             ),
                             const SizedBox(
@@ -100,6 +102,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                                     AppStrings.employee,
                                     style: TextStyle(
                                         fontSize: 14,
+                                        fontFamily: FontConstants.fontFamily,
                                         color: ColorManager.black),
                                   )
                                 ],
@@ -121,6 +124,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                                     AppStrings.company,
                                     style: TextStyle(
                                         fontSize: 14,
+                                        fontFamily: FontConstants.fontFamily,
                                         color: ColorManager.black),
                                   )
                                 ],
@@ -136,6 +140,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                             label: Text(
                               AppStrings.billReference,
                               style: TextStyle(
+                                fontFamily: FontConstants.fontFamily,
                                 color: ColorManager.primary,
                               ),
                             ),

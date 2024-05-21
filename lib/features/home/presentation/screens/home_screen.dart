@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:Attendace/core/utils/color_manager.dart';
+import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +149,10 @@ class HomeScreen extends StatelessWidget {
                                 HomeCubit.get(context).isPunchIn
                                     ? AppStrings.punchOut
                                     : AppStrings.punchIn,
-                                style: const TextStyle(fontSize: 16),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: FontConstants.fontFamily,
+                                ),
                               ),
                             ],
                           ),

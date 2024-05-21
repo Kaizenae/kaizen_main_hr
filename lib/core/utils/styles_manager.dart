@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'font_manager.dart';
 
 TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
-  return GoogleFonts.montserrat(
-      fontWeight: fontWeight, color: color, fontSize: fontSize);
+  return TextStyle(
+      fontFamily: FontConstants.fontFamily,
+      fontWeight: fontWeight,
+      color: color,
+      fontSize: fontSize);
 }
 
 // regular style

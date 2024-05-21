@@ -48,7 +48,9 @@ class DropDownWidget extends StatelessWidget {
                 child: Text(
                   item,
                   style: TextStyle(
-                      fontSize: FontSize.s14, color: ColorManager.primary),
+                      fontFamily: FontConstants.fontFamily,
+                      fontSize: FontSize.s14,
+                      color: ColorManager.primary),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

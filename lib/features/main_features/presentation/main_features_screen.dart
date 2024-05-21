@@ -3,6 +3,7 @@ import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/constants_manager.dart';
+import '../../../core/utils/font_manager.dart';
 import '../../../core/utils/routes_manager.dart';
 import '../../../core/widgets/component.dart';
 
@@ -72,7 +73,7 @@ class MainFeaturesScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: const Padding(
-                                    padding: EdgeInsets.all(12),
+                                    padding: EdgeInsets.all(20),
                                     child: Image(
                                       image: AssetImage(
                                         ImageAssets.hrImg,
@@ -91,6 +92,7 @@ class MainFeaturesScreen extends StatelessWidget {
                                       AppStrings.hr,
                                       style: TextStyle(
                                         fontSize: 24,
+                                        fontFamily: FontConstants.fontFamily,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -130,7 +132,7 @@ class MainFeaturesScreen extends StatelessWidget {
                                   ),
                                 ),
                                 child: const Padding(
-                                  padding: EdgeInsets.all(12),
+                                  padding: EdgeInsets.all(20),
                                   child: Image(
                                     image: AssetImage(
                                       ImageAssets.projectsImg,
@@ -150,6 +152,7 @@ class MainFeaturesScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.w600,
+                                      fontFamily: FontConstants.fontFamily,
                                     ),
                                   ),
                                 ),
@@ -194,7 +197,7 @@ class MainFeaturesScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: const Padding(
-                                    padding: EdgeInsets.all(12),
+                                    padding: EdgeInsets.all(20),
                                     child: Image(
                                       image: AssetImage(
                                         ImageAssets.expensesImg,
@@ -213,6 +216,7 @@ class MainFeaturesScreen extends StatelessWidget {
                                       AppStrings.expenses,
                                       style: TextStyle(
                                         fontSize: 24,
+                                        fontFamily: FontConstants.fontFamily,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),

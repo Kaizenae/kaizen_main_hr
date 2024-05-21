@@ -139,6 +139,7 @@ class MainPageAdminState extends State<MainPageAdmin> {
                                       .toString(),
                                   style: TextStyle(
                                       color: ColorManager.white,
+                                      fontFamily: FontConstants.fontFamily,
                                       fontSize: FontSize.s14),
                                 ),
                               )

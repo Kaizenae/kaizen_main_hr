@@ -1,3 +1,4 @@
+import 'package:Attendace/core/utils/font_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/color_manager.dart';
@@ -39,11 +40,15 @@ class FeatureItemWidget extends StatelessWidget {
                 title,
                 style: const TextStyle(
                     fontSize: 22,
+                    fontFamily: FontConstants.fontFamily,
                     fontWeight: FontWeight.w500,
                     color: ColorManager.white),
               ),
             ),
-            Image(image: AssetImage(icon)),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Image(image: AssetImage(icon)),
+            ),
           ],
         ),
       ),

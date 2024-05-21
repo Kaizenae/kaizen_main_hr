@@ -27,7 +27,6 @@ dependencies:
   dartz: ^0.10.1
   get_it: ^7.6.7
   rename: ^3.0.1
-  google_fonts: ^6.1.0
   animate_do: ^3.3.4
   shimmer: ^3.0.0
   dropdown_button2: ^2.3.9
@@ -55,7 +54,20 @@ flutter:
      - assets/icons/
      - assets/images/
 
-
+  fonts:
+    - family: Visby
+      fonts:
+        - asset: assets/fonts/VisbyLight.otf
+          weight: 300
+        - asset: assets/fonts/VisbyBold.otf
+          weight: 700
+        - asset: assets/fonts/VisbyMedium.otf
+          weight: 500
+        - asset: assets/fonts/VisbyRegular.otf
+          weight: 400
+        - asset: assets/fonts/VisbySemibold.otf
+          weight: 600
+       
   # fonts:
   #   - family: Schyler
   #     fonts:

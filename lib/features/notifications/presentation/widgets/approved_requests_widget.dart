@@ -69,6 +69,7 @@ class ApprovedRequestsWidget extends StatelessWidget {
                                       .approvedRequests[index]
                                       .employeeName,
                                   style: TextStyle(
+                                    fontFamily: FontConstants.fontFamily,
                                     color: ColorManager.primary,
                                     fontSize: FontSize.s16,
                                   ),
@@ -131,6 +132,7 @@ class ApprovedRequestsWidget extends StatelessWidget {
                                       .approvedRequests[index]
                                       .reason,
                                   style: TextStyle(
+                                    fontFamily: FontConstants.fontFamily,
                                     color: ColorManager.primary,
                                     fontSize: FontSize.s16,
                                   ),

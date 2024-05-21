@@ -81,6 +81,7 @@ class PendingTimeWidget extends StatelessWidget {
                             ? Text(
                                 AppStrings.approvers,
                                 style: TextStyle(
+                                    fontFamily: FontConstants.fontFamily,
                                     color: ColorManager.black,
                                     fontSize: FontSize.s18,
                                     fontWeight: FontWeight.w600),
@@ -118,6 +119,8 @@ class PendingTimeWidget extends StatelessWidget {
                                                   cubit.myTimeOffPending[index]
                                                       .approvers[ind].userName,
                                                   style: TextStyle(
+                                                    fontFamily: FontConstants
+                                                        .fontFamily,
                                                     color: ColorManager.primary,
                                                     fontSize: FontSize.s16,
                                                   ),
@@ -130,6 +133,8 @@ class PendingTimeWidget extends StatelessWidget {
                                                 cubit.myTimeOffPending[index]
                                                     .approvers[ind].state,
                                                 style: TextStyle(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily,
                                                   color: ColorManager.primary,
                                                   fontSize: FontSize.s14,
                                                 ),
@@ -143,6 +148,8 @@ class PendingTimeWidget extends StatelessWidget {
                                             cubit.myTimeOffPending[index]
                                                 .approvers[ind].reason,
                                             style: TextStyle(
+                                              fontFamily:
+                                                  FontConstants.fontFamily,
                                               fontSize: FontSize.s14,
                                               color: ColorManager.grey,
                                             ),

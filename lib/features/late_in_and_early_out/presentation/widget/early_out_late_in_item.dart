@@ -61,6 +61,7 @@ class EarlyOutLateInItem extends StatelessWidget {
                   child: Text(
                     item.reason,
                     style: TextStyle(
+                      fontFamily: FontConstants.fontFamily,
                       color: ColorManager.primary,
                       fontSize: FontSize.s16,
                     ),
@@ -79,6 +80,7 @@ class EarlyOutLateInItem extends StatelessWidget {
                 ? Text(
                     AppStrings.approvers,
                     style: TextStyle(
+                        fontFamily: FontConstants.fontFamily,
                         color: ColorManager.black,
                         fontSize: FontSize.s18,
                         fontWeight: FontWeight.w600),
@@ -112,6 +114,7 @@ class EarlyOutLateInItem extends StatelessWidget {
                                     child: Text(
                                       item.approvers[index].userName,
                                       style: TextStyle(
+                                        fontFamily: FontConstants.fontFamily,
                                         color: ColorManager.primary,
                                         fontSize: FontSize.s16,
                                       ),
@@ -126,6 +129,7 @@ class EarlyOutLateInItem extends StatelessWidget {
                             Text(
                               item.approvers[index].state,
                               style: TextStyle(
+                                fontFamily: FontConstants.fontFamily,
                                 color: ColorManager.primary,
                                 fontSize: FontSize.s14,
                               ),
@@ -138,6 +142,7 @@ class EarlyOutLateInItem extends StatelessWidget {
                         Text(
                           item.approvers[index].reason,
                           style: TextStyle(
+                            fontFamily: FontConstants.fontFamily,
                             fontSize: FontSize.s14,
                             color: ColorManager.grey,
                           ),

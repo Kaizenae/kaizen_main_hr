@@ -55,6 +55,7 @@ class RejectedRequestsWidget extends StatelessWidget {
                                     .rejectedRequests[index]
                                     .employeeName,
                                 style: TextStyle(
+                                  fontFamily: FontConstants.fontFamily,
                                   color: ColorManager.primary,
                                   fontSize: FontSize.s16,
                                 ),
@@ -116,6 +117,7 @@ class RejectedRequestsWidget extends StatelessWidget {
                                     .rejectedRequests[index]
                                     .reason,
                                 style: TextStyle(
+                                  fontFamily: FontConstants.fontFamily,
                                   color: ColorManager.primary,
                                   fontSize: FontSize.s16,
                                 ),

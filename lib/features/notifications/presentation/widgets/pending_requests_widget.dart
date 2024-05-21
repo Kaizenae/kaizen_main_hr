@@ -79,6 +79,7 @@ class PendingRequestsWidget extends StatelessWidget {
                                       .pendingRequests[index]
                                       .employeeName,
                                   style: TextStyle(
+                                    fontFamily: FontConstants.fontFamily,
                                     color: ColorManager.primary,
                                     fontSize: FontSize.s16,
                                   ),
@@ -141,6 +142,7 @@ class PendingRequestsWidget extends StatelessWidget {
                                       .pendingRequests[index]
                                       .reason,
                                   style: TextStyle(
+                                    fontFamily: FontConstants.fontFamily,
                                     color: ColorManager.primary,
                                     fontSize: FontSize.s16,
                                   ),
