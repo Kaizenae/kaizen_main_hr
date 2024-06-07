@@ -36,7 +36,8 @@ class HelpAndFeedbackScreen extends StatelessWidget {
           text: AppStrings.helpsFeedback,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(AppPadding.p16),
+          padding: const EdgeInsets.symmetric(
+              vertical: AppPadding.p16, horizontal: 40),
           child: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

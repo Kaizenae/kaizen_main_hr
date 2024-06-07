@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../core/api/api_consumer.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/utils/constants_manager.dart';
@@ -19,6 +21,7 @@ class EmployeeRemoteDataSourceImpl implements EmployeeRemoteDataSource {
       "jsonrpc": "2.0",
       "params": {"company_id": AppConstants.companyId, "user_id": userId}
     });
+    log(response.toString());
     return EmployeeModel.fromJson(response);
   }
 

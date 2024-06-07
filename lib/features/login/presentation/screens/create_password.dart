@@ -100,10 +100,7 @@ class CreatePasswordAfterLoginScreen extends StatelessWidget {
                                 )
                               : ElevatedButtonCustom(
                                   fontSize: FontSize.s14,
-
                                   textColor: ColorManager.white,
-
-                                  // width: 100,
                                   onPressed: () {
                                     BlocProvider.of<LoginCubit>(context)
                                         .changePassword(

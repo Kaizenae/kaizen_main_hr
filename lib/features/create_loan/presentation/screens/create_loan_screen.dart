@@ -70,7 +70,7 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                           return DropdownButtonHideUnderline(
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: ColorManager.textFormColor,
+                                  color: ColorManager.white,
                                   borderRadius:
                                       BorderRadius.circular(AppSize.s8)),
                               width: context.width / 1.1,
@@ -219,10 +219,10 @@ class _CreateLoanScreenState extends State<CreateLoanScreen> {
                               child: CupertinoTextFormFieldRow(
                                 controller: cubit.loanAmountController,
                                 decoration: BoxDecoration(
-                                  color: ColorManager.textFormColor,
+                                  color: ColorManager.white,
                                   //floatingLabelBehavior: FloatingLabelBehavior.auto,
                                   border: Border.all(
-                                    color: ColorManager.textFormColor,
+                                    color: ColorManager.white,
                                     width: AppSize.s1_5,
                                   ),
                                   borderRadius:

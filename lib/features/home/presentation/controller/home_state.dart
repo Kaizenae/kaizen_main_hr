@@ -1,58 +1,33 @@
 import 'package:Attendace/features/home/domain/entities/punchInOut_entity.dart';
-import 'package:equatable/equatable.dart';
 
-abstract class HomeState extends Equatable {
+abstract class HomeState {
   const HomeState();
 }
 
-class HomeInitial extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class HomeInitial extends HomeState {}
 
-class CheckInAndOutLoading extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class CheckInAndOutLoading extends HomeState {}
 
-class CheckOutLoading extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class CheckOutLoading extends HomeState {}
 
 class CheckInAndOutSuccess extends HomeState {
   final PunchInOutEntity punchInOutEntity;
 
   const CheckInAndOutSuccess({required this.punchInOutEntity});
-  @override
-  List<Object> get props => [];
 }
 
 class CheckInAndOutError extends HomeState {
   final String message;
 
   const CheckInAndOutError({required this.message});
-
-  @override
-  List<Object> get props => [message];
 }
 
-class PunchChangeLoading extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class PunchChangeLoading extends HomeState {}
 
-class PunchChange extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class PunchChange extends HomeState {}
 
-class ChangePunchAndInPunchOutLoadingState extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class ChangePunchAndInPunchOutLoadingState extends HomeState {}
 
-class ChangePunchAndInPunchOutSuccessState extends HomeState {
-  @override
-  List<Object> get props => [];
-}
+class ChangePunchAndInPunchOutSuccessState extends HomeState {}
+
+class ChangeIsMoreState extends HomeState {}

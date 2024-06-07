@@ -170,9 +170,9 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: ColorManager.textFormColor,
-                            border: Border.all(
-                                color: ColorManager.textFormColor, width: 2),
+                            color: ColorManager.white,
+                            border:
+                                Border.all(color: ColorManager.white, width: 2),
                           ),
                           child: InkWell(
                             onTap: () {
@@ -223,9 +223,9 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: ColorManager.textFormColor,
-                            border: Border.all(
-                                color: ColorManager.textFormColor, width: 2),
+                            color: ColorManager.white,
+                            border:
+                                Border.all(color: ColorManager.white, width: 2),
                           ),
                           child: InkWell(
                             onTap: () async {},

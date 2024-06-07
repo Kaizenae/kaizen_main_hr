@@ -1,7 +1,5 @@
 class EndPoints {
-  // static   String baseUrl.get(key: AppStrings.baseUrl 'http://52.91.122.186:8016';
-  static String baseUrl = 'http://178.128.101.145:8069';
-// static   String baseUrl 'http';
+  static String baseUrl = 'https://wik-wik-prod-staging-12269714.dev.odoo.com';
 
   static String loginUrl = '$baseUrl/login_api';
   static String registerUrl = '$baseUrl/register_api';
@@ -57,10 +55,12 @@ class EndPoints {
   static String otpPath = "https://ndm-solutions.com/sms/api";
   static String getUserIDPath = "$baseUrl/api/get_user_id";
   static String forgetPasswordPath = "$baseUrl/api/reset_password";
-  static String getPendingRequests = "$baseUrl/org/get_my_requests";
-  static String approveRequest = "$baseUrl/org/approve_request";
-  static String rejectRequest = "$baseUrl/org/refuse_request";
-  static String cancelMyRequestPath = "$baseUrl/org/cancel_my_request";
-  static String getOddPunchPath = "$baseUrl/org/get_all_odds";
-  static String getVersionCodePath = "$baseUrl/org/get_version";
+  static String getPendingRequests = "$baseUrl/get_my_requests";
+  static String approveRequest = "$baseUrl/approve_request";
+  static String rejectRequest = "$baseUrl/refuse_request";
+  static String cancelMyRequestPath = "$baseUrl/cancel_my_request";
+  static String getOddPunchPath = "$baseUrl/get_all_odds";
+  static String getVersionCodePath = "$baseUrl/get_version";
+  static String checkInCheckOutPath = "$baseUrl/check_in_check_out";
+  static String getlocationPath = "$baseUrl/get_location";
 }

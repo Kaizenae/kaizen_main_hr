@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class AppStrings {
   static const String noRouteFound = 'Can not find the path';
   static const String empty = '';
@@ -195,4 +197,24 @@ class AppStrings {
   static const String analytic = "Analytic";
   static const String hr = "HR";
   static const String projects = "Projects";
+  static const String details = "Details";
+  static const String myRemainingBalance = "My remaining balance";
+  static const String myAction = "My Action";
+  static const String fullDetails = "Full Details";
+  static const String days = "Days";
+  static const String whatWouldYouLikeToDo = "What would you like to do?";
+  static const String overtimeRequest = "Overtime Request";
+  static const String fingerprint = "Fingerprint";
+  static const String apply = "Apply";
+  static const String cancel = "Cancel";
+  static const String moreOption = "More Option";
+  static const String lessOption = "Less Option";
+  static const String check_in = "Check-in";
+  static const String check_out = "Check-out";
+  static const String youAreAlreadyCheckingIn = "You are already checking in";
+  static const String youAreAlreadyCheckingOut = "You are already checking out";
+  static const String goToTheRequiredLocation =
+      "Go to the required location, and you can reapply/request again";
+  static const String YouAreOutSide =
+      "You are outside the required area for your presence.";
 }

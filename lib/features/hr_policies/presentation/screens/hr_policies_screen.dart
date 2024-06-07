@@ -26,7 +26,7 @@ class HrPoliciesScreen extends StatelessWidget {
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSize.s12,
+                horizontal: AppSize.s40,
                 vertical: AppSize.s20,
               ),
               child: state is HrPoliciesLoadingState

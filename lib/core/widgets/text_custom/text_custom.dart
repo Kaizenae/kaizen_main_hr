@@ -33,19 +33,16 @@ class TextCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Text(text,
-          maxLines: maxLines,
-          overflow: overflow,
-          textAlign: textAlign,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                fontSize: fontSize,
-                color: color,
-                fontWeight: fontWeight,
-                decoration: decoration,
-                decorationColor: decorationColor,
-              )),
-    );
+    return Text(text,
+        maxLines: maxLines,
+        overflow: overflow,
+        textAlign: textAlign,
+        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+              fontSize: fontSize,
+              color: color,
+              fontWeight: fontWeight,
+              decoration: decoration,
+              decorationColor: decorationColor,
+            ));
   }
 }

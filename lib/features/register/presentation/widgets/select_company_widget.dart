@@ -38,7 +38,7 @@ class SelectCompanyWidget extends StatelessWidget {
                     .companiesDataModel.result.responseModel.isNotEmpty
                 ? Container(
                     decoration: BoxDecoration(
-                        color: ColorManager.textFormColor,
+                        color: ColorManager.white,
                         borderRadius: BorderRadius.circular(AppSize.s8)),
                     width: context.width / 1.1,
                     height: AppSize.s50,
@@ -142,20 +142,20 @@ class SelectCompanyWidget extends StatelessWidget {
                         key: const Key('2'),
                         inputDecorationTheme: InputDecorationTheme(
                           filled: true,
-                          fillColor: ColorManager.textFormColor,
+                          fillColor: ColorManager.white,
                           isDense: true,
                           //floatingLabelBehavior: FloatingLabelBehavior.auto,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(AppSize.s8),
                             borderSide: const BorderSide(
-                              color: ColorManager.textFormColor,
+                              color: ColorManager.white,
                               width: AppSize.s1_5,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(AppSize.s8),
                             borderSide: const BorderSide(
-                              color: ColorManager.textFormColor,
+                              color: ColorManager.white,
                               width: AppSize.s1_5,
                             ),
                           ),
@@ -166,7 +166,7 @@ class SelectCompanyWidget extends StatelessWidget {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(AppSize.s8),
                             borderSide: const BorderSide(
-                              color: ColorManager.textFormColor,
+                              color: ColorManager.white,
                               width: AppSize.s1_5,
                             ),
                           ),
@@ -184,7 +184,7 @@ class SelectCompanyWidget extends StatelessWidget {
                             ),
                           ),
                           suffixIconColor: ColorManager.textFormIconColor,
-                          focusColor: ColorManager.textFormColor,
+                          focusColor: ColorManager.white,
                         ),
                         enabled: false,
                         trailingIcon: const Icon(

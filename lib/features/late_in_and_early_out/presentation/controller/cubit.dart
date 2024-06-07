@@ -24,6 +24,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
   TextEditingController reasonController = TextEditingController();
   String? selectedDateShow = DateFormat("dd,MMM,yyyy").format(DateTime.now());
   String? selectedDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+  String? selectedTime = DateFormat("hh:mm").format(DateTime.now());
   String checkType = '';
   int selectedValue = 0;
 
@@ -45,6 +46,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "company_id": AppConstants.companyId.toString().toString(),
         "reason": reasonController.text.toString(),
         "date": selectedDate.toString(),
+        "time": selectedTime.toString(),
         "attachment": base64string,
       }
     }).then((value) {
@@ -65,6 +67,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
         "user_id": CacheHelper.get(key: AppConstants.userId).toString(),
         "company_id": AppConstants.companyId.toString(),
         "reason": reasonController.text.toString(),
+        "time": selectedTime.toString(),
         "date": selectedDate.toString(),
         "attachment": base64string,
       }
@@ -72,6 +75,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
       emit(LateInSuccessState(
           message: value.data["result"]["message"].toString()));
     }).catchError((error) {
+      log(error.toString());
       emit(LateInErrorState(
           message: AppStrings.someThingWentWrongTryAgainLater));
     });
@@ -123,7 +127,7 @@ class EarlyOutLateInCubit extends Cubit<EarlyOutLateInStates> {
           lateInDone.add(element);
         } else if (element.state == "Submitted") {
           lateInPending.add(element);
-        } else if (element.state == "Rejected") {
+        } else if (element.state == "Rejected" || element.state == "Refused") {
           lateInRefuse.add(element);
         }
       }

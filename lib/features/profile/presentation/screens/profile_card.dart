@@ -97,7 +97,7 @@ class ProfileCard extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.all(AppPadding.p8 / 2),
                                   decoration: BoxDecoration(
-                                      color: ColorManager.textBackgroundColor,
+                                      color: ColorManager.white,
                                       borderRadius:
                                           BorderRadius.circular(AppSize.s10)),
                                   child: TextCustom(
@@ -172,7 +172,7 @@ class ProfileCard extends StatelessWidget {
                                 child: TextCustom(
                                   text: 'xxx@xx.com',
                                   fontSize: FontSize.s16,
-                                  color: ColorManager.grey2,
+                                  color: ColorManager.white,
                                 ),
                               ),
                               const SizedBox(

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../controller/cubit.dart';
 import 'early_and_late_list.dart';
@@ -20,6 +21,8 @@ class RefusedWidget extends StatelessWidget {
       refuseList = EarlyOutLateInCubit.get(context).earlyOutRefuse;
       return EarlyAndLateList(
         list: refuseList,
+        bgStatusColor: ColorManager.error.withOpacity(.5),
+        statusColor: ColorManager.white,
         isPending: false,
         title: title,
         state: state,
@@ -31,6 +34,8 @@ class RefusedWidget extends StatelessWidget {
         state: state,
         title: title,
         isPending: false,
+        bgStatusColor: ColorManager.error.withOpacity(.5),
+        statusColor: ColorManager.white,
       );
     } else {
       return const SizedBox();

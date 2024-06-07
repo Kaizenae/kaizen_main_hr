@@ -1,5 +1,4 @@
 import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
-import 'package:Attendace/features/login/presentation/screens/create_password.dart';
 import 'package:Attendace/features/login/presentation/widgets/login_form_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,30 +36,18 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<LoginCubit, LoginStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            if (state.loginEntity.resultEntity.loginBefore == false) {
-              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
-                  message: state.loginEntity.resultEntity.message.toString(),
-                  context: context));
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CreatePasswordAfterLoginScreen(
-                          userID:
-                              state.loginEntity.resultEntity.id.toString())));
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
-                  message: state.loginEntity.resultEntity.message.toString(),
-                  context: context));
-              CacheHelper.put(
-                  key: AppConstants.userId,
-                  value: state.loginEntity.resultEntity.id.toString());
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.loginEntity.resultEntity.message.toString(),
+                context: context));
+            CacheHelper.put(
+                key: AppConstants.userId,
+                value: state.loginEntity.resultEntity.id.toString());
 
-              AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
+            AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
 
-              AppConstants.admin =
-                  CacheHelper.get(key: AppStrings.admin) ?? false;
-              navigatorAndRemove(context, Routes.mainFeatureRoute);
-            }
+            AppConstants.admin =
+                CacheHelper.get(key: AppStrings.admin) ?? false;
+            navigatorAndRemove(context, Routes.homeRoute);
           } else if (state is LoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
                 message: state.message.toString(), context: context));

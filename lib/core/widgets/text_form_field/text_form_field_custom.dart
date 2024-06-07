@@ -61,8 +61,8 @@ class TextFormFieldCustom extends StatelessWidget {
       this.align = TextAlign.start,
       this.initial,
       this.enable,
-      this.fillColor = ColorManager.textFormColor,
-      this.boarderColor = ColorManager.textFormColor,
+      this.fillColor = ColorManager.white,
+      this.boarderColor = ColorManager.white,
       this.padding = 16.0,
       this.maxLines});
 
@@ -115,7 +115,7 @@ class TextFormFieldCustom extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppSize.s8),
           borderSide: const BorderSide(
-            color: ColorManager.textFormColor,
+            color: ColorManager.white,
             width: AppSize.s1_5,
           ),
         ),
@@ -144,7 +144,7 @@ class TextFormFieldCustom extends StatelessWidget {
           ),
         ),
         suffixIconColor: ColorManager.textFormIconColor,
-        focusColor: ColorManager.textFormColor,
+        focusColor: ColorManager.white,
 
         prefixIcon: prefix
             ? Padding(
@@ -178,7 +178,7 @@ class TextFormFieldCustom extends StatelessWidget {
                   child: SvgPicture.asset(
                     suffixIcon!,
                     height: AppSize.s20,
-                    color: ColorManager.skyColor,
+                    color: ColorManager.purple,
                   ),
                 ),
               )

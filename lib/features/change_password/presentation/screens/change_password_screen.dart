@@ -59,7 +59,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             var changePasswordCubit = ChangePasswordCubit.get(context);
             return SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Form(
                   key: formKey,
                   child: SingleChildScrollView(

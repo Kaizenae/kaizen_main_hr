@@ -1,21 +1,13 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:developer';
-
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/font_manager.dart';
-import '../../../../core/utils/strings_manager.dart';
-import '../../../../core/utils/values_manager.dart';
 import '../controllers/requests_controller/bloc.dart';
 import '../controllers/requests_controller/states.dart';
-import 'userRequest_widget.dart';
 
 class RejectedRequestsWidget extends StatelessWidget {
   const RejectedRequestsWidget({super.key});
@@ -27,39 +19,99 @@ class RejectedRequestsWidget extends StatelessWidget {
       child: BlocConsumer<RequestsBloc, RequestsStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          log(state.toString());
           return state is RequestSuccessState &&
                   RequestsBloc.get(context).rejectedRequests.isNotEmpty
               ? ListView.separated(
-                  separatorBuilder: (context, index) => const Divider(),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 20,
+                  ),
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(AppPadding.p12),
+                  itemBuilder: (context, index) => Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: ColorManager.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorManager.lightGrey.withOpacity(.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                    ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          "${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].startDate))} - ${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].endDate))}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(fontSize: 16),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          RequestsBloc.get(context)
+                              .rejectedRequests[index]
+                              .reason,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SvgPicture.asset(
-                              IconsAssets.personIcon,
-                              height: AppSize.s24,
-                              color: ColorManager.primary,
+                            Text(
+                              RequestsBloc.get(context)
+                                  .rejectedRequests[index]
+                                  .employeeName,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge!
+                                  .copyWith(fontSize: 14),
                             ),
                             const SizedBox(
-                              width: AppSize.s8,
+                              width: 10,
                             ),
-                            Expanded(
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: ColorManager.yellow,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
                               child: Text(
                                 RequestsBloc.get(context)
                                     .rejectedRequests[index]
-                                    .employeeName,
-                                style: TextStyle(
-                                  fontFamily: FontConstants.fontFamily,
-                                  color: ColorManager.primary,
-                                  fontSize: FontSize.s16,
-                                ),
+                                    .duration
+                                    .toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      color: ColorManager.orange,
+                                    ),
                               ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              RequestsBloc.get(context)
+                                  .rejectedRequests[index]
+                                  .type,
+                              style: Theme.of(context).textTheme.bodyLarge,
                             ),
                             RequestsBloc.get(context)
                                     .rejectedRequests[index]
@@ -90,121 +142,194 @@ class RejectedRequestsWidget extends StatelessWidget {
                                 : const SizedBox(),
                           ],
                         ),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.emailIcon,
-                          text: AppStrings.message,
-                          subText: RequestsBloc.get(context)
-                              .rejectedRequests[index]
-                              .type,
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset(
-                              IconsAssets.messageQuestionIcon,
-                              height: AppSize.s24,
-                              color: ColorManager.primary,
-                            ),
-                            const SizedBox(
-                              width: AppSize.s8,
-                            ),
-                            Expanded(
-                              child: Text(
-                                RequestsBloc.get(context)
-                                    .rejectedRequests[index]
-                                    .reason,
-                                style: TextStyle(
-                                  fontFamily: FontConstants.fontFamily,
-                                  color: ColorManager.primary,
-                                  fontSize: FontSize.s16,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.calenderIcon,
-                          text: AppStrings.date,
-                          subText: DateFormat('EEE, MMM dd, yyyy').format(
-                            DateTime.parse(
-                              RequestsBloc.get(context)
-                                  .rejectedRequests[index]
-                                  .startDate,
-                            ),
-                          ),
-                        ),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.calenderIcon,
-                          text: AppStrings.date,
-                          subText: DateFormat('EEE, MMM dd, yyyy').format(
-                            DateTime.parse(
-                              RequestsBloc.get(context)
-                                  .rejectedRequests[index]
-                                  .endDate,
-                            ),
-                          ),
-                        ),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.clockIcon,
-                          text: AppStrings.duration,
-                          subText: RequestsBloc.get(context)
-                              .rejectedRequests[index]
-                              .duration
-                              .toString(),
-                        ),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.clockIcon,
-                          text: AppStrings.duration,
-                          subText: RequestsBloc.get(context)
-                              .rejectedRequests[index]
-                              .state
-                              .toString(),
-                        ),
                       ],
                     ),
                   ),
                   itemCount: RequestsBloc.get(context).rejectedRequests.length,
                 )
+              // ignore: dead_code
               : state is RequestLoadingState
                   ? ShimmerCustom(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => Column(
-                            children: List.generate(
-                          6,
-                          (index) => const UserRequestWidget(
-                            iconPath: IconsAssets.emailIcon,
-                            text: AppStrings.message,
-                            subText: 'Loading.....',
-                          ),
-                        )),
-                        itemCount: 2,
+                      child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 20,
                       ),
-                    )
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => Container(
+                        padding: const EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          color: ColorManager.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorManager.lightGrey.withOpacity(.1),
+                              blurRadius: 10,
+                              offset: const Offset(0, 0),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Oct 12, 2020 - Oct 12, 2020",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(fontSize: 16),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "Going to vacation",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Tony Saji Thomas",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayLarge!
+                                      .copyWith(fontSize: 14),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.yellow,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    "3",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                          color: ColorManager.orange,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "Annual Leave",
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            )
+                          ],
+                        ),
+                      ),
+                      itemCount: 10,
+                    ))
                   : state is RequestErrorState ||
                           RequestsBloc.get(context).rejectedRequests.isEmpty
                       ? ErrorsWidget(
                           onPress: () {},
                         )
                       : ShimmerCustom(
-                          child: ListView.builder(
+                          child: ListView.separated(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                              height: 20,
+                            ),
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
-                            itemBuilder: (context, index) => Column(
-                              children: List.generate(
-                                6,
-                                (index) => const UserRequestWidget(
-                                  iconPath: IconsAssets.emailIcon,
-                                  text: AppStrings.message,
-                                  subText: 'Loading.....',
-                                ),
+                            itemBuilder: (context, index) => Container(
+                              padding: const EdgeInsets.all(24),
+                              decoration: BoxDecoration(
+                                color: ColorManager.white,
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color:
+                                        ColorManager.lightGrey.withOpacity(.1),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 0),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Oct 12, 2020 - Oct 12, 2020",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(fontSize: 16),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "Going to vacation",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Tony Saji Thomas",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge!
+                                            .copyWith(fontSize: 14),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 8,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: ColorManager.yellow,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Text(
+                                          "3",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineMedium!
+                                              .copyWith(
+                                                color: ColorManager.orange,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    "Annual Leave",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  )
+                                ],
                               ),
                             ),
-                            itemCount: 2,
+                            itemCount: 10,
                           ),
                         );
         },

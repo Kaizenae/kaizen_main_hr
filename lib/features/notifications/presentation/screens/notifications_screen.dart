@@ -1,4 +1,4 @@
-import 'package:Attendace/core/utils/values_manager.dart';
+import 'package:Attendace/core/widgets/app_bar/app_bar_custom.dart';
 import 'package:Attendace/core/widgets/scaffold_custom/scaffold_custom.dart';
 import 'package:Attendace/features/notifications/presentation/widgets/approved_requests_widget.dart';
 import 'package:Attendace/features/notifications/presentation/widgets/rejected_requests_widget.dart';
@@ -17,8 +17,11 @@ class NotificationsScreen extends StatelessWidget {
     return BlocProvider.value(
       value: BlocProvider.of<RequestsBloc>(context)..getRequests(),
       child: ScaffoldCustom(
+        appBarCustom: const AppBarCustom(
+          text: AppStrings.requests,
+        ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           child: SafeArea(
             child: Column(
               children: [
@@ -49,5 +52,10 @@ class NotificationsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  backToHome({required BuildContext context}) {
+    RequestsBloc.get(context).getRequests();
+    Navigator.pop(context);
   }
 }

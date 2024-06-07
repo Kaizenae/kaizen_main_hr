@@ -28,7 +28,7 @@ class UserRequestWidget extends StatelessWidget {
           SvgPicture.asset(
             iconPath,
             height: AppSize.s24,
-            color: ColorManager.skyColor,
+            color: ColorManager.purple,
           ),
           const SizedBox(
             width: AppSize.s8,

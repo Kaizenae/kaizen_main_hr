@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ? Routes.baseUrlRoute
             : AppConstants.token == AppStrings.empty || AppConstants.token == 0
                 ? Routes.loginRoute
-                : Routes.mainFeatureRoute,
+                : Routes.homeRoute,
       );
 
       // navigatorAndRemove(context, Routes.localAuthRoute);
@@ -97,9 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ? Routes.baseUrlRoute
             : AppConstants.token == AppStrings.empty || AppConstants.token == 0
                 ? Routes.loginRoute
-                : AppConstants.admin
-                    ? Routes.mainRouteAdmin
-                    : Routes.mainRoute,
+                : Routes.homeRoute,
       );
     }
   }

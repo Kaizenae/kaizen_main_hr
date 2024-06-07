@@ -24,7 +24,7 @@ class ResultModel extends ResultEntity {
   factory ResultModel.fromJson(Map<String, dynamic> json) => ResultModel(
         status: json['status'],
         responseEntity: List<ResponseEntity>.from(
-            json['response'].map((e) => ResponseModel.fromJson(e))),
+            json['responseee'].map((e) => ResponseModel.fromJson(e))),
       );
 }
 

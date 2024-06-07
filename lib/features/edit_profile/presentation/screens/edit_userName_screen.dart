@@ -7,7 +7,6 @@ import '../../../../core/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
@@ -38,9 +37,7 @@ class EditUserNameScreen extends StatelessWidget {
                 message:
                     state.editProfileEntity.resultEntity.message.toString(),
                 context: context));
-            AppConstants.admin
-                ? navigatorAndRemove(context, Routes.mainRouteAdmin)
-                : navigatorAndRemove(context, Routes.mainRoute);
+            navigatorAndRemove(context, Routes.mainRoute);
           } else if (state is EditProfileErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
                 message: state.message.toString(), context: context));

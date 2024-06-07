@@ -12,8 +12,6 @@ import 'package:Attendace/features/edit_company/presentation/screens/edit_locati
 import 'package:Attendace/features/forget_password/presentation/screens/forget_password_screen.dart';
 import 'package:Attendace/features/help_and_feedback/presentation/screens/help_and_feedback_screen.dart';
 import 'package:Attendace/features/hr_policies/presentation/screens/hr_policies_screen.dart';
-import 'package:Attendace/features/main_features/presentation/main_features_screen.dart';
-import 'package:Attendace/features/main_page_admin_screen.dart';
 import 'package:Attendace/features/main_page_screen.dart';
 import 'package:Attendace/features/myRequests/presentation/screens/myRequests_screen.dart';
 import 'package:Attendace/features/myTimeOff/presentation/screens/myTimeOff_screen.dart';
@@ -48,7 +46,6 @@ class Routes {
   static const String localAuthRoute = "LocalAuth";
   static const String splashRoute = "SplashScreen";
   static const String mainFeatureRoute = "MainFeatureScreen";
-  static const String mainRouteAdmin = "mainPageAdmin";
   static const String homeRoute = "home";
   static const String registerRoute = "register";
   static const String userRoute = "userData";
@@ -113,8 +110,6 @@ class RoutesMap {
   static Map<String, Widget Function(BuildContext)> routesMap() {
     return {
       Routes.loginRoute: (BuildContext context) => const LoginScreen(),
-      Routes.mainFeatureRoute: (BuildContext context) =>
-          const MainFeaturesScreen(),
       Routes.registerRoute: (BuildContext context) => const RegisterScreen(),
       Routes.homeRoute: (BuildContext context) => const HomeScreen(),
       Routes.myRequestsRoute: (BuildContext context) =>
@@ -127,7 +122,6 @@ class RoutesMap {
       Routes.createTimeOffRoute: (BuildContext context) =>
           const CreateTimeOffScreen(),
       Routes.mainRoute: (BuildContext context) => const MainPage(),
-      Routes.mainRouteAdmin: (BuildContext context) => const MainPageAdmin(),
       Routes.editProfileRoute: (BuildContext context) =>
           const EditProfileScreen(),
       Routes.editUserNameRoute: (BuildContext context) =>
@@ -172,16 +166,14 @@ class RoutesMap {
 
       case Routes.registerRoute:
         return const RegisterScreen();
-
-      case Routes.mainFeatureRoute:
-        return const MainFeaturesScreen();
-
       case Routes.myRequestsRoute:
         return const MyRequestsScreen();
       case Routes.myLoansRoute:
         return const MyLoansScreen();
       case Routes.myTimeOffRoute:
         return const MyTimeOffScreen();
+      case Routes.homeRoute:
+        return const HomeScreen();
 
       case Routes.notificationsRoute:
         return const NotificationsScreen();
@@ -190,9 +182,6 @@ class RoutesMap {
 
       case Routes.mainRoute:
         return const MainPage();
-      case Routes.mainRouteAdmin:
-        return const MainPageAdmin();
-
       case Routes.editProfileRoute:
         return const EditProfileScreen();
       case Routes.editUserNameRoute:

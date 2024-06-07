@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'color_manager.dart';
 import 'font_manager.dart';
@@ -7,12 +8,9 @@ import 'styles_manager.dart';
 import 'values_manager.dart';
 
 CupertinoThemeData getApplicationThemeIOS() {
-  return CupertinoThemeData(
+  return const CupertinoThemeData(
     primaryColor: ColorManager.primary,
     scaffoldBackgroundColor: ColorManager.scaffoldColor,
-    textTheme: CupertinoTextThemeData(
-      textStyle: getLightStyle(color: ColorManager.primary),
-    ),
   );
 }
 
@@ -38,6 +36,10 @@ ThemeData getApplicationTheme() {
         centerTitle: true,
         color: ColorManager.white,
         elevation: AppSize.s0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
         // shadowColor: ColorManager.lightPrimary,
         titleTextStyle:
             getRegularStyle(fontSize: FontSize.s16, color: ColorManager.white)),
@@ -61,16 +63,18 @@ ThemeData getApplicationTheme() {
                 borderRadius: BorderRadius.circular(AppSize.s12)))),
 
     textTheme: TextTheme(
-        displayLarge: getSemiBoldStyle(
-            color: ColorManager.darkGrey, fontSize: FontSize.s20),
+        displayLarge:
+            getBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s20),
         headlineLarge:
-            getSemiBoldStyle(color: ColorManager.white, fontSize: FontSize.s16),
+            getBoldStyle(color: ColorManager.white, fontSize: FontSize.s16),
         headlineMedium:
             getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
         titleMedium:
             getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s16),
         bodyLarge: getRegularStyle(color: ColorManager.grey1),
-        bodySmall: getRegularStyle(color: ColorManager.grey)),
+        bodySmall: getRegularStyle(color: ColorManager.grey),
+        titleLarge:
+            getBoldStyle(color: ColorManager.black, fontSize: FontSize.s22)),
 
     // input decoration theme (text form field)
     inputDecorationTheme: InputDecorationTheme(

@@ -3,32 +3,25 @@ const String iconPath = "assets/icons";
 
 class ImageAssets {
   static const String logoName = "$imagePath/logo_name.png";
-  static const String back1 = "$imagePath/back1.jpg";
-  static const String back2 = "$imagePath/back2.jpg";
-  static const String back3 = "$imagePath/back3.jpg";
-  static const String back4 = "$imagePath/back4.jpg";
-  static const String back5 = "$imagePath/back5.jpg";
-  static const String back6 = "$imagePath/back6.jpg";
-  static const String back7 = "$imagePath/back7.jpg";
-  static const String back8 = "$imagePath/back8.jpg";
-  static const String back9 = "$imagePath/back9.jpg";
-  static const String back10 = "$imagePath/back10.jpg";
   static const String logoImg = "$imagePath/logo.png";
   static const String logoWhiteImg = "$imagePath/logo_white.png";
   static const String homeIconImg = "$imagePath/playstore.png";
-  static const String lateInImg = "$imagePath/late_in.png";
-  static const String checkOut = "$imagePath/check_out.png";
-  static const String policyImg = "$imagePath/policy.png";
-  static const String shiftAllocationImg = "$imagePath/shift_allocatin.png";
-  static const String timeOffImg = "$imagePath/time_off.png";
-  static const String attendanceImg = "$imagePath/attendance.png";
   static const String noDataImg = "$imagePath/no_data.png";
   static const String userPhotoImg = "$imagePath/user_photo.png";
   static const String webIcon = "$imagePath/web.png";
-  static const String overTimeImg = "$imagePath/overtime.png";
-  static const String hrImg = "$imagePath/hr.png";
-  static const String expensesImg = "$imagePath/expenses.png";
-  static const String projectsImg = "$imagePath/projects.png";
+  static const String calendar = "$imagePath/calendar.png";
+  static const String clock = "$imagePath/clock.png";
+  static const String documentFile = "$imagePath/document-file.png";
+  static const String earlyOut = "$imagePath/early_out.png";
+  static const String lateIn = "$imagePath/late_in.png";
+  static const String overTime = "$imagePath/over_time.png";
+  static const String requests = "$imagePath/requests.png";
+  static const String shifts = "$imagePath/shifts.png";
+  static const String wallet = "$imagePath/wallet.png";
+  static const String leaves = "$imagePath/leaves.png";
+  static const String fingerprint = "$imagePath/fingerprint.png";
+  static const String arrowDown = "$imagePath/arrow.png";
+  static const String arrowUp = "$imagePath/arrow_up.png";
 }
 
 class IconsAssets {

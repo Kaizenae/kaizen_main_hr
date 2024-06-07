@@ -17,7 +17,6 @@ class ResultEntity extends Equatable {
   final List<String> message;
   final int id;
   final int companyId;
-  final bool loginBefore;
 
   const ResultEntity({
     required this.status,
@@ -25,7 +24,6 @@ class ResultEntity extends Equatable {
     required this.id,
     required this.admin,
     required this.companyId,
-    required this.loginBefore,
   });
 
   @override
@@ -33,6 +31,5 @@ class ResultEntity extends Equatable {
         status,
         message,
         id,
-        loginBefore,
       ];
 }

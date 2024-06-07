@@ -22,12 +22,12 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
     final response = await apiConsumer.post(EndPoints.loginUrl, body: {
       "jsonrpc": "2.0",
       "params": {
-        "db": "ICD_CMTY_TEST",
+        "db": "wik-wik-prod-staging-12269714",
         "login": email,
         "password": password,
-        "device_id": ""
       }
     });
+
     return LoginModel.fromJson(response);
   }
 }

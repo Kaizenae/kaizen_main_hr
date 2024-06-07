@@ -1,13 +1,9 @@
-import 'package:Attendace/core/utils/media_query_values.dart';
 import 'package:Attendace/features/expenses/presentation/screens/screens/create_expenses_screen.dart';
 import 'package:flutter/material.dart';
-
+import '../../../../../core/services/animation/slide_transtion.dart';
 import '../../../../../core/utils/color_manager.dart';
-import '../../../../../core/utils/font_manager.dart';
 import '../../../../../core/utils/strings_manager.dart';
-import '../../../../../core/utils/values_manager.dart';
 import '../../../../../core/widgets/app_bar/app_bar_custom.dart';
-import '../../../../../core/widgets/elevated_button/elevated_button_custom.dart';
 import '../../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../../../../../core/widgets/tab_bar_custom/tab_bar_custom.dart';
 import '../../widget/approved_widget.dart';
@@ -21,42 +17,43 @@ class ExpensesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldCustom(
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: ColorManager.primary,
+        label: Row(
+          children: [
+            Text(
+              AppStrings.apply,
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            const Icon(
+              Icons.add,
+              color: ColorManager.white,
+            ),
+          ],
+        ),
+        onPressed: () {
+          Navigator.of(context).push(
+            SlideTranstion(page: const CreateExpensesScreen()),
+          );
+        },
+      ),
       appBarCustom: const AppBarCustom(
         text: AppStrings.expensesRequests,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           children: [
-            const SizedBox(
-              height: AppSize.s16,
-            ),
-            Center(
-              child: ElevatedButtonCustom(
-                fontSize: FontSize.s14,
-                colors: ColorManager.secondary,
-                width: context.width / 1.6,
-                text: AppStrings.applyRequest,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CreateExpensesScreen(),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(
-              height: AppSize.s20,
-            ),
             TabBarCustom(
               widgets: [
-                const PendingWidget(),
+                PendingWidget(),
                 ApprovedWidget(),
                 RefusedWidget(),
               ],
-              myTabs: const [
+              myTabs: [
                 Tab(
                   text: AppStrings.pending,
                 ),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:Attendace/core/api/end_points.dart';
@@ -46,7 +47,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
       rejectedRequests = [];
       requestsModel = RequestsModel.fromJson(value.data);
       for (var item in requestsModel.result.responseModel) {
-        if (item.state == "Rejected") {
+        if (item.state == "Rejected" || item.state == "Refused") {
           rejectedRequests.add(item);
         } else if (item.state == "Submitted") {
           if (item.ownStatus == "New" || item.ownStatus == "Submitted") {
@@ -62,6 +63,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
       }
       emit(RequestSuccessState());
     }).catchError((error) {
+      log(error.toString());
       emit(RequestErrorState());
     });
   }

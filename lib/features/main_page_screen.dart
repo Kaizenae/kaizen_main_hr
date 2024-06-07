@@ -20,23 +20,15 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   final _screens = [
     const HomeScreen(),
-
-    // const AttendanceScreen(),
     const ProfileScreen(),
-
-    // const CategoryScreen(),
-    //
-    // const ProfileScreen(),
   ];
   final List<String> _icons = [
     IconsAssets.homeIcon,
-    // IconsAssets.attendIcon,
     IconsAssets.personIcon,
   ];
 
   final List<String> _labels = [
     AppStrings.home,
-    // AppStrings.attendance,
     AppStrings.profile,
   ];
 
@@ -59,39 +51,52 @@ class MainPageState extends State<MainPage> {
         child: Stack(
           children: _screens
               .asMap()
-              .map((index, screen) {
-                return MapEntry(
-                  index,
-                  Offstage(
-                    offstage: _selectedIndex != index,
-                    child: screen,
-                  ),
-                );
-              })
+              .map(
+                (index, screen) {
+                  return MapEntry(
+                    index,
+                    Offstage(
+                      offstage: _selectedIndex != index,
+                      child: screen,
+                    ),
+                  );
+                },
+              )
               .values
               .toList(),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            if (index == 1) {
-              ProfileCubit.get(context).getEmployeeFun();
-            }
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          iconSize: 24,
-          items: List.generate(
-              _screens.length,
-              (index) => bottom(
-                    icon: _icons[index],
-                    label: _labels[index],
-                  ))),
+        currentIndex: _selectedIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          if (index == 1) {
+            ProfileCubit.get(context).getEmployeeFun();
+          }
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        iconSize: 24,
+        items: List.generate(
+          _screens.length,
+          (index) => bottom(
+            icon: _icons[index],
+            label: _labels[index],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorManager.primary,
+        isExtended: true,
+        onPressed: () {},
+        child: const Icon(
+          Icons.add,
+          color: ColorManager.white,
+        ),
+      ),
     );
   }
 

@@ -1,8 +1,6 @@
-import 'dart:math' as math;
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/local/cache_helper.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -32,15 +30,6 @@ class HomeCubit extends Cubit<HomeState> {
   bool serviceEnabled = false;
   TextEditingController messageController = TextEditingController();
 
-  List<double> companyLocation = [];
-  double lat = 0.0;
-  double long = 0.0;
-  deg2rad(deg) {
-    return deg * (math.pi / 180);
-  }
-
-  var currentTime = DateFormat.jm('en_US').format(DateTime.now()).toString();
-  var currentDate = DateFormat.yMd('en_US').format(DateTime.now()).toString();
   bool checked = false;
 
   bool flag = false;
@@ -61,5 +50,11 @@ class HomeCubit extends Cubit<HomeState> {
     emit(ChangePunchAndInPunchOutLoadingState());
     isPunchIn = !isPunchIn;
     emit(ChangePunchAndInPunchOutSuccessState());
+  }
+
+  bool isMore = false;
+  void changeIsMore() {
+    isMore = !isMore;
+    emit(ChangeIsMoreState());
   }
 }

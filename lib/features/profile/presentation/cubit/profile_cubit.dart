@@ -64,6 +64,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     await CacheHelper.removeData(key: AppStrings.cachedRegister);
     await CacheHelper.removeData(key: AppStrings.admin);
     await CacheHelper.removeData(key: AppStrings.company);
+    await CacheHelper.removeData(key: AppConstants.checkInOrCheckOut);
 
     AppConstants.token = CacheHelper.get(key: AppStrings.token) ?? 0;
     AppConstants.admin = CacheHelper.get(key: AppStrings.admin) ?? false;

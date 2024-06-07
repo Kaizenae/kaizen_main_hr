@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
+import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utils/strings_manager.dart';
 import '../controller/cubit.dart';
@@ -21,6 +22,8 @@ class ApprovedWidget extends StatelessWidget {
       return EarlyAndLateList(
         list: doneList,
         title: title,
+        bgStatusColor: ColorManager.green.withOpacity(.5),
+        statusColor: ColorManager.white,
         state: state,
         isPending: false,
       );
@@ -31,6 +34,8 @@ class ApprovedWidget extends StatelessWidget {
         state: state,
         isPending: false,
         title: title,
+        bgStatusColor: ColorManager.green.withOpacity(.5),
+        statusColor: ColorManager.white,
       );
     } else {
       return const SizedBox();

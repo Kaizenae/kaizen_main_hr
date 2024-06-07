@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:Attendace/core/utils/font_manager.dart';
+import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/core/widgets/error_widget.dart';
 import 'package:Attendace/core/widgets/shimmer_custom/shimmer_custom.dart';
 import 'package:Attendace/core/widgets/snack_bar/snack_bar_widget.dart';
@@ -7,15 +9,9 @@ import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_c
 import 'package:Attendace/features/myTimeOff/presentation/controller/myTimeOff_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/font_manager.dart';
-import '../../../../core/utils/strings_manager.dart';
-import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/elevated_button/elevated_button_custom.dart';
-import 'userRequest_widget.dart';
 
 class PendingTimeWidget extends StatelessWidget {
   const PendingTimeWidget({super.key});
@@ -40,141 +36,142 @@ class PendingTimeWidget extends StatelessWidget {
 
           return cubit.myTimeOffPending.isNotEmpty
               ? ListView.separated(
-                  separatorBuilder: (context, index) => const Divider(),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 20,
+                  ),
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(AppPadding.p12),
+                  itemBuilder: (context, index) => Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: ColorManager.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorManager.lightGrey.withOpacity(.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 0),
+                        ),
+                      ],
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        UserRequestWidget(
-                          iconPath: IconsAssets.emailIcon,
-                          text: AppStrings.message,
-                          subText: cubit.myTimeOffPending[index].holidayStatus,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            "${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(cubit.myTimeOffPending[index].start))} - ${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(cubit.myTimeOffPending[index].end))}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(fontSize: 16),
+                            maxLines: 1,
+                          ),
                         ),
-                        UserRequestWidget(
-                            iconPath: IconsAssets.calenderIcon,
-                            text: AppStrings.date,
-                            subText: DateFormat('EEE, MMM dd, yyyy').format(
-                                DateTime.parse(
-                                    cubit.myTimeOffPending[index].start))),
-                        UserRequestWidget(
-                            iconPath: IconsAssets.calenderIcon,
-                            text: AppStrings.date,
-                            subText: DateFormat('EEE, MMM dd, yyyy').format(
-                                DateTime.parse(
-                                    cubit.myTimeOffPending[index].end))),
-                        UserRequestWidget(
-                          iconPath: IconsAssets.distanceIcon,
-                          text: AppStrings.distance,
-                          subText: cubit.myTimeOffPending[index].description,
-                        ),
-                        UserRequestWidget(
-                            iconPath: IconsAssets.clockIcon,
-                            text: AppStrings.status,
-                            subText: cubit.myTimeOffPending[index].state),
                         const SizedBox(
-                          height: 10,
+                          height: 4,
                         ),
-                        cubit.myTimeOffPending[index].approvers.isNotEmpty
-                            ? Text(
-                                AppStrings.approvers,
-                                style: TextStyle(
-                                    fontFamily: FontConstants.fontFamily,
-                                    color: ColorManager.black,
-                                    fontSize: FontSize.s18,
-                                    fontWeight: FontWeight.w600),
-                              )
-                            : const SizedBox(),
+                        Text(
+                          cubit.myTimeOffPending[index].description,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              cubit.myTimeOffPending[index].holidayStatus,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge!
+                                  .copyWith(fontSize: 14),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: ColorManager.yellow,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                cubit.myTimeOffPending[index].state,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      color: ColorManager.orange,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
                         cubit.myTimeOffPending[index].approvers.isNotEmpty
                             ? const SizedBox(
-                                height: 10,
+                                height: 4,
                               )
                             : const SizedBox(),
-                        ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, ind) => Row(
+                        cubit.myTimeOffPending[index].approvers.isNotEmpty
+                            ? ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, ind) => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SvgPicture.asset(
-                                                IconsAssets.personIcon,
-                                                height: AppSize.s24,
-                                                color: ColorManager.skyColor,
-                                              ),
-                                              const SizedBox(
-                                                width: AppSize.s8,
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  cubit.myTimeOffPending[index]
-                                                      .approvers[ind].userName,
-                                                  style: TextStyle(
-                                                    fontFamily: FontConstants
-                                                        .fontFamily,
-                                                    color: ColorManager.primary,
-                                                    fontSize: FontSize.s16,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                              Text(
-                                                cubit.myTimeOffPending[index]
-                                                    .approvers[ind].state,
-                                                style: TextStyle(
-                                                  fontFamily:
-                                                      FontConstants.fontFamily,
-                                                  color: ColorManager.primary,
-                                                  fontSize: FontSize.s14,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
+                                    Text(
+                                      "${cubit.myTimeOffPending[index].approvers[ind].userName} - ${cubit.myTimeOffPending[index].approvers[ind].state}",
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    cubit.myTimeOffPending[index].approvers[ind]
+                                            .reason.isNotEmpty
+                                        ? Text(
                                             cubit.myTimeOffPending[index]
                                                 .approvers[ind].reason,
-                                            style: TextStyle(
-                                              fontFamily:
-                                                  FontConstants.fontFamily,
-                                              fontSize: FontSize.s14,
-                                              color: ColorManager.grey,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge!
+                                                .copyWith(
+                                                  color: ColorManager.darkGrey,
+                                                ),
+                                          )
+                                        : const SizedBox(),
                                   ],
                                 ),
-                            itemCount:
-                                cubit.myTimeOffPending[index].approvers.length),
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(
+                                  height: 8,
+                                ),
+                                itemCount: cubit
+                                    .myTimeOffPending[index].approvers.length,
+                              )
+                            : const SizedBox(),
                         const SizedBox(
                           height: 10,
                         ),
-                        ElevatedButtonCustom(
-                          fontSize: FontSize.s14,
-                          colors: ColorManager.error,
-                          borderColor: ColorManager.error,
-                          fontWeight: FontWeight.w800,
-                          width: double.infinity,
-                          text: 'Cancel Request',
-                          onPressed: () {
-                            cubit.cancelMyRequest(
-                                requestId: cubit.myTimeOffPending[index].id);
-                          },
+                        Align(
+                          alignment: AlignmentDirectional.center,
+                          child: ElevatedButtonCustom(
+                            fontSize: FontSize.s14,
+                            colors: ColorManager.error,
+                            borderColor: ColorManager.error,
+                            fontWeight: FontWeight.w800,
+                            width: MediaQuery.of(context).size.width / 4,
+                            text: AppStrings.cancel,
+                            onPressed: () {
+                              cubit.cancelMyRequest(
+                                  requestId: cubit.myTimeOffPending[index].id);
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -183,25 +180,91 @@ class PendingTimeWidget extends StatelessWidget {
                 )
               : state is GetMyTimeOffPendingLoading
                   ? ShimmerCustom(
-                      child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => const Column(
-                        children: [
-                          UserRequestWidget(
-                            iconPath: IconsAssets.emailIcon,
-                            text: AppStrings.message,
-                            subText: '',
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 20,
+                        ),
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorManager.lightGrey.withOpacity(.1),
+                                blurRadius: 10,
+                                offset: const Offset(0, 0),
+                              ),
+                            ],
                           ),
-                          UserRequestWidget(
-                            iconPath: IconsAssets.clockIcon,
-                            text: AppStrings.status,
-                            subText: 'Loading.....',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Oct 12, 2020 - Oct 12, 2020",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(fontSize: 16),
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                "Going on a vacation ",
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Annual Leave ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge!
+                                        .copyWith(fontSize: 14),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: ColorManager.yellow,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Text(
+                                      "Pending",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineMedium!
+                                          .copyWith(
+                                            color: ColorManager.orange,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                "Akhil Retnan - New",
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              )
+                            ],
                           ),
-                        ],
+                        ),
+                        itemCount: 10,
                       ),
-                      itemCount: 2,
-                    ))
+                    )
                   : ErrorsWidget(
                       onPress: () {
                         cubit.getMyTimeOffFun();

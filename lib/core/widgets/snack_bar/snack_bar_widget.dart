@@ -18,6 +18,6 @@ SnackBar snackBarWidget({
       borderRadius: BorderRadius.circular(5),
     ),
     margin: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height - 150, right: 20, left: 20),
+        bottom: MediaQuery.of(context).size.height - 200, right: 20, left: 20),
   );
 }

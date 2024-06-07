@@ -1,7 +1,6 @@
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/attendance/presentation/screens/all_attendance_screen.dart';
 import 'package:Attendace/features/attendance/presentation/screens/odd_punch_in.dart';
-import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/app_bar/app_bar_custom.dart';
 import '../../../../core/widgets/scaffold_custom/scaffold_custom.dart';
 import '../../../../core/widgets/tab_bar_custom/tab_bar_custom.dart';
@@ -16,13 +15,15 @@ class AttendanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: BlocProvider.of<AttendanceCubit>(context),
-      child: const ScaffoldCustom(
-        appBarCustom: AppBarCustom(
+      child: ScaffoldCustom(
+        appBarCustom: const AppBarCustom(
           text: AppStrings.myAttendance,
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p6),
-          child: SafeArea(
+        body: Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 40,
+          ),
+          child: const SafeArea(
             child: Column(
               children: [
                 SizedBox(

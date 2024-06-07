@@ -23,6 +23,7 @@ class ResponseModel {
   late String reason;
   late String state;
   late String date;
+  late double time;
   List<ApproversModel> approvers = [];
 
   ResponseModel();
@@ -33,6 +34,7 @@ class ResponseModel {
     reason = json["reason"];
     state = json["state"];
     date = json["date"];
+    time = json["time"];
     json["approvers"].forEach((element) {
       approvers.add(ApproversModel.fromJson(element));
     });

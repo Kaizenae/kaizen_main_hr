@@ -19,7 +19,7 @@ class LoginFormWidget extends StatelessWidget {
       children: [
         TextCustom(
           fontSize: FontSize.s14,
-          text: AppStrings.loginIdOrEmployeeCode,
+          text: AppStrings.email,
           textAlign: TextAlign.start,
           color: ColorManager.white,
         ),

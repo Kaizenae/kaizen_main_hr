@@ -22,7 +22,7 @@ class CustomHomeItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
-            color: ColorManager.skyColor.withOpacity(0.1),
+            color: ColorManager.purple.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(

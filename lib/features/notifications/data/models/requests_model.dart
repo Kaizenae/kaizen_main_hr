@@ -20,7 +20,6 @@ class ResponseModel {
   late int id;
   late String type;
   late String employeeName;
-  late int companyId;
   late int duration;
   late String state;
   late String reason;
@@ -34,7 +33,6 @@ class ResponseModel {
   ResponseModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     type = json["type"];
-    companyId = json["company_id"];
     reason = json["reason"];
     employeeName = json["employee_name"];
     duration = json["duration"];

@@ -1,3 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
+import 'dart:developer';
+
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/features/attendance/data/models/odd_punch_model.dart';
 import 'package:dartz/dartz.dart';
@@ -60,6 +64,10 @@ class AttendanceCubit extends Cubit<AttendanceState> {
       oddPunchModel = OddPunchModel.fromJson(value.data);
       emit(const GetOddPunchSuccessState());
     }).catchError((error) {
+      log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrorrrrrrrrrrrrrrrrrrrrrr $error");
+      if (error is DioError) {
+        log(error.response!.data.toString());
+      }
       emit(const GetOddPunchErrorState());
     });
   }

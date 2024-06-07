@@ -94,10 +94,9 @@ class _CreateLateInEarlyOutScreenState
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: ColorManager.textFormColor,
+                                      color: ColorManager.white,
                                       border: Border.all(
-                                          color: ColorManager.textFormColor,
-                                          width: 2),
+                                          color: ColorManager.white, width: 2),
                                     ),
                                     child: InkWell(
                                       onTap: () {
@@ -106,8 +105,13 @@ class _CreateLateInEarlyOutScreenState
                                           showDatePicker(
                                             context: context,
                                             initialDate: DateTime.now(),
-                                            firstDate: DateTime.now(),
-                                            lastDate: DateTime.now(),
+                                            firstDate: DateTime.now().subtract(
+                                                const Duration(days: 1000)),
+                                            lastDate: DateTime.now().add(
+                                              const Duration(
+                                                days: 1000,
+                                              ),
+                                            ),
                                           ).then(
                                             (value) {
                                               cubit.selectedDate =
@@ -116,10 +120,13 @@ class _CreateLateInEarlyOutScreenState
                                                           value.toString()));
 
                                               EarlyOutLateInCubit.get(context)
-                                                  .changeDate(DateFormat(
-                                                          "dd-MM-yyyy")
-                                                      .format(DateTime.parse(
-                                                          value.toString())));
+                                                  .changeDate(
+                                                DateFormat("dd-MM-yyyy").format(
+                                                  DateTime.parse(
+                                                    value.toString(),
+                                                  ),
+                                                ),
+                                              );
                                             },
                                           );
                                         } else if (widget.title ==
@@ -128,8 +135,12 @@ class _CreateLateInEarlyOutScreenState
                                             context: context,
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime.now().subtract(
-                                                const Duration(days: 1)),
-                                            lastDate: DateTime.now(),
+                                                const Duration(days: 1000)),
+                                            lastDate: DateTime.now().add(
+                                              const Duration(
+                                                days: 1000,
+                                              ),
+                                            ),
                                           ).then(
                                             (value) {
                                               cubit.selectedDate =
@@ -165,6 +176,68 @@ class _CreateLateInEarlyOutScreenState
                                       ),
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: AppSize.s10,
+                                  ),
+
+                                  TextCustom(
+                                    fontSize: FontSize.s14,
+                                    text: AppStrings.time,
+                                    color: ColorManager.textFormLabelColor,
+                                  ),
+                                  const SizedBox(
+                                    height: AppSize.s8,
+                                  ),
+                                  //Date
+                                  Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: ColorManager.white,
+                                      border: Border.all(
+                                          color: ColorManager.white, width: 2),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () {
+                                        showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay.now(),
+                                        ).then(
+                                          (value) {
+                                            cubit.selectedTime =
+                                                DateFormat("hh:mm")
+                                                    .format(DateTime(
+                                                        DateTime.now().year,
+                                                        DateTime.now().month,
+                                                        DateTime.now().day,
+                                                        value!.hour,
+                                                        value.minute))
+                                                    .toString();
+
+                                            setState(() {});
+                                          },
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextCustom(
+                                            text: cubit.selectedTime!,
+                                            color: ColorManager.black,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                          ),
+                                          SvgPicture.asset(
+                                            IconsAssets.calenderIcon,
+                                            width: 24,
+                                            height: 24,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
                                   const SizedBox(
                                     height: AppSize.s20,
                                   ),
@@ -206,10 +279,9 @@ class _CreateLateInEarlyOutScreenState
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: ColorManager.textFormColor,
+                                      color: ColorManager.white,
                                       border: Border.all(
-                                          color: ColorManager.textFormColor,
-                                          width: 2),
+                                          color: ColorManager.white, width: 2),
                                     ),
                                     child: InkWell(
                                       onTap: () async {

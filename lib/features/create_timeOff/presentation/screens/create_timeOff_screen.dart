@@ -88,7 +88,7 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                         return DropdownButtonHideUnderline(
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              color: ColorManager.textFormColor,
+                                              color: ColorManager.white,
                                               borderRadius:
                                                   BorderRadius.circular(
                                                 AppSize.s8,
@@ -256,10 +256,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: ColorManager.textFormColor,
+                                      color: ColorManager.white,
                                       border: Border.all(
-                                          color: ColorManager.textFormColor,
-                                          width: 2),
+                                          color: ColorManager.white, width: 2),
                                     ),
                                     child: InkWell(
                                       onTap: () {
@@ -321,10 +320,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: ColorManager.textFormColor,
+                                      color: ColorManager.white,
                                       border: Border.all(
-                                          color: ColorManager.textFormColor,
-                                          width: 2),
+                                          color: ColorManager.white, width: 2),
                                     ),
                                     child: InkWell(
                                       onTap: () {
@@ -408,10 +406,9 @@ class _CreateTimeOffScreenState extends State<CreateTimeOffScreen> {
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
-                                      color: ColorManager.textFormColor,
+                                      color: ColorManager.white,
                                       border: Border.all(
-                                          color: ColorManager.textFormColor,
-                                          width: 2),
+                                          color: ColorManager.white, width: 2),
                                     ),
                                     child: InkWell(
                                       onTap: () async {

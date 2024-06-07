@@ -38,7 +38,9 @@ dependencies:
   image_picker: ^1.0.7
   path_provider: ^2.1.2
   open_file: ^3.3.2
-  video_player: ^2.8.2
+  device_preview: ^1.2.0
+  google_maps_flutter: ^2.6.1
+  geolocator: ^12.0.0
 
 dev_dependencies:
 
@@ -55,18 +57,18 @@ flutter:
      - assets/images/
 
   fonts:
-    - family: Visby
+    - family: VisbyCF
       fonts:
-        - asset: assets/fonts/VisbyLight.otf
-          weight: 300
-        - asset: assets/fonts/VisbyBold.otf
+        - asset: assets/fonts/VisbyCF-ExtraBold.otf
+          weight: 800
+        - asset: assets/fonts/VisbyCF-Bold.otf
           weight: 700
-        - asset: assets/fonts/VisbyMedium.otf
-          weight: 500
-        - asset: assets/fonts/VisbyRegular.otf
-          weight: 400
-        - asset: assets/fonts/VisbySemibold.otf
+        - asset: assets/fonts/VisbyCF-Medium.otf
           weight: 600
+        - asset: assets/fonts/VisbyCF-Regular.otf
+          weight: 500
+        - asset: assets/fonts/VisbyCF-Heavy.otf
+          weight: 900
        
   # fonts:
   #   - family: Schyler
