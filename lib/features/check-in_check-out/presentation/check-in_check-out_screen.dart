@@ -1,12 +1,9 @@
 // ignore_for_file: file_names, use_build_context_synchronously
 
 import 'dart:async';
-import 'dart:developer';
 
-import 'package:Attendace/core/local/cache_helper.dart';
 import 'package:Attendace/core/services/location_services.dart';
 import 'package:Attendace/core/utils/color_manager.dart';
-import 'package:Attendace/core/utils/constants_manager.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/check-in_check-out/controller/bloc.dart';
 import 'package:Attendace/features/check-in_check-out/controller/states.dart';
@@ -88,7 +85,6 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
           }
         },
         builder: (context, state) {
-          log(state.toString());
           return Stack(
             children: [
               SizedBox(
