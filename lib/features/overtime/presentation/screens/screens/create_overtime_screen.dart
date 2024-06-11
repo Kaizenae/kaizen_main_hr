@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:Attendace/core/utils/assets_manager.dart';
 import 'package:Attendace/core/utils/color_manager.dart';
 import 'package:Attendace/core/utils/font_manager.dart';

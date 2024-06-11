@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
 import 'package:Attendace/features/check-in_check-out/model/location_model.dart';
@@ -34,7 +31,6 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
 
     var c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     var d = R * c; // Distance in km
-    log(d.toInt().toString());
     return d.toInt();
   }
 
@@ -59,7 +55,6 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
         }
       },
     ).then((value) {
-      log(value.data.toString());
       emit(CheckInCheckOutSuccessState(
           message: value.data["result"]["message"]));
     }).catchError((error) {
@@ -92,13 +87,11 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
         "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
       }
     }).then((value) {
-      log(value.data.toString());
       locationModel = LocationModel.fromJson(value.data);
       lat = locationModel.result.responseModel.latitude.toDouble();
       long = locationModel.result.responseModel.longitude.toDouble();
       emit(GetCompanyLocationSuccessState());
     }).catchError((error) {
-      log(error.toString());
       emit(GetCompanyLocationErrorState());
     });
   }
