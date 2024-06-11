@@ -9,6 +9,7 @@ import 'dart:math' as math;
 import '../../../core/local/cache_helper.dart';
 import '../../../core/services/location_services.dart';
 import '../../../core/utils/constants_manager.dart';
+import '../model/check_in_check_out_model.dart';
 import 'states.dart';
 
 class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
@@ -55,6 +56,7 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
         }
       },
     ).then((value) {
+      getLastChecking();
       emit(CheckInCheckOutSuccessState(
           message: value.data["result"]["message"]));
     }).catchError((error) {
@@ -93,6 +95,21 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
       emit(GetCompanyLocationSuccessState());
     }).catchError((error) {
       emit(GetCompanyLocationErrorState());
+    });
+  }
+
+  CheckInCheckOutModel checkInCheckOutModel = CheckInCheckOutModel();
+  void getLastChecking() {
+    Dio().get(EndPoints.getLastCheckingPath, data: {
+      "jsonrpc": "2.0",
+      "params": {
+        "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
+      }
+    }).then((value) {
+      checkInCheckOutModel = CheckInCheckOutModel.fromJson(value.data);
+      emit(GetLastCheckingSuccessState());
+    }).catchError((error) {
+      emit(GetLastCheckingErrorState());
     });
   }
 }

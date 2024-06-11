@@ -65,4 +65,5 @@ class EndPoints {
   static String getlocationPath = "$baseUrl/get_location";
   static String createOvertimePath = "$baseUrl/overtime_request";
   static String getOvertimePath = "$baseUrl/get_all_overtime";
+  static String getLastCheckingPath = "$baseUrl/last_check_in_check_out";
 }

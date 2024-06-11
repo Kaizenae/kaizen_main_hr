@@ -21,3 +21,9 @@ class GetCompanyLocationLoadingState extends CheckInCheckOutStates {}
 class GetCompanyLocationSuccessState extends CheckInCheckOutStates {}
 
 class GetCompanyLocationErrorState extends CheckInCheckOutStates {}
+
+class GetLastCheckingLoadingState extends CheckInCheckOutStates {}
+
+class GetLastCheckingSuccessState extends CheckInCheckOutStates {}
+
+class GetLastCheckingErrorState extends CheckInCheckOutStates {}

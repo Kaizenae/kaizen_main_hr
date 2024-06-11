@@ -73,7 +73,9 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CheckInCheckOutBloc()..getCompanyLocation(),
+      create: (context) => CheckInCheckOutBloc()
+        ..getCompanyLocation()
+        ..getLastChecking(),
       child: BlocConsumer<CheckInCheckOutBloc, CheckInCheckOutStates>(
         listener: (context, state) {
           if (state is CheckInCheckOutSuccessState) {
@@ -227,9 +229,10 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () async {
-                                            if (CacheHelper.get(
-                                                    key: AppConstants
-                                                        .checkInOrCheckOut) !=
+                                            if (CheckInCheckOutBloc.get(context)
+                                                    .checkInCheckOutModel
+                                                    .result
+                                                    .checking !=
                                                 true) {
                                               await CheckInCheckOutBloc.get(
                                                       context)
@@ -243,13 +246,6 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                                   .checked) {
                                                 CheckInCheckOutBloc.get(context)
                                                     .checkInCheckOut();
-                                                if (state
-                                                    is CheckInCheckOutSuccessState) {
-                                                  CacheHelper.put(
-                                                      key: AppConstants
-                                                          .checkInOrCheckOut,
-                                                      value: true);
-                                                }
                                               } else {
                                                 showDialog(
                                                   context: context,
@@ -304,9 +300,11 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                                   offset: const Offset(0, 0),
                                                 ),
                                               ],
-                                              color: CacheHelper.get(
-                                                          key: AppConstants
-                                                              .checkInOrCheckOut) ==
+                                              color: CheckInCheckOutBloc.get(
+                                                              context)
+                                                          .checkInCheckOutModel
+                                                          .result
+                                                          .checking ==
                                                       true
                                                   ? ColorManager.white
                                                   : ColorManager.darkPurple,
@@ -317,19 +315,22 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                               children: [
                                                 Text(
                                                   AppStrings.check_in,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headlineLarge!
-                                                      .copyWith(
-                                                        color: CacheHelper.get(
-                                                                    key: AppConstants
-                                                                        .checkInOrCheckOut) ==
-                                                                true
-                                                            ? ColorManager
-                                                                .lightGrey
-                                                            : ColorManager
-                                                                .white,
-                                                      ),
+                                                  style:
+                                                      Theme.of(context)
+                                                          .textTheme
+                                                          .headlineLarge!
+                                                          .copyWith(
+                                                            color: CheckInCheckOutBloc.get(
+                                                                            context)
+                                                                        .checkInCheckOutModel
+                                                                        .result
+                                                                        .checking ==
+                                                                    true
+                                                                ? ColorManager
+                                                                    .lightGrey
+                                                                : ColorManager
+                                                                    .white,
+                                                          ),
                                                 ),
                                                 const SizedBox(
                                                   height: 10,
@@ -357,9 +358,10 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                       Expanded(
                                         child: GestureDetector(
                                           onTap: () async {
-                                            if (CacheHelper.get(
-                                                    key: AppConstants
-                                                        .checkInOrCheckOut) ==
+                                            if (CheckInCheckOutBloc.get(context)
+                                                    .checkInCheckOutModel
+                                                    .result
+                                                    .checking ==
                                                 true) {
                                               await CheckInCheckOutBloc.get(
                                                       context)
@@ -373,13 +375,6 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                                   .checked) {
                                                 CheckInCheckOutBloc.get(context)
                                                     .checkInCheckOut();
-                                                if (state
-                                                    is CheckInCheckOutSuccessState) {
-                                                  CacheHelper.put(
-                                                      key: AppConstants
-                                                          .checkInOrCheckOut,
-                                                      value: false);
-                                                }
                                               } else {
                                                 showDialog(
                                                   context: context,
@@ -434,9 +429,11 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                                   offset: const Offset(0, 0),
                                                 ),
                                               ],
-                                              color: CacheHelper.get(
-                                                          key: AppConstants
-                                                              .checkInOrCheckOut) !=
+                                              color: CheckInCheckOutBloc.get(
+                                                              context)
+                                                          .checkInCheckOutModel
+                                                          .result
+                                                          .checking !=
                                                       true
                                                   ? ColorManager.white
                                                   : ColorManager.darkPurple,
@@ -447,19 +444,22 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                               children: [
                                                 Text(
                                                   AppStrings.check_out,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .headlineLarge!
-                                                      .copyWith(
-                                                        color: CacheHelper.get(
-                                                                    key: AppConstants
-                                                                        .checkInOrCheckOut) !=
-                                                                true
-                                                            ? ColorManager
-                                                                .lightGrey
-                                                            : ColorManager
-                                                                .white,
-                                                      ),
+                                                  style:
+                                                      Theme.of(context)
+                                                          .textTheme
+                                                          .headlineLarge!
+                                                          .copyWith(
+                                                            color: CheckInCheckOutBloc.get(
+                                                                            context)
+                                                                        .checkInCheckOutModel
+                                                                        .result
+                                                                        .checking !=
+                                                                    true
+                                                                ? ColorManager
+                                                                    .lightGrey
+                                                                : ColorManager
+                                                                    .white,
+                                                          ),
                                                 ),
                                                 const SizedBox(
                                                   height: 10,

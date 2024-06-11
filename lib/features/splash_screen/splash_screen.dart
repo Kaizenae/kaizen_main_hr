@@ -25,15 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      navigatorAndRemove(
-        context,
-        EndPoints.baseUrl.isEmpty
-            ? Routes.baseUrlRoute
-            : AppConstants.token == AppStrings.empty || AppConstants.token == 0
-                ? Routes.loginRoute
-                : Routes.homeRoute,
-      );
+    Future.delayed(const Duration(seconds: 4), () {
+      _nextScreen();
 
       // navigatorAndRemove(context, Routes.localAuthRoute);
     });
