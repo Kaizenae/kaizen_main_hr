@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:Attendace/core/api/end_points.dart';
 import 'package:Attendace/core/utils/strings_manager.dart';
@@ -33,7 +34,7 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
 
     var c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
     var d = R * c; // Distance in km
-
+    log(d.toInt().toString());
     return d.toInt();
   }
 
@@ -54,10 +55,11 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
       data: {
         "jsonrpc": "2.0",
         "params": {
-          "user_id": CacheHelper.get(key: AppConstants.userId).toString(),
+          "user_id": int.parse(CacheHelper.get(key: AppConstants.userId)),
         }
       },
     ).then((value) {
+      log(value.data.toString());
       emit(CheckInCheckOutSuccessState(
           message: value.data["result"]["message"]));
     }).catchError((error) {
@@ -74,7 +76,7 @@ class CheckInCheckOutBloc extends Cubit<CheckInCheckOutStates> {
   Future<void> checkDistance({required latitude, required longitude}) async {
     if (await getDistanceFromLatLonInMeter(
             latitude: latitude, longitude: longitude) <=
-        20) {
+        250) {
       checked = true;
     } else {
       checked = false;

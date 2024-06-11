@@ -217,4 +217,6 @@ class AppStrings {
       "Go to the required location, and you can reapply/request again";
   static const String YouAreOutSide =
       "You are outside the required area for your presence.";
+  static const String pleaseEnterDescriptionField =
+      "Please Enter The Description for Over time";
 }

@@ -53,17 +53,6 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
 
   Widget buildMap() {
     return GoogleMap(
-      markers: {
-        Marker(
-          markerId: const MarkerId(
-            "My Location",
-          ),
-          position: LatLng(
-            position!.latitude,
-            position!.longitude,
-          ),
-        ),
-      },
       initialCameraPosition: initialCameraPosition,
       mapType: MapType.normal,
       myLocationEnabled: true,
@@ -86,7 +75,16 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
     return BlocProvider(
       create: (context) => CheckInCheckOutBloc()..getCompanyLocation(),
       child: BlocConsumer<CheckInCheckOutBloc, CheckInCheckOutStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is CheckInCheckOutSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
+            Navigator.pop(context);
+          } else if (state is CheckInCheckOutErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(snackBarWidget(
+                message: state.message.toString(), context: context));
+          }
+        },
         builder: (context, state) {
           log(state.toString());
           return Stack(
@@ -218,338 +216,386 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () async {
-                                  if (CacheHelper.get(
-                                          key:
-                                              AppConstants.checkInOrCheckOut) !=
-                                      true) {
-                                    await CheckInCheckOutBloc.get(context)
-                                        .checkDistance(
-                                            latitude: position!.latitude,
-                                            longitude: position!.longitude);
-                                    if (CheckInCheckOutBloc.get(context)
-                                        .checked) {
-                                      CheckInCheckOutBloc.get(context)
-                                          .checkInCheckOut();
-                                      CacheHelper.put(
-                                          key: AppConstants.checkInOrCheckOut,
-                                          value: true);
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (_) => AlertDialog(
-                                          title: const Text(
-                                            AppStrings.YouAreOutSide,
-                                          ),
-                                          content: const Text(
-                                            AppStrings.goToTheRequiredLocation,
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text(AppStrings.ok),
-                                            )
-                                          ],
-                                        ),
-                                        barrierDismissible: false,
-                                      );
-                                    }
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      snackBarWidget(
-                                          message: AppStrings
-                                              .youAreAlreadyCheckingIn,
-                                          context: context),
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  height: 110,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 14,
-                                    vertical: 16,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      26,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: ColorManager.lightGrey
-                                            .withOpacity(.5),
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 0),
-                                      ),
-                                    ],
-                                    color: CacheHelper.get(
-                                                key: AppConstants
-                                                    .checkInOrCheckOut) ==
-                                            true
-                                        ? ColorManager.white
-                                        : ColorManager.darkPurple,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                        state is CheckInCheckOutLoadingState
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : Column(
+                                children: [
+                                  Row(
                                     children: [
-                                      Text(
-                                        AppStrings.check_in,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge!
-                                            .copyWith(
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            if (CacheHelper.get(
+                                                    key: AppConstants
+                                                        .checkInOrCheckOut) !=
+                                                true) {
+                                              await CheckInCheckOutBloc.get(
+                                                      context)
+                                                  .checkDistance(
+                                                      latitude:
+                                                          position!.latitude,
+                                                      longitude:
+                                                          position!.longitude);
+                                              if (CheckInCheckOutBloc.get(
+                                                      context)
+                                                  .checked) {
+                                                CheckInCheckOutBloc.get(context)
+                                                    .checkInCheckOut();
+                                                if (state
+                                                    is CheckInCheckOutSuccessState) {
+                                                  CacheHelper.put(
+                                                      key: AppConstants
+                                                          .checkInOrCheckOut,
+                                                      value: true);
+                                                }
+                                              } else {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) => AlertDialog(
+                                                    title: const Text(
+                                                      AppStrings.YouAreOutSide,
+                                                    ),
+                                                    content: const Text(
+                                                      AppStrings
+                                                          .goToTheRequiredLocation,
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text(
+                                                            AppStrings.ok),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  barrierDismissible: false,
+                                                );
+                                              }
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                snackBarWidget(
+                                                    message: AppStrings
+                                                        .youAreAlreadyCheckingIn,
+                                                    context: context),
+                                              );
+                                            }
+                                          },
+                                          child: Container(
+                                            height: 110,
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 14,
+                                              vertical: 16,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                26,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorManager.lightGrey
+                                                      .withOpacity(.5),
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 0),
+                                                ),
+                                              ],
                                               color: CacheHelper.get(
                                                           key: AppConstants
                                                               .checkInOrCheckOut) ==
                                                       true
-                                                  ? ColorManager.lightGrey
-                                                  : ColorManager.white,
+                                                  ? ColorManager.white
+                                                  : ColorManager.darkPurple,
                                             ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "09:30:21 AM",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                                color: ColorManager.lightGrey),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () async {
-                                  if (CacheHelper.get(
-                                          key:
-                                              AppConstants.checkInOrCheckOut) ==
-                                      true) {
-                                    await CheckInCheckOutBloc.get(context)
-                                        .checkDistance(
-                                            latitude: position!.latitude,
-                                            longitude: position!.longitude);
-                                    if (CheckInCheckOutBloc.get(context)
-                                        .checked) {
-                                      CheckInCheckOutBloc.get(context)
-                                          .checkInCheckOut();
-                                      CacheHelper.put(
-                                          key: AppConstants.checkInOrCheckOut,
-                                          value: false);
-                                    } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (_) => AlertDialog(
-                                          title: const Text(
-                                            AppStrings.YouAreOutSide,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  AppStrings.check_in,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineLarge!
+                                                      .copyWith(
+                                                        color: CacheHelper.get(
+                                                                    key: AppConstants
+                                                                        .checkInOrCheckOut) ==
+                                                                true
+                                                            ? ColorManager
+                                                                .lightGrey
+                                                            : ColorManager
+                                                                .white,
+                                                      ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  "09:30:21 AM",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineMedium!
+                                                      .copyWith(
+                                                          color: ColorManager
+                                                              .lightGrey),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          content: const Text(
-                                            AppStrings.goToTheRequiredLocation,
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: const Text(AppStrings.ok),
-                                            )
-                                          ],
                                         ),
-                                        barrierDismissible: false,
-                                      );
-                                    }
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      snackBarWidget(
-                                          message: AppStrings
-                                              .youAreAlreadyCheckingOut,
-                                          context: context),
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  height: 110,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 14,
-                                    vertical: 16,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      26,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: ColorManager.lightGrey
-                                            .withOpacity(.5),
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 0),
                                       ),
-                                    ],
-                                    color: CacheHelper.get(
-                                                key: AppConstants
-                                                    .checkInOrCheckOut) !=
-                                            true
-                                        ? ColorManager.white
-                                        : ColorManager.darkPurple,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        AppStrings.check_out,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineLarge!
-                                            .copyWith(
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            if (CacheHelper.get(
+                                                    key: AppConstants
+                                                        .checkInOrCheckOut) ==
+                                                true) {
+                                              await CheckInCheckOutBloc.get(
+                                                      context)
+                                                  .checkDistance(
+                                                      latitude:
+                                                          position!.latitude,
+                                                      longitude:
+                                                          position!.longitude);
+                                              if (CheckInCheckOutBloc.get(
+                                                      context)
+                                                  .checked) {
+                                                CheckInCheckOutBloc.get(context)
+                                                    .checkInCheckOut();
+                                                if (state
+                                                    is CheckInCheckOutSuccessState) {
+                                                  CacheHelper.put(
+                                                      key: AppConstants
+                                                          .checkInOrCheckOut,
+                                                      value: false);
+                                                }
+                                              } else {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (_) => AlertDialog(
+                                                    title: const Text(
+                                                      AppStrings.YouAreOutSide,
+                                                    ),
+                                                    content: const Text(
+                                                      AppStrings
+                                                          .goToTheRequiredLocation,
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text(
+                                                            AppStrings.ok),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  barrierDismissible: false,
+                                                );
+                                              }
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                snackBarWidget(
+                                                    message: AppStrings
+                                                        .youAreAlreadyCheckingOut,
+                                                    context: context),
+                                              );
+                                            }
+                                          },
+                                          child: Container(
+                                            height: 110,
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 14,
+                                              vertical: 16,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                26,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorManager.lightGrey
+                                                      .withOpacity(.5),
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 0),
+                                                ),
+                                              ],
                                               color: CacheHelper.get(
                                                           key: AppConstants
                                                               .checkInOrCheckOut) !=
                                                       true
-                                                  ? ColorManager.lightGrey
-                                                  : ColorManager.white,
+                                                  ? ColorManager.white
+                                                  : ColorManager.darkPurple,
                                             ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "--:--",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                                color: ColorManager.lightGrey),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  AppStrings.check_out,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineLarge!
+                                                      .copyWith(
+                                                        color: CacheHelper.get(
+                                                                    key: AppConstants
+                                                                        .checkInOrCheckOut) !=
+                                                                true
+                                                            ? ColorManager
+                                                                .lightGrey
+                                                            : ColorManager
+                                                                .white,
+                                                      ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  "--:--",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineMedium!
+                                                      .copyWith(
+                                                          color: ColorManager
+                                                              .lightGrey),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 110,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      26,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: ColorManager.lightGrey
-                                            .withOpacity(.5),
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 0),
-                                      ),
-                                    ],
-                                    color: ColorManager.white),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Smoke breake start",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge!
-                                          .copyWith(
-                                              color: ColorManager.lightGrey),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "--:--",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineMedium!
-                                          .copyWith(
-                                              color: ColorManager.lightGrey),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 110,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 14,
-                                  vertical: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      26,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: ColorManager.lightGrey
-                                            .withOpacity(.5),
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 0),
-                                      ),
-                                    ],
-                                    color: ColorManager.white),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Smoke breake End",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge!
-                                          .copyWith(
-                                            color: ColorManager.lightGrey,
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          height: 110,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 14,
+                                            vertical: 16,
                                           ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "--:--",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineMedium!
-                                          .copyWith(
-                                              color: ColorManager.lightGrey),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        )
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                26,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorManager.lightGrey
+                                                      .withOpacity(.5),
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 0),
+                                                ),
+                                              ],
+                                              color: ColorManager.white),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Smoke breake start",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineLarge!
+                                                    .copyWith(
+                                                        color: ColorManager
+                                                            .lightGrey),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "--:--",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineMedium!
+                                                    .copyWith(
+                                                        color: ColorManager
+                                                            .lightGrey),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          height: 110,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 14,
+                                            vertical: 16,
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                26,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: ColorManager.lightGrey
+                                                      .withOpacity(.5),
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 0),
+                                                ),
+                                              ],
+                                              color: ColorManager.white),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Smoke breake End",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineLarge!
+                                                    .copyWith(
+                                                      color: ColorManager
+                                                          .lightGrey,
+                                                    ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                "--:--",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineMedium!
+                                                    .copyWith(
+                                                        color: ColorManager
+                                                            .lightGrey),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )
                       ],
                     ),
                   ),

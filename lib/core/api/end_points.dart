@@ -63,4 +63,6 @@ class EndPoints {
   static String getVersionCodePath = "$baseUrl/get_version";
   static String checkInCheckOutPath = "$baseUrl/check_in_check_out";
   static String getlocationPath = "$baseUrl/get_location";
+  static String createOvertimePath = "$baseUrl/overtime_request";
+  static String getOvertimePath = "$baseUrl/get_all_overtime";
 }
