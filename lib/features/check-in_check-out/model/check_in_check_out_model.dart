@@ -7,7 +7,7 @@ class CheckInCheckOutModel {
 }
 
 class Result {
-  late bool checking;
+  bool? checking;
   Result();
   Result.fromJson(Map<String, dynamic> json) {
     checking = json["checking"];
