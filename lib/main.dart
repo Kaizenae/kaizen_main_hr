@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl<CurrencyCubit>()),
         BlocProvider(create: (context) => sl<MyTimeOffCubit>()),
         BlocProvider(create: (context) => sl<TimeOffCubit>()),
-        BlocProvider(create: (context) => RequestsBloc()),
+        // BlocProvider(create: (context) => RequestsBloc()),
         BlocProvider(create: (context) => sl<EditProfileCubit>()),
         BlocProvider(create: (context) => sl<EditCompanyCubit>()),
         BlocProvider(create: (context) => sl<CreateTimeOffCubit>()),
