@@ -63,88 +63,85 @@ class HomeScreen extends StatelessWidget {
                               width: 150,
                             ),
                             const Spacer(),
-                            // AppConstants.admin
-                            //     ? BlocProvider.value(
-                            //         value:
-                            //             BlocProvider.of<RequestsBloc>(context)
-                            //               ..getRequests(),
-                            //         child: IconButton(
-                            //           onPressed: () {
-                            //             Navigator.of(context).push(
-                            //               SlideTranstion(
-                            //                 page: const NotificationsScreen(),
-                            //               ),
-                            //             );
-                            //           },
-                            //           icon: Stack(
-                            //             clipBehavior: Clip.none,
-                            //             children: [
-                            //               SvgPictureCustom(
-                            //                 assetsName:
-                            //                     IconsAssets.notificationIcon,
-                            //                 color: ColorManager.grey1,
-                            //               ),
-                            //               Positioned(
-                            //                 top: -10,
-                            //                 left: 9,
-                            //                 child: BlocBuilder<RequestsBloc,
-                            //                     RequestsStates>(
-                            //                   builder: (context, state) {
-                            //                     return RequestsBloc.get(context)
-                            //                             .pendingRequests
-                            //                             .isNotEmpty
-                            //                         ? Container(
-                            //                             clipBehavior: Clip
-                            //                                 .antiAliasWithSaveLayer,
-                            //                             padding:
-                            //                                 const EdgeInsets
-                            //                                     .symmetric(
-                            //                                     horizontal: 5),
-                            //                             decoration:
-                            //                                 BoxDecoration(
-                            //                               borderRadius:
-                            //                                   BorderRadius
-                            //                                       .circular(8),
-                            //                               color: ColorManager
-                            //                                   .error,
-                            //                               shape: BoxShape
-                            //                                   .rectangle,
-                            //                             ),
-                            //                             child: Text(
-                            //                               RequestsBloc.get(
-                            //                                               context)
-                            //                                           .pendingRequests
-                            //                                           .length >=
-                            //                                       100
-                            //                                   ? "+99"
-                            //                                   : RequestsBloc.get(
-                            //                                           context)
-                            //                                       .pendingRequests
-                            //                                       .length
-                            //                                       .toString(),
-                            //                               style: TextStyle(
-                            //                                   color:
-                            //                                       ColorManager
-                            //                                           .white,
-                            //                                   fontFamily:
-                            //                                       FontConstants
-                            //                                           .fontFamily,
-                            //                                   fontSize:
-                            //                                       FontSize.s14),
-                            //                             ),
-                            //                           )
-                            //                         : const SizedBox();
-                            //                   },
-                            //                 ),
-                            //               ),
-                            //             ],
-                            //           ),
-                            //         ),
-                            //       )
-                            //     : const SizedBox.shrink(),
-                            // const SizedBox(
-                            //   width: 16,
-                            // ),
+                            AppConstants.admin
+                                ? BlocProvider.value(
+                                    value:
+                                        BlocProvider.of<RequestsBloc>(context)
+                                          ..getRequests(),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          SlideTranstion(
+                                            page: const NotificationsScreen(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Stack(
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          SvgPictureCustom(
+                                            assetsName:
+                                                IconsAssets.notificationIcon,
+                                            color: ColorManager.grey1,
+                                          ),
+                                          Positioned(
+                                            top: -10,
+                                            left: 9,
+                                            child: BlocBuilder<RequestsBloc,
+                                                RequestsStates>(
+                                              builder: (context, state) {
+                                                return
+                                                    // RequestsBloc.get(context)
+                                                    //         .pendingRequests
+                                                    //         .isNotEmpty
+                                                    //     ?
+                                                    Container(
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 5),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    color: ColorManager.error,
+                                                    shape: BoxShape.rectangle,
+                                                  ),
+                                                  child: Text(
+                                                    // RequestsBloc.get(
+                                                    //                 context)
+                                                    //             .pendingRequests
+                                                    //             .length >=
+                                                    //         100
+                                                    //     ?
+                                                    "+99"
+                                                    // : RequestsBloc.get(
+                                                    //         context)
+                                                    //     .pendingRequests
+                                                    //     .length
+                                                    //     .toString(),
+                                                    ,
+                                                    style: TextStyle(
+                                                        color:
+                                                            ColorManager.white,
+                                                        fontFamily:
+                                                            FontConstants
+                                                                .fontFamily,
+                                                        fontSize: FontSize.s14),
+                                                  ),
+                                                );
+                                                // : const SizedBox();
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                            const SizedBox(
+                              width: 16,
+                            ),
                             BlocProvider.value(
                               value: BlocProvider.of<ProfileCubit>(context)
                                 ..getEmployeeFun(),
