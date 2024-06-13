@@ -13,7 +13,9 @@ import '../../../../core/widgets/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/values_manager.dart';
+import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
+import '../../../login/presentation/screens/login_screen.dart';
 import '../cubit/profile_cubit.dart';
 import '../cubit/profile_state.dart';
 import 'profile_component.dart';
@@ -201,10 +203,51 @@ class ProfileCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppSize.s10)),
                   child: Column(
                     children: [
-                      const ProfileComponent(
-                        iconName: IconsAssets.lockIcon,
-                        name: AppStrings.changePassword,
-                        screen: Routes.changePasswordRoute,
+                      // const ProfileComponent(
+                      //   iconName: IconsAssets.lockIcon,
+                      //   name: AppStrings.changePassword,
+                      //   screen: Routes.changePasswordRoute,
+                      // ),
+                      // const Divider(),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => const AlertDialog(
+                              title: Text('Delete Account'),
+                              content: Text(
+                                  'A request will be made to delete your account and all your data'),
+                            ),
+                          );
+                          Future.delayed(const Duration(milliseconds: 1500))
+                              .then((value) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()));
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppPadding.p6),
+                          child: Row(
+                            children: [
+                              const SvgPictureCustom(
+                                assetsName: IconsAssets.attendIcon,
+                                color: ColorManager.primary,
+                              ),
+                              const SizedBox(
+                                width: AppSize.s16,
+                              ),
+                              TextCustom(
+                                text: AppStrings.deleteAccount,
+                                fontWeight: FontWeight.w200,
+                                fontSize: FontSize.s16,
+                                color: ColorManager.primary,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       const Divider(),
                       const ProfileComponent(

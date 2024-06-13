@@ -164,14 +164,19 @@ class AllAtendanceScreen extends StatelessWidget {
                                                             .response[index]
                                                             .checkIn !=
                                                         ''
-                                                    ? DateFormat('hh: mm a').format(
+                                                    ? DateFormat('hh: mm a')
+                                                        .format(
                                                         DateTime.parse(state
                                                                 .attendanceEntity
                                                                 .resultEntity
                                                                 .response[index]
                                                                 .checkIn)
-                                                            .add(const Duration(
-                                                                hours: 4)))
+                                                            .add(
+                                                          const Duration(
+                                                            hours: 3,
+                                                          ),
+                                                        ),
+                                                      )
                                                     : '00: 00',
                                                 style: Theme.of(context)
                                                     .textTheme
@@ -212,15 +217,19 @@ class AllAtendanceScreen extends StatelessWidget {
                                                             .response[index]
                                                             .checkOut !=
                                                         ''
-                                                    ? DateFormat('hh: mm a').format(
+                                                    ? DateFormat('hh: mm a')
+                                                        .format(
                                                         DateTime.tryParse(state
                                                                 .attendanceEntity
                                                                 .resultEntity
                                                                 .response[index]
                                                                 .checkOut)!
-                                                            .add(const Duration(
-                                                                hours:
-                                                                    4))) // we need add duration about 4 hours to set time in UAE becuse we recive time in UTC time zone
+                                                            .add(
+                                                          const Duration(
+                                                            hours: 3,
+                                                          ),
+                                                        ),
+                                                      ) // we need add duration about 3 hours to set time in UAE becuse we recive time in UTC time zone
                                                     : '00: 00',
                                                 style: Theme.of(context)
                                                     .textTheme

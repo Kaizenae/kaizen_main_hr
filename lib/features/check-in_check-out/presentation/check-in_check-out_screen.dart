@@ -209,18 +209,18 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                             .copyWith(
                                                 color: ColorManager.grey1),
                                       ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        "Al Reem Island - Najmat Abu Dhabi - Abu Dhabi",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                                color: ColorManager.grey1),
-                                        textAlign: TextAlign.center,
-                                      ),
+                                      // const SizedBox(
+                                      //   height: 10,
+                                      // ),
+                                      // Text(
+                                      //   "Al Reem Island - Najmat Abu Dhabi - Abu Dhabi",
+                                      //   style: Theme.of(context)
+                                      //       .textTheme
+                                      //       .headlineMedium!
+                                      //       .copyWith(
+                                      //           color: ColorManager.grey1),
+                                      //   textAlign: TextAlign.center,
+                                      // ),
                                     ],
                                   );
                                 },
@@ -358,7 +358,7 @@ class _CheckInCheckOutScreenState extends State<CheckInCheckOutScreen> {
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "09:30:21 AM",
+                                                        "--:--",
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .headlineMedium!

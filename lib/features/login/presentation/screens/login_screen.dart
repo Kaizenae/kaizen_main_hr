@@ -117,19 +117,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     text: AppStrings.login,
                                   ),
                           ),
-                          Center(
-                            child: TextButton(
-                              onPressed: () {
-                                navigator(context, Routes.forgetPasswordRoute);
-                              },
-                              child: TextCustom(
-                                color: ColorManager.white,
-                                fontSize: FontSize.s14,
-                                fontWeight: FontWeight.w600,
-                                text: AppStrings.forgetPassword,
-                              ),
-                            ),
-                          ),
+                          // Center(
+                          //   child: TextButton(
+                          //     onPressed: () {
+                          //       navigator(context, Routes.forgetPasswordRoute);
+                          //     },
+                          //     child: TextCustom(
+                          //       color: ColorManager.white,
+                          //       fontSize: FontSize.s14,
+                          //       fontWeight: FontWeight.w600,
+                          //       text: AppStrings.forgetPassword,
+                          //     ),
+                          //   ),
+                          // ),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

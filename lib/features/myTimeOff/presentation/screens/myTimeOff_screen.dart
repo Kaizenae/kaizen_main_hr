@@ -104,26 +104,26 @@ class MyTimeOffScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.w900,
                                               ),
                                             ),
-                                            FittedBox(
-                                              fit: BoxFit.scaleDown,
-                                              child: TextCustom(
-                                                text: " / 40",
-                                                color: ColorManager.darkGrey,
-                                                fontSize: FontSize.s16,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
+                                            // FittedBox(
+                                            //   fit: BoxFit.scaleDown,
+                                            //   child: TextCustom(
+                                            //     text: " / 40",
+                                            //     color: ColorManager.darkGrey,
+                                            //     fontSize: FontSize.s16,
+                                            //     fontWeight: FontWeight.w500,
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
-                                        FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: TextCustom(
-                                            text: AppStrings.days,
-                                            color: ColorManager.darkGrey,
-                                            fontSize: FontSize.s12,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
+                                        // FittedBox(
+                                        //   fit: BoxFit.scaleDown,
+                                        //   child: TextCustom(
+                                        //     text: AppStrings.days,
+                                        //     color: ColorManager.darkGrey,
+                                        //     fontSize: FontSize.s12,
+                                        //     fontWeight: FontWeight.w500,
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   );

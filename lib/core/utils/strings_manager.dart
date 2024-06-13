@@ -219,4 +219,5 @@ class AppStrings {
       "You are outside the required area for your presence.";
   static const String pleaseEnterDescriptionField =
       "Please Enter The Description for Over time";
+  static const String deleteAccount = "Delete Account";
 }
