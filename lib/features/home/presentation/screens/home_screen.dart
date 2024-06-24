@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/services/animation/slide_transtion.dart';
 import '../../../../core/utils/constants_manager.dart';
-import '../../../../core/widgets/svg_pic/svg_pic.dart';
 import '../../../../core/widgets/text_custom/text_custom.dart';
 import '../../../late_in_and_early_out/presentation/screens/late_in_and_early_out_screen.dart';
 import '../../../myTimeOff/presentation/controller/myTimeOff_cubit.dart';
@@ -63,29 +62,97 @@ class HomeScreen extends StatelessWidget {
                               width: 135,
                             ),
                             const Spacer(),
-                            const Image(
-                              image: AssetImage(
-                                ImageAssets.notification,
-                              ),
-                              width: 24,
-                            )
-                            // AppConstants.admin
-                            //     ? GestureDetector(
-                            //         onTap: () {
-                            //           Navigator.of(context).push(
-                            //             SlideTranstion(
-                            //               page: const NotificationsScreen(),
-                            //             ),
-                            //           );
-                            //         },
-                            //         child: SvgPictureCustom(
-                            //           assetsName: IconsAssets.notificationIcon,
-                            //           color: ColorManager.grey1,
-                            //         ),
-                            //       )
-                            //     : const SizedBox.shrink(),
-
-                            ,
+                            AppConstants.admin
+                                ? BlocProvider.value(
+                                    value:
+                                        BlocProvider.of<RequestsBloc>(context)
+                                          ..getRequests(),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          SlideTranstion(
+                                            page: const NotificationsScreen(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Align(
+                                        alignment: Alignment.center,
+                                        child: SizedBox(
+                                          child: Stack(
+                                            clipBehavior: Clip.none,
+                                            children: [
+                                              const Image(
+                                                image: AssetImage(
+                                                  ImageAssets.notification,
+                                                ),
+                                                width: 24,
+                                              ),
+                                              Positioned(
+                                                top: -10,
+                                                left: 9,
+                                                child: BlocBuilder<RequestsBloc,
+                                                    RequestsStates>(
+                                                  builder: (context, state) {
+                                                    return RequestsBloc.get(
+                                                                context)
+                                                            .pendingRequests
+                                                            .isNotEmpty
+                                                        ? Container(
+                                                            clipBehavior: Clip
+                                                                .antiAliasWithSaveLayer,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        5),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              color:
+                                                                  ColorManager
+                                                                      .error,
+                                                              shape: BoxShape
+                                                                  .rectangle,
+                                                            ),
+                                                            child: Text(
+                                                              RequestsBloc.get(
+                                                                              context)
+                                                                          .pendingRequests
+                                                                          .length >=
+                                                                      100
+                                                                  ? "+99"
+                                                                  : RequestsBloc
+                                                                          .get(
+                                                                              context)
+                                                                      .pendingRequests
+                                                                      .length
+                                                                      .toString(),
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      ColorManager
+                                                                          .white,
+                                                                  fontFamily:
+                                                                      FontConstants
+                                                                          .fontFamily,
+                                                                  fontSize:
+                                                                      FontSize
+                                                                          .s14),
+                                                            ),
+                                                          )
+                                                        : const SizedBox();
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
                             const SizedBox(
                               width: 10,
                             ),
