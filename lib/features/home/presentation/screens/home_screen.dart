@@ -60,26 +60,30 @@ class HomeScreen extends StatelessWidget {
                               image: AssetImage(
                                 ImageAssets.logoName,
                               ),
-                              width: 150,
+                              width: 135,
                             ),
-                            const Spacer(),
-                            AppConstants.admin
-                                ? GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        SlideTranstion(
-                                          page: const NotificationsScreen(),
-                                        ),
-                                      );
-                                    },
-                                    child: SvgPictureCustom(
-                                      assetsName: IconsAssets.notificationIcon,
-                                      color: ColorManager.grey1,
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
+                            SvgPictureCustom(
+                              assetsName: IconsAssets.notificationIcon,
+                              color: ColorManager.grey1,
+                            )
+                            // AppConstants.admin
+                            //     ? GestureDetector(
+                            //         onTap: () {
+                            //           Navigator.of(context).push(
+                            //             SlideTranstion(
+                            //               page: const NotificationsScreen(),
+                            //             ),
+                            //           );
+                            //         },
+                            //         child: SvgPictureCustom(
+                            //           assetsName: IconsAssets.notificationIcon,
+                            //           color: ColorManager.grey1,
+                            //         ),
+                            //       )
+                            //     : const SizedBox.shrink(),
+                            ,
                             const SizedBox(
-                              width: 16,
+                              width: 10,
                             ),
                             BlocProvider.value(
                               value: BlocProvider.of<ProfileCubit>(context)
