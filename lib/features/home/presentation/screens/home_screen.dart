@@ -64,20 +64,17 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             AppConstants.admin
-                                ? IconButton(
-                                    onPressed: () {
+                                ? GestureDetector(
+                                    onTap: () {
                                       Navigator.of(context).push(
                                         SlideTranstion(
                                           page: const NotificationsScreen(),
                                         ),
                                       );
                                     },
-                                    icon: SizedBox(
-                                      child: SvgPictureCustom(
-                                        assetsName:
-                                            IconsAssets.notificationIcon,
-                                        color: ColorManager.grey1,
-                                      ),
+                                    child: SvgPictureCustom(
+                                      assetsName: IconsAssets.notificationIcon,
+                                      color: ColorManager.grey1,
                                     ),
                                   )
                                 : const SizedBox.shrink(),
