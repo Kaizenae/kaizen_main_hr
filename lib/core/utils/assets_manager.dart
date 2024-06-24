@@ -22,6 +22,7 @@ class ImageAssets {
   static const String fingerprint = "$imagePath/fingerprint.png";
   static const String arrowDown = "$imagePath/arrow.png";
   static const String arrowUp = "$imagePath/arrow_up.png";
+  static const String notification = "$imagePath/notification.png";
 }
 
 class IconsAssets {

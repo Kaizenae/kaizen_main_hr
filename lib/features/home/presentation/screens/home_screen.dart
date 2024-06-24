@@ -62,9 +62,12 @@ class HomeScreen extends StatelessWidget {
                               ),
                               width: 135,
                             ),
-                            SvgPictureCustom(
-                              assetsName: IconsAssets.notificationIcon,
-                              color: ColorManager.grey1,
+                            const Spacer(),
+                            const Image(
+                              image: AssetImage(
+                                ImageAssets.notification,
+                              ),
+                              width: 24,
                             )
                             // AppConstants.admin
                             //     ? GestureDetector(
@@ -81,6 +84,7 @@ class HomeScreen extends StatelessWidget {
                             //         ),
                             //       )
                             //     : const SizedBox.shrink(),
+
                             ,
                             const SizedBox(
                               width: 10,
