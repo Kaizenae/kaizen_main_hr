@@ -62,26 +62,21 @@ class HomeScreen extends StatelessWidget {
                               ),
                               width: 150,
                             ),
-                            const Expanded(child: SizedBox()),
+                            const Spacer(),
                             AppConstants.admin
-                                ? BlocProvider.value(
-                                    value:
-                                        BlocProvider.of<RequestsBloc>(context)
-                                          ..getRequests(),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          SlideTranstion(
-                                            page: const NotificationsScreen(),
-                                          ),
-                                        );
-                                      },
-                                      icon: SizedBox(
-                                        child: SvgPictureCustom(
-                                          assetsName:
-                                              IconsAssets.notificationIcon,
-                                          color: ColorManager.grey1,
+                                ? IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        SlideTranstion(
+                                          page: const NotificationsScreen(),
                                         ),
+                                      );
+                                    },
+                                    icon: SizedBox(
+                                      child: SvgPictureCustom(
+                                        assetsName:
+                                            IconsAssets.notificationIcon,
+                                        color: ColorManager.grey1,
                                       ),
                                     ),
                                   )
