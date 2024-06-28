@@ -46,10 +46,14 @@ class RequestsBloc extends Cubit<RequestsStates> {
       approvedRequests = [];
       rejectedRequests = [];
       requestsModel = RequestsModel.fromJson(value.data);
+      log(value.data.toString());
+
       for (var item in requestsModel.result.responseModel) {
-        if (item.state == "Rejected" || item.state == "Refused") {
+        if (item.state == "Rejected" ||
+            item.state == "Refused" ||
+            item.state == "cancelled") {
           rejectedRequests.add(item);
-        } else if (item.state == "Submitted") {
+        } else if (item.state == "Submitted" || item.state == "New") {
           if (item.ownStatus == "New" || item.ownStatus == "Submitted") {
             pendingRequests.add(item);
           } else if (item.ownStatus == "Approved") {
