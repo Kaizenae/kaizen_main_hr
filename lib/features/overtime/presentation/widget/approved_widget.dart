@@ -218,38 +218,50 @@ class ApprovedWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Text(
-                            DateFormat('EEE, MMM, dd, yyyy').format(
-                                DateTime.parse(OvertimeBloc.get(context)
-                                    .approvedOvertime[index]
-                                    .date)),
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayLarge!
-                                .copyWith(fontSize: 14),
+                          Expanded(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                DateFormat('EEE, MMM, dd, yyyy').format(
+                                    DateTime.parse(OvertimeBloc.get(context)
+                                        .approvedOvertime[index]
+                                        .date)),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(fontSize: 14),
+                                maxLines: 1,
+                              ),
+                            ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: ColorManager.green.withOpacity(.5),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              OvertimeBloc.get(context)
-                                  .approvedOvertime[index]
-                                  .state,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
-                                    color: ColorManager.white,
-                                  ),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: ColorManager.green.withOpacity(.5),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  OvertimeBloc.get(context)
+                                      .approvedOvertime[index]
+                                      .state,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineMedium!
+                                      .copyWith(
+                                        color: ColorManager.white,
+                                      ),
+                                  maxLines: 1,
+                                ),
+                              ),
                             ),
                           ),
                         ],
