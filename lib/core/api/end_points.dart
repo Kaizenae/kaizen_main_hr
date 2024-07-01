@@ -1,5 +1,5 @@
 class EndPoints {
-  static String baseUrl = 'https://wik-wik-prod-staging-12269714.dev.odoo.com';
+  static String baseUrl = 'https://wik-wik-prod-staging-13949824.dev.odoo.com';
 
   static String loginUrl = '$baseUrl/login_api';
   static String registerUrl = '$baseUrl/register_api';
