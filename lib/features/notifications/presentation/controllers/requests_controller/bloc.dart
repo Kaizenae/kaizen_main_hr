@@ -49,9 +49,7 @@ class RequestsBloc extends Cubit<RequestsStates> {
       log(value.data.toString());
 
       for (var item in requestsModel.result.responseModel) {
-        if (item.state == "Rejected" ||
-            item.state == "Refused" ||
-            item.state == "cancelled") {
+        if (item.state == "Rejected" || item.state == "Refused") {
           rejectedRequests.add(item);
         } else if (item.state == "Submitted" || item.state == "New") {
           if (item.ownStatus == "New" || item.ownStatus == "Submitted") {

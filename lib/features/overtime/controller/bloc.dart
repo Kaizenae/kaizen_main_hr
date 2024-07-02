@@ -60,11 +60,11 @@ class OvertimeBloc extends Cubit<OvertimeStates> {
     }).then((value) {
       overtimeModel = OvertimeModel.fromJson(value.data);
       for (var item in overtimeModel.result.responseModel) {
-        if (item.state == "cancelled") {
+        if (item.state == "Rejected") {
           rejectOvertime.add(item);
-        } else if (item.state == "ceo_approved") {
+        } else if (item.state == "Approved by CEO") {
           approvedOvertime.add(item);
-        } else {
+        } else if (item.state != "Cancelled") {
           peindingOvertime.add(item);
         }
       }
