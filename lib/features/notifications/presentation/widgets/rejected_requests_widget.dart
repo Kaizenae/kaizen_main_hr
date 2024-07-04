@@ -44,13 +44,24 @@ class RejectedRequestsWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].startDate))} - ${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].endDate))}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(fontSize: 16),
-                        ),
+                        RequestsBloc.get(context)
+                                    .rejectedRequests[index]
+                                    .type ==
+                                "Overtime"
+                            ? Text(
+                                "${DateFormat('MMM d, h:mm a').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].startDate))} - ${DateFormat('MMM d, h:mm a').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].endDate))}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(fontSize: 16),
+                              )
+                            : Text(
+                                "${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].startDate))} - ${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).rejectedRequests[index].endDate))}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(fontSize: 16),
+                              ),
                         const SizedBox(
                           height: 4,
                         ),

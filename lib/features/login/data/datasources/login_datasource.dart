@@ -22,7 +22,10 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
     final response = await apiConsumer.post(EndPoints.loginUrl, body: {
       "jsonrpc": "2.0",
       "params": {
-        "db": "wik-wik-prod-staging-13949824",
+        // Test DB
+        // "db": "wik-wik-prod-staging-13949824",
+        // Live DB
+        "db": "uatef-wik-production-10976953",
         "login": email,
         "password": password,
       }

@@ -63,13 +63,24 @@ class ApprovedRequestsWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).approvedRequests[index].startDate))} - ${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).approvedRequests[index].endDate))}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(fontSize: 16),
-                          ),
+                          RequestsBloc.get(context)
+                                      .approvedRequests[index]
+                                      .type ==
+                                  "Overtime"
+                              ? Text(
+                                  "${DateFormat('MMM d, h:mm a').format(DateTime.parse(RequestsBloc.get(context).approvedRequests[index].startDate))} - ${DateFormat('MMM d, h:mm a').format(DateTime.parse(RequestsBloc.get(context).approvedRequests[index].endDate))}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(fontSize: 16),
+                                )
+                              : Text(
+                                  "${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).approvedRequests[index].startDate))} - ${DateFormat('EEE, MMM dd, yyyy').format(DateTime.parse(RequestsBloc.get(context).approvedRequests[index].endDate))}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(fontSize: 16),
+                                ),
                           const SizedBox(
                             height: 4,
                           ),
