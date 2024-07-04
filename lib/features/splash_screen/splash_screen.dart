@@ -1,8 +1,10 @@
 // ignore_for_file: unused_element, unrelated_type_equality_checks
 
+import 'dart:io';
 import 'package:Attendace/core/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/api/end_points.dart';
 import '../../core/utils/constants_manager.dart';
@@ -37,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
             if (state is GetVersionSuccessState) {
               version = state.version;
               _nextScreen();
-              // navigatorAndRemove(context, Routes.localAuthRoute);
             }
           },
           builder: (context, state) {
@@ -74,8 +75,14 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                if (Platform.isIOS) {
+                  await launchInBrowser(Uri.parse(
+                      "https://apps.apple.com/ae/app/kaizen-hr/id6504225336?platform=iphone"));
+                } else if (Platform.isAndroid) {
+                  await launchInBrowser(Uri.parse(
+                      "https://play.google.com/store/apps/details?id=com.attendance.KAIZENHR"));
+                }
               },
               child: const Text(AppStrings.ok),
             )
@@ -92,6 +99,15 @@ class _SplashScreenState extends State<SplashScreen> {
                 ? Routes.loginRoute
                 : Routes.homeRoute,
       );
+    }
+  }
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
     }
   }
 }
