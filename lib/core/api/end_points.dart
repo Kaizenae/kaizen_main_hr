@@ -1,8 +1,8 @@
 class EndPoints {
   // Live Base URL
-  static String baseUrl = 'https://wik-wik-prod.odoo.com';
+  // static String baseUrl = 'https://wik-wik-prod.odoo.com';
   // Test Base URL
-  // static String baseUrl = 'https://wik-wik-prod-staging-13949824.dev.odoo.com';
+  static String baseUrl = 'https://wik-wik-prod-staging-13949824.dev.odoo.com';
 
   static String loginUrl = '$baseUrl/login_api';
   static String registerUrl = '$baseUrl/register_api';

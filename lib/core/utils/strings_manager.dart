@@ -220,4 +220,12 @@ class AppStrings {
   static const String pleaseEnterDescriptionField =
       "Please Enter The Description for Over time";
   static const String deleteAccount = "Delete Account";
+  static const String createTask = "Create Task";
+  static const String tasks = "Tasks";
+  static const String create = "Create";
+  static const String taskName = "Task Name";
+  static const String deadline = "Deadline";
+  static const String taskType = "Task Type";
+  static const String assignUsers = "Assign Users";
+  static const String idNumber = "ID Number";
 }

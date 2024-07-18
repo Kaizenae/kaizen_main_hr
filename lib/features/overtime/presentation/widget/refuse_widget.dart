@@ -220,6 +220,7 @@ class RefusedWidget extends StatelessWidget {
                           Expanded(
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
+                              alignment: AlignmentDirectional.centerStart,
                               child: Text(
                                 DateFormat('EEE, MMM, dd, yyyy').format(
                                     DateTime.parse(OvertimeBloc.get(context)

@@ -235,6 +235,7 @@ class PendingWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: FittedBox(
+                                  alignment: AlignmentDirectional.centerStart,
                                   fit: BoxFit.scaleDown,
                                   child: Text(
                                     DateFormat('EEE, MMM, dd, yyyy').format(

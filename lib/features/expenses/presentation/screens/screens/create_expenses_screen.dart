@@ -33,7 +33,7 @@ class _CreateExpensesScreenState extends State<CreateExpensesScreen> {
         text: AppStrings.expensesRequest,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
         child: CustomScrollView(
           slivers: [
             SliverFillRemaining(

@@ -13,6 +13,7 @@ import 'package:Attendace/features/myTimeOff/presentation/screens/myTimeOff_scre
 import 'package:Attendace/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:Attendace/features/overtime/presentation/screens/screens/overtime_screen.dart';
 import 'package:Attendace/features/profile/presentation/screens/profile_screen.dart';
+import 'package:Attendace/features/projects/presentation/screens/projects_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/services/animation/slide_transtion.dart';
@@ -448,11 +449,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: FeatureItemWidget(
                                 icon: ImageAssets.requests,
                                 title: AppStrings.projects,
-                                onTap: null,
+                                onTap: () {
+                                  Navigator.of(context).push(SlideTranstion(
+                                      page: const ProjectsScreen()));
+                                },
                               ),
                             ),
                             const SizedBox(

@@ -220,6 +220,7 @@ class ApprovedWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: FittedBox(
+                              alignment: AlignmentDirectional.centerStart,
                               fit: BoxFit.scaleDown,
                               child: Text(
                                 DateFormat('EEE, MMM, dd, yyyy').format(
@@ -231,6 +232,7 @@ class ApprovedWidget extends StatelessWidget {
                                     .displayLarge!
                                     .copyWith(fontSize: 14),
                                 maxLines: 1,
+                                textAlign: TextAlign.start,
                               ),
                             ),
                           ),

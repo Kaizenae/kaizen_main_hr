@@ -23,9 +23,9 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
       "jsonrpc": "2.0",
       "params": {
         // Test DB
-        // "db": "wik-wik-prod-staging-13949824",
+        "db": "wik-wik-prod-staging-13949824",
         // Live DB
-        "db": "uatef-wik-production-10976953",
+        // "db": "uatef-wik-production-10976953",
         "login": email,
         "password": password,
       }
